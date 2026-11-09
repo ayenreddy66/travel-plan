@@ -557,6 +557,10 @@ i.pdot{display:inline-block; width:10px; height:10px; border-radius:50%}
 .vdot::after{content:""; position:absolute; inset:2px; border-radius:50%; background:var(--ok)}
 .vdot.nv{border-color:var(--bad)} .vdot.nv::after{background:var(--bad)}
 .vdot.both{border-color:var(--warn)} .vdot.both::after{background:var(--warn)}
+.vdot.egg{border-color:#D4A100} .vdot.egg::after{background:#F2C200}
+.resto{display:grid; gap:6px; padding:10px 0; border-bottom:1px solid var(--line)} .resto:last-child{border-bottom:0}
+.resto-top{display:grid; grid-template-columns:28px minmax(0,1fr) auto; gap:8px; align-items:center}
+.resto-rank{font-size:1.35rem}
 .check.food .txt{line-height:1.3}
 .recap{border-radius:var(--r-lg); padding:18px; display:grid; gap:12px; color:#fff; background:radial-gradient(120% 120% at 100% 0%, #FFBF2E 0, transparent 40%), linear-gradient(140deg,#0F3D32,#1599A8 60%,#D8326B)}
 .recap .eyebrow{color:#FFE7A8}
@@ -1063,7 +1067,7 @@ function render() {
   renderNav(); checkNewActivity();
   tickCountdown(); charTick();
   $('#fab').hidden = ['fun', 'kit', 'safety'].includes(S.tab);
-  ensurePayers();
+  ensurePayers(); ensureCleanup();
   if ($('#attList')) renderAttList();
 }
 function renderSync() {
@@ -1154,7 +1158,7 @@ function vHome() {
     <div class="strip">${days.map(d => `<button class="daycard" data-act="goDay" data-n="${+d.dayNo}"><span class="d">${String(d.dayNo).padStart(2, '0')}</span><b>${esc(d.title)}</b><span class="muted">${esc(fmtD(d.date))} · ${esc(d.route)}</span></button>`).join('')}</div>
   </section>
   <button class="home-fun" data-act="tab" data-k="fun"><span class="fun-e">🎲</span><span><b>Fun Zone</b><br><span>Quiz, Tambola, dumb charades, Ludo & Telugu antakshari for the van rides</span></span></button>
-  ${feed().length ? `<section class="card"><div class="sec-head"><h3>Latest from the group</h3><button class="btn sm" data-act="tab" data-k="updates">See all</button></div><div class="rows">${feed().slice(0, 4).map(a => `<div class="row feed-row"><span class="who-cell"><span class="ico">${FEED_IC[a.type] || '•'}</span><span><b>${esc(a._by || 'Someone')}</b> ${esc(a.text)}<br><span class="by">${esc(ago(a._at))}</span></span></span><span></span></div>`).join('')}</div></section>` : ''}`;
+  ${feed().length ? `<section class="card"><div class="sec-head"><h3>Latest from the group</h3><button class="btn sm" data-act="tab" data-k="updates">See all</button></div><div class="rows">${feed().slice(0, 4).map(a => `<div class="row feed-row"><span class="who-cell"><span class="ico">${FEED_IC[a.type] || '•'}</span><span><b>${esc(a._by || 'Someone')}</b> ${esc(a.text)}<br><span class="by">${esc(ago(a._at))}</span></span></span><button class="btn sm" data-act="feedDel" data-id="${esc(a.id)}" aria-label="Remove this update">${IC.x}</button></div>`).join('')}</div></section>` : ''}`;
 }
 const stat = (k, v, p, tab, sub) => `<button class="stat" data-act="tab" data-k="${tab}"><span class="k">${k}</span><span class="v num">${v}</span>${p == null ? `<span class="muted" style="font-size:13px">${esc(sub || '')}</span>` : `<span class="bar"><i style="width:${p}%"></i></span>`}</button>`;
 function tickCountdown() {
@@ -2033,7 +2037,7 @@ function vUpdates() {
   return `<div class="sec-head"><div><h2>Updates</h2><p>Everything the group books, pays, uploads and decides, newest first.</p></div><button class="btn sm primary" data-act="add" data-c="polls">🗳 Ask the group</button></div>
   ${perm !== 'granted' ? `<div class="banner"><p><b>Get alerts on this phone.</b> ${perm === 'unsupported' ? 'On iPhone, first open this link in Safari, tap Share → Add to Home Screen, then open it from there.' : 'You’ll see a notification when someone books, pays or adds photos while the app is open in the background.'}</p>${perm === 'default' ? '<div><button class="btn sm dark" data-act="notifyOn">Turn on alerts</button></div>' : perm === 'denied' ? '<p class="by">Alerts are blocked for this site in your browser settings.</p>' : ''}</div>` : ''}
   ${polls.length ? `<section class="view" style="gap:10px"><h3>Polls</h3>${polls.map(pollCard).join('')}</section>` : ''}
-  <section class="card"><h3>Activity</h3>${f.length ? `<div class="rows">${f.map(a => `<div class="row feed-row ${(a._at || 0) > lastSeen() && a._by !== S.name ? 'unread' : ''}"><span class="who-cell"><span class="ico">${FEED_IC[a.type] || '•'}</span><span><b>${esc(a._by || 'Someone')}</b> ${esc(a.text)}<br><span class="by">${esc(ago(a._at))}</span></span></span><span class="person-btns">${a.tab ? `<button class="btn sm" data-act="tab" data-k="${esc(a.tab)}">Open</button>` : ''}<a class="btn sm wa-btn" href="${esc(shareWA(`${a._by || ''} ${a.text}\n${appLink(a.tab)}`))}" target="_blank" rel="noopener" aria-label="Share on WhatsApp">${IC.wa}</a></span></div>`).join('')}</div>` : '<p class="muted" style="margin:0">Nothing yet. Bookings, payments, photos and polls will show up here.</p>'}</section>`;
+  <section class="card"><div class="sec-head"><h3>Activity</h3>${f.length ? '<button class="btn sm danger" data-act="feedClear">Clear all</button>' : ''}</div>${f.length ? `<div class="rows">${f.map(a => `<div class="row feed-row ${(a._at || 0) > lastSeen() && a._by !== S.name ? 'unread' : ''}"><span class="who-cell"><span class="ico">${FEED_IC[a.type] || '•'}</span><span><b>${esc(a._by || 'Someone')}</b> ${esc(a.text)}<br><span class="by">${esc(ago(a._at))}</span></span></span><span class="person-btns">${a.tab ? `<button class="btn sm" data-act="tab" data-k="${esc(a.tab)}">Open</button>` : ''}<a class="btn sm wa-btn" href="${esc(shareWA(`${a._by || ''} ${a.text}\n${appLink(a.tab)}`))}" target="_blank" rel="noopener" aria-label="Share on WhatsApp">${IC.wa}</a><button class="btn sm" data-act="feedDel" data-id="${esc(a.id)}" aria-label="Remove this update">${IC.x}</button></span></div>`).join('')}</div>` : '<p class="muted" style="margin:0">Nothing yet. Bookings, payments, photos and polls will show up here.</p>'}</section>`;
 }
 function pollCard(p) {
   const opts = String(p.options || '').split('\n').map(s => s.trim()).filter(Boolean);
@@ -2157,6 +2161,7 @@ async function importFile(file) {
 /* ---------- plan update (v1 → v2) ---------- */
 const PLAN_COLLS = ['days','timeline','legs','places','stays','activities','budget','mustdo','photographers'];
 function keepOnUpdate(c, x) {
+  if (oldPlanItem(x)) return false;
   if (filesFor(c, x.id).length) return true;
   if ((c === 'stays' || c === 'activities') && (x.status === 'Booked' || x.status === 'Paid')) return true;
   if (c === 'budget' && (x.status === 'Paid' || x.status === 'Quoted')) return true;
@@ -2550,7 +2555,7 @@ const collOf = c => String(c).startsWith('kit:') ? 'kit' : c;
 const kitOf = type => DB.kit.filter(x => x.type === type);
 const KIT_FIXED = { 'kit:sosnote': 'sosnote', 'kit:kidcfg': 'kidcfg' };
 Object.assign(OPT, {
-  rag: ['Red', 'Amber', 'Green'], veg: ['Veg', 'Non-veg', 'Both'], mood: ['😍 Loved it', '😂 So funny', '😌 Peaceful', '🤩 Wow', '😴 Tired but happy', '🥲 Emotional'],
+  rag: ['Red', 'Amber', 'Green'], veg: ['Veg', 'Egg', 'Non-veg', 'Both'], mood: ['😍 Loved it', '😂 So funny', '😌 Peaceful', '🤩 Wow', '😴 Tired but happy', '🥲 Emotional'],
   kidWhat: ['Feed', 'Nap', 'Diaper', 'Medicine', 'Other']
 });
 SCHEMA['kit:ready'] = { noun: 'readiness check', fields: [['text', 'What needs to be ready', 'text', 'e.g. Vehicle permit for Kerala'], ['owner', 'Owner', 'text'], ['due', 'Due by', 'date'], ['status', 'Status (RAG)', 'select:rag'], ['notes', 'Notes / risk', 'textarea']] };
@@ -2767,20 +2772,12 @@ function sosShare() {
 /* ---------- 11 · food trail ---------- */
 const FOOD_STARTER = [
   ['Dindigul Thalappakatti biryani', 'Dindigul', 1, 'Non-veg'], ['Kothu parotta / filter coffee stop', 'Dindigul – Theni highway', 2, 'Both'],
-  ['Fresh cardamom tea & tea tasting', 'KDHP Tea Museum, Munnar', 2, 'Veg'], ['Pazham pori + chai at a roadside stall', 'Munnar', 3, 'Veg'], ['Bread omelette by the lake', 'Mattupetty / Echo Point stalls', 3, 'Non-veg'], ['Roasted corn with chilli-lime', 'Echo Point', 3, 'Veg'],
+  ['Fresh cardamom tea & tea tasting', 'KDHP Tea Museum, Munnar', 2, 'Veg'], ['Pazham pori + chai at a roadside stall', 'Munnar', 3, 'Veg'], ['Bread omelette by the lake', 'Mattupetty / Echo Point stalls', 3, 'Egg'], ['Roasted corn with chilli-lime', 'Echo Point', 3, 'Veg'],
   ['Appam with vegetable or chicken stew', 'Thekkady', 4, 'Both'], ['Spiced cardamom & pepper shopping (and tasting)', 'Kumily market', 5, 'Veg'],
   ['Karimeen pollichathu (pearl spot in banana leaf)', 'Kumarakom', 5, 'Non-veg'], ['Kappa & meen curry (tapioca + fish curry)', 'Kumarakom', 5, 'Non-veg'], ['Tender coconut on the canal bank', 'Kumarakom', 6, 'Veg'],
   ['Puttu & kadala curry breakfast', 'Kumarakom / Athirappilly', 6, 'Veg'], ['Malabar parotta & chicken roast', 'Chalakudy / Thrissur', 7, 'Non-veg'],
   ['Kerala sadya on a banana leaf', 'Guruvayur veg hotels', 7, 'Veg'], ['Palpayasam / payasam', 'Guruvayur', 7, 'Veg'], ['Unniyappam (sweet banana fritters)', 'Guruvayur temple street', 7, 'Veg'], ['Fresh-fried banana chips & halwa to take home', 'Guruvayur / Thrissur', 8, 'Veg']
 ];
-function vFood() {
-  const all = kitOf('food'); const f = S.foodF || 'All';
-  const list = all.filter(x => f === 'All' || x.veg === f || x.veg === 'Both' || (f === 'To try' && !x.done)).sort((a, b) => (a.done - b.done) || ((+a.dayNo || 99) - (+b.dayNo || 99)));
-  const done = all.filter(x => x.done).length;
-  return `<div class="sec-head"><div><h2>Food trail</h2><p>Dishes to try on the way – tick them off, rate them, add your finds.</p></div><div class="ring" style="--p:${all.length ? Math.round(done / all.length * 100) : 0}"><span>${done}/${all.length}</span></div></div>
-    <div class="chips">${['All', 'Veg', 'Non-veg'].map(k => `<button class="chip" aria-pressed="${f === k}" data-act="foodF" data-k="${k}">${k === 'Veg' ? '🟢 Veg' : k === 'Non-veg' ? '🔴 Non-veg' : 'All'}</button>`).join('')}${all.length ? '' : '<button class="btn sm primary" data-act="foodStarter">+ Add the Kerala food list</button>'}</div>
-    ${list.length ? `<div class="view" style="gap:8px">${list.map(x => `<div class="check food ${x.done ? 'done' : ''}"><button class="tick" aria-label="Tried" data-act="toggle" data-c="kit" data-id="${esc(x.id)}">${IC.check}</button><button class="txt" data-act="edit" data-c="kit:food" data-id="${esc(x.id)}"><span class="vdot ${x.veg === 'Non-veg' ? 'nv' : x.veg === 'Both' ? 'both' : ''}"></span>${esc(x.name)}<br><span class="by">${esc(x.where || '')}</span></button><span class="chips">${x.dayNo ? `<span class="chip">D${esc(x.dayNo)}</span>` : ''}${ratingChip('food:' + x.id)}${x.done ? rateBtn('food:' + x.id, x.name) : ''}</span></div>`).join('')}</div>` : `<div class="empty">${all.length ? 'Nothing in this filter.' : 'Tap “Add the Kerala food list” for 17 must-try dishes along our route.'}</div>`}`;
-}
 
 /* ---------- 12 · memories & recap ---------- */
 function vMemories() {
@@ -2871,12 +2868,96 @@ function kitClick(a, t) {
     case 'sosShare': sosShare(); return true;
     case 'kidLog': run(B.add('kit', { type: 'kidlog', kid: t.dataset.k, what: t.dataset.w, at: new Date(Date.now() - new Date().getTimezoneOffset() * 6e4).toISOString().slice(0, 16), note: '' })); toast(`${t.dataset.k}: ${t.dataset.w} logged`); return true;
     case 'foodF': S.foodF = t.dataset.k; render(); return true;
+    case 'foodTab': S.foodTab = t.dataset.k; render(); return true;
+    case 'dishAdd': run(B.add('kit', { type: 'food', name: t.dataset.d, where: t.dataset.w, dayNo: +t.dataset.day || '', veg: t.dataset.v || 'Veg', notes: '', done: false })); toast('Added to Dishes to try'); return true;
+    case 'feedDel': run(B.remove('activity', t.dataset.id)); return true;
+    case 'feedClear': if (armed !== t) { armed = t; t.classList.add('armed'); t.textContent = 'Tap again – clears for everyone'; return true; } armed = null; DB.activity.forEach(x => run(B.remove('activity', x.id))); toast('Updates cleared'); return true;
     case 'foodStarter': FOOD_STARTER.forEach(([name, where, dayNo, veg]) => run(B.add('kit', { type: 'food', name, where, dayNo, veg, notes: '', done: false }))); toast('Food list added'); return true;
     case 'recapShare': navigator.share({ title: meta().tripName, text: decodeURIComponent((t.closest('.recap').querySelector('.wa-btn').href.split('text=')[1] || '')) }).catch(() => {}); return true;
     case 'briefing': { const n = +t.dataset.n || S.day; const d = dayOf(n); if (d) loadWx(d); openComposer('Morning briefing', '', [{ label: 'Briefing', text: briefingText(n) }], 'Send to the family WhatsApp group before you leave.'); return true; }
     case 'karaDone': run(B.update('kit', t.dataset.id, { done: true })); return true;
   }
   return false;
+}
+
+/* ---------- restaurant guide (Google ratings via Wanderlog, Nov 2026) ---------- */
+const RESTOS = [
+  { stop: 'Dindigul', day: 1, note: 'Night 1 dinner / Day 2 early breakfast', list: [
+    ['Ponram Food Square', 4.4, '20.7k', 'Non-veg', ['Mutton biryani', 'Chicken biryani']],
+    ['Dindigul Thalappakatti', 4.0, '8.3k', 'Non-veg', ['Thalappakatti seeraga-samba mutton biryani', 'Chicken biryani']],
+    ['Venu Biriyani Hotel', 3.9, '20.7k', 'Non-veg', ['Mutton biryani', 'Chicken biryani']],
+    ['Sree Baalaaji Bhavan (veg pick)', 3.9, '4.3k', 'Veg', ['Ghee pongal', 'Dosa', 'Veg biryani']]
+  ] },
+  { stop: 'Munnar', day: 2, note: 'Days 2–3', list: [
+    ['Top Station Multi Cuisine Restaurant', 4.7, '1.3k', 'Non-veg', ['Duck roast', 'Duck biryani', 'Duck Malabar']],
+    ['Hotel Gurubhavan', 4.1, '9.5k', 'Non-veg', ['Fish curry meals', 'Mutton curry']],
+    ['Saravana Bhavan Munnar', 4.1, '4.8k', 'Veg', ['Ghee roast dosa', 'Idli-sambar', 'Kerala filter coffee']],
+    ['Sree Annapoorani Pure Veg (veg pick)', 4.3, '1.5k', 'Veg', ['South Indian meals']]
+  ] },
+  { stop: 'Thekkady / Kumily', day: 4, note: 'Days 4–5', list: [
+    ['Nava Jyoti Pure Veg Restaurant', 4.6, '660', 'Veg', ['Veg thali', 'North & South Indian veg']],
+    ['Tusker Café', 4.5, '3.5k', 'Both', ['Banana-leaf specials', 'Fried chicken']],
+    ['Grandma’s Cafe', 4.4, '485', 'Both', ['Kerala parotta', 'Chicken kondattam']]
+  ] },
+  { stop: 'Kumarakom', day: 5, note: 'Day 5 dinner, Day 6 breakfast', list: [
+    ['The Kumarakom Kitchen', 4.5, '2.3k', 'Non-veg', ['Duck roast with tapioca', 'Karimeen fry']],
+    ['Karma Waterside Restaurant', 4.6, '1.6k', 'Both', ['Kerala & pan-Indian menu by the lake']],
+    ['Lakshmi Hotel & Resorts', 4.0, '747', 'Both', ['Karimeen', 'Prawns', 'Aloo sabzi with chapati (veg)']]
+  ] },
+  { stop: 'Athirappilly', day: 6, note: 'Few good options at the falls – eat dinner at your resort', list: [
+    ['Cinnamon Food Court (at the falls)', 3.4, '695', 'Both', ['Kerala veg meals', 'Fish fry']],
+    ['Banana Leaf, Vettilappara', 3.2, '85', 'Non-veg', ['Beef fry with chapathi', 'Chicken dishes']]
+  ] },
+  { stop: 'Thrissur (on the way)', day: 7, note: 'Day 7 lunch – it’s on the route to Guruvayur', list: [
+    ['Hotel Bharath (pure veg)', 4.4, '15k', 'Veg', ['Kerala sadya meals', 'Masala dosa', 'Filter coffee']],
+    ['Round The Global Diner', 4.6, '36.6k', 'Both', ['Asian, Indian & Mediterranean menu']],
+    ['Thomson’s Casa', 4.2, '13k', 'Non-veg', ['Golden infused chicken', 'Chicken biryani', 'Lemon-pepper rotisserie chicken']]
+  ] },
+  { stop: 'Guruvayur', day: 7, note: 'Temple town – almost everything is vegetarian', list: [
+    ['Hotel New Bharathi', 4.1, '483', 'Veg', ['Masala dosa', 'Ghee roast', 'Coffee']],
+    ['Indian Coffee House', 3.5, '1.3k', 'Veg', ['Veg biryani', 'Ghee roast']],
+    ['Sowparnika Restaurant', 3.6, '252', 'Veg', ['Batura & chana masala', 'Masala dosa', 'Uzhunnu vada']]
+  ] }
+];
+const vegDot = v => `<span class="vdot ${v === 'Non-veg' ? 'nv' : v === 'Egg' ? 'egg' : v === 'Both' ? 'both' : ''}"></span>`;
+function vRestos() {
+  const added = new Set(kitOf('food').map(x => slug(x.name)));
+  return `<section class="view" style="gap:10px"><div class="sec-head"><div><h2>Top restaurants on our route</h2><p>Top 3 by Google rating at each stop, with what to order. Tap a dish to add it to our list.</p></div></div>
+    ${RESTOS.map(g => `<section class="card resto-stop"><div class="sec-head"><div><h3>📍 ${esc(g.stop)}</h3><span class="by">Day ${g.day} · ${esc(g.note)}</span></div></div>
+      <div class="rows">${g.list.slice().sort((x, y) => (/veg pick/.test(x[0]) - /veg pick/.test(y[0])) || (y[1] - x[1])).map(([n, r, cnt, v, dishes], i) => { const t = 'resto:' + slug(n); return `<div class="resto"><div class="resto-top"><span class="resto-rank">${['🥇', '🥈', '🥉'][i] || '🌱'}</span><span style="min-width:0"><b>${vegDot(v)}${esc(n)}</b><br><span class="by">⭐ ${r.toFixed(1)} Google · ${esc(cnt)} reviews · ${esc(v === 'Both' ? 'Veg & non-veg' : v)}</span></span><a class="btn sm" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(n.replace(/\(.*?\)/g, '') + ' ' + g.stop.replace(/\(.*?\)/g, '') + ' Kerala')}" target="_blank" rel="noopener">${IC.pin}</a></div>
+        <div class="chips"><span class="by" style="align-self:center">Must try:</span>${dishes.map(d => added.has(slug(d)) ? `<span class="chip on">✓ ${esc(d)}</span>` : `<button class="chip" data-act="dishAdd" data-d="${esc(d)}" data-w="${esc(n.replace(/\s*\(.*?\)/, '') + ', ' + g.stop.replace(/\s*\(.*?\)/, ''))}" data-day="${g.day}" data-v="${esc(v === 'Both' ? (/chicken|fish|prawn|karimeen|duck|beef|mutton/i.test(d) ? 'Non-veg' : 'Veg') : v)}">+ ${esc(d)}</button>`).join('')}</div>
+        <div class="chips">${ratingChip(t)}${rateBtn(t, n)}</div></div>`; }).join('')}</div></section>`).join('')}
+    <p class="by" style="margin:0">Ratings are Google ratings as listed on Wanderlog in Nov 2026 – check Maps before you go, as places change.</p></section>`;
+}
+function vFood() {
+  const all = kitOf('food'); const f = S.foodF || 'All'; const tab = S.foodTab || 'dishes';
+  const done = all.filter(x => x.done).length;
+  const seg = `<div class="seg" style="grid-template-columns:1fr 1fr" role="tablist"><button role="tab" aria-checked="${tab === 'dishes'}" data-act="foodTab" data-k="dishes">🍛 Dishes to try</button><button role="tab" aria-checked="${tab === 'restos'}" data-act="foodTab" data-k="restos">⭐ Top restaurants</button></div>`;
+  const head = `<div class="sec-head"><div><h2>Food trail</h2><p>Dishes to try and the best-rated places to eat along the route.</p></div><div class="ring" style="--p:${all.length ? Math.round(done / all.length * 100) : 0}"><span>${done}/${all.length}</span></div></div>${seg}`;
+  if (tab === 'restos') return head + vRestos();
+  const GROUPS = [['Veg', '🟢 Vegetarian'], ['Egg', '🟡 Eggetarian'], ['Non-veg', '🔴 Non-vegetarian'], ['Both', '🟠 Veg & non-veg versions']];
+  const row = x => `<div class="check food ${x.done ? 'done' : ''}"><button class="tick" aria-label="Tried" data-act="toggle" data-c="kit" data-id="${esc(x.id)}">${IC.check}</button><button class="txt" data-act="edit" data-c="kit:food" data-id="${esc(x.id)}">${vegDot(x.veg)}${esc(x.name)}<br><span class="by">${esc(x.where || '')}</span></button><span class="chips">${x.dayNo ? `<span class="chip">D${esc(x.dayNo)}</span>` : ''}${ratingChip('food:' + x.id)}${x.done ? rateBtn('food:' + x.id, x.name) : ''}</span></div>`;
+  const sortF = (a, b) => (a.done - b.done) || ((+a.dayNo || 99) - (+b.dayNo || 99));
+  const shown = GROUPS.filter(([k]) => f === 'All' || f === k).map(([k, l]) => { const l2 = all.filter(x => (x.veg || 'Veg') === k).sort(sortF); return l2.length ? `<section class="view" style="gap:8px"><div class="day-label">${l} · ${l2.length}</div>${l2.map(row).join('')}</section>` : ''; }).join('');
+  return head + `<div class="chips">${[['All', 'All'], ['Veg', '🟢 Veg'], ['Egg', '🟡 Egg'], ['Non-veg', '🔴 Non-veg'], ['Both', '🟠 Both']].map(([k, l]) => `<button class="chip" aria-pressed="${f === k}" data-act="foodF" data-k="${k}">${l}</button>`).join('')}${all.length ? '' : '<button class="btn sm primary" data-act="foodStarter">+ Add the Kerala food list</button>'}</div>
+    ${shown || `<div class="empty">${all.length ? 'Nothing in this filter.' : 'Tap “Add the Kerala food list” for 17 must-try dishes along our route.'}</div>`}`;
+}
+
+/* ---------- one-time clean-up (v6) ---------- */
+const OLD_PLAN_RE = /houseboat|kolukkumalai|lakshmi hills|chokramudi|bamboo raft|nature walk|\btrek\b/i;
+const oldPlanItem = x => OLD_PLAN_RE.test([x.name, x.title, x.item, x.text, x.stop].filter(Boolean).join(' '));
+let cleanTried = false;
+function ensureCleanup() {
+  if (cleanTried || !S.ready || S.err) return;
+  if (B === Cloud && (!Cloud.serverOk || Cloud.loaded.size < COLLS.length)) return;
+  if (B === Rest && !Rest.synced) return;
+  const m = DB.meta.find(x => x.id === 'trip'); if (!m) return;
+  cleanTried = true; if ((+m.cleanV || 0) >= 6) return;
+  run(B.update('meta', 'trip', { cleanV: 6 }));
+  let n = 0;
+  ['stays', 'activities', 'places', 'timeline', 'budget', 'mustdo'].forEach(c => DB[c].filter(oldPlanItem).forEach(x => { filesFor(c, x.id).forEach(deleteAttachment); run(B.remove(c, x.id)); n++; }));
+  kitOf('food').filter(x => /omelet|omelette|\begg\b/i.test(x.name) && x.veg !== 'Egg').forEach(x => run(B.update('kit', x.id, { veg: 'Egg' })));
+  if (n) toast(`Removed ${n} old-plan items (houseboat, treks, rafting)`);
 }
 
 /* ---------- toast ---------- */
