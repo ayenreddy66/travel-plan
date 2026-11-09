@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0F3D32">
+<meta name="theme-color" content="#102D25">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Kerala Era">
 <link rel="manifest" href="manifest.webmanifest">
@@ -12,7 +12,7 @@
 <title>Kerala Era ’27</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,700&display=swap">
 <style>
 /* Layout: phone-first app shell. Sticky header + scrolling tab pills, one view at a time, floating add button. */
 :root{
@@ -593,16 +593,188 @@ i.pdot{display:inline-block; width:10px; height:10px; border-radius:50%}
 .kara .btn:not(.primary){background:rgba(255,255,255,.14); color:#fff; border-color:rgba(255,255,255,.3)}
 .fun-karaoke{background:linear-gradient(140deg,#FF4FA0,#4A1478)}
 @media (max-width:380px){ .sos-btns{grid-template-columns:repeat(2, minmax(0,1fr))} }
+/* ================= v7 luxury design system ================= */
+:root{
+  --bg:#F5F3ED; --surface:#FFFFFF; --surface-2:#EEF3EF; --ink:#292D2A; --muted:#656B66; --line:#E3E2DA;
+  --accent:#183D32; --accent-ink:#FFFFFF; --gold:#B79A60; --gold-ink:#5E4A20; --sage:#DCE8E0; --pop:#183D32; --sun:#B79A60;
+  --hero:#102D25; --hero-ink:#F5F3ED; --hero-muted:#C9D6CE; --ok:#2E7D4F; --warn:#A86A00; --bad:#B3392B; --info:#2F6690;
+  --f-display:"Playfair Display", Georgia, "Times New Roman", serif; --f-body:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; --f-mono:"Inter", system-ui, sans-serif;
+  --r-lg:18px; --r-md:14px; --r-sm:12px;
+  --shadow:0 1px 2px rgba(16,45,37,.05), 0 6px 20px rgba(16,45,37,.06);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0D1714; --surface:#14211D; --surface-2:#1B2B26; --ink:#ECEAE3; --muted:#A3ABA5; --line:#26362F;
+  --accent:#8FC7A8; --accent-ink:#0D1714; --gold:#CDB27A; --gold-ink:#F1E3C0; --sage:#21332C; --pop:#CDB27A; --sun:#CDB27A;
+  --hero:#0F2620; --hero-ink:#F5F3ED; --hero-muted:#B9C9BF; --ok:#5DC48A; --warn:#E3A93C; --bad:#F07F6F; --info:#7FB2DA; } }
+:root[data-theme="dark"]{
+  --bg:#0D1714; --surface:#14211D; --surface-2:#1B2B26; --ink:#ECEAE3; --muted:#A3ABA5; --line:#26362F;
+  --accent:#8FC7A8; --accent-ink:#0D1714; --gold:#CDB27A; --gold-ink:#F1E3C0; --sage:#21332C; --pop:#CDB27A; --sun:#CDB27A;
+  --hero:#0F2620; --hero-ink:#F5F3ED; --hero-muted:#B9C9BF; --ok:#5DC48A; --warn:#E3A93C; --bad:#F07F6F; --info:#7FB2DA; }
+body{font:15px/1.55 var(--f-body); letter-spacing:-.005em}
+h1,h2,h3{font-family:var(--f-display); font-weight:700; letter-spacing:-.01em}
+h2{font-size:1.45rem} h3{font-size:1.08rem}
+.num{font-family:var(--f-body); font-variant-numeric:tabular-nums; font-feature-settings:"tnum"}
+.eyebrow{font:600 11.5px/1.2 var(--f-body); letter-spacing:.14em; text-transform:uppercase}
+.card,.stat,.qa,.pcard,.ticket,.pass{border:0; border-radius:var(--r-lg); box-shadow:var(--shadow)}
+.btn{border-radius:12px; font-weight:600; box-shadow:none}
+.btn.primary{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+.btn.dark{background:var(--hero); color:var(--hero-ink)}
+.chip{font-weight:600; border-radius:999px}
+.chip[aria-pressed="true"]{background:var(--accent); color:var(--accent-ink)}
+.tab{border:0; background:transparent; color:var(--muted); font-weight:600; padding:8px 12px; border-radius:10px}
+.tab[aria-selected="true"]{background:var(--surface); color:var(--accent); box-shadow:var(--shadow); border:0}
+.tabs[hidden]{display:none}
+.top{background:color-mix(in srgb, var(--bg) 90%, transparent); border-bottom:1px solid var(--line)}
+.logo{background:var(--hero); color:var(--gold); transform:none; border-radius:12px; font:700 14px/1 var(--f-display); letter-spacing:.02em}
+.brand b{font:700 1.12rem/1.15 var(--f-display)}
+.icon-btn{border:0; background:var(--surface); box-shadow:var(--shadow)}
+.avatar{width:40px; height:40px; border-radius:50%; border:0; background:var(--gold); color:#fff; font:700 14px var(--f-body); flex:none; display:grid; place-items:center}
+.fab{background:var(--accent); color:var(--accent-ink); border-radius:16px; box-shadow:0 10px 26px rgba(16,45,37,.28)}
+.fab[hidden]{display:none}
+.banner{background:color-mix(in srgb, var(--gold) 14%, var(--surface)); border:1px solid color-mix(in srgb, var(--gold) 40%, var(--line))}
+.ring{--c:var(--accent)}
+/* status labels: never colour alone */
+.st{display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:999px; font:600 12px/1.2 var(--f-body); white-space:nowrap; align-self:center}
+.st::before{content:""; width:7px; height:7px; border-radius:50%; background:currentColor}
+.st-ok{background:color-mix(in srgb, var(--ok) 13%, var(--surface)); color:var(--ok)}
+.st-warn{background:color-mix(in srgb, var(--warn) 14%, var(--surface)); color:var(--warn)}
+.st-bad{background:color-mix(in srgb, var(--bad) 13%, var(--surface)); color:var(--bad)}
+.st-none{background:var(--surface-2); color:var(--muted)}
+.st-info{background:color-mix(in srgb, var(--info) 13%, var(--surface)); color:var(--info)}
+/* hero */
+.hero.lux{border-radius:22px; min-height:300px; align-content:space-between; padding:20px; background:var(--hero)}
+.hero.lux.has-photo::before{background:linear-gradient(180deg, rgba(10,25,20,.35) 0%, rgba(10,25,20,.15) 40%, rgba(10,25,20,.78) 100%)}
+.hero.lux h1{font-family:var(--f-display); font-weight:700; letter-spacing:-.01em; font-size:clamp(2.2rem, 9vw, 3.6rem); line-height:1.02}
+.hero-top{display:flex; justify-content:space-between; align-items:center; gap:8px}
+.hero-top .eyebrow{color:var(--gold)}
+.hero-dates{margin:8px 0 0; font-weight:600}
+.hero .route-line{opacity:.85; font-size:13.5px; margin:4px 0 0}
+.chip.glass{background:rgba(255,255,255,.16); color:#fff; border:1px solid rgba(255,255,255,.28); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px)}
+.hero .count div{background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.18)}
+/* KPIs */
+.kpis{display:grid; gap:10px; grid-template-columns:repeat(2, minmax(0,1fr))}
+.kpi{display:grid; gap:2px; text-align:left; padding:14px; border:0; border-radius:var(--r-lg); background:var(--surface); box-shadow:var(--shadow)}
+.kpi .k{font:600 11.5px var(--f-body); letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
+.kpi b{font:700 1.35rem/1.2 var(--f-display)}
+.kpi-ring{grid-column:1 / -1; grid-template-columns:auto 1fr; align-items:center; gap:14px}
+.kpi-ring > span:last-child{display:grid}
+.ring.sm{width:56px; height:56px}
+.ring.sm span{font-size:13px; width:42px; height:42px}
+@media (min-width:700px){ .kpis{grid-template-columns:repeat(5, minmax(0,1fr))} .kpi-ring{grid-column:auto; grid-template-columns:1fr; justify-items:start} }
+.next-body{display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:start}
+.next-time{font:700 1.15rem var(--f-display); color:var(--accent); padding:8px 12px; border-radius:12px; background:var(--surface-2); white-space:nowrap}
+.sec-head h3 .li, h3 .li{vertical-align:-3px; color:var(--gold)}
+.brows{display:grid; gap:2px}
+.brow{display:grid; grid-template-columns:40px minmax(0,1fr) auto; gap:12px; align-items:center; text-align:left; padding:10px 0; border:0; border-bottom:1px solid var(--line); background:none; width:100%}
+.brow:last-child{border-bottom:0}
+.brow-ic{width:40px; height:40px; border-radius:12px; display:grid; place-items:center; background:var(--surface-2); color:var(--accent)}
+.brow-t{display:grid; min-width:0}
+.cat{display:inline-block; font:600 11px var(--f-body); letter-spacing:.06em; text-transform:uppercase; padding:3px 8px; border-radius:6px; background:var(--surface-2); color:var(--muted)}
+.cat-important{background:color-mix(in srgb, var(--bad) 14%, var(--surface)); color:var(--bad)}
+.cat-payment-reminder{background:color-mix(in srgb, var(--warn) 16%, var(--surface)); color:var(--warn)}
+.cat-schedule-change{background:color-mix(in srgb, var(--info) 14%, var(--surface)); color:var(--info)}
+.cat-booking-update{background:color-mix(in srgb, var(--ok) 14%, var(--surface)); color:var(--ok)}
+.hub-grid{display:grid; gap:10px; grid-template-columns:repeat(auto-fill, minmax(min(100%, 160px), 1fr))}
+.hub-card{display:grid; gap:4px; text-align:left; padding:16px; border:0; border-radius:var(--r-lg); background:var(--surface); box-shadow:var(--shadow)}
+.hub-card b{font:700 1rem var(--f-display)}
+.hub-ic{width:42px; height:42px; border-radius:12px; display:grid; place-items:center; background:var(--hero); color:var(--gold); margin-bottom:6px}
+.txt-btn{border:0; background:none; text-align:left; padding:0; min-width:0}
+.plan-check .pc-list{margin:0; padding:0; list-style:none; display:grid; gap:6px}
+.pc-list li{padding:8px 10px 8px 30px; border-radius:10px; position:relative; font-size:14px; background:var(--surface-2)}
+.pc-list li::before{position:absolute; left:10px; top:8px; font-weight:800}
+.pc-warn::before{content:"!"; color:var(--warn)} .pc-bad::before{content:"✕"; color:var(--bad)} .pc-info::before{content:"i"; color:var(--info)}
+.map-card{display:grid; gap:10px}
+.stops{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:6px}
+.stops li{display:inline-flex; align-items:center; gap:6px; padding:4px 10px 4px 4px; border-radius:999px; background:var(--surface-2); font-size:13px; font-weight:600}
+.sn-n{width:22px; height:22px; border-radius:50%; display:grid; place-items:center; background:var(--accent); color:var(--accent-ink); font-size:11.5px}
+.map-frame{border-radius:14px; overflow:hidden; aspect-ratio:4/3; background:var(--surface-2)}
+.map-frame iframe{width:100%; height:100%; border:0}
+.table-wrap{overflow-x:auto}
+.tbl{width:100%; border-collapse:collapse; font-size:13.5px}
+.tbl th{text-align:left; font:600 11px var(--f-body); letter-spacing:.06em; text-transform:uppercase; color:var(--muted); padding:8px 6px; border-bottom:1px solid var(--line)}
+.tbl td{padding:9px 6px; border-bottom:1px solid var(--line)}
+.tbl .pos{color:var(--ok)} .tbl .neg{color:var(--bad)}
+.event-hero{border-radius:22px; padding:20px; display:grid; gap:14px; color:var(--hero-ink); background:var(--hero); border:1px solid color-mix(in srgb, var(--gold) 35%, transparent)}
+.event-hero .eyebrow{color:var(--gold)}
+.event-hero h2{font-size:1.8rem; color:#fff}
+.ev-stats{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:8px}
+.ev-stats > div{display:grid; justify-items:start; gap:2px; padding:10px; border-radius:14px; background:rgba(255,255,255,.07)}
+.ev-stats b{font:700 1.15rem var(--f-display); color:#fff}
+.ev-stats span{font-size:12px; color:var(--hero-muted)}
+.event-hero .ring span{color:#fff; background:var(--hero)}
+/* toned-down Fun Zone & hero cards */
+.fun-tile{background:var(--hero) !important; border:1px solid color-mix(in srgb, var(--gold) 25%, transparent)}
+.fun-tile b{font-family:var(--f-display)}
+.fun-hero,.recap,.kara,.wa-hero{background:var(--hero) !important}
+.fun-hero .eyebrow,.recap .eyebrow,.kara .eyebrow{color:var(--gold) !important}
+.home-fun{background:var(--hero)}
+.go-ok{background:#1F5A3E} .go-warn{background:#7A5615} .go-bad{background:#8A2C21}
+.sos{background:#8A2C21}
+/* navigation: 5 sections on mobile, sidebar on desktop */
+.bnav{grid-template-columns:repeat(5, minmax(0,1fr)); background:color-mix(in srgb, var(--surface) 94%, transparent); border-top:1px solid var(--line)}
+.bnav .side-brand,.bnav .nav-sub,.bnav .nav-hub{display:none}
+.nav-grp{display:contents}
+.bnav button[aria-current="page"]{color:var(--accent); background:transparent}
+.bnav button[aria-current="page"] .li{stroke-width:2.2}
+.bnav button[aria-current="page"]::after{content:""; position:absolute; top:0; left:30%; right:30%; height:3px; border-radius:0 0 3px 3px; background:var(--gold)}
+@media (min-width:900px){
+  body{padding-left:248px; padding-bottom:40px}
+  .bnav{display:flex !important; flex-direction:column; gap:4px; top:0; bottom:0; right:auto; width:248px; padding:18px 14px; overflow-y:auto; border-top:0; border-right:1px solid var(--line); background:var(--surface)}
+  .bnav .side-brand{display:flex; align-items:center; gap:10px; padding:4px 6px 16px; font:700 1.05rem var(--f-display)}
+  .nav-grp{display:grid; gap:2px} .bnav .nav-hub{display:grid; margin-top:auto; padding-top:10px; border-top:1px solid var(--line)}
+  .bnav button{display:flex; gap:10px; justify-content:flex-start; padding:9px 10px; font-size:14.5px; font-weight:600; border-radius:10px}
+  .bnav button[aria-current="page"]::after{display:none}
+  .nav-grp > button[aria-current="page"]{background:var(--surface-2)}
+  .bnav .nav-sub{display:grid; gap:1px; padding-left:34px}
+  .nav-sub button{font-size:13.5px; padding:6px 10px; color:var(--muted)}
+  .nav-sub button[aria-current="page"]{color:var(--accent); background:var(--surface-2)}
+  .fab{bottom:24px}
+  .top .tabs{display:none}
+}
+#settingsBtn[hidden]{display:none}
+.view > *,.card,.grid > *{min-width:0}
+.bva .sec-head,.sec-head{flex-wrap:wrap}
+.option .facts{grid-template-columns:repeat(2, minmax(0,1fr)); gap:6px}
+.option .fact{padding:8px 10px; font-size:13.5px}
+.tbl{font-size:12.5px}
+.tbl th,.tbl td{padding:8px 4px}
+@media (max-width:420px){ .brand .sync span{font-size:11px} .top-row{gap:8px} }
+/* v8 */
+.ai-fab{position:fixed; left:calc(16px + env(safe-area-inset-left,0px)); bottom:calc(84px + env(safe-area-inset-bottom,0px)); z-index:25; display:flex; align-items:center; gap:8px; height:46px; padding:0 16px; border-radius:999px; border:1px solid color-mix(in srgb, var(--gold) 60%, transparent); background:var(--hero); color:var(--gold); font-weight:600; box-shadow:0 8px 22px rgba(16,45,37,.25)}
+.ai-fab span{color:#F5F3ED}
+@media (max-width:420px){ .ai-fab span{display:none} .ai-fab{width:46px; padding:0; justify-content:center} }
+@media (min-width:900px){ .ai-fab{left:auto; right:24px; bottom:92px} }
+.ai-out{display:grid; gap:8px}
+.ai-q{justify-self:end; max-width:85%; padding:8px 12px; border-radius:14px 14px 4px 14px; background:var(--accent); color:var(--accent-ink); font-size:14px}
+.ai-a{padding:12px; border-radius:14px 14px 14px 4px; background:var(--surface-2); font-size:14px; line-height:1.55}
+.ai-wait{color:var(--muted); font-style:italic}
+.google-btn{background:#fff; color:#1f1f1f; border:1px solid #dadce0; width:100%}
+.or{display:flex; align-items:center; gap:10px; color:var(--muted); font-size:12.5px} .or::before,.or::after{content:""; flex:1; height:1px; background:var(--line)}
+.gate{display:grid; gap:10px; justify-items:start; padding:24px}
+.gate p{margin:0}
+.neg{color:var(--bad)}
+.opt-grid{display:grid; gap:10px; grid-template-columns:repeat(auto-fit, minmax(min(100%, 220px), 1fr))}
+.opt-grid ol{margin:6px 0; padding-left:20px}
+.opt-new{outline:2px solid var(--gold)}
+.wx-card2{display:grid; gap:10px; padding:16px; border-radius:var(--r-lg); background:var(--surface); box-shadow:var(--shadow)}
+.wx-facts{display:grid; grid-template-columns:repeat(auto-fit, minmax(110px, 1fr)); gap:8px}
+.wx-facts div{display:grid; padding:8px 10px; border-radius:10px; background:var(--surface-2)}
+.wx-facts small{font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted)}
+.roles-tbl td:not(:first-child),.roles-tbl th:not(:first-child){text-align:center}
+@media print{ .ai-fab{display:none !important} }
+@media print{ .top,.bnav,.fab,.no-print,#toastRoot{display:none !important} body{padding:0; background:#fff} .card{box-shadow:none; border:1px solid #ddd} }
 </style>
 </head>
 <body>
 <header class="top">
   <div class="wrap">
     <div class="top-row">
-      <div class="logo" aria-hidden="true">KL</div>
+      <div class="logo" aria-hidden="true">KE</div>
       <div class="brand"><b id="tripName">Kerala Era ’27</b><span class="sync" id="sync"><i class="dot"></i><span>Loading…</span></span></div>
+      <button class="icon-btn" data-act="tab" data-k="hub" aria-label="Travel Hub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"/></svg></button>
       <button class="icon-btn bell" id="bellBtn" aria-label="Updates" data-act="tab" data-k="updates"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg><span class="bell-n" id="bellN" hidden></span></button>
-      <button class="icon-btn" id="settingsBtn" aria-label="Settings and sharing"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
+      <button class="avatar" id="avatarBtn" data-act="settings" aria-label="Your profile and settings">?</button>
+      <button class="icon-btn" id="settingsBtn" aria-label="Settings and sharing" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
     </div>
     <nav class="tabs" id="tabs" role="tablist" aria-label="Sections"></nav>
   </div>
@@ -613,6 +785,7 @@ i.pdot{display:inline-block; width:10px; height:10px; border-radius:50%}
 <button class="fab" id="fab" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span id="fabLabel">Add</span></button>
 <div id="sheetRoot"></div>
 <div id="viewerRoot"></div>
+<button class="ai-fab" data-act="aiOpen" aria-label="Ask Kerala AI"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 4.6L18.5 9l-4.7 1.4L12 15l-1.8-4.6L5.5 9l4.7-1.4z"/><path d="M18.5 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg><span>Ask Kerala AI</span></button>
 <div id="toastRoot"></div>
 
 <script>
@@ -729,6 +902,7 @@ SCHEMA.contacts = { noun: 'contact', fields: [
   ['linkedTo','For','text','e.g. Munnar villa, Day 5 shikara'], ['dayNo','Day','day'], ['notes','Notes','textarea'] ] };
 SCHEMA.polls = { noun: 'poll', fields: [
   ['q','Question','text','e.g. Which Munnar stay should we book?'], ['options','Options','textarea','One option per line'] ] };
+SCHEMA.meta.fields.push(['aiUrl','AI assistant address','url','Your Cloudflare Worker URL from the ai-worker setup (optional)']);
 SCHEMA.meta.fields.push(['albumUrl','Shared photo album link','url','Optional: a Google Photos shared album for full-resolution originals']);
 const COLLS = ['meta','days','timeline','legs','places','stays','activities','budget','photographers','mustdo','photos','members','expenses','settlements','files','contacts','votes','polls','activity','payers','fun','kit'];
 const ATTACH = new Set(['stays','activities','budget','photographers','expenses','settlements']);
@@ -869,8 +1043,8 @@ const S = {
   tab: ls.get(KEYS.tab, 'home'), day: ls.get(KEYS.day, 1), placeFilter: 'All', mustFilter: 'All',
   name: ls.get(KEYS.name, ''), me: ls.get('ktrip.me', ''), ready: false, mode: 'local', pending: false, err: '', online: navigator.onLine
 };
-const TABS = [['home','Home'],['days','Days'],['route','Travel plan'],['places','Places'],['stays','Stays'],['activities','Activities'],['food','Food trail 🍛'],['kit','Trip kit 🧳'],['safety','Kids & SOS 🆘'],['gallery','Photos'],['memories','Memories 📖'],['fun','Fun Zone 🎲'],['people','People & chat'],['split','Split & settle'],['budget','Budget'],['photo','Photographers'],['must','Must-do'],['updates','Updates']];
-const FAB = { food: ['kit:food','Add a dish'], memories: ['kit:journal','Add a memory'], gallery: ['gallery','Add photos'], people: ['contacts','Add contact'], updates: ['polls','Ask the group'], split: ['expenses','Add expense'], home: ['timeline','Add plan item'], days: ['timeline','Add to this day'], route: ['legs','Add leg'], places: ['places','Add place'], stays: ['stays','Add stay option'], activities: ['activities','Add activity'], budget: ['budget','Add budget line'], photo: ['photographers','Add photographer'], must: ['mustdo','Add must-do'] };
+const TABS = ['home','places','food','activities','photo','days','route','stays','transport','kit','must','people','updates','tasks','gallery','memories','budget','split','reports','hub','events','docs','safety','fun'].map(k => [k, k]);
+const FAB = { transport: ['kit:vehicle','Add vehicle'], tasks: ['kit:task','Add task'], docs: ['kit:doc','Add document'], updates: ['kit:announce','Post announcement'], food: ['kit:food','Add a dish'], memories: ['kit:journal','Add a memory'], gallery: ['gallery','Add photos'], people: ['contacts','Add contact'], updates: ['polls','Ask the group'], split: ['expenses','Add expense'], home: ['timeline','Add plan item'], days: ['timeline','Add to this day'], route: ['legs','Add leg'], places: ['places','Add place'], stays: ['stays','Add stay option'], activities: ['activities','Add activity'], budget: ['budget','Add budget line'], photo: ['photographers','Add photographer'], must: ['mustdo','Add must-do'] };
 const meta = () => Object.assign({ tripName: 'Our trip', start: '', adults: 0, teens: 0, kids: 0, infants: 0, paying: 1, buffer: 10 }, DB.meta.find(m => m.id === 'trip') || DB.meta[0] || {});
 
 /* ---------- backends ---------- */
@@ -885,8 +1059,8 @@ const Local = {
   save() { const d = {}; COLLS.forEach(c => d[c] = DB[c]); d.blobs = DB.blobs; if (!ls.set(KEYS.local, d)) toast('This phone’s storage is full. Connect the shared database to keep photos.'); },
   add(c, o, id) { DB[c] = DB[c] || []; const rec = Object.assign({}, o, { id: id || uid(), _by: S.name, _at: Date.now() }); const i = id ? DB[c].findIndex(x => x.id === id) : -1; if (i > -1) DB[c][i] = rec; else DB[c].push(rec); this.save(); render(); return Promise.resolve(); },
   get(c, id) { return Promise.resolve((DB[c] || []).find(x => x.id === id) || null); },
-  update(c, id, p) { const i = DB[c].findIndex(x => x.id === id); if (i > -1) DB[c][i] = Object.assign({}, DB[c][i], p, { _by: S.name, _at: Date.now() }); else DB[c].push(Object.assign({ id }, p)); this.save(); render(); return Promise.resolve(); },
-  remove(c, id) { DB[c] = DB[c].filter(x => x.id !== id); this.save(); render(); return Promise.resolve(); },
+  update(c, id, p) { DB[c] = DB[c] || []; const i = DB[c].findIndex(x => x.id === id); if (i > -1) DB[c][i] = Object.assign({}, DB[c][i], p, { _by: S.name, _at: Date.now(), ...(S.user ? { _uid: S.user.uid } : {}) }); else DB[c].push(Object.assign({ id }, p)); this.save(); render(); return Promise.resolve(); },
+  remove(c, id) { DB[c] = (DB[c] || []).filter(x => x.id !== id); this.save(); render(); return Promise.resolve(); },
   reset() { ls.del(KEYS.local); this.start(); }
 };
 const FB = 'https://www.gstatic.com/firebasejs/10.12.2/';
@@ -909,6 +1083,7 @@ const Cloud = {
     }
     if (lastErr || !(window.firebase && firebase.firestore)) throw new Error('Couldn’t download the sync code. Open the trip from your github.io link in Safari or Chrome (not a file preview), and check the internet connection.');
     if (!firebase.apps.length) firebase.initializeApp(cfg.fb);
+    await ensureAuth(cfg);
     try { firebase.firestore.setLogLevel('error'); } catch (e) {}
     this.fs = firebase.firestore();
     try { this.fs.settings({ experimentalForceLongPolling: true, merge: true }); } catch (e) {}
@@ -916,7 +1091,7 @@ const Cloud = {
     this.base = this.fs.collection('trips').doc(cfg.trip);
     COLLS.forEach(c => {
       this.base.collection(c).onSnapshot({ includeMetadataChanges: true }, snap => {
-        if (!snap.metadata.fromCache) this.serverOk = true;
+        if (!snap.metadata.fromCache) { this.serverOk = true; S.lastSync = Date.now(); }
         DB[c] = snap.docs.map(d => Object.assign({ id: d.id }, d.data()));
         this.loaded.add(c);
         S.pending = snap.metadata.hasPendingWrites; S.fromCache = snap.metadata.fromCache; S.err = '';
@@ -926,15 +1101,15 @@ const Cloud = {
     });
   },
   clean(o) { const x = {}; for (const k in o) { if (k === 'id' || o[k] === undefined) continue; x[k] = o[k]; } return x; },
-  add(c, o, id) { const d = Object.assign(this.clean(o), { _by: S.name, _at: Date.now() }); return id ? this.base.collection(c).doc(id).set(d) : this.base.collection(c).add(d); },
+  add(c, o, id) { const d = Object.assign(this.clean(o), { _by: S.name, _at: Date.now(), ...(S.user ? { _uid: S.user.uid } : {}) }); return id ? this.base.collection(c).doc(id).set(d) : this.base.collection(c).add(d); },
   async get(c, id) { const x = await this.base.collection(c).doc(id).get(); return x.exists ? Object.assign({ id }, x.data()) : null; },
-  update(c, id, p) { return this.base.collection(c).doc(id).set(Object.assign(this.clean(p), { _by: S.name, _at: Date.now() }), { merge: true }); },
+  update(c, id, p) { return this.base.collection(c).doc(id).set(Object.assign(this.clean(p), { _by: S.name, _at: Date.now(), ...(S.user ? { _uid: S.user.uid } : {}) }), { merge: true }); },
   remove(c, id) { return this.base.collection(c).doc(id).delete(); },
   async importAll(data) {
     const ops = []; COLLS.forEach(c => (data[c] || []).forEach(o => ops.push([c, o])));
     for (let i = 0; i < ops.length; i += 400) {
       const b = this.fs.batch();
-      ops.slice(i, i + 400).forEach(([c, o]) => { const ref = c === 'meta' ? this.base.collection(c).doc('trip') : this.base.collection(c).doc(); b.set(ref, Object.assign(this.clean(o), { _by: S.name, _at: Date.now() })); });
+      ops.slice(i, i + 400).forEach(([c, o]) => { const ref = c === 'meta' ? this.base.collection(c).doc('trip') : this.base.collection(c).doc(); b.set(ref, Object.assign(this.clean(o), { _by: S.name, _at: Date.now(), ...(S.user ? { _uid: S.user.uid } : {}) })); });
       await b.commit();
     }
   }
@@ -961,7 +1136,7 @@ function fromFields(f) { const o = {}; for (const k in f) o[k] = fromFS(f[k]); r
 const restBase = cfg => `https://firestore.googleapis.com/v1/projects/${encodeURIComponent(cfg.fb.projectId)}/databases/(default)/documents/trips/${encodeURIComponent(cfg.trip)}`;
 async function diagnose(cfg) {
   try {
-    const r = await fetch(`${restBase(cfg)}/meta?pageSize=1&key=${encodeURIComponent(cfg.fb.apiKey)}`);
+    const tok = await idToken(); const r = await fetch(`${restBase(cfg)}/meta?pageSize=1&key=${encodeURIComponent(cfg.fb.apiKey)}`, tok ? { headers: { Authorization: 'Bearer ' + tok } } : undefined);
     const j = await r.json().catch(() => ({})); const msg = (j.error && j.error.message) || '';
     if (r.ok) return { ok: true };
     if (r.status === 404 || /does not exist|NOT_FOUND/i.test(msg)) return { text: 'The Firestore database doesn’t exist yet, or it was created with a name other than “(default)”. In Firebase open Build → Firestore Database and create it with the database ID “(default)”.' };
@@ -977,7 +1152,7 @@ const Rest = {
   mode: 'cloud', rest: true, pending: 0, busy: false,
   init(cfg) { this.base = restBase(cfg); this.key = encodeURIComponent(cfg.fb.apiKey); },
   async req(method, url, body) {
-    const r = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: body ? JSON.stringify(body) : undefined });
+    const tok = await idToken(); const r = await fetch(url, { method, headers: Object.assign({ 'Content-Type': 'application/json' }, tok ? { Authorization: 'Bearer ' + tok } : {}), body: body ? JSON.stringify(body) : undefined });
     if (!r.ok) { const j = await r.json().catch(() => ({})); const e = new Error((j.error && j.error.message) || ('HTTP ' + r.status)); e.code = r.status === 403 ? 'permission-denied' : String(r.status); throw e; }
     return r.status === 204 ? null : r.json().catch(() => null);
   },
@@ -993,7 +1168,7 @@ const Rest = {
     try {
       const res = await Promise.all(colls.map(c => this.listColl(c)));
       if (!this.pending) colls.forEach((c, i) => DB[c] = res[i]);
-      S.err = ''; S.ready = true; S.online = true; if (colls.includes('meta')) this.synced = true;
+      S.err = ''; S.ready = true; S.online = true; S.lastSync = Date.now(); if (colls.includes('meta')) this.synced = true;
       const cache = {}; COLLS.forEach(c => { if (c !== 'photos') cache[c] = DB[c]; }); ls.set('ktrip.cache', cache);
     } catch (e) { S.err = e.code === 'permission-denied' ? 'permission-denied' : ''; S.online = false; S.ready = true; }
     finally { this.busy = false; schedule(); if (this.queued && !this.pending) { const q = this.queued; this.queued = null; setTimeout(() => this.pull(q), 50); } }
@@ -1010,21 +1185,21 @@ const Rest = {
   done(c) { this.pending = Math.max(0, this.pending - 1); if (c !== 'blobs') setTimeout(() => this.pull([c]), 300); else if (!this.pending && this.queued) { const q = this.queued; this.queued = null; setTimeout(() => this.pull(q), 50); } },
   async get(c, id) { const d = await this.req('GET', `${this.base}/${c}/${encodeURIComponent(id)}?key=${this.key}`); return d ? Object.assign(fromFields(d.fields || {}), { id }) : null; },
   add(c, o, id) {
-    const data = Object.assign(Cloud.clean(o), { _by: S.name, _at: Date.now() });
-    const tmp = Object.assign({ id: id || 'tmp_' + uid() }, data); if (c !== 'blobs') { const i = id ? DB[c].findIndex(x => x.id === id) : -1; if (i > -1) DB[c][i] = tmp; else DB[c].push(tmp); schedule(); } this.pending++;
+    const data = Object.assign(Cloud.clean(o), { _by: S.name, _at: Date.now(), ...(S.user ? { _uid: S.user.uid } : {}) });
+    const tmp = Object.assign({ id: id || 'tmp_' + uid() }, data); if (c !== 'blobs') { DB[c] = DB[c] || []; const i = id ? DB[c].findIndex(x => x.id === id) : -1; if (i > -1) DB[c][i] = tmp; else DB[c].push(tmp); schedule(); } this.pending++;
     const p = c === 'meta' ? this.req('PATCH', `${this.base}/meta/trip?key=${this.key}`, { fields: toFields(data) })
       : id ? this.req('PATCH', `${this.base}/${c}/${encodeURIComponent(id)}?key=${this.key}`, { fields: toFields(data) })
       : this.req('POST', `${this.base}/${c}?key=${this.key}`, { fields: toFields(data) });
     return p.then(d => { if (d && d.name) tmp.id = d.name.split('/').pop(); }).finally(() => this.done(c));
   },
   update(c, id, p) {
-    const data = Object.assign(Cloud.clean(p), { _by: S.name, _at: Date.now() });
-    const i = DB[c].findIndex(x => x.id === id); if (i > -1) DB[c][i] = Object.assign({}, DB[c][i], data); schedule(); this.pending++;
+    const data = Object.assign(Cloud.clean(p), { _by: S.name, _at: Date.now(), ...(S.user ? { _uid: S.user.uid } : {}) });
+    DB[c] = DB[c] || []; const i = DB[c].findIndex(x => x.id === id); if (i > -1) DB[c][i] = Object.assign({}, DB[c][i], data); schedule(); this.pending++;
     const mask = Object.keys(data).map(k => 'updateMask.fieldPaths=' + encodeURIComponent(k)).join('&');
     return this.req('PATCH', `${this.base}/${c}/${encodeURIComponent(id)}?${mask}&key=${this.key}`, { fields: toFields(data) }).finally(() => this.done(c));
   },
   remove(c, id) {
-    DB[c] = DB[c].filter(x => x.id !== id); schedule(); this.pending++;
+    DB[c] = (DB[c] || []).filter(x => x.id !== id); schedule(); this.pending++;
     return this.req('DELETE', `${this.base}/${c}/${encodeURIComponent(id)}?key=${this.key}`).finally(() => this.done(c));
   },
   async importAll(data) {
@@ -1032,7 +1207,7 @@ const Rest = {
     this.pending++;
     try {
       for (let i = 0; i < ops.length; i += 8) {
-        await Promise.all(ops.slice(i, i + 8).map(([c, o]) => { const f = { fields: toFields(Object.assign(Cloud.clean(o), { _by: S.name, _at: Date.now() })) };
+        await Promise.all(ops.slice(i, i + 8).map(([c, o]) => { const f = { fields: toFields(Object.assign(Cloud.clean(o), { _by: S.name, _at: Date.now(), ...(S.user ? { _uid: S.user.uid } : {}) })) };
           return c === 'meta' ? this.req('PATCH', `${this.base}/meta/trip?key=${this.key}`, f) : this.req('POST', `${this.base}/${c}?key=${this.key}`, f); }));
       }
     } finally { this.pending = Math.max(0, this.pending - 1); }
@@ -1049,24 +1224,24 @@ async function fallbackToRest(cfg) {
   } else { S.err = d.text; S.errBlocked = !!d.blocked; render(); }
 }
 let B = Local;
-const run = p => Promise.resolve(p).catch(e => { const c = e && (e.code || e.message) || 'unknown'; toast(c === 'permission-denied' ? 'Save blocked by the database rules. Check the Firebase rules (Settings → Sharing).' : 'Could not save: ' + c); });
+const run = p => Promise.resolve(p).catch(e => { const c = e && (e.code || e.message) || 'unknown'; toast(/permission-denied|PERMISSION_DENIED|403/.test(c) ? (S.user ? `Not allowed for your role (${roleName(S.role)}). Ask the trip admin.` : 'Please sign in to make changes (⚙ → Sign in).') : 'Could not save: ' + c); });
 
 /* ---------- render ---------- */
 let rq = 0; const schedule = () => { if (!rq) rq = requestAnimationFrame(() => { rq = 0; render(); }); };
 function render() {
   const m = meta();
-  $('#tripName').textContent = m.tripName || 'Our trip';
+  $('#tripName').textContent = m.tripName || 'Our trip'; $('#avatarBtn').textContent = S.name ? initials(S.name) : '?';
   document.title = m.tripName || 'Trip planner';
   renderSync(); renderTabs();
   const f = FAB[S.tab]; $('#fabLabel').textContent = f ? f[1] : 'Add';
   const v = $('#view');
   if (!S.ready) { v.innerHTML = '<div class="empty">Loading the trip…</div>'; return; }
-  const fn = { home: vHome, days: vDays, route: vRoute, places: vPlaces, stays: vStays, activities: vActs, budget: vBudget, split: vSplit, photo: vPhoto, must: vMust, gallery: vGallery, people: vPeople, updates: vUpdates, fun: vFun, kit: vKit, safety: vSafety, food: vFood, memories: vMemories }[S.tab] || vHome;
+  const fn = { home: vHome2, transport: vTransport, tasks: vTasks, reports: vReports, events: vEvents, docs: vDocs, hub: vHub, days: vDays, route: vRoute, places: vPlaces, stays: vStays, activities: vActs, budget: vBudget, split: vSplit, photo: vPhoto, must: vMust, gallery: vGallery, people: vPeople, updates: vUpdates, fun: vFun, kit: vKit, safety: vSafety, food: vFood, memories: vMemories }[S.tab] || vHome;
   if (S.tab === 'updates') markSeen();
-  v.innerHTML = banner() + fn();
+  v.innerHTML = banner() + (S.err === 'permission-denied' ? '' : fn());
   renderNav(); checkNewActivity();
   tickCountdown(); charTick();
-  $('#fab').hidden = ['fun', 'kit', 'safety'].includes(S.tab);
+  $('#fab').hidden = S.role === 'guest' || ['fun', 'kit', 'safety', 'hub', 'reports', 'events', 'home'].includes(S.tab);
   ensurePayers(); ensureCleanup();
   if ($('#attList')) renderAttList();
 }
@@ -1074,22 +1249,19 @@ function renderSync() {
   let cls = '', txt = 'Only on this phone';
   if (B.mode === 'cloud') {
     if (S.err) { cls = 'err'; txt = 'Sync problem – tap ⚙'; }
-    else if (!S.online) { cls = 'wait'; txt = 'Offline – saves when back online'; }
+    else if (!S.online) { cls = 'wait'; txt = 'Offline' + (S.lastSync ? ' · synced ' + ago(S.lastSync) : '') + ' – saves later'; }
     else if (S.checking) { cls = 'wait'; txt = 'Connecting…'; }
     else if (B.rest) { cls = 'live'; txt = 'Shared · auto-sync'; }
     else if (S.pending) { cls = 'wait'; txt = 'Saving…'; }
     else if (!Cloud.serverOk) { cls = 'wait'; txt = 'Connecting…'; }
     else { cls = 'live'; txt = 'Shared · live'; }
   }
-  $('#sync').innerHTML = `<i class="dot ${cls}"></i><span>${esc(txt)}${S.name ? ' · ' + esc(S.name) : ''}</span>`;
-}
-function renderTabs() {
-  $('#tabs').innerHTML = TABS.map(([k, l]) => `<button class="tab" role="tab" aria-selected="${S.tab === k}" data-act="tab" data-k="${k}">${l}${k === 'updates' && unreadCount() ? ` <span class="badge">${unreadCount()}</span>` : ''}</button>`).join('');
-  const sel = $('#tabs [aria-selected="true"]'); if (sel && sel.scrollIntoView && !renderTabs.done) { try { sel.scrollIntoView({ inline: 'center', block: 'nearest' }); } catch (e) {} renderTabs.done = true; }
+  $('#sync').innerHTML = `<i class="dot ${cls}"></i><span>${esc(txt)}${S.name ? ' · ' + esc(S.name) : ''}${S.role ? ' · ' + esc(roleName(S.role).replace(/ \(.*\)/, '')) : ''}</span>`;
 }
 const inPreview = (() => { try { return window.self !== window.top || location.protocol === 'file:'; } catch (e) { return true; } })();
 function banner() {
   if (B.mode === 'cloud' && S.checking) return `<div class="banner"><p><b>Checking the connection to the shared trip…</b></p></div>`;
+  if (B.mode === 'cloud' && S.err === 'permission-denied') return S.user ? `<section class="gate card"><span class="hub-ic">${ico('shield', 22)}</span><h2>Waiting for an invite</h2><p>You’re signed in as <b>${esc(S.user.email)}</b>, but this email isn’t on the trip’s guest list yet.</p><p class="muted">Ask the trip admin to add <b>${esc(S.user.email)}</b> in ⚙ → Manage people & roles, then reopen this link.</p><div class="chips"><button class="btn primary" data-act="retry">I’ve been invited – try again</button><button class="btn" data-act="signOut">Use another account</button></div></section>` : `<section class="gate card"><span class="hub-ic">${ico('shield', 22)}</span><h2>${esc(DB.meta.length ? meta().tripName : 'Kerala Era ’27')} is private</h2><p>Sign in with the Google account or email your organiser invited.</p><div><button class="btn primary" data-act="signIn">Sign in</button></div>${S.authErr ? `<p class="neg">${esc(S.authErr)}</p>` : ''}</section>`;
   if (B.mode === 'cloud' && S.err) return `<div class="banner"><p><b>Can’t reach the shared trip.</b> ${esc(S.err === 'permission-denied' ? 'The database rules are blocking access. In Firebase open Firestore Database → Rules, paste the trip rules and tap Publish.' : S.err)}</p><p class="by">This page: ${esc(location.href.split('#')[0])}</p><div class="chips"><button class="btn sm dark" data-act="retry">Try again</button><button class="btn sm" data-act="settings">Sharing settings</button></div></div>`;
   if (B.mode === 'cloud' && S.ready && !DB.days.length && !DB.places.length) return `<div class="banner"><p><b>This shared trip is empty.</b> Load the Kerala plan (or whatever is saved on this phone) so everyone starts from it.</p><div class="chips"><button class="btn sm primary" data-act="seedCloud">Load the Kerala plan</button><button class="btn sm" data-act="seedCloudLocal">Upload this phone’s copy</button></div></div>`;
   if ((S.tab === 'home' || S.tab === 'days') && planBanner()) return planBanner();
@@ -1180,7 +1352,7 @@ function vDays() {
   const d = dayOf(S.day), tl = tlFor(S.day);
   const stays = DB.stays.filter(s => s.checkin && s.checkout && s.checkin <= d.date && d.date < s.checkout);
   const showStays = stays.filter(isBooked).length ? stays.filter(isBooked) : stays;
-  const places = DB.places.filter(p => +p.dayNo === +S.day);
+  const places = DB.places.filter(p => +p.dayNo === +S.day).sort((a, b) => (+a.seq || 99) - (+b.seq || 99));
   const acts = DB.activities.filter(a => +a.dayNo === +S.day && a.status !== 'Skip');
   const must = DB.mustdo.filter(x => +x.dayNo === +S.day);
   return `
@@ -1189,9 +1361,10 @@ function vDays() {
     <span class="eyebrow">Day ${esc(d.dayNo)} · ${esc(fmtD(d.date))}</span>
     <h2>${esc(d.title)}</h2>
     <p>${esc(d.vibe)}</p>
-    <div class="chips"><span class="chip">${esc(d.route)}</span>${+d.km ? `<span class="chip num">${esc(d.km)} km</span>` : ''}${d.night ? `<span class="chip">Night: ${esc(d.night)}</span>` : ''}<button class="chip" data-act="edit" data-c="days" data-id="${esc(d.id)}">${IC.edit} Edit day</button><a class="chip wa-chip" href="${esc(shareWA(dayPlanText(d.dayNo) + sign()))}" target="_blank" rel="noopener">${IC.wa} Share day plan</a><button class="chip" data-act="briefing" data-n="${+d.dayNo}">☀️ Morning briefing</button></div>
+    <div class="chips"><span class="chip">${esc(d.route)}</span>${+d.km ? `<span class="chip num">${esc(d.km)} km</span>` : ''}${d.night ? `<span class="chip">Night: ${esc(d.night)}</span>` : ''}<button class="chip" data-act="edit" data-c="days" data-id="${esc(d.id)}">${IC.edit} Edit day</button><a class="chip wa-chip" href="${esc(shareWA(dayPlanText(d.dayNo) + sign()))}" target="_blank" rel="noopener">${IC.wa} Share day plan</a><button class="chip" data-act="briefing" data-n="${+d.dayNo}">☀️ Morning briefing</button>${places.length > 1 ? `<button class="chip" data-act="optimise" data-n="${+d.dayNo}">${ico('pin', 14)} Optimise route</button>` : ''}</div>
   </section>
   ${wxCard(d)}
+  ${planCheckCard(d)}
   <div class="day-layout">
     <section class="card"><div class="sec-head" style="margin-bottom:4px"><h3>Plan for the day</h3><span class="muted num">${tl.filter(t => t.done).length}/${tl.length} done</span></div>
       ${tl.length ? `<ul class="tl">${tl.map(t => `<li class="tl-item ${t.done ? 'done' : ''}"><button class="tick" aria-label="Mark done" data-act="toggle" data-c="timeline" data-id="${esc(t.id)}">${IC.check}</button><div class="tl-time">${esc(t.time)}</div><button class="tl-body" data-act="edit" data-c="timeline" data-id="${esc(t.id)}"><b>${esc(t.title)}</b>${t.note ? `<p>${esc(t.note)}</p>` : ''}${t.who && t.who !== 'Everyone' ? `<span class="who">${esc(t.who)}</span>` : ''}</button></li>`).join('')}</ul>` : `<div class="empty">Nothing planned yet. Tap “Add to this day”.</div>`}
@@ -1209,7 +1382,7 @@ function vDays() {
 function vRoute() {
   const legs = DB.legs.slice().sort((a, b) => (+a.dayNo || 0) - (+b.dayNo || 0));
   const km = legs.reduce((t, l) => t + (+l.km || 0), 0);
-  return `<div class="sec-head"><div><h2>Travel plan</h2><p>${legs.length} legs · <span class="num">${km.toLocaleString('en-IN')}</span> km in the Force Urbania</p></div></div>
+  return routeMap() + `<div class="sec-head"><div><h2>Travel plan</h2><p>${legs.length} legs · <span class="num">${km.toLocaleString('en-IN')}</span> km in the Force Urbania</p></div></div>
   ${legs.length ? `<div class="grid">${legs.map(l => {
     const fc = (l.fromCode || (l.from || '').slice(0, 3)).toUpperCase(), tc = (l.toCode || (l.to || '').slice(0, 3)).toUpperCase();
     const maps = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(l.from || '')}&destination=${encodeURIComponent(l.to || '')}&travelmode=driving`;
@@ -1298,6 +1471,7 @@ function vStays() {
         ${+s.price ? `<div class="price-line"><span class="num">${inr(s.price)}</span> <span class="muted">/ night</span>${n > 1 ? ` · <span class="num">${inr(s.price * n)}</span> <span class="muted">total</span>` : ''}</div>` : '<div class="muted">Price not added</div>'}
         ${(+s.rooms || +s.sleeps) ? `<div class="chips">${+s.rooms ? `<span class="chip">${+s.rooms} rooms</span>` : ''}${+s.sleeps ? `<span class="chip">sleeps ${+s.sleeps}</span>` : ''}</div>` : ''}
         ${s.notes ? `<p class="muted" style="margin:0;font-size:14px">${esc(s.notes)}</p>` : ''}
+        ${s.ref || +s.advance || s.address || s.cancel || s.facilities ? `<div class="facts">${s.ref ? `<div class="fact"><small>Booking ref</small>${esc(s.ref)}</div>` : ''}${+s.advance ? `<div class="fact"><small>Advance · due</small>${inr(s.advance)} · ${inr(Math.max(0, (+s.price || 0) * Math.max(1, n) - s.advance))}</div>` : ''}${s.address ? `<div class="fact"><small>Address</small><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.address)}" target="_blank" rel="noopener">${esc(s.address)}</a></div>` : ''}${s.cancel ? `<div class="fact"><small>Cancellation</small>${esc(s.cancel)}</div>` : ''}${s.facilities ? `<div class="fact"><small>Facilities</small>${esc(s.facilities)}</div>` : ''}</div>` : ''}
         <div class="chips">${likeBtn('stays:' + s.id)}${isBooked(s) ? rateBtn('stays:' + s.id, s.name) + ratingChip('stays:' + s.id) : ''}${s.phone ? `<button class="chip wa-chip" data-act="chatStay" data-id="${esc(s.id)}">${IC.wa} Ask host</button>` : ''}</div>
         <div class="chips" style="justify-content:space-between;align-items:center">${link ? `<a class="link-out" href="${esc(link)}" target="_blank" rel="noopener">Open on ${esc(pl === 'Other' || pl === 'Direct / Website' ? 'website' : pl)} ${IC.out}</a>` : '<span class="by">No link yet</span>'}<button class="btn sm" data-act="edit" data-c="stays" data-id="${esc(s.id)}">${IC.edit} Edit</button></div>${byLine(s)}</article>`; }).join('')}
       <button class="empty" style="cursor:pointer" data-act="addStay" data-stop="${esc(g.stop)}" data-ci="${esc(g.checkin)}" data-co="${esc(g.checkout)}">+ Add an option for ${esc(g.stop)}</button></div></section>`; }).join('') : '<div class="empty">No stays yet. Tap “Add stay option”.</div>'}`;
@@ -1548,8 +1722,8 @@ function openForm(c, id, defaults) {
   if ((c === 'members' || c === 'payers') && !id) defaults = Object.assign({ heads: 1 }, defaults || {});
   if (c === 'kit:kidlog' && !id) defaults = Object.assign({ at: new Date(Date.now() - new Date().getTimezoneOffset() * 6e4).toISOString().slice(0, 16) }, defaults || {});
   if ((c === 'kit:journal' || c === 'kit:food') && !id) defaults = Object.assign({ dayNo: (todayDay() || {}).dayNo || '' }, defaults || {});
-  const sc = SCHEMA[c]; const item = id ? DB[collOf(c)].find(x => x.id === id) : null;
-  if (c === 'meta') { editing = { c, id: 'trip' }; } else editing = { c, id: item ? item.id : null, pending: [] };
+  const sc = SCHEMA[c]; const item = id ? DB[collOf(c)].find(x => x.id === id) : null; const extra = defaults && defaults.ev ? { ev: defaults.ev } : null;
+  if (c === 'meta') { editing = { c, id: 'trip' }; } else editing = { c, id: item ? item.id : null, pending: [], extra };
   const val = Object.assign({}, defaults || {}, c === 'meta' ? meta() : (item || {}));
   const fields = sc.fields.map(f => fieldHtml(f, val[f[0]] ?? (f[2].startsWith('select:') ? OPT[f[2].slice(7)][0] : ''))).join('');
   openSheet((item || c === 'meta' ? 'Edit ' : 'Add ') + sc.noun, `<form id="theForm" class="form">${fields}${ATTACH.has(c) ? attSection() : ''}
@@ -1862,13 +2036,8 @@ function coverArt(tag) {
   };
   return `<svg class="cover-art" viewBox="0 0 160 100" preserveAspectRatio="xMaxYMax meet" aria-hidden="true">${art[tag] || (tag === 'Backwaters' ? art.Houseboat : art.Mountains)}</svg>`;
 }
-const NAV = [['home', 'Home', '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h5v-6h4v6h5V10"/>'], ['days', 'Days', '<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>'], ['gallery', 'Photos', '<rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/>'], ['split', 'Split', '<circle cx="12" cy="12" r="9"/><path d="M15 9h-4.5a1.75 1.75 0 0 0 0 3.5h3a1.75 1.75 0 0 1 0 3.5H9M12 7v2m0 7v2"/>'], ['people', 'Chat', '<path d="M4 20l1.3-3.9A8 8 0 1 1 8 19.3z"/>']];
-function renderNav() {
-  $('#bnav').innerHTML = NAV.map(([k, l, d]) => `<button data-act="tab" data-k="${k}" aria-current="${S.tab === k ? 'page' : 'false'}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</svg><span>${l}</span>${k === 'people' && unreadCount() ? '<i class="ndot"></i>' : ''}</button>`).join('');
-  const n = unreadCount(), b = $('#bellN'); b.hidden = !n; b.textContent = n > 9 ? '9+' : n;
-}
 function setTab(k, fromHash) {
-  S.tab = k; ls.set(KEYS.tab, k); closeSheet(); render(); window.scrollTo({ top: 0 });
+  S.tab = k; ls.set(KEYS.tab, k); S.secLast[sectionOf(k)] = k; ls.set('ktrip.secLast', S.secLast); closeSheet(); render(); window.scrollTo({ top: 0 });
   if (!fromHash) { try { history.replaceState(null, '', location.pathname + location.search + '#' + k); } catch (e) {} }
   const sel = $('#tabs [aria-selected="true"]'); if (sel) { try { sel.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' }); } catch (e) {} }
 }
@@ -2018,7 +2187,7 @@ function vPeople() {
   <section class="wa-hero"><div><span class="eyebrow">Message the whole group</span><h3>Pick an update, tweak it, send it to your WhatsApp group</h3></div>
     <div class="chips">${templates('Group').map((t, i) => `<button class="chip" data-act="groupMsg" data-i="${i}">${esc(t.label)}</button>`).join('')}</div></section>
   <section class="card"><div class="sec-head"><h3>The crew <span class="muted" style="font-weight:600">· ${going} heads going</span></h3><button class="btn sm" data-act="add" data-c="members">+ Person / family</button></div>
-    ${mem.length ? `<div class="rows">${mem.map(m => { const v = Math.round(b[m.id] || 0); return `<div class="row person"><span class="who-cell"><span class="av">${esc(initials(m.name))}</span><span><b>${esc(m.name)}</b> <span class="pill rsvp-${slug(m.rsvp || 'Going')}">${esc(m.rsvp || 'Going')}</span><br><span class="by">${+m.heads || 1} head${(+m.heads || 1) > 1 ? 's' : ''}${m.from ? ' · ' + esc(m.from) : ''}${v < 0 ? ' · owes ' + inr(-v) : ''}</span></span></span>
+    ${mem.length ? `<div class="rows">${mem.map(m => { const v = Math.round(b[m.id] || 0); return `<div class="row person"><span class="who-cell"><span class="av">${esc(initials(m.name))}</span><span><b>${esc(m.name)}</b> <span class="pill rsvp-${slug(m.rsvp || 'Going')}">${esc(m.rsvp || 'Going')}</span><br><span class="by">${+m.heads || 1} head${(+m.heads || 1) > 1 ? 's' : ''}${m.from ? ' · ' + esc(m.from) : ''}${(() => { const r = kitOf('room').filter(x => (x.who || []).includes(m.name)); return r.length ? ' · rooms: ' + esc(r.map(x => x.name).slice(0, 2).join(', ')) + (r.length > 2 ? '…' : '') : ''; })()}${m.emergency ? ' · ICE: ' + esc(m.emergency) : ''}${v < 0 ? ' · owes ' + inr(-v) : ''}</span></span></span>
       <span class="person-btns">${m.phone ? `<button class="btn sm wa-btn" data-act="chatMember" data-id="${esc(m.id)}">${IC.wa}</button>` : `<button class="btn sm" data-act="edit" data-c="members" data-id="${esc(m.id)}">+ number</button>`}<button class="btn sm" data-act="edit" data-c="members" data-id="${esc(m.id)}" aria-label="Edit ${esc(m.name)}">${IC.edit}</button></span></div>`; }).join('')}</div>` : '<p class="muted" style="margin:0">Add each family with their WhatsApp number. Split & settle keeps its own copy, which you can import from here.</p>'}</section>
   <section class="view" style="gap:12px"><div class="sec-head"><h2>Hosts, vendors & help</h2><button class="btn sm primary" data-act="add" data-c="contacts">+ Contact</button></div>
     ${roles.length ? roles.map(r => `<div class="day-label">${ROLE_IC[r] || ''} ${esc(r)}</div><div class="grid">${DB.contacts.filter(c => c.role === r).map(c => `<article class="card option contact"><div class="option-top"><b style="font-size:1.05rem">${esc(c.name)}</b>${ratingChip('contacts:' + c.id)}</div>
@@ -2034,7 +2203,8 @@ const EMERGENCY = [['National emergency', '112', 'Police, fire, ambulance'], ['A
 function vUpdates() {
   const polls = DB.polls.slice().sort((a, b) => (b._at || 0) - (a._at || 0)); const f = feed().slice(0, 80);
   const perm = 'Notification' in window ? Notification.permission : 'unsupported';
-  return `<div class="sec-head"><div><h2>Updates</h2><p>Everything the group books, pays, uploads and decides, newest first.</p></div><button class="btn sm primary" data-act="add" data-c="polls">🗳 Ask the group</button></div>
+  return `<div class="sec-head"><div><h2>Updates</h2><p>Everything the group books, pays, uploads and decides, newest first.</p></div><span class="chips"><button class="btn sm" data-act="add" data-c="kit:announce">+ Announcement</button><button class="btn sm primary" data-act="add" data-c="polls">Ask the group</button></span></div>
+  ${kitOf('announce').length ? `<section class="card"><h3>Announcements</h3><div class="rows">${kitOf('announce').sort((a, b) => (b._at || 0) - (a._at || 0)).map(a => `<button class="row" data-act="edit" data-c="kit:announce" data-id="${esc(a.id)}"><span><span class="cat cat-${slug(a.cat || 'General')}">${esc(a.cat || 'General')}</span><br><b>${esc(a.text)}</b><br><span class="by">${esc(a._by || '')} · ${esc(ago(a._at))}</span></span><span></span></button>`).join('')}</div></section>` : ''}
   ${perm !== 'granted' ? `<div class="banner"><p><b>Get alerts on this phone.</b> ${perm === 'unsupported' ? 'On iPhone, first open this link in Safari, tap Share → Add to Home Screen, then open it from there.' : 'You’ll see a notification when someone books, pays or adds photos while the app is open in the background.'}</p>${perm === 'default' ? '<div><button class="btn sm dark" data-act="notifyOn">Turn on alerts</button></div>' : perm === 'denied' ? '<p class="by">Alerts are blocked for this site in your browser settings.</p>' : ''}</div>` : ''}
   ${polls.length ? `<section class="view" style="gap:10px"><h3>Polls</h3>${polls.map(pollCard).join('')}</section>` : ''}
   <section class="card"><div class="sec-head"><h3>Activity</h3>${f.length ? '<button class="btn sm danger" data-act="feedClear">Clear all</button>' : ''}</div>${f.length ? `<div class="rows">${f.map(a => `<div class="row feed-row ${(a._at || 0) > lastSeen() && a._by !== S.name ? 'unread' : ''}"><span class="who-cell"><span class="ico">${FEED_IC[a.type] || '•'}</span><span><b>${esc(a._by || 'Someone')}</b> ${esc(a.text)}<br><span class="by">${esc(ago(a._at))}</span></span></span><span class="person-btns">${a.tab ? `<button class="btn sm" data-act="tab" data-k="${esc(a.tab)}">Open</button>` : ''}<a class="btn sm wa-btn" href="${esc(shareWA(`${a._by || ''} ${a.text}\n${appLink(a.tab)}`))}" target="_blank" rel="noopener" aria-label="Share on WhatsApp">${IC.wa}</a><button class="btn sm" data-act="feedDel" data-id="${esc(a.id)}" aria-label="Remove this update">${IC.x}</button></span></div>`).join('')}</div>` : '<p class="muted" style="margin:0">Nothing yet. Bookings, payments, photos and polls will show up here.</p>'}</section>`;
@@ -2129,6 +2299,7 @@ function openSettings() {
   openSheet('Settings & sharing', `
     <div class="field"><label for="myName">Your name</label><input id="myName" value="${esc(S.name)}" placeholder="So others see who edited what"></div>
     <div><button class="btn sm" data-act="saveName">Save name</button> <button class="btn sm" data-act="edit" data-c="meta" data-id="trip">${IC.edit} Trip name, dates & headcount</button></div>
+    <h3>Sign-in & roles</h3>${securitySection()}
     <h3>Sharing</h3>${sharing}
     <h3>Backup</h3>
     <p class="muted" style="margin:0">Download everything as a file, or restore from one. Photos are included.</p>
@@ -2576,35 +2747,6 @@ const dayPlace = d => { if (!d) return ''; const n = d.night && !/home/i.test(d.
 const llFor = name => { const k = Object.keys(LL).find(x => slug(name).includes(x)); return k ? LL[k] : null; };
 const WX = {};
 const WXI = c => c == null ? '🌡️' : c === 0 ? '☀️' : c <= 3 ? '⛅' : c <= 48 ? '🌫️' : c <= 57 ? '🌦️' : c <= 67 ? '🌧️' : c <= 77 ? '🌨️' : c <= 82 ? '🌧️' : '⛈️';
-async function loadWx(d) {
-  const place = dayPlace(d); const ll = llFor(place); if (!ll || !d.date) return null;
-  const key = d.date + '|' + place; if (WX[key]) return WX[key];
-  WX[key] = { loading: true, place };
-  const diff = Math.round((pd(d.date) - pd(today())) / 864e5);
-  try {
-    let r, kind;
-    if (diff >= 0 && diff <= 15) {
-      kind = 'forecast';
-      r = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${ll[0]}&longitude=${ll[1]}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weather_code&timezone=Asia%2FKolkata&start_date=${d.date}&end_date=${d.date}`).then(x => x.json());
-    } else {
-      kind = 'typical'; const y = +d.date.slice(0, 4) - (diff > 0 ? 1 : 0); const ds = y + d.date.slice(4);
-      r = await fetch(`https://archive-api.open-meteo.com/v1/archive?latitude=${ll[0]}&longitude=${ll[1]}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weather_code&timezone=Asia%2FKolkata&start_date=${ds}&end_date=${ds}`).then(x => x.json());
-    }
-    const dl = r && r.daily; if (!dl || !dl.time) throw new Error('no data');
-    WX[key] = { place, kind, max: Math.round(dl.temperature_2m_max[0]), min: Math.round(dl.temperature_2m_min[0]), rainP: dl.precipitation_probability_max ? dl.precipitation_probability_max[0] : null, rainMm: dl.precipitation_sum ? dl.precipitation_sum[0] : null, code: (dl.weather_code || [null])[0] };
-  } catch (e) { WX[key] = { place, err: true }; }
-  schedule(); return WX[key];
-}
-function wxText(w) {
-  if (!w || w.loading) return 'Loading weather…'; if (w.err) return 'Weather unavailable';
-  const rain = w.kind === 'forecast' ? (w.rainP != null ? ` · rain ${w.rainP}%` : '') : (w.rainMm != null ? ` · ${w.rainMm > 1 ? 'some rain' : 'dry'}` : '');
-  return `${WXI(w.code)} ${w.max}° / ${w.min}°${rain}`;
-}
-function wxCard(d) {
-  const place = dayPlace(d); if (!llFor(place)) return '';
-  const w = WX[d.date + '|' + place]; if (!w) loadWx(d);
-  return `<div class="wx-card"><div><span class="eyebrow">${w && w.kind === 'forecast' ? 'Forecast' : 'Typical weather'} · ${esc(place)}</span><b>${esc(wxText(w))}</b><span class="by">${w && w.kind === 'typical' ? 'Same date last year. The real forecast appears 16 days before.' : w && w.kind === 'forecast' ? 'Open-Meteo forecast for this date' : ''}</span></div><a class="chip" href="https://www.google.com/search?q=${encodeURIComponent('weather ' + place)}" target="_blank" rel="noopener">More ${IC.out.replace('<svg', '<svg width="12" height="12"')}</a></div>`;
-}
 
 /* ---------- morning briefing ---------- */
 function wearFor(place, d) {
@@ -2629,7 +2771,8 @@ function briefingText(n) {
     + (leg ? `🚐 ${leg.from} → ${leg.to} · ${leg.km} km · ${leg.hours}\n` : `📍 ${d.route}\n`)
     + (w && !w.err && !w.loading ? `🌤 ${place}: ${wxText(w)}${w.kind === 'typical' ? ' (typical)' : ''}\n` : '')
     + (tl.length ? '⏰ Plan:\n' + tl.slice(0, 6).map(t => `• ${t.time} – ${t.title}`).join('\n') + (tl.length > 6 ? `\n• …and ${tl.length - 6} more` : '') + '\n' : '')
-    + `👕 Wear: ${wearFor(place, d).join('; ')}\n🎒 Carry: ${carry.join(', ')}\n`
+    + (w ? wxAlerts(w, d).map(x => '⚠️ ' + x[1] + '\n').join('') : '')
+    + `👕 Wear: ${wearFor(place, d).join('; ')}\n🎒 Carry: ${carry.join(', ')}${w && ((w.rainP || 0) >= 35 || w.rainyYears >= 2) ? ', umbrellas & rain covers' : ''}\n`
     + (d.night && !/home/i.test(d.night) ? `🛏 Tonight: ${stay ? stay.name + ', ' : ''}${d.night}${rooms.length ? `\n🚪 Rooms: ` + rooms.map(r => `${r.name}: ${(r.who || []).join(', ') || '–'}`).join(' | ') : ''}\n` : '🏠 Tonight: home!\n')
     + `Full plan: ${appLink('days')}`;
 }
@@ -2720,7 +2863,7 @@ function vKit() {
   const segs = [['ready', '🚦 Ready check'], ['rooms', '🚪 Rooms'], ['seats', '🚐 Seats'], ['pack', '🎒 Packing']];
   return `<div class="sec-head"><div><h2>Trip kit</h2><p>Readiness, rooms, van seats and packing – shared with everyone.</p></div></div>
     <div class="seg kit-seg" role="tablist">${segs.map(([k, l]) => `<button role="tab" aria-checked="${k === sec}" data-act="kitSec" data-k="${k}">${l}</button>`).join('')}</div>
-    ${{ ready: vReady, rooms: vRooms, seats: vSeats, pack: vPacking }[sec]()}`;
+    ${sec === 'rooms' ? '<div class="chips"><button class="btn sm" data-act="roomsCsv">⤓ Export room allocation (CSV)</button></div>' : ''}${{ ready: vReady, rooms: vRooms, seats: vSeats, pack: vPacking }[sec]()}`;
 }
 
 /* ---------- 3 · kids, 9 · SOS, 10 · live location ---------- */
@@ -2960,6 +3103,504 @@ function ensureCleanup() {
   if (n) toast(`Removed ${n} old-plan items (houseboat, treks, rafting)`);
 }
 
+/* ================= v7 redesign: 5 sections, Travel Hub, events, documents, transport, reports ================= */
+const LI = {
+  home: '<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h5v-6h4v6h5V9.5"/>',
+  explore: '<circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/>',
+  plan: '<path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/>',
+  group: '<circle cx="9" cy="8" r="3.2"/><path d="M3 20c.6-3.4 3-5.4 6-5.4s5.4 2 6 5.4"/><circle cx="17" cy="9" r="2.6"/><path d="M15.5 14.3c2.6-.2 4.8 1.5 5.5 4.7"/>',
+  budget: '<rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18"/><circle cx="16.5" cy="14.5" r="1.3"/><path d="M6 6V4.8A1.8 1.8 0 0 1 8.2 3L17 5.2"/>',
+  hub: '<rect x="3.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"/>',
+  cal: '<rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/>', doc: '<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5M8.5 13h7M8.5 17h5"/>',
+  shield: '<path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.2 7.5 9.5 4.4-1.3 7.5-4.9 7.5-9.5V6z"/><path d="M12 8v5M12 16h.01"/>', check: '<rect x="4" y="3.5" width="16" height="17" rx="2"/><path d="m8.5 12 2.5 2.5 4.5-5"/>',
+  game: '<rect x="2.5" y="7" width="19" height="11" rx="4"/><path d="M7 11v3M5.5 12.5h3M15.5 12h.01M18 14h.01"/>', gear: '<circle cx="12" cy="12" r="3"/><path d="M12 2.8v2.4M12 18.8v2.4M4.2 6.6l1.8 1.3M18 16.1l1.8 1.3M2.8 12h2.4M18.8 12h2.4M4.2 17.4l1.8-1.3M18 7.9l1.8-1.3"/>',
+  van: '<path d="M3 16V7h12l4 4h2v5h-2"/><path d="M3 16h2m4 0h6"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/>', bed: '<path d="M3 18V7M3 13h18v5M21 13a3 3 0 0 0-3-3h-7v3"/><circle cx="7" cy="10.5" r="1.8"/>',
+  pin: '<path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>', clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  bell: '<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/>', cake: '<path d="M4 21h16M5 21v-7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v7"/><path d="M5 16c1.5 1 3 1 4.5 0s3-1 4.5 0 3 1 5 0M12 12V8M12 5.5c.8-.8.8-1.7 0-2.5-.8.8-.8 1.7 0 2.5z"/>'
+};
+const ico = (k, s) => `<svg class="li" width="${s || 20}" height="${s || 20}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${LI[k] || ''}</svg>`;
+const LABEL = { home: 'Home', places: 'Places', food: 'Food & restaurants', activities: 'Activities', photo: 'Photographers', days: 'Itinerary', route: 'Route & map', stays: 'Stays', transport: 'Transport', kit: 'Checklists & rooms', must: 'Must-do', people: 'People & chat', updates: 'Announcements', tasks: 'Tasks', gallery: 'Photos', memories: 'Memories', budget: 'Overview', split: 'Split & settle', reports: 'Reports', hub: 'Travel Hub', events: 'Events', docs: 'Documents', safety: 'Kids & SOS', fun: 'Fun Zone' };
+const SECTIONS = [['home', 'Home', ['home']], ['explore', 'Explore', ['places', 'food', 'activities', 'photo']], ['plan', 'Plan', ['days', 'route', 'stays', 'transport', 'kit', 'must']], ['group', 'Group', ['people', 'updates', 'tasks', 'gallery', 'memories']], ['budget', 'Budget', ['budget', 'split', 'reports']], ['hub', 'Travel Hub', ['hub', 'events', 'docs', 'safety', 'fun']]];
+const sectionOf = k => (SECTIONS.find(s => s[2].includes(k)) || SECTIONS[0])[0];
+S.secLast = ls.get('ktrip.secLast', {});
+
+/* ---------- extra schemas ---------- */
+Object.assign(OPT, {
+  annCat: ['Important', 'Payment reminder', 'Schedule change', 'Booking update', 'General'],
+  docCat: ['Tickets', 'Accommodation vouchers', 'Vehicle confirmations', 'Event quotations', 'Insurance', 'Receipts', 'Identity (keep minimal)', 'Other'],
+  vehStatus: ['Enquired', 'Quoted', 'Confirmed', 'Paid', 'Cancelled'],
+  evVendorCat: ['Venue', 'Decoration', 'Catering', 'Cake & desserts', 'Photography', 'Videography', 'Entertainment', 'Transportation', 'Other'],
+  vendStatus: ['Enquired', 'Quoted', 'Confirmed', 'Advance paid', 'Fully paid', 'Cancelled'],
+  invite: ['Not invited', 'Invited', 'Reminded'], rsvp3: ['Awaiting', 'Yes', 'Maybe', 'No']
+});
+SCHEMA['kit:announce'] = { noun: 'announcement', fields: [['cat', 'Category', 'select:annCat'], ['text', 'Announcement', 'textarea'], ['pin', 'Pin on Home (yes / no)', 'text', 'Type yes to keep it at the top']] };
+SCHEMA['kit:task'] = { noun: 'task', fields: [['text', 'Task', 'text'], ['owner', 'Assigned to', 'crew'], ['due', 'Due by', 'date'], ['notes', 'Notes', 'textarea']] };
+SCHEMA['kit:doc'] = { noun: 'document', fields: [['name', 'Document', 'text', 'e.g. KTDC boat e-ticket'], ['cat', 'Category', 'select:docCat'], ['dayNo', 'For day', 'day'], ['expiry', 'Expires / valid till', 'date'], ['notes', 'Notes', 'textarea', 'Do not upload Aadhaar or bank details – anyone with the trip link can see files.']] };
+SCHEMA['kit:vehicle'] = { noun: 'vehicle', fields: [['name', 'Vehicle', 'text', 'e.g. Force Urbania 17-seater'], ['reg', 'Registration number', 'text'], ['seats', 'Seating capacity', 'number'], ['driver', 'Driver name', 'text'], ['dphone', 'Driver phone', 'text'], ['pickup', 'Pickup location', 'text'], ['drop', 'Drop-off location', 'text'], ['status', 'Booking status', 'select:vehStatus'], ['rate', 'Total hire cost (₹)', 'number'], ['advance', 'Advance paid (₹)', 'number'], ['notes', 'Notes', 'textarea']] };
+SCHEMA['kit:event'] = { noun: 'event', fields: [['name', 'Event name', 'text', 'e.g. Birthday dinner at Kumarakom'], ['date', 'Date', 'date'], ['time', 'Start time', 'text'], ['venue', 'Venue', 'text'], ['theme', 'Theme', 'text'], ['budget', 'Estimated budget (₹)', 'number'], ['notes', 'Notes', 'textarea']] };
+SCHEMA['kit:eguest'] = { noun: 'guest', fields: [['name', 'Guest / family', 'text'], ['adults', 'Adults', 'number'], ['kids', 'Children', 'number'], ['phone', 'WhatsApp', 'text'], ['invite', 'Invitation', 'select:invite'], ['rsvp', 'RSVP', 'select:rsvp3']] };
+SCHEMA['kit:evendor'] = { noun: 'vendor', fields: [['cat', 'Type', 'select:evVendorCat'], ['name', 'Vendor', 'text'], ['phone', 'Contact number', 'text'], ['quote', 'Quotation (₹)', 'number'], ['agreed', 'Agreed amount (₹)', 'number'], ['advance', 'Advance paid (₹)', 'number'], ['status', 'Status', 'select:vendStatus'], ['notes', 'Notes', 'textarea']] };
+SCHEMA['kit:erun'] = { noun: 'run-sheet item', fields: [['start', 'Start', 'text', 'e.g. 6:30 pm'], ['end', 'End', 'text'], ['text', 'What happens', 'text'], ['owner', 'Responsible', 'text'], ['vendor', 'Vendor', 'text']] };
+['kit:doc', 'kit:evendor', 'kit:vehicle'].forEach(c => ATTACH.add(c));
+SCHEMA.stays.fields.splice(SCHEMA.stays.fields.length - 1, 0, ['ref', 'Booking reference', 'text'], ['address', 'Address', 'text'], ['advance', 'Advance paid (₹)', 'number'], ['cancel', 'Cancellation policy', 'text'], ['facilities', 'Facilities', 'text', 'e.g. AC, geyser, parking for 2 vans, cots']);
+SCHEMA.members.fields.push(['emergency', 'Emergency contact', 'text', 'Name & number of someone not on the trip']);
+
+/* ---------- navigation ---------- */
+function renderTabs() {
+  const sec = SECTIONS.find(s => s[0] === sectionOf(S.tab));
+  const el = $('#tabs'); el.hidden = sec[2].length < 2;
+  el.innerHTML = sec[2].map(k => `<button class="tab" role="tab" aria-selected="${S.tab === k}" data-act="tab" data-k="${k}">${esc(LABEL[k])}${k === 'updates' && unreadCount() ? ` <span class="badge">${unreadCount()}</span>` : ''}</button>`).join('');
+}
+function renderNav() {
+  const cur = sectionOf(S.tab);
+  $('#bnav').innerHTML = `<div class="side-brand"><span class="logo">KE</span><b>${esc(meta().tripName || 'Kerala Era ’27')}</b></div>` + SECTIONS.map(([k, l, subs]) => `<div class="nav-grp ${k === 'hub' ? 'nav-hub' : ''}"><button data-act="sec" data-k="${k}" aria-current="${cur === k ? 'page' : 'false'}">${ico(k, 23)}<span>${l}</span>${k === 'group' && unreadCount() ? '<i class="ndot"></i>' : ''}</button>${subs.length > 1 ? `<div class="nav-sub">${subs.map(s => `<button data-act="tab" data-k="${s}" aria-current="${S.tab === s ? 'page' : 'false'}">${esc(LABEL[s])}</button>`).join('')}</div>` : ''}</div>`).join('');
+  const n = unreadCount(), b = $('#bellN'); b.hidden = !n; b.textContent = n > 9 ? '9+' : n;
+}
+
+/* ---------- readiness % ---------- */
+function readiness() {
+  const { list } = autoChecks(); const all = list.map(x => x.s).concat(kitOf('ready').map(x => x.status || 'Amber'));
+  if (!all.length) return 0; return Math.round(all.reduce((t, s) => t + (s === 'Green' ? 1 : s === 'Amber' ? .5 : 0), 0) / all.length * 100);
+}
+const statusTag = (s, label) => `<span class="st st-${s}">${esc(label || ({ ok: 'Confirmed', warn: 'Pending', bad: 'Overdue', none: 'Not started', info: 'Info' })[s])}</span>`;
+
+/* ---------- Home dashboard ---------- */
+function nextUp() {
+  const now = new Date(); const ds = daysSorted();
+  for (const d of ds) { for (const t of tlFor(d.dayNo)) { const base = pd(d.date); if (!base) continue; const mins = tMin(t.time, d.date); const when = new Date(base.getTime() + (mins < 99999 ? mins : 0) * 6e4); if (when >= now && t.who !== 'Optional') return { d, t, when }; } }
+  return null;
+}
+function vHome2() {
+  const m = meta(), days = daysSorted(), groups = stayGroups(), bt = budgetTotals();
+  const going = DB.members.filter(x => (x.rsvp || 'Going') === 'Going').reduce((t, x) => t + (+x.heads || 1), 0);
+  const total = (+m.adults || 0) + (+m.teens || 0) + (+m.kids || 0) + (+m.infants || 0);
+  const spent = DB.expenses.reduce((t, x) => t + expTotal(x), 0); const rd = readiness();
+  const route = days.length ? [String(days[0].route || '').split('→')[0].trim()].concat(days.map(d => String(d.route || '').split('→').pop().trim()).filter((x, i, a) => x && !/local/i.test(x) && x !== a[i - 1])).join(' · ') : '';
+  const nu = nextUp(); const leg = nu && DB.legs.find(l => +l.dayNo === +nu.d.dayNo);
+  const sb = groups.filter(g => g.items.some(isBooked)).length;
+  const veh = kitOf('vehicle'); const vehOk = veh.filter(v => v.status === 'Confirmed' || v.status === 'Paid').length;
+  const vend = kitOf('evendor').filter(v => v.status !== 'Cancelled'); const vendOk = vend.filter(v => /Confirmed|paid/.test(v.status || '')).length;
+  const owe = settleUp(balances()).reduce((t, x) => t + x.amount, 0) + vend.reduce((t, v) => t + Math.max(0, (+v.agreed || 0) - (+v.advance || 0)), 0) + DB.stays.filter(s => isBooked(s) && +s.advance).reduce((t, s) => t + Math.max(0, (+s.price || 0) * Math.max(1, nightsBetween(s.checkin, s.checkout)) - (+s.advance || 0)), 0) + kitOf('vehicle').filter(v => +v.rate && v.status !== 'Cancelled').reduce((t, v) => t + Math.max(0, v.rate - (+v.advance || 0)), 0);
+  const ann = kitOf('announce').sort((a, b) => ((/^y/i.test(b.pin || '')) - (/^y/i.test(a.pin || ''))) || ((b._at || 0) - (a._at || 0))).slice(0, 3);
+  const row = (icon, label, value, st, tab) => `<button class="brow" data-act="tab" data-k="${tab}"><span class="brow-ic">${ico(icon)}</span><span class="brow-t"><b>${esc(label)}</b><span class="by">${esc(value)}</span></span>${st}</button>`;
+  const stOf = (ok, n) => n === 0 ? 'none' : ok === n ? 'ok' : ok > 0 ? 'warn' : 'warn';
+  return `
+  <section class="hero lux has-photo">
+    <img class="hero-img" src="${esc(UNS(STOCK.Mountains[0], 1600))}" alt="" onerror="this.parentNode.classList.remove('has-photo');this.remove()">
+    <div class="hero-top"><span class="eyebrow">Family road trip · Kerala</span><button class="chip glass" data-act="edit" data-c="meta" data-id="trip">${ico('gear', 15)} Edit trip</button></div>
+    <div><h1>${esc(m.tripName)}</h1><p class="hero-dates">${esc(tripRange())} · ${days.length} days</p><p class="route-line">${esc(route)}</p></div>
+    <div class="count" id="countdown" aria-live="polite"></div>
+    <span class="credit">Photo: ${esc(STOCK.Mountains[1])} / Unsplash</span>
+  </section>
+  <section class="kpis">
+    <button class="kpi" data-act="tab" data-k="people"><span class="k">Travellers</span><b class="num">${going || total}</b><span class="by">${going ? `of ${total} confirmed` : `${total} planned`}</span></button>
+    <button class="kpi" data-act="tab" data-k="days"><span class="k">Duration</span><b class="num">${days.length}d</b><span class="by">${Math.max(0, days.length - 1)} nights</span></button>
+    <button class="kpi" data-act="tab" data-k="budget"><span class="k">Est. budget</span><b class="num">${inr(bt.total)}</b><span class="by">${inr(bt.per)} / head</span></button>
+    <button class="kpi" data-act="tab" data-k="reports"><span class="k">Spent</span><b class="num">${inr(spent)}</b><span class="by">${bt.total ? Math.round(spent / bt.total * 100) : 0}% of budget</span></button>
+    <button class="kpi kpi-ring" data-act="kitGo" data-k="ready"><span class="ring sm" style="--p:${rd}"><span>${rd}%</span></span><span><span class="k">Trip readiness</span><span class="by">Tap for details</span></span></button>
+  </section>
+  ${nu ? `<section class="card next"><div class="sec-head"><h3>${ico('clock', 18)} Up next</h3><button class="btn sm" data-act="goDay" data-n="${+nu.d.dayNo}">View itinerary</button></div>
+    <div class="next-body"><span class="next-time num">${esc(nu.t.time.replace(/^(mon|tue|wed|thu|fri|sat|sun)\s*/i, ''))}</span><span><b>${esc(nu.t.title)}</b><br><span class="by">Day ${esc(nu.d.dayNo)} · ${esc(fmtD(nu.d.date))} · ${esc(dayPlace(nu.d) || nu.d.route)}${leg ? ' · drive ' + esc(leg.hours) + ' (estimate)' : ''}</span>${nu.t.note ? `<br><span class="by">${esc(nu.t.note)}</span>` : ''}</span></div></section>` : ''}
+  <section class="card"><div class="sec-head"><h3>Bookings</h3><span class="by">${owe ? 'Outstanding ' + inr(owe) : 'Nothing outstanding'}</span></div><div class="brows">
+    ${row('bed', 'Accommodation', `${sb}/${groups.length} stays confirmed`, statusTag(stOf(sb, groups.length), sb === groups.length && groups.length ? 'Confirmed' : sb ? 'Partly booked' : 'Not booked'), 'stays')}
+    ${row('van', 'Transport', veh.length ? `${vehOk}/${veh.length} vehicles confirmed` : 'No vehicles added yet', statusTag(veh.length ? stOf(vehOk, veh.length) : 'none', veh.length && vehOk === veh.length ? 'Confirmed' : veh.length ? 'Pending' : 'Not started'), 'transport')}
+    ${row('cake', 'Event vendors', vend.length ? `${vendOk}/${vend.length} vendors confirmed` : 'No events planned', statusTag(vend.length ? stOf(vendOk, vend.length) : 'none', vend.length && vendOk === vend.length ? 'Confirmed' : vend.length ? 'Pending' : 'Not started'), 'events')}
+    ${row('budget', 'Payments', owe ? `${inr(owe)} still to pay or settle` : 'All settled', statusTag(owe ? 'warn' : 'ok', owe ? 'Attention' : 'Settled'), 'reports')}
+  </div></section>
+  <section class="card"><div class="sec-head"><h3>${ico('bell', 18)} Announcements</h3><button class="btn sm" data-act="add" data-c="kit:announce">Post</button></div>
+    ${ann.length ? `<div class="rows">${ann.map(a => `<button class="row" data-act="edit" data-c="kit:announce" data-id="${esc(a.id)}"><span><span class="cat cat-${slug(a.cat || 'General')}">${esc(a.cat || 'General')}</span>${/^y/i.test(a.pin || '') ? ' <span class="by">· pinned</span>' : ''}<br><b>${esc(a.text)}</b><br><span class="by">${esc(a._by || '')} · ${esc(ago(a._at))}</span></span><span></span></button>`).join('')}</div>` : '<p class="muted" style="margin:0">No announcements. Post schedule changes, payment reminders or booking news here.</p>'}
+    ${feed().length ? `<h3 style="margin-top:14px">Recent updates</h3><div class="rows">${feed().slice(0, 3).map(a => `<div class="row feed-row"><span class="who-cell"><span class="ico">${FEED_IC[a.type] || '•'}</span><span><b>${esc(a._by || 'Someone')}</b> ${esc(a.text)}<br><span class="by">${esc(ago(a._at))}</span></span></span><button class="btn sm" data-act="feedDel" data-id="${esc(a.id)}" aria-label="Remove this update">${IC.x}</button></div>`).join('')}</div>` : ''}</section>
+  <section class="view" style="gap:12px"><div class="sec-head"><h2>The days</h2><button class="btn sm" data-act="tab" data-k="days">Itinerary</button></div>
+    <div class="strip">${days.map(d => `<button class="daycard" data-act="goDay" data-n="${+d.dayNo}"><span class="d">${String(d.dayNo).padStart(2, '0')}</span><b>${esc(d.title)}</b><span class="muted">${esc(fmtD(d.date))} · ${esc(d.route)}</span></button>`).join('')}</div></section>
+  <section class="view" style="gap:12px"><div class="sec-head"><h2>Travel Hub</h2><button class="btn sm" data-act="tab" data-k="hub">Open</button></div>${hubGrid(true)}</section>`;
+}
+function hubGrid(compact) {
+  const ev = kitOf('event').length, docs = vaultFiles().length, tasks = kitOf('task').filter(x => !x.done).length;
+  const items = [['events', 'cake', 'Events & celebrations', ev ? `${ev} event${ev > 1 ? 's' : ''}` : 'Birthdays, dinners, ceremonies'], ['docs', 'doc', 'Document vault', `${docs} file${docs === 1 ? '' : 's'}`], ['safety', 'shield', 'Kids & SOS', 'Emergency, babies, live location'], ['kit', 'check', 'Checklists & rooms', `Readiness ${readiness()}%`], ['tasks', 'check', 'Tasks', tasks ? `${tasks} open` : 'Who does what'], ['fun', 'game', 'Fun Zone', 'Quiz, Tambola, Ludo, karaoke']];
+  return `<div class="hub-grid ${compact ? 'compact' : ''}">${items.map(([k, i, t, s]) => `<button class="hub-card" data-act="tab" data-k="${k}"><span class="hub-ic">${ico(i, 22)}</span><b>${esc(t)}</b><span class="by">${esc(s)}</span></button>`).join('')}${compact ? '' : `<button class="hub-card" data-act="settings"><span class="hub-ic">${ico('gear', 22)}</span><b>Settings & sharing</b><span class="by">Name, link, backup, alerts</span></button>`}</div>`;
+}
+function vHub() {
+  return `<div class="sec-head"><div><h2>Travel Hub</h2><p>Everything beyond the day plan – in one place.</p></div></div>${hubGrid(false)}
+    <section class="card"><div class="sec-head"><h3>Offline & sync</h3>${statusTag(S.online ? 'ok' : 'warn', S.online ? 'Online' : 'Offline')}</div><p class="muted" style="margin:0">${S.lastSync ? 'Last synced ' + esc(ago(S.lastSync)) + '. ' : ''}${S.swOk ? 'Offline mode is on: the itinerary, stays, contacts, rooms and seats open without signal. Changes sync when you’re back online.' : 'Offline mode turns on after the app is opened once from the github.io link with sw.js uploaded.'}</p></section>`;
+}
+
+/* ---------- Plan: itinerary checks ---------- */
+function planChecks(d) {
+  const out = []; const tl = tlFor(d.dayNo).filter(t => t.who !== 'Optional'); const leg = DB.legs.find(l => +l.dayNo === +d.dayNo);
+  const hrs = leg ? Math.max(...String(leg.hours || '').match(/\d+(\.\d+)?/g)?.map(Number) || [0]) : 0;
+  if (tl.length > 10) out.push(['warn', `Busy day: ${tl.length} planned items. With infants, consider dropping one.`]);
+  if (+d.km > 450 || hrs >= 9) out.push(['warn', `Long drive: ${d.km} km${hrs ? ', ~' + hrs + ' h' : ''}. Plan breaks every 2 hours; times are estimates, not guarantees.`]);
+  const seen = {}; tl.forEach(t => { const k = tMin(t.time, d.date); if (k < 99999 && t.who === 'Everyone') { if (seen[k]) out.push(['warn', `Overlap at ${t.time}: “${seen[k]}” and “${t.title}”.`]); else seen[k] = t.title; } });
+  const ts = tl.map(t => tMin(t.time, d.date)).filter(x => x < 99999); for (let i = 1; i < ts.length; i++) if (ts[i] - ts[i - 1] > 0 && ts[i] - ts[i - 1] < 15) { out.push(['info', `Tight gap: only ${ts[i] - ts[i - 1]} min between two items around ${tl[i].time}.`]); break; }
+  if (d.night && !/home/i.test(d.night)) { const st = DB.stays.filter(s => s.checkin && s.checkout && s.checkin <= d.date && d.date < s.checkout); if (!st.length) out.push(['bad', `No stay for the night in ${d.night}.`]); else if (!st.some(isBooked)) out.push(['warn', `Stay in ${d.night} not booked yet.`]); }
+  const late = tl.find(t => tMin(t.time, d.date) >= 22 * 60 && tMin(t.time, d.date) < 1440 && !/check in|home|dinner/i.test(t.title)); if (late) out.push(['info', `Late activity at ${late.time} – tiring for the little ones.`]);
+  wxAlerts(WX[d.date + '|' + dayPlace(d)], d).filter(x => x[0] !== 'info').forEach(x => out.push([x[0], 'Weather: ' + x[1]]));
+  return out;
+}
+function planCheckCard(d) {
+  const c = planChecks(d);
+  return `<section class="card plan-check"><div class="sec-head"><h3>Plan check</h3>${statusTag(c.some(x => x[0] === 'bad') ? 'bad' : c.some(x => x[0] === 'warn') ? 'warn' : 'ok', c.some(x => x[0] === 'bad') ? 'Fix needed' : c.some(x => x[0] === 'warn') ? 'Review' : 'Looks good')}</div>${c.length ? `<ul class="pc-list">${c.map(([s, t]) => `<li class="pc-${s}">${esc(t)}</li>`).join('')}</ul>` : '<p class="muted" style="margin:0">No clashes, missing stays or overloaded slots found for this day.</p>'}</section>`;
+}
+function routeMap() {
+  const stops = []; daysSorted().forEach(d => { const a = String(d.route || '').split('→').map(s => s.trim()).filter(s => s && !/local/i.test(s)); a.forEach(s => { if (stops[stops.length - 1] !== s) stops.push(s); }); });
+  if (stops.length < 2) return '';
+  const q = s => encodeURIComponent(s + (/kadapa/i.test(s) ? ', Andhra Pradesh' : /dindigul/i.test(s) ? ', Tamil Nadu' : ', Kerala'));
+  const embed = `https://maps.google.com/maps?saddr=${q(stops[0])}&daddr=${stops.slice(1).map(q).join('+to:')}&output=embed`;
+  const dir = `https://www.google.com/maps/dir/${stops.map(q).join('/')}`;
+  return `<section class="card map-card"><div class="sec-head"><h3>${ico('pin', 18)} Whole route</h3><a class="btn sm" href="${esc(dir)}" target="_blank" rel="noopener">Open in Google Maps ${IC.out}</a></div>
+    <ol class="stops">${stops.map((s, i) => `<li><span class="sn-n">${i + 1}</span>${esc(s)}</li>`).join('')}</ol>
+    <div class="map-frame"><iframe title="Route map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="${esc(embed)}"></iframe></div>
+    <p class="by" style="margin:0">Distances and drive times are estimates. Check live traffic and ghat-road conditions on the day.</p></section>`;
+}
+
+/* ---------- Plan: transport ---------- */
+function vTransport() {
+  const veh = kitOf('vehicle'); const tr = DB.budget.filter(b => b.category === 'Transport'); const trT = tr.reduce((t, b) => t + (+b.amount || 0), 0);
+  const vs = s => s === 'Confirmed' || s === 'Paid' ? 'ok' : s === 'Cancelled' ? 'bad' : s ? 'warn' : 'none';
+  return `<div class="sec-head"><div><h2>Transport</h2><p>Vehicles, drivers, costs and who sits where.</p></div><button class="btn sm primary" data-act="add" data-c="kit:vehicle">+ Vehicle</button></div>
+    ${veh.length ? `<div class="grid">${veh.map(v => `<article class="card option"><div class="option-top"><b style="font-size:1.05rem">${ico('van', 18)} ${esc(v.name)}</b><span class="chips">${attChip('kit:vehicle', v.id)}${statusTag(vs(v.status), v.status || 'Not started')}</span></div>
+      <div class="facts"><div class="fact"><small>Registration</small>${esc(v.reg || '–')}</div><div class="fact"><small>Seats</small>${esc(v.seats || '–')}</div><div class="fact"><small>Driver</small>${esc(v.driver || '–')}</div><div class="fact"><small>Pickup → drop</small>${esc([v.pickup, v.drop].filter(Boolean).join(' → ') || '–')}</div></div>
+      ${+v.rate ? `<div class="price-line"><span class="num">${inr(v.rate)}</span> <span class="muted">total · advance ${inr(v.advance)} · due ${inr(Math.max(0, v.rate - (+v.advance || 0)))}</span></div>` : ''}
+      <div class="chips">${v.dphone ? `<a class="btn sm" href="tel:${esc(String(v.dphone).replace(/[^\d+]/g, ''))}">📞 Driver</a>${isMobile(v.dphone) ? `<a class="btn sm wa-btn" href="${esc(wa(v.dphone, 'Hi! ' + (meta().tripName || 'Our trip') + ' here.'))}" target="_blank" rel="noopener">${IC.wa}</a>` : ''}` : ''}<button class="btn sm" data-act="edit" data-c="kit:vehicle" data-id="${esc(v.id)}">${IC.edit} Edit</button></div></article>`).join('')}</div>` : '<div class="empty">Add the Urbania and the second van: registration, driver, pickup point and cost.</div>'}
+    <section class="card"><div class="sec-head"><h3>Journey costs (budget)</h3><span class="num">${inr(trT)}</span></div><div class="rows">${tr.map(b => `<button class="row" data-act="edit" data-c="budget" data-id="${esc(b.id)}"><span>${esc(b.item)}</span><span class="amt">${inr(b.amount)}</span></button>`).join('') || '<p class="muted">No transport lines in the budget.</p>'}</div></section>
+    <div class="sec-head"><h2>Seating & passenger manifest</h2><button class="btn sm" data-act="manifestCsv">⤓ Manifest (CSV)</button></div>${vSeats()}`;
+}
+
+/* ---------- Group: tasks + announcements ---------- */
+function vTasks() {
+  const l = kitOf('task').sort((a, b) => (a.done - b.done) || String(a.due || '9').localeCompare(String(b.due || '9')));
+  const od = x => !x.done && x.due && x.due < today();
+  return `<div class="sec-head"><div><h2>Tasks</h2><p>Who is doing what before and during the trip.</p></div><button class="btn sm primary" data-act="add" data-c="kit:task">+ Task</button></div>
+    ${l.length ? `<div class="view" style="gap:8px">${l.map(x => `<div class="check ${x.done ? 'done' : ''}"><button class="tick" aria-label="Done" data-act="toggle" data-c="kit" data-id="${esc(x.id)}">${IC.check}</button><button class="txt" data-act="edit" data-c="kit:task" data-id="${esc(x.id)}">${esc(x.text)}<br><span class="by">${esc(x.owner || 'Unassigned')}${x.due ? ' · due ' + esc(fmtD(x.due)) : ''}</span></button>${x.done ? statusTag('ok', 'Done') : od(x) ? statusTag('bad', 'Overdue') : statusTag('warn', 'Open')}</div>`).join('')}</div>` : '<div class="empty">No tasks yet. e.g. “Confirm Kumarakom villa – Ravi – by 1 Dec”.</div>'}`;
+}
+
+/* ---------- Budget: reports ---------- */
+function vReports() {
+  const mem = membersSorted(); const b = mem.length ? balances() : {}; const sh = {}, paid = {};
+  DB.expenses.forEach(x => { paid[x.paidBy] = (paid[x.paidBy] || 0) + expTotal(x); const s = expShares(x); for (const k in s) sh[k] = (sh[k] || 0) + s[k]; });
+  const spent = DB.expenses.reduce((t, x) => t + expTotal(x), 0); const heads = mem.reduce((t, m) => t + (+m.heads || 1), 0) || +meta().paying || 1;
+  const xfers = mem.length ? settleUp(b) : []; const vend = kitOf('evendor').filter(v => v.status !== 'Cancelled');
+  const vendDue = vend.map(v => [v.name || v.cat, Math.max(0, (+v.agreed || 0) - (+v.advance || 0))]).filter(x => x[1]);
+  const stayDue = DB.stays.filter(isBooked).map(s => [s.name, Math.max(0, (+s.price || 0) * Math.max(1, nightsBetween(s.checkin, s.checkout)) - (+s.advance || 0))]).filter(x => x[1] && DB.stays.find(z => z.name === x[0]).advance);
+  const vehDue = kitOf('vehicle').filter(v => +v.rate).map(v => [v.name, Math.max(0, v.rate - (+v.advance || 0))]).filter(x => x[1]);
+  return `<div class="sec-head"><div><h2>Reports</h2><p>Spend by category, family and person – export or print.</p></div><div class="chips no-print"><button class="btn sm" data-act="csv" data-k="expenses">⤓ Expenses CSV</button><button class="btn sm" data-act="csv" data-k="budget">⤓ Budget CSV</button><button class="btn sm primary" data-act="print">Print / PDF</button></div></div>
+    ${budgetVsActual()}
+    <section class="card"><div class="sec-head"><h3>By family</h3><span class="by">${inr(spent)} spent · ${inr(spent / heads)} per person</span></div>
+      ${mem.length ? `<div class="table-wrap"><table class="tbl"><thead><tr><th>Family</th><th>Heads</th><th>Paid</th><th>Share</th><th>Per person</th><th>Balance</th></tr></thead><tbody>${mem.map(m => { const v = Math.round(b[m.id] || 0); return `<tr><td>${esc(m.name)}</td><td class="num">${+m.heads || 1}</td><td class="num">${inr(paid[m.id] || 0)}</td><td class="num">${inr(sh[m.id] || 0)}</td><td class="num">${inr((sh[m.id] || 0) / (+m.heads || 1))}</td><td class="num ${v > 0 ? 'pos' : v < 0 ? 'neg' : ''}">${v > 0 ? '+' + inr(v) : v < 0 ? '−' + inr(-v) : '0'}</td></tr>`; }).join('')}</tbody></table></div>` : '<p class="muted" style="margin:0">Add people in Split & settle to see family totals.</p>'}</section>
+    <section class="card"><div class="sec-head"><h3>Outstanding</h3></div><div class="rows">
+      ${xfers.map(t => `<div class="row"><span>${esc(mName(t.from))} → ${esc(mName(t.to))}<br><span class="by">Settle-up</span></span><span class="amt">${inr(t.amount)}</span></div>`).join('')}
+      ${stayDue.concat(vehDue, vendDue).map(([n, a]) => `<div class="row"><span>${esc(n)}<br><span class="by">Balance due to vendor</span></span><span class="amt">${inr(a)}</span></div>`).join('')}
+      ${!xfers.length && !stayDue.length && !vehDue.length && !vendDue.length ? '<p class="muted" style="margin:0">Nothing outstanding.</p>' : ''}</div></section>`;
+}
+function downloadText(name, text, type) { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], { type: type || 'text/csv' })); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000); }
+const csv = rows => '﻿' + rows.map(r => r.map(v => { v = String(v ?? ''); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }).join(',')).join('\n');
+
+/* ---------- Events & celebrations ---------- */
+function vEvents() {
+  const evs = kitOf('event').sort((a, b) => String(a.date || '').localeCompare(String(b.date || '')));
+  if (!evs.length) return `<div class="sec-head"><div><h2>Events & celebrations</h2><p>Birthdays, anniversaries, a special dinner – guests, vendors, run sheet and budget.</p></div></div>
+    <section class="card" style="display:grid;gap:12px"><p style="margin:0">Plan a celebration during the trip, or any family event.</p><div class="chips"><button class="btn primary" data-act="add" data-c="kit:event">+ New event</button><button class="btn" data-act="evTemplate">Start from a birthday template</button></div></section>`;
+  const id = evs.some(e => e.id === S.ev) ? S.ev : evs[0].id; const e = evs.find(x => x.id === id); const sub = S.evSub || 'guests';
+  const G = kitOf('eguest').filter(x => x.ev === id), V = kitOf('evendor').filter(x => x.ev === id), R = kitOf('erun').filter(x => x.ev === id).sort((a, b) => tMin(a.start, e.date) - tMin(b.start, e.date));
+  const yes = G.filter(g => g.rsvp === 'Yes'); const ad = yes.reduce((t, g) => t + (+g.adults || 0), 0), ch = yes.reduce((t, g) => t + (+g.kids || 0), 0);
+  const live = V.filter(v => v.status !== 'Cancelled'); const actual = live.reduce((t, v) => t + (+v.agreed || +v.quote || 0), 0), adv = live.reduce((t, v) => t + (+v.advance || 0), 0);
+  const confirmed = live.filter(v => /Confirmed|paid/.test(v.status || '')).length;
+  const rd = Math.round(((live.length ? confirmed / live.length : 0) * .5 + (G.length ? G.filter(g => g.rsvp && g.rsvp !== 'Awaiting').length / G.length : 0) * .25 + (R.length ? .25 : 0)) * 100);
+  const vs = s => /paid|Confirmed/.test(s || '') ? 'ok' : s === 'Cancelled' ? 'bad' : s ? 'warn' : 'none';
+  const subs = [['guests', `Guests (${G.length})`], ['vendors', `Vendors (${V.length})`], ['run', 'Run sheet'], ['money', 'Budget']];
+  const body = {
+    guests: () => `<div class="sec-head"><span class="by">${ad} adults · ${ch} children confirmed · ${G.filter(g => g.rsvp === 'Awaiting' || !g.rsvp).length} awaiting</span><button class="btn sm primary" data-act="add" data-c="kit:eguest" data-ev="${esc(id)}">+ Guest</button></div>
+      ${G.length ? `<div class="rows">${G.map(g => `<div class="row"><button class="txt-btn" data-act="edit" data-c="kit:eguest" data-id="${esc(g.id)}"><b>${esc(g.name)}</b><br><span class="by">${+g.adults || 0} adults · ${+g.kids || 0} kids · ${esc(g.invite || 'Not invited')}${g.attended ? ' · attended ✓' : ''}</span></button><span class="person-btns">${statusTag(g.rsvp === 'Yes' ? 'ok' : g.rsvp === 'No' ? 'bad' : 'warn', g.rsvp || 'Awaiting')}${g.phone ? `<a class="btn sm wa-btn" href="${esc(wa(g.phone, `Hi ${g.name}! You're invited to ${e.name}${e.date ? ' on ' + fmtD(e.date) : ''}${e.time ? ' at ' + e.time : ''}${e.venue ? ', ' + e.venue : ''}. Please confirm how many adults and children will come 🙏`))}" target="_blank" rel="noopener">${IC.wa}</a>` : ''}<button class="btn sm" data-act="evAttend" data-id="${esc(g.id)}">${g.attended ? 'Undo' : 'Arrived'}</button></span></div>`).join('')}</div>` : '<p class="muted" style="margin:0">Add guests or families. Tap Arrived on the day.</p>'}
+      ${DB.members.length ? `<div><button class="btn sm" data-act="evImportGuests" data-ev="${esc(id)}">Add everyone from People & chat</button></div>` : ''}`,
+    vendors: () => `<div class="sec-head"><span class="by">${confirmed}/${live.length} confirmed</span><button class="btn sm primary" data-act="add" data-c="kit:evendor" data-ev="${esc(id)}">+ Vendor</button></div>
+      ${V.length ? `<div class="grid">${V.map(v => `<article class="card option"><div class="option-top"><span class="chip">${esc(v.cat || 'Vendor')}</span><span class="chips">${attChip('kit:evendor', v.id)}${statusTag(vs(v.status), v.status || 'Not started')}</span></div><h3>${esc(v.name || '–')}</h3>
+        <div class="facts"><div class="fact"><small>Quote</small>${inr(v.quote)}</div><div class="fact"><small>Agreed</small>${inr(v.agreed)}</div><div class="fact"><small>Advance</small>${inr(v.advance)}</div><div class="fact"><small>Outstanding</small>${inr(Math.max(0, (+v.agreed || 0) - (+v.advance || 0)))}</div></div>
+        <div class="chips">${v.phone ? `<a class="btn sm" href="tel:${esc(String(v.phone).replace(/[^\d+]/g, ''))}">📞 Call</a>${isMobile(v.phone) ? `<a class="btn sm wa-btn" href="${esc(wa(v.phone, `Hi! Enquiry for ${e.name}${e.date ? ' on ' + fmtD(e.date) : ''}${e.venue ? ' at ' + e.venue : ''} for about ${ad + ch || G.reduce((t, g) => t + (+g.adults || 0) + (+g.kids || 0), 0) || 'our'} guests. Please share your package and price.`))}" target="_blank" rel="noopener">${IC.wa}</a>` : ''}` : ''}<button class="btn sm" data-act="edit" data-c="kit:evendor" data-id="${esc(v.id)}">${IC.edit} Edit</button></div></article>`).join('')}</div>` : '<p class="muted" style="margin:0">Add decoration, catering, cake, photographer… Attach quotes as PDFs.</p>'}`,
+    run: () => `<div class="sec-head"><span class="by">${R.filter(r => r.done).length}/${R.length} done</span><button class="btn sm primary" data-act="add" data-c="kit:erun" data-ev="${esc(id)}">+ Item</button></div>
+      ${R.length ? `<ul class="tl">${R.map(r => `<li class="tl-item ${r.done ? 'done' : ''}"><button class="tick" aria-label="Done" data-act="toggle" data-c="kit" data-id="${esc(r.id)}">${IC.check}</button><div class="tl-time">${esc(r.start || '')}${r.end ? '–' + esc(r.end) : ''}</div><button class="tl-body" data-act="edit" data-c="kit:erun" data-id="${esc(r.id)}"><b>${esc(r.text)}</b><p>${esc([r.owner, r.vendor].filter(Boolean).join(' · '))}</p></button></li>`).join('')}</ul>` : '<p class="muted" style="margin:0">Build the minute-by-minute plan: decor setup, guests arrive, cake, dinner, photos.</p>'}`,
+    money: () => `<div class="facts"><div class="fact"><small>Estimated</small>${inr(e.budget)}</div><div class="fact"><small>Actual (agreed/quoted)</small>${inr(actual)}</div><div class="fact"><small>Advance paid</small>${inr(adv)}</div><div class="fact"><small>Outstanding</small>${inr(Math.max(0, actual - adv))}</div><div class="fact"><small>Cost per guest</small>${inr(actual / Math.max(1, ad + ch))}</div><div class="fact"><small>Vs estimate</small>${+e.budget ? (actual > e.budget ? '🔴 ' : '🟢 ') + inr(Math.abs(e.budget - actual)) + (actual > e.budget ? ' over' : ' under') : '–'}</div></div>`
+  }[sub];
+  return `<div class="sec-head"><div><h2>Events & celebrations</h2></div><button class="btn sm" data-act="add" data-c="kit:event">+ Event</button></div>
+    ${evs.length > 1 ? `<div class="chips">${evs.map(x => `<button class="chip" aria-pressed="${x.id === id}" data-act="evPick" data-id="${esc(x.id)}">${esc(x.name)}</button>`).join('')}</div>` : ''}
+    <section class="event-hero"><div><span class="eyebrow">${esc([e.date ? fmtD(e.date) : 'Date TBC', e.time, e.venue].filter(Boolean).join(' · '))}</span><h2>${esc(e.name)}</h2>${e.theme ? `<span>Theme: ${esc(e.theme)}</span>` : ''}</div>
+      <div class="ev-stats"><div><b class="num">${ad + ch}</b><span>guests</span></div><div><b class="num">${inr(actual || e.budget)}</b><span>${actual ? 'committed' : 'estimate'}</span></div><div><span class="ring sm" style="--p:${rd}"><span>${rd}%</span></span><span>ready</span></div></div>
+      <div class="chips"><button class="chip glass" data-act="edit" data-c="kit:event" data-id="${esc(id)}">${IC.edit} Edit event</button></div></section>
+    <div class="seg" role="tablist">${subs.map(([k, l]) => `<button role="tab" aria-checked="${k === sub}" data-act="evSub" data-k="${k}">${l}</button>`).join('')}</div>
+    <section class="card" style="display:grid;gap:10px">${body()}</section>`;
+}
+
+/* ---------- Document vault ---------- */
+const DOC_FROM = { stays: 'Accommodation vouchers', activities: 'Tickets', budget: 'Receipts', expenses: 'Receipts', settlements: 'Receipts', photographers: 'Event quotations', 'kit:evendor': 'Event quotations', 'kit:vehicle': 'Vehicle confirmations' };
+function vaultFiles() {
+  const out = [];
+  DB.files.filter(f => f.parentC !== 'gallery').forEach(f => {
+    if (f.parentC === 'kit:doc') { const d = DB.kit.find(x => x.id === f.parentId); out.push({ f, cat: (d && d.cat) || 'Other', title: (d && d.name) || f.name, expiry: d && d.expiry, docId: d && d.id }); }
+    else { const coll = collOf(f.parentC); const it = (DB[coll] || []).find(x => x.id === f.parentId) || {}; out.push({ f, cat: DOC_FROM[f.parentC] || 'Other', title: it.name || it.title || it.item || f.name, from: LABEL[{ stays: 'stays', activities: 'activities', budget: 'budget', expenses: 'split', settlements: 'split', photographers: 'photo', 'kit:evendor': 'events', 'kit:vehicle': 'transport' }[f.parentC]] || '' }); }
+  });
+  return out;
+}
+function vDocs() {
+  const all = vaultFiles(); const cats = OPT.docCat.filter(c => all.some(x => x.cat === c)); const f = S.docF || 'All';
+  const list = all.filter(x => f === 'All' || x.cat === f).sort((a, b) => (b.f._at || 0) - (a.f._at || 0));
+  const exp = x => { if (!x.expiry) return ''; const d = Math.ceil((pd(x.expiry) - pd(today())) / 864e5); return d < 0 ? statusTag('bad', 'Expired') : d <= 30 ? statusTag('warn', `Expires in ${d} d`) : `<span class="by">valid till ${esc(fmtD(x.expiry))}</span>`; };
+  return `<div class="sec-head"><div><h2>Document vault</h2><p>Every ticket, voucher, quote and receipt from across the app, plus anything you add here.</p></div><button class="btn sm primary" data-act="add" data-c="kit:doc">+ Document</button></div>
+    <div class="banner"><p><b>Keep it safe:</b> anyone with the trip link can open these files. Store tickets and vouchers here – not Aadhaar, passports or bank details.</p></div>
+    <div class="chips"><button class="chip" aria-pressed="${f === 'All'}" data-act="docF" data-k="All">All · ${all.length}</button>${cats.map(c => `<button class="chip" aria-pressed="${f === c}" data-act="docF" data-k="${esc(c)}">${esc(c)} · ${all.filter(x => x.cat === c).length}</button>`).join('')}</div>
+    ${list.length ? `<div class="card rows">${list.map(x => `<div class="row"><button class="txt-btn" data-act="attView" data-k="f:${esc(x.f.id)}"><span class="who-cell"><span class="ico">${/pdf/i.test(x.f.type || '') ? '📄' : '🖼'}</span><span><b>${esc(x.title)}</b><br><span class="by">${esc(x.cat)}${x.from ? ' · from ' + esc(x.from) : ''} · ${esc(x.f.name || '')}</span></span></span></button><span class="person-btns">${exp(x)}${x.docId ? `<button class="btn sm" data-act="edit" data-c="kit:doc" data-id="${esc(x.docId)}">${IC.edit}</button>` : ''}</span></div>`).join('')}</div>` : '<div class="empty">No documents yet. Tap “+ Document” and attach a PDF or photo, or attach files to stays, tickets and expenses.</div>'}`;
+}
+
+/* ---------- clicks ---------- */
+function v7Click(a, t) {
+  switch (a) {
+    case 'sec': { const sec = SECTIONS.find(s => s[0] === t.dataset.k); const last = S.secLast[sec[0]]; setTab(last && sec[2].includes(last) ? last : sec[2][0]); return true; }
+    case 'evPick': S.ev = t.dataset.id; render(); return true;
+    case 'evSub': S.evSub = t.dataset.k; render(); return true;
+    case 'evAttend': { const g = DB.kit.find(x => x.id === t.dataset.id); if (g) run(B.update('kit', g.id, { attended: !g.attended })); return true; }
+    case 'evImportGuests': { const ev = t.dataset.ev; const have = new Set(kitOf('eguest').filter(x => x.ev === ev).map(x => slug(x.name))); DB.members.filter(m => !have.has(slug(m.name))).forEach(m => run(B.add('kit', { type: 'eguest', ev, name: m.name, adults: +m.heads || 1, kids: 0, phone: m.phone || '', invite: 'Invited', rsvp: (m.rsvp || 'Going') === 'Going' ? 'Yes' : 'Awaiting' }))); toast('Guests added'); return true; }
+    case 'evTemplate': { const id = 'ev_' + uid(); const d = (todayDay() || {}).date || ''; run(B.add('kit', { type: 'event', name: 'Birthday celebration', date: d, time: '7:00 pm', venue: '', theme: '', budget: 25000, notes: '' }, id)); S.ev = id;
+      [['Decoration', 'Balloon & flower décor'], ['Cake & desserts', 'Birthday cake'], ['Catering', 'Dinner for the group'], ['Photography', 'Photographer (1–2 h)']].forEach(([cat, name]) => run(B.add('kit', { type: 'evendor', ev: id, cat, name, status: 'Enquired', quote: 0, agreed: 0, advance: 0, phone: '', notes: '' })));
+      [['5:30 pm', '6:30 pm', 'Decoration setup'], ['7:00 pm', '', 'Guests arrive'], ['7:30 pm', '', 'Cake cutting'], ['7:45 pm', '', 'Group photos'], ['8:00 pm', '', 'Dinner']].forEach(([start, end, text]) => run(B.add('kit', { type: 'erun', ev: id, start, end, text, owner: '', vendor: '', done: false })));
+      toast('Birthday template added – edit the date and venue'); return true; }
+    case 'docF': S.docF = t.dataset.k; render(); return true;
+    case 'print': window.print(); return true;
+    case 'csv': { const k = t.dataset.k;
+      if (k === 'expenses') downloadText('kerala-trip-expenses.csv', csv([['Date', 'Expense', 'Type', 'Category', 'Paid by', 'Amount', 'Tip', 'Total', 'Split', 'Shares']].concat(DB.expenses.map(x => { const s = expShares(x); return [x.date, x.title, x.type, EXP_CAT[x.type] || 'Other', mName(x.paidBy), x.amount, x.tip || 0, expTotal(x), x.mode, Object.keys(s).map(m => mName(m) + ' ' + Math.round(s[m])).join('; ')]; }))));
+      else downloadText('kerala-trip-budget.csv', csv([['Category', 'Item', 'Amount', 'Status', 'Paid by', 'Notes']].concat(DB.budget.map(b => [b.category, b.item, b.amount, b.status, b.paidBy, b.notes]))));
+      return true; }
+    case 'manifestCsv': { const rows = [['Day', 'Date', 'Vehicle', 'Seat', 'Passenger']]; daysSorted().forEach(d => { const doc = DB.kit.find(x => x.id === 'seat__' + d.dayNo); if (!doc) return; doc.vans.forEach(v => { if (v.drv) rows.push([d.dayNo, d.date, v.n, 'Driver', v.drv]); (v.s || []).forEach((p, i) => p && rows.push([d.dayNo, d.date, v.n, i + 1, p])); }); });
+      if (rows.length < 2) { toast('Fill the seating chart first'); return true; } downloadText('passenger-manifest.csv', csv(rows)); return true; }
+    case 'roomsCsv': { const rows = [['Stay', 'Date', 'Room', 'Beds', 'Who', 'Notes']]; stayGroups().forEach(g => kitOf('room').filter(r => r.night === g.checkin).forEach(r => rows.push([g.stop, g.checkin, r.name, r.beds, (r.who || []).join(' / '), r.notes]))); if (rows.length < 2) { toast('Add rooms first'); return true; } downloadText('room-allocation.csv', csv(rows)); return true; }
+  }
+  return false;
+}
+
+/* ================= v8: sign-in, roles, AI assistant, route optimiser, live weather ================= */
+const ROLES = [['admin', 'Admin'], ['coorg', 'Co-organiser'], ['traveller', 'Traveller'], ['guest', 'Guest (view only)']];
+const roleName = r => (ROLES.find(x => x[0] === r) || [, 'Not set'])[1];
+S.user = null; S.role = ''; S.access = undefined;
+let authReady = null;
+async function ensureAuth(cfg) {
+  if (authReady) return authReady;
+  authReady = (async () => {
+    const srcs = [FB, 'https://cdn.jsdelivr.net/npm/firebase@10.12.2/', 'https://unpkg.com/firebase@10.12.2/'];
+    for (const base of srcs) {
+      try { if (!window.firebase) await loadScript(base + 'firebase-app-compat.js'); if (!firebase.auth) await loadScript(base + 'firebase-auth-compat.js'); break; } catch (e) {}
+    }
+    if (!(window.firebase && firebase.auth)) return null;
+    if (!firebase.apps.length) firebase.initializeApp(cfg.fb);
+    try { await firebase.auth().getRedirectResult(); } catch (e) { if (e && e.code) S.authErr = authMsg(e); }
+    return new Promise(res => { const un = firebase.auth().onAuthStateChanged(u => { un(); S.user = u ? { uid: u.uid, email: (u.email || '').toLowerCase(), name: u.displayName || '', verified: !!u.emailVerified } : null; if (S.user && !S.name && S.user.name) { S.name = S.user.name.split(' ')[0]; ls.set(KEYS.name, S.name); } res(S.user); }); setTimeout(() => res(S.user), 6000); });
+  })();
+  return authReady;
+}
+const idToken = async () => { try { const u = window.firebase && firebase.auth && firebase.auth().currentUser; return u ? await u.getIdToken() : ''; } catch (e) { return ''; } };
+function authMsg(e) {
+  const c = (e && e.code) || '';
+  return ({ 'auth/unauthorized-domain': 'This website isn’t on the Firebase list of authorised domains yet. In Firebase → Authentication → Settings → Authorised domains, add ayenreddy66.github.io.', 'auth/operation-not-allowed': 'This sign-in method is switched off. In Firebase → Authentication → Sign-in method, enable it.', 'auth/wrong-password': 'Wrong email or password.', 'auth/invalid-credential': 'Wrong email or password.', 'auth/user-not-found': 'No account with that email – tap Create account.', 'auth/email-already-in-use': 'That email already has an account – tap Sign in.', 'auth/weak-password': 'Use at least 6 characters.', 'auth/popup-closed-by-user': 'Sign-in window closed.', 'auth/network-request-failed': 'No internet connection.' })[c] || (e && e.message) || 'Sign-in failed';
+}
+/* membership: trips/{trip}/access/{uid} */
+async function loadAccess() {
+  if (!S.user) { S.access = null; S.role = ''; return; }
+  try {
+    const a = await B.get('access', S.user.uid).catch(() => null);
+    if (a && a.active !== false) { S.access = a; S.role = a.role || ''; return; }
+    S.access = a || null; S.role = '';
+    const inv = await B.get('invites', S.user.email).catch(() => null);
+    if (inv && inv.role && !a) {
+      await B.add('access', { uid: S.user.uid, email: S.user.email, name: S.user.name || S.name || '', role: inv.role, active: true, invitedBy: inv._by || '' }, S.user.uid);
+      S.access = { role: inv.role, active: true }; S.role = inv.role; toast(`Welcome! You joined as ${roleName(inv.role)}`); setTimeout(() => location.reload(), 900);
+    }
+  } catch (e) { S.access = null; S.role = ''; }
+}
+const canEdit = () => !S.role || S.role === 'admin' || S.role === 'coorg';
+function signInSheet(msg) {
+  openSheet('Sign in to Kerala Era', `${msg ? `<div class="banner"><p>${esc(msg)}</p></div>` : ''}
+    <button class="btn google-btn" data-act="gSignIn"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg> Continue with Google</button>
+    <div class="or"><span>or with email</span></div>
+    <div class="field"><label for="authEmail">Email</label><input id="authEmail" type="email" autocomplete="email" inputmode="email"></div>
+    <div class="field"><label for="authPass">Password</label><input id="authPass" type="password" autocomplete="current-password"></div>
+    <div class="actions"><button class="btn" data-act="emailUp">Create account</button><div class="r"><button class="btn primary" data-act="emailIn">Sign in</button></div></div>
+    <button class="link-out" style="border:0;background:none;justify-self:start" data-act="resetPw">Forgot password?</button>
+    <p class="by" style="margin:0">The organiser must invite your email before you can see the trip.</p>`);
+}
+async function doSignIn(kind) {
+  const a = firebase.auth(); const email = ($('#authEmail') || {}).value, pass = ($('#authPass') || {}).value;
+  try {
+    if (kind === 'google') { const p = new firebase.auth.GoogleAuthProvider(); const standalone = navigator.standalone || matchMedia('(display-mode: standalone)').matches; if (standalone) { await a.signInWithRedirect(p); return; } try { await a.signInWithPopup(p); } catch (e) { if (/popup-blocked|operation-not-supported/.test(e.code || '')) { await a.signInWithRedirect(p); return; } throw e; } }
+    else if (kind === 'up') { if (!email || !pass) { toast('Enter email and password'); return; } const r = await a.createUserWithEmailAndPassword(email.trim(), pass); try { await r.user.sendEmailVerification(); } catch (e) {} toast('Account created – check your inbox to verify your email'); }
+    else if (kind === 'in') { if (!email || !pass) { toast('Enter email and password'); return; } await a.signInWithEmailAndPassword(email.trim(), pass); }
+    else if (kind === 'reset') { if (!email) { toast('Type your email first'); return; } await a.sendPasswordResetEmail(email.trim()); toast('Password reset email sent'); return; }
+    toast('Signed in'); setTimeout(() => location.reload(), 500);
+  } catch (e) { toast(authMsg(e)); }
+}
+async function signOut() { try { await firebase.auth().signOut(); } catch (e) {} ls.del('ktrip.cache'); location.reload(); }
+function securitySection() {
+  if (!(window.firebase && firebase.auth)) return '<p class="muted" style="margin:0">Sign-in isn’t available on this connection.</p>';
+  if (!S.user) return `<p class="muted" style="margin:0">Sign in to get your role, use the AI assistant and keep the trip private.</p><div><button class="btn sm primary" data-act="signIn">Sign in</button></div>`;
+  return `<div class="row" style="border:0"><span><b>${esc(S.user.name || S.user.email)}</b><br><span class="by">${esc(S.user.email)}${S.user.verified ? '' : ' · email not verified'}</span></span>${statusTag(S.role ? 'ok' : 'warn', roleName(S.role))}</div>
+    <div class="chips">${S.role === 'admin' ? '<button class="btn sm primary" data-act="manageRoles">Manage people & roles</button>' : ''}${!S.role ? '<button class="btn sm" data-act="claimAdmin">Make me the admin</button>' : ''}<button class="btn sm" data-act="copyUid">Copy my user ID</button><button class="btn sm danger" data-act="signOut">Sign out</button></div>
+    ${!S.role ? '<p class="by" style="margin:0">“Make me the admin” only works before the secure rules are published. After that, only an admin can add people.</p>' : ''}`;
+}
+async function openRoles() {
+  openSheet('People & roles', '<p class="muted">Loading…</p>');
+  let acc = [], inv = [];
+  try { acc = Cloud.fs ? (await Cloud.base.collection('access').get()).docs.map(d => Object.assign({ id: d.id }, d.data())) : await Rest.listColl('access'); inv = Cloud.fs ? (await Cloud.base.collection('invites').get()).docs.map(d => Object.assign({ id: d.id }, d.data())) : await Rest.listColl('invites'); }
+  catch (e) { $('#sheetRoot .form').innerHTML = '<p>Couldn’t load the member list: ' + esc(e.code || e.message) + '</p>'; return; }
+  const sel = (id, r, act) => `<select data-act-change="${act}" data-id="${esc(id)}">${ROLES.map(([k, l]) => `<option value="${k}" ${k === r ? 'selected' : ''}>${l}</option>`).join('')}</select>`;
+  $('#sheetRoot .form').innerHTML = `<h3>Invite someone</h3><div class="two"><div class="field"><label for="invEmail">Their email (Google or email sign-in)</label><input id="invEmail" type="email" placeholder="name@gmail.com"></div><div class="field"><label for="invRole">Role</label><select id="invRole">${ROLES.filter(r => r[0] !== 'admin').map(([k, l]) => `<option value="${k}" ${k === 'traveller' ? 'selected' : ''}>${l}</option>`).join('')}<option value="admin">Admin</option></select></div></div>
+    <div class="chips"><button class="btn sm primary" data-act="addInvite">Add invite</button></div>
+    <div class="table-wrap"><table class="tbl roles-tbl"><thead><tr><th>Feature</th><th>Admin</th><th>Co-org</th><th>Traveller</th><th>Guest</th></tr></thead><tbody>${[['View trip', 1, 1, 1, 1], ['Edit itinerary, bookings, events', 1, 1, 0, 0], ['Add expenses & photos, vote, tick lists', 1, 1, 1, 0], ['Manage people & roles', 1, 0, 0, 0], ['Delete trip data', 1, 0, 0, 0]].map(r => `<tr><td>${r[0]}</td>${r.slice(1).map(x => `<td>${x ? '✓' : '—'}</td>`).join('')}</tr>`).join('')}</tbody></table></div>
+    <h3>Members (${acc.length})</h3><div class="rows">${acc.map(a => `<div class="row"><span><b>${esc(a.name || a.email || a.id)}</b>${a.id === (S.user || {}).uid ? ' (you)' : ''}<br><span class="by">${esc(a.email || a.id)}${a.active === false ? ' · deactivated' : ''}</span></span><span class="person-btns">${a.id === (S.user || {}).uid ? statusTag('ok', roleName(a.role)) : sel(a.id, a.role, 'setRole') + `<button class="btn sm" data-act="toggleActive" data-id="${esc(a.id)}" data-on="${a.active === false ? 1 : 0}">${a.active === false ? 'Reactivate' : 'Deactivate'}</button>`}</span></div>`).join('') || '<p class="muted">No members yet.</p>'}</div>
+    <h3>Pending invites (${inv.length})</h3><div class="rows">${inv.map(i => `<div class="row"><span><b>${esc(i.id)}</b><br><span class="by">${roleName(i.role)} · not signed in yet</span></span><button class="btn sm danger" data-act="delInvite" data-id="${esc(i.id)}">Remove</button></div>`).join('') || '<p class="muted" style="margin:0">None.</p>'}</div>
+    <p class="by" style="margin:0">Invited people open the trip link, tap Sign in with that same email, and get their role automatically.</p>`;
+}
+
+/* ---------- AI assistant (via your Cloudflare Worker) ---------- */
+const AI_SUGGEST = ['Plan tomorrow’s activities', 'Find family-friendly attractions near our stops', 'Suggest vegetarian restaurants on our route', 'Check for unrealistic driving schedules', 'Suggest alternatives if it rains', 'Estimate our expenses per family', 'Make a packing checklist for babies and adults', 'Recommend activities for the kids'];
+function aiContext() {
+  const m = meta(); const L = [];
+  L.push(`Trip: ${m.tripName}, ${tripRange()}. Group: ${groupLine()}. Vehicle: Force Urbania + second van, driving from Kadapa (Andhra Pradesh). Avoid medium/hard treks; 2 infants.`);
+  daysSorted().forEach(d => { const leg = DB.legs.find(l => +l.dayNo === +d.dayNo); L.push(`Day ${d.dayNo} ${d.date}: ${d.title} | ${d.route} | ${d.km || '?'} km${leg ? ' ~' + leg.hours : ''} | night: ${d.night || '-'}`); tlFor(d.dayNo).forEach(t => L.push(`  ${t.time} ${t.title}${t.who && t.who !== 'Everyone' ? ' (' + t.who + ')' : ''}`)); const w = WX[d.date + '|' + dayPlace(d)]; if (w && !w.err && !w.loading) L.push(`  weather (${w.kind}): ${w.max}/${w.min}C${w.rainP != null ? ' rain ' + w.rainP + '%' : ''}`); });
+  L.push('Places: ' + DB.places.map(p => `${p.name} (D${p.dayNo}; ${(p.tags || []).join('/')}; ${p.timings || ''}; ${p.entry || ''})`).join('; '));
+  L.push('Stays: ' + stayGroups().map(g => { const b = g.items.find(isBooked); return `${g.stop} ${g.checkin}: ${b ? 'BOOKED ' + b.name : 'not booked (' + g.items.length + ' options)'}`; }).join('; '));
+  const bt = budgetTotals(); L.push(`Budget: ${inr(bt.total)} total, ${inr(bt.per)} per head. Spent so far: ${inr(DB.expenses.reduce((t, x) => t + expTotal(x), 0))}.`);
+  L.push('Families (heads): ' + DB.payers.concat(DB.payers.length ? [] : DB.members).map(x => `${x.name} (${+x.heads || 1})`).join(', '));
+  L.push('Food list: ' + kitOf('food').map(f => `${f.name} [${f.veg}]`).join('; ')); L.push('Top restaurants: ' + RESTOS.map(g => g.stop + ': ' + g.list.map(r => `${r[0]} ${r[1]}★ ${r[3]}`).join(', ')).join(' | '));
+  if (S.tab === 'days') L.push(`User is looking at Day ${S.day}.`); L.push('Today is ' + today() + '.');
+  return L.join('\n').slice(0, 9000);
+}
+const mdLite = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/^#{1,3}\s*(.+)$/gm, '<b>$1</b>').replace(/^\s*[-*•]\s+/gm, '• ').replace(/\n/g, '<br>');
+function openAI() {
+  const url = meta().aiUrl; S.aiLog = S.aiLog || [];
+  const setup = !url ? `<div class="banner"><p><b>The assistant isn’t switched on yet.</b> The trip admin deploys the free Cloudflare Worker from the <code>ai-worker</code> folder, then pastes its address in ⚙ → Trip name, dates & headcount → AI assistant address.</p></div>` : !S.user ? `<div class="banner"><p><b>Sign in first.</b> The assistant only answers signed-in trip members, so nobody else can use up the free quota.</p><div><button class="btn sm primary" data-act="signIn">Sign in</button></div></div>` : '';
+  openSheet('Ask Kerala AI', `${setup}<div class="chips">${AI_SUGGEST.map(q => `<button class="chip" data-act="aiQ" data-q="${esc(q)}">${esc(q)}</button>`).join('')}</div>
+    <div class="field"><label for="aiQ">Your question</label><textarea id="aiQ" style="min-height:80px" placeholder="e.g. What can we do near Kumarakom if it rains on Day 5?"></textarea></div>
+    <div class="actions"><span class="by">Answers use our itinerary, stays, budget and weather. Always double-check timings and prices.</span><div class="r"><button class="btn primary" data-act="aiAsk" ${!url || !S.user ? 'disabled' : ''}>Ask</button></div></div>
+    <div id="aiOut" class="ai-out">${S.aiLog.slice().reverse().map(x => `<div class="ai-q">${esc(x.q)}</div><div class="ai-a">${mdLite(x.a)}</div>`).join('')}</div>`);
+}
+async function aiAsk() {
+  const q = ($('#aiQ').value || '').trim(); if (!q) { toast('Type a question'); return; } if (q.length > 600) { toast('Please keep it under 600 characters'); return; }
+  const out = $('#aiOut'); out.insertAdjacentHTML('afterbegin', `<div class="ai-q">${esc(q)}</div><div class="ai-a ai-wait">Thinking…</div>`); $('#aiQ').value = '';
+  const el = out.querySelector('.ai-wait');
+  try {
+    const r = await fetch(meta().aiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + await idToken() }, body: JSON.stringify({ question: q, context: aiContext() }) });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(j.error || ('HTTP ' + r.status));
+    el.classList.remove('ai-wait'); el.innerHTML = mdLite(j.answer || 'No answer.'); S.aiLog.push({ q, a: j.answer || '' });
+  } catch (e) { el.classList.remove('ai-wait'); el.innerHTML = `<span class="neg">Couldn’t get an answer: ${esc(e.message)}</span>`; }
+}
+
+/* ---------- route optimiser (OpenStreetMap: Photon + OSRM, free public services) ---------- */
+const GEO = ls.get('ktrip.geo', {});
+async function geocode(q) {
+  if (GEO[q]) return GEO[q];
+  const town = llFor(q); if (town) return (GEO[q] = [town[1], town[0]]);
+  const r = await fetch(`https://photon.komoot.io/api/?q=${encodeURIComponent(q)}&limit=1&lat=10.2&lon=76.8`).then(x => x.json());
+  const c = r && r.features && r.features[0] && r.features[0].geometry.coordinates; if (!c) throw new Error('Couldn’t find ' + q + ' on the map');
+  GEO[q] = c; ls.set('ktrip.geo', GEO); return c;
+}
+const placeQ = p => (p.map || p.name) + ', ' + String(p.area || '').replace(/\(.*?\)/g, '') + ', India';
+const fmtKm = m => (m / 1000).toFixed(0) + ' km', fmtH = s => { const h = Math.floor(s / 3600), m = Math.round(s % 3600 / 60); return (h ? h + ' h ' : '') + m + ' min'; };
+async function openOptimiser(n) {
+  const d = dayOf(n); if (!d) return; const ds = daysSorted(); const prev = ds[ds.indexOf(d) - 1];
+  const startName = prev ? dayPlace(prev) : String(d.route || '').split('→')[0].trim(); const endName = dayPlace(d) || 'Kadapa';
+  const stops = DB.places.filter(p => +p.dayNo === +n).sort((a, b) => (+a.seq || 99) - (+b.seq || 99));
+  openSheet(`Optimise Day ${n} route`, '<p class="muted" style="margin:0">Finding the stops on OpenStreetMap…</p>');
+  if (stops.length < 2) { $('#sheetRoot .form').innerHTML = '<p style="margin:0">This day has fewer than 2 places, so there’s nothing to reorder.</p>'; return; }
+  try {
+    const pts = [await geocode(startName + ', India')]; for (const p of stops) pts.push(await geocode(placeQ(p))); pts.push(await geocode(endName + ', India'));
+    const coords = pts.map(c => c.join(',')).join(';');
+    const [orig, opt] = await Promise.all([fetch(`https://router.project-osrm.org/route/v1/driving/${coords}?overview=false`).then(x => x.json()), fetch(`https://router.project-osrm.org/trip/v1/driving/${coords}?source=first&destination=last&roundtrip=false&overview=false`).then(x => x.json())]);
+    if (orig.code !== 'Ok' || opt.code !== 'Ok') throw new Error('The free routing service is busy – try again in a minute');
+    const order = opt.waypoints.slice(1, -1).map((w, i) => ({ p: stops[i], k: w.waypoint_index })).sort((a, b) => a.k - b.k).map(x => x.p);
+    const same = order.every((p, i) => p === stops[i]); const o = orig.routes[0], t = opt.trips[0];
+    S.optim = { n, order };
+    const gm = list => `https://www.google.com/maps/dir/${[startName].concat(list.map(p => (p.map || p.name)), [endName]).map(x => encodeURIComponent(x)).join('/')}`;
+    $('#sheetRoot .form').innerHTML = `<p class="by" style="margin:0">Start (fixed): <b>${esc(startName)}</b> · End (fixed): <b>${esc(endName)}</b></p>
+      <div class="opt-grid"><div class="card"><h3>Current order</h3><ol>${stops.map(p => `<li>${esc(p.name)}</li>`).join('')}</ol><p class="num"><b>${fmtKm(o.distance)}</b> · ${fmtH(o.duration)}</p><a class="link-out" href="${esc(gm(stops))}" target="_blank" rel="noopener">Google Maps ${IC.out}</a></div>
+      <div class="card ${same ? '' : 'opt-new'}"><h3>Suggested</h3><ol>${order.map(p => `<li>${esc(p.name)}</li>`).join('')}</ol><p class="num"><b>${fmtKm(t.distance)}</b> · ${fmtH(t.duration)}</p><a class="link-out" href="${esc(gm(order))}" target="_blank" rel="noopener">Google Maps ${IC.out}</a></div></div>
+      <p style="margin:0">${same ? '✅ Your current order is already the shortest.' : `Saves about <b>${fmtKm(Math.max(0, o.distance - t.distance))}</b> and <b>${fmtH(Math.max(0, o.duration - t.duration))}</b> of driving.`}</p>
+      <p class="by" style="margin:0">Estimates from OpenStreetMap (OSRM). They don’t include traffic, ghat roads, stops or opening hours – check that the new order still fits timings (e.g. boat slots).</p>
+      <div class="actions"><button class="btn" data-act="closeSheet">Keep current</button><div class="r">${same ? '' : '<button class="btn primary" data-act="optApply">Use suggested order</button>'}</div></div>`;
+  } catch (e) { $('#sheetRoot .form').innerHTML = `<p style="margin:0">${esc(e.message || 'Route service unavailable')}</p><p class="by">You can still plan with Google Maps from the Route & map tab.</p>`; }
+}
+
+/* ---------- live weather (Open-Meteo) ---------- */
+async function loadWx(d) {
+  const place = dayPlace(d); const ll = llFor(place); if (!ll || !d.date) return null;
+  const key = d.date + '|' + place; if (WX[key] && (WX[key].loading || Date.now() - (WX[key].at || 0) < 30 * 60000)) return WX[key];
+  WX[key] = Object.assign(WX[key] || {}, { loading: true, place });
+  const diff = Math.round((pd(d.date) - pd(today())) / 864e5);
+  try {
+    let w;
+    if (diff >= 0 && diff <= 15) {
+      const r = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${ll[0]}&longitude=${ll[1]}&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,precipitation_probability_max,precipitation_sum,wind_speed_10m_max,weather_code${diff === 0 ? '&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m' : ''}&timezone=Asia%2FKolkata&start_date=${d.date}&end_date=${d.date}`).then(x => x.json());
+      const dl = r.daily; if (!dl || !dl.time) throw new Error('no data'); const v = k => dl[k] ? dl[k][0] : null;
+      w = { kind: 'forecast', max: Math.round(v('temperature_2m_max')), min: Math.round(v('temperature_2m_min')), feels: v('apparent_temperature_max') != null ? Math.round(v('apparent_temperature_max')) : null, rainP: v('precipitation_probability_max'), rainMm: v('precipitation_sum'), wind: v('wind_speed_10m_max') != null ? Math.round(v('wind_speed_10m_max')) : null, code: v('weather_code'), cur: r.current ? { t: Math.round(r.current.temperature_2m), feels: Math.round(r.current.apparent_temperature), code: r.current.weather_code, wind: Math.round(r.current.wind_speed_10m) } : null };
+    } else {
+      const y0 = +d.date.slice(0, 4) - (diff > 0 ? 1 : 0); const ys = [y0, y0 - 1, y0 - 2];
+      const rs = await Promise.all(ys.map(y => fetch(`https://archive-api.open-meteo.com/v1/archive?latitude=${ll[0]}&longitude=${ll[1]}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max,weather_code&timezone=Asia%2FKolkata&start_date=${y + d.date.slice(4)}&end_date=${y + d.date.slice(4)}`).then(x => x.json()).catch(() => null)));
+      const ok = rs.filter(r => r && r.daily && r.daily.time); if (!ok.length) throw new Error('no data');
+      const avg = k => { const a = ok.map(r => (r.daily[k] || [])[0]).filter(x => x != null); return a.length ? a.reduce((t, x) => t + x, 0) / a.length : null; };
+      w = { kind: 'typical', years: ok.length, yrs: ys.filter((y, i) => rs[i] && rs[i].daily).join(', '), max: Math.round(avg('temperature_2m_max')), min: Math.round(avg('temperature_2m_min')), rainMm: avg('precipitation_sum'), rainyYears: ok.filter(r => (r.daily.precipitation_sum || [0])[0] > 1).length, wind: avg('wind_speed_10m_max') != null ? Math.round(avg('wind_speed_10m_max')) : null, code: Math.max(...ok.map(r => (r.daily.weather_code || [0])[0] || 0)) };
+    }
+    WX[key] = Object.assign(w, { place, at: Date.now() });
+  } catch (e) { WX[key] = { place, err: true, at: Date.now() }; }
+  schedule(); return WX[key];
+}
+function wxText(w) {
+  if (!w || w.loading && w.max == null) return 'Loading weather…'; if (w.err) return 'Weather unavailable';
+  const rain = w.kind === 'forecast' ? (w.rainP != null ? ` · rain ${w.rainP}%` : '') : ` · rain on ${w.rainyYears}/${w.years} past years`;
+  return `${WXI(w.code)} ${w.max}° / ${w.min}°${rain}`;
+}
+function wxAlerts(w, d) {
+  if (!w || w.err || w.max == null) return []; const out = []; const tl = tlFor(d.dayNo).map(t => t.title).join(' ');
+  const outdoor = (tl.match(/boat|shikara|safari|jeep|falls|beach|top station|eravikulam|bird|mattupetty|kundala|echo/ig) || []).map(x => x.replace(/^./, c => c.toUpperCase())); const aff = outdoor.length ? ` Affects: ${[...new Set(outdoor)].slice(0, 4).join(', ')}.` : '';
+  if (w.kind === 'forecast') {
+    if (w.rainP >= 60) out.push(['bad', `High chance of rain (${w.rainP}%). Carry umbrellas and rain covers; boat rides and waterfall paths can close.${aff}`]);
+    else if (w.rainP >= 35) out.push(['warn', `Some rain likely (${w.rainP}%). Keep umbrellas handy.`]);
+    if (w.wind >= 35) out.push(['warn', `Windy (${w.wind} km/h). Boat rides may pause; hold on to caps at viewpoints.`]);
+    if (w.feels >= 36) out.push(['warn', `Hot – feels like ${w.feels}°. Water, shade and hats for the little ones.`]);
+  } else if (w.rainyYears >= 2) out.push(['warn', `It rained on this date in ${w.rainyYears} of the last ${w.years} years. Pack umbrellas.`]);
+  if (w.min <= 13) out.push(['info', `Cold morning (${w.min}°). Warm layers, caps and socks for babies.`]);
+  return out;
+}
+function wxCard(d) {
+  const place = dayPlace(d); if (!llFor(place)) return '';
+  const w = WX[d.date + '|' + place]; if (!w || (!w.loading && Date.now() - (w.at || 0) > 30 * 60000)) loadWx(d);
+  const al = wxAlerts(w, d);
+  const facts = w && !w.err && w.max != null ? [['High / low', `${w.max}° / ${w.min}°`], w.feels != null ? ['Feels like', w.feels + '°'] : null, w.kind === 'forecast' ? ['Rain chance', (w.rainP ?? '–') + '%'] : ['Rainy years', `${w.rainyYears} of ${w.years}`], w.wind != null ? ['Wind', w.wind + ' km/h'] : null].filter(Boolean) : [];
+  return `<section class="wx-card2"><div class="sec-head"><div><span class="eyebrow">${w && w.kind === 'forecast' ? 'Live forecast' : 'Seasonal pattern'} · ${esc(place)}</span><h3 style="margin-top:2px">${esc(wxText(w))}</h3></div><a class="chip" href="https://www.google.com/search?q=${encodeURIComponent('weather ' + place)}" target="_blank" rel="noopener">More ${IC.out.replace('<svg', '<svg width="12" height="12"')}</a></div>
+    ${w && w.cur ? `<p style="margin:0"><b>Now:</b> ${WXI(w.cur.code)} ${w.cur.t}° (feels ${w.cur.feels}°) · wind ${w.cur.wind} km/h</p>` : ''}
+    ${facts.length ? `<div class="wx-facts">${facts.map(([k, v]) => `<div><small>${k}</small><b class="num">${esc(v)}</b></div>`).join('')}</div>` : ''}
+    ${al.length ? `<ul class="pc-list">${al.map(([s, t]) => `<li class="pc-${s}">${esc(t)}</li>`).join('')}</ul>` : ''}
+    <span class="by">${w && w.kind === 'forecast' ? `Forecast for ${esc(fmtD(d.date))}, updated ${esc(ago(w.at))}. Forecasts change – check again the evening before.` : w && w.kind === 'typical' ? `Average of ${esc(w.yrs)} on this date (Open-Meteo history). Not a forecast – the live forecast appears 16 days before.` : ''}</span></section>`;
+}
+
+function v8Click(a, t) {
+  switch (a) {
+    case 'signIn': signInSheet(); return true;
+    case 'gSignIn': doSignIn('google'); return true;
+    case 'emailIn': doSignIn('in'); return true;
+    case 'emailUp': doSignIn('up'); return true;
+    case 'resetPw': doSignIn('reset'); return true;
+    case 'signOut': signOut(); return true;
+    case 'copyUid': copyFrom({ value: (S.user || {}).uid || '' }); return true;
+    case 'claimAdmin': run(B.add('access', { uid: S.user.uid, email: S.user.email, name: S.user.name || S.name || '', role: 'admin', active: true }, S.user.uid).then(() => { toast('You’re the admin now'); setTimeout(() => location.reload(), 700); })); return true;
+    case 'manageRoles': openRoles(); return true;
+    case 'addInvite': { const em = ($('#invEmail').value || '').trim().toLowerCase(); if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)) { toast('Enter a valid email'); return true; } run(B.add('invites', { role: $('#invRole').value, email: em }, em).then(() => { toast('Invite added – send them the trip link'); openRoles(); })); return true; }
+    case 'delInvite': run(B.remove('invites', t.dataset.id).then(() => openRoles())); return true;
+    case 'toggleActive': run(B.update('access', t.dataset.id, { active: t.dataset.on === '1' }).then(() => openRoles())); return true;
+    case 'aiOpen': openAI(); return true;
+    case 'aiQ': $('#aiQ').value = t.dataset.q; $('#aiQ').focus(); return true;
+    case 'aiAsk': aiAsk(); return true;
+    case 'optimise': openOptimiser(+t.dataset.n || S.day); return true;
+    case 'optApply': { const o = S.optim; if (!o) return true; o.order.forEach((p, i) => run(B.update('places', p.id, { seq: i + 1 }))); closeSheet(); toast('Stop order updated'); logActivity('note', `reordered Day ${o.n} stops to save driving`, 'days'); return true; }
+  }
+  return false;
+}
+document.addEventListener('change', e => { const el = e.target; if (el.dataset && el.dataset.actChange === 'setRole') run(B.update('access', el.dataset.id, { role: el.value }).then(() => toast('Role updated'))); });
+
 /* ---------- toast ---------- */
 let tt; function toast(msg) { $('#toastRoot').innerHTML = `<div class="toast" role="status">${esc(msg)}</div>`; clearTimeout(tt); tt = setTimeout(() => $('#toastRoot').innerHTML = '', 3200); }
 function copyFrom(el) {
@@ -2977,6 +3618,8 @@ document.addEventListener('click', async e => {
   if (a === 'closeViewer') { if (e.target === t || t.classList.contains('icon-btn')) $('#viewerRoot').innerHTML = ''; return; }
   if (a !== 'multi' && t.tagName !== 'A' && t.tagName !== 'LABEL') e.preventDefault();
   if (funClick(a, t)) return;
+  if (v7Click(a, t)) return;
+  if (v8Click(a, t)) return;
   if (kitClick(a, t)) return;
   switch (a) {
     case 'applyPlan': if (S.applying) break; S.applying = true; closeSheet(); render(); applyNewPlan().catch(err => toast('Could not finish: ' + (err.code || err.message))).finally(() => { S.applying = false; render(); }); break;
@@ -2989,7 +3632,7 @@ document.addEventListener('click', async e => {
     case 'pf': S.placeFilter = t.dataset.k; render(); break;
     case 'mf': S.mustFilter = t.dataset.k; render(); break;
     case 'place': openPlace(t.dataset.id); break;
-    case 'add': openForm(t.dataset.c, null, t.dataset.c === 'days' ? { dayNo: (Math.max(0, ...DB.days.map(d => +d.dayNo || 0)) + 1) } : Object.assign({}, t.dataset.night ? { night: t.dataset.night } : {}, t.dataset.fam ? { fam: t.dataset.fam } : {}, t.dataset.singer ? { singer: t.dataset.singer } : {})); break;
+    case 'add': openForm(t.dataset.c, null, t.dataset.c === 'days' ? { dayNo: (Math.max(0, ...DB.days.map(d => +d.dayNo || 0)) + 1) } : Object.assign({}, t.dataset.night ? { night: t.dataset.night } : {}, t.dataset.fam ? { fam: t.dataset.fam } : {}, t.dataset.singer ? { singer: t.dataset.singer } : {}, t.dataset.ev ? { ev: t.dataset.ev } : {})); break;
     case 'addStay': openForm('stays', null, { stop: t.dataset.stop, checkin: t.dataset.ci, checkout: t.dataset.co, status: 'Idea' }); break;
     case 'edit': openForm(t.dataset.c, t.dataset.id); break;
     case 'toggle': { const c = t.dataset.c, it = DB[c].find(x => x.id === t.dataset.id); if (it) { run(B.update(c, it.id, { done: !it.done })); if (c === 'mustdo' && !it.done) logActivity('done', `ticked off: ${it.text}`, 'must'); } break; }
@@ -3072,9 +3715,11 @@ document.addEventListener('submit', e => {
   const { c } = editing; const id = editing.id; const data = readForm(); const newId = id || (c === 'meta' ? 'trip' : KIT_FIXED[c] || uid());
   const prev = id ? (DB[collOf(c)] || []).find(x => x.id === id) || {} : {};
   if (c.startsWith('kit:')) data.type = c.slice(4);
+  if (!id && editing.extra) Object.assign(data, editing.extra);
   if (c === 'meta') { run(B.update('meta', 'trip', data)); }
   else if (id) run(B.update(collOf(c), id, data));
-  else { if (['timeline', 'mustdo', 'kit:pack', 'kit:food', 'kit:karaoke'].includes(c)) data.done = false; run(B.add(collOf(c), data, newId)); }
+  else { if (['timeline', 'mustdo', 'kit:pack', 'kit:food', 'kit:karaoke', 'kit:task', 'kit:erun'].includes(c)) data.done = false; run(B.add(collOf(c), data, newId)); }
+  if (c === 'kit:announce' && !id) announce('note', `${data.cat || 'Announcement'}: ${data.text}`, 'home');
   if (c === 'kit:journal' && !id) logActivity('note', `added a memory from Day ${data.dayNo || '?'} 📖`, 'memories');
   if (c === 'kit:karaoke' && !id) logActivity('note', `queued “${data.song}” for karaoke 🎤`, 'fun');
   const ed = editing; closeSheet(); toast('Saved');
@@ -3125,11 +3770,11 @@ addEventListener('offline', () => { S.online = false; renderSync(); });
   const cfg = ls.get(KEYS.cfg, null) || (ls.get('ktrip.localOnly', false) ? null : BUILTIN);
   if (cfg && cfg.fb && cfg.trip) {
     if (!ls.get(KEYS.cfg, null)) ls.set(KEYS.cfg, cfg);
-    if (ls.get('ktrip.rest', false)) { Rest.init(cfg); B = Rest; Rest.start(); }
+    if (ls.get('ktrip.rest', false)) { ensureAuth(cfg).then(() => { Rest.init(cfg); B = Rest; Rest.start(); loadAccess().then(render); }); }
     else {
       B = Cloud; render();
-      const timer = setTimeout(() => { if (!Cloud.serverOk) fallbackToRest(cfg); }, 7000);
-      Cloud.start(cfg).catch(() => { clearTimeout(timer); fallbackToRest(cfg); });
+      const timer = setTimeout(() => { if (!Cloud.serverOk && S.err !== 'permission-denied') fallbackToRest(cfg); }, 9000);
+      Cloud.start(cfg).then(() => loadAccess()).then(() => render()).catch(() => { clearTimeout(timer); fallbackToRest(cfg); });
     }
   } else { B = Local; Local.start(); }
   registerSW();
