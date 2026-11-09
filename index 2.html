@@ -1,0 +1,1677 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0F3D32">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Kerala Era ’27</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: phone-first app shell. Sticky header + scrolling tab pills, one view at a time, floating add button. */
+:root{
+  --bg:#EDF4F0; --surface:#FFFFFF; --surface-2:#E1ECE6; --ink:#0F231E; --muted:#566B64; --line:#CFDFD7;
+  --accent:#0E8A62; --accent-ink:#FFFFFF; --pop:#F2542D; --sun:#FFBF2E; --lagoon:#1599A8; --hibiscus:#D8326B;
+  --hero:#0F3D32; --hero-ink:#F2FFF8; --hero-muted:#A9D3C3; --scrim:rgba(8,20,16,.55);
+  --ok:#1E8F55; --warn:#C27A00; --bad:#C23A2B;
+  --t-mountain:linear-gradient(150deg,#1B6B4A,#0E3B2E 70%);
+  --t-trek:linear-gradient(150deg,#3E7C3A,#173A22 70%);
+  --t-beach:linear-gradient(160deg,#FF8A4C,#F2542D 45%,#1599A8 100%);
+  --t-temple:linear-gradient(150deg,#F2A516,#B5530E 75%);
+  --t-safari:linear-gradient(150deg,#7C8A2B,#2F3B10 75%);
+  --t-house:linear-gradient(150deg,#19B3C2,#0B5866 75%);
+  --t-wild:linear-gradient(150deg,#2F6B3F,#11281A 75%);
+  --t-gem:linear-gradient(150deg,#E8457C,#7B1840 80%);
+  --f-display:"Bricolage Grotesque", "Arial Rounded MT Bold", system-ui, sans-serif;
+  --f-body:"Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --r-lg:22px; --r-md:16px; --r-sm:11px;
+  --gut-l:max(16px, env(safe-area-inset-left, 0px)); --gut-r:max(16px, env(safe-area-inset-right, 0px));
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#08130F; --surface:#10201B; --surface-2:#172C25; --ink:#E6F2EC; --muted:#93AAA1; --line:#24403A;
+  --accent:#2FC98D; --accent-ink:#04140D; --pop:#FF7454; --sun:#FFCE55; --lagoon:#3CC6D4; --hibiscus:#F2628F;
+  --hero:#123F33; --hero-ink:#EFFFF7; --hero-muted:#9CCDB9; --scrim:rgba(0,0,0,.66);
+  --ok:#3CCB7F; --warn:#F0B13B; --bad:#FF6B5A; color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#08130F; --surface:#10201B; --surface-2:#172C25; --ink:#E6F2EC; --muted:#93AAA1; --line:#24403A;
+  --accent:#2FC98D; --accent-ink:#04140D; --pop:#FF7454; --sun:#FFCE55; --lagoon:#3CC6D4; --hibiscus:#F2628F;
+  --hero:#123F33; --hero-ink:#EFFFF7; --hero-muted:#9CCDB9; --scrim:rgba(0,0,0,.66);
+  --ok:#3CCB7F; --warn:#F0B13B; --bad:#FF6B5A; color-scheme:dark; }
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg); color:var(--ink); font:15px/1.5 var(--f-body); -webkit-font-smoothing:antialiased; padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:30; background:var(--bg)}
+img{max-width:100%; display:block}
+a{color:inherit}
+button,input,select,textarea{font:inherit; color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--sun); outline-offset:2px; border-radius:8px}
+h1,h2,h3{font-family:var(--f-display); text-wrap:balance; margin:0; letter-spacing:-.02em}
+h2{font-size:1.35rem; font-weight:800}
+h3{font-size:1.05rem; font-weight:800}
+.num{font-family:var(--f-mono); font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.wrap{max-width:1120px; margin:0 auto; padding-left:var(--gut-l); padding-right:var(--gut-r)}
+
+/* header */
+.top{position:sticky; top:env(safe-area-inset-top,0px); z-index:20; background:color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid var(--line)}
+.top-row{display:flex; align-items:center; gap:10px; padding-block:10px 6px}
+.logo{width:38px; height:38px; border-radius:12px; background:var(--hero); color:var(--sun); display:grid; place-items:center; font:800 13px/1 var(--f-display); flex:none; transform:rotate(-4deg)}
+.brand{min-width:0; flex:1}
+.brand b{display:block; font:800 1.05rem/1.15 var(--f-display); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.sync{display:inline-flex; align-items:center; gap:6px; font-size:12px; color:var(--muted); font-weight:600}
+.dot{width:8px; height:8px; border-radius:50%; background:var(--muted)}
+.dot.live{background:var(--ok); box-shadow:0 0 0 3px color-mix(in srgb, var(--ok) 25%, transparent)}
+.dot.wait{background:var(--warn)}
+.dot.err{background:var(--bad)}
+.icon-btn{width:40px; height:40px; border-radius:12px; border:1px solid var(--line); background:var(--surface); display:grid; place-items:center; flex:none}
+.icon-btn svg{width:20px; height:20px}
+.tabs{display:flex; gap:6px; overflow-x:auto; padding-block:4px 10px; scrollbar-width:none; -webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none; border:1px solid var(--line); background:var(--surface); border-radius:999px; padding:8px 14px; font-weight:700; font-size:14px; white-space:nowrap}
+.tab[aria-selected="true"]{background:var(--ink); color:var(--bg); border-color:var(--ink)}
+
+main{padding-block:18px 24px}
+.view{display:grid; gap:22px}
+.sec-head{display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap}
+.sec-head p{margin:2px 0 0; color:var(--muted)}
+
+/* generic */
+.card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:16px}
+.grid{display:grid; gap:14px; grid-template-columns:repeat(auto-fill, minmax(min(100%, 280px), 1fr))}
+.chips{display:flex; flex-wrap:wrap; gap:6px}
+.chip{display:inline-flex; align-items:center; gap:5px; border-radius:999px; padding:4px 10px; font-size:12.5px; font-weight:700; background:var(--surface-2); color:var(--ink); border:1px solid transparent; white-space:nowrap}
+button.chip{border-color:var(--line); background:var(--surface)}
+button.chip[aria-pressed="true"]{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+.pill{display:inline-block; border-radius:999px; padding:3px 9px; font-size:12px; font-weight:800; letter-spacing:.02em}
+.st-idea,.st-shortlist,.st-estimate,.st-skip,.st-not-now,.st-rejected{background:var(--surface-2); color:var(--muted)}
+.st-shortlisted,.st-to-book,.st-contacted,.st-quoted{background:color-mix(in srgb, var(--sun) 30%, var(--surface)); color:var(--ink)}
+.st-booked{background:color-mix(in srgb, var(--accent) 22%, var(--surface)); color:var(--ink)}
+.st-paid{background:var(--accent); color:var(--accent-ink)}
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:7px; border-radius:14px; padding:11px 16px; font-weight:800; border:1px solid var(--line); background:var(--surface); text-decoration:none; font-size:14px}
+.btn svg{width:17px; height:17px}
+.btn.primary{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+.btn.dark{background:var(--ink); color:var(--bg); border-color:var(--ink)}
+.btn.danger{color:var(--bad); border-color:color-mix(in srgb, var(--bad) 40%, var(--line))}
+.btn.danger.armed{background:var(--bad); color:#fff; border-color:var(--bad)}
+.btn.sm{padding:7px 11px; font-size:13px; border-radius:11px}
+.link-out{display:inline-flex; align-items:center; gap:4px; font-weight:700; color:var(--accent); text-decoration:none; font-size:13.5px}
+.link-out svg{width:14px; height:14px}
+.by{font-size:11.5px; color:var(--muted)}
+.empty{border:2px dashed var(--line); border-radius:var(--r-lg); padding:22px; text-align:center; color:var(--muted)}
+
+/* hero */
+.hero{background:var(--hero); color:var(--hero-ink); border-radius:28px; padding:22px 20px; display:grid; gap:18px; position:relative; overflow:hidden}
+.hero::after{content:""; position:absolute; right:-60px; top:-60px; width:220px; height:220px; border-radius:50%; background:radial-gradient(circle, color-mix(in srgb, var(--sun) 55%, transparent), transparent 70%); opacity:.55; pointer-events:none}
+.eyebrow{font-size:12px; text-transform:uppercase; letter-spacing:.12em; font-weight:800; color:var(--hero-muted)}
+.hero h1{font-size:clamp(2rem, 8vw, 3.4rem); font-weight:800; line-height:.98; margin-top:6px}
+.route-line{margin:8px 0 0; color:var(--hero-muted); font-weight:600}
+.count{display:flex; gap:10px; flex-wrap:wrap; position:relative; z-index:1}
+.count div{background:color-mix(in srgb, var(--hero-ink) 9%, transparent); border:1px solid color-mix(in srgb, var(--hero-ink) 16%, transparent); border-radius:16px; padding:10px 14px; min-width:78px}
+.count b{display:block; font:700 1.9rem/1 var(--f-mono); color:var(--sun)}
+.count span{font-size:12px; color:var(--hero-muted); font-weight:700; text-transform:uppercase; letter-spacing:.08em}
+.hero .chip{background:color-mix(in srgb, var(--hero-ink) 12%, transparent); color:var(--hero-ink)}
+.stats{display:grid; gap:12px; grid-template-columns:repeat(auto-fit, minmax(min(100%, 155px), 1fr))}
+.stat{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:14px; display:grid; gap:4px; text-align:left}
+.stat .k{font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.08em; color:var(--muted)}
+.stat .v{font:800 1.5rem/1.1 var(--f-display)}
+.bar{height:7px; border-radius:99px; background:var(--surface-2); overflow:hidden}
+.bar i{display:block; height:100%; background:var(--accent); border-radius:99px}
+.strip{display:flex; gap:12px; overflow-x:auto; padding-bottom:6px; scroll-snap-type:x mandatory}
+.daycard{flex:0 0 min(78%, 240px); scroll-snap-align:start; border-radius:var(--r-md); padding:14px; background:var(--surface); border:1px solid var(--line); text-align:left; display:grid; gap:6px}
+.daycard .d{font:800 2.2rem/1 var(--f-display); color:var(--accent)}
+
+/* days */
+.daypills{display:flex; gap:8px; overflow-x:auto; padding-bottom:4px; scrollbar-width:none}
+.daypills::-webkit-scrollbar{display:none}
+.daypill{flex:none; border:1px solid var(--line); background:var(--surface); border-radius:16px; padding:8px 12px; text-align:left; min-width:72px}
+.daypill b{display:block; font:800 1.1rem/1.1 var(--f-display)}
+.daypill small{color:var(--muted); font-weight:700; font-size:11.5px}
+.daypill[aria-selected="true"]{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.daypill[aria-selected="true"] small{color:inherit; opacity:.85}
+.dayhero{border-radius:var(--r-lg); padding:18px; background:var(--hero); color:var(--hero-ink); display:grid; gap:10px}
+.dayhero h2{font-size:clamp(1.6rem, 6vw, 2.3rem)}
+.dayhero p{margin:0; color:var(--hero-muted)}
+.dayhero .chip{background:color-mix(in srgb, var(--hero-ink) 12%, transparent); color:var(--hero-ink)}
+.day-layout{display:grid; gap:18px}
+@media (min-width:860px){ .day-layout{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); align-items:start} }
+.tl{list-style:none; margin:0; padding:0; display:grid}
+.tl-item{display:grid; grid-template-columns:auto 76px minmax(0,1fr); gap:10px; padding:12px 0; border-bottom:1px dashed var(--line); align-items:start}
+.tl-item:last-child{border-bottom:0}
+.tick{width:26px; height:26px; border-radius:9px; border:2px solid var(--line); background:var(--surface); display:grid; place-items:center; padding:0}
+.tick svg{width:15px; height:15px; opacity:0}
+.done .tick{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.done .tick svg{opacity:1}
+.done .tl-body b{text-decoration:line-through; opacity:.6}
+.tl-time{font:700 12.5px/1.3 var(--f-mono); color:var(--muted); padding-top:4px}
+.tl-body{background:none; border:0; text-align:left; padding:0; display:grid; gap:3px; min-width:0}
+.tl-body b{font-weight:700}
+.tl-body p{margin:0; color:var(--muted); font-size:14px}
+.who{font-size:11.5px; font-weight:800; color:var(--lagoon)}
+.side{display:grid; gap:14px}
+.mini{display:grid; gap:8px}
+.mini-row{display:flex; justify-content:space-between; gap:10px; align-items:center; padding:10px 12px; border-radius:var(--r-sm); background:var(--surface-2); text-align:left; border:0; width:100%}
+.mini-row span{min-width:0}
+
+/* route */
+.pass{display:grid; grid-template-columns:minmax(0,1fr) auto; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); overflow:hidden}
+.pass-main{padding:16px; display:grid; gap:10px; min-width:0}
+.codes{display:flex; align-items:center; gap:10px}
+.code{font:800 clamp(1.8rem, 8vw, 2.5rem)/1 var(--f-display); letter-spacing:-.01em}
+.codes .line{flex:1; height:2px; background:repeating-linear-gradient(90deg, var(--line) 0 8px, transparent 8px 14px); position:relative; min-width:30px}
+.codes .line svg{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:26px; height:26px; color:var(--pop); background:var(--surface); padding:2px}
+.places-sub{display:flex; justify-content:space-between; gap:10px; font-weight:700; font-size:13px; color:var(--muted)}
+.pass-stub{border-left:2px dashed var(--line); padding:16px; display:grid; align-content:center; gap:4px; text-align:center; min-width:96px; background:var(--surface-2); position:relative}
+.pass-stub::before,.pass-stub::after{content:""; position:absolute; left:-10px; width:18px; height:18px; border-radius:50%; background:var(--bg)}
+.pass-stub::before{top:-10px}.pass-stub::after{bottom:-10px}
+.pass-stub b{font:800 1.4rem/1 var(--f-display)}
+.pass-stub small{font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.08em; color:var(--muted)}
+
+/* places */
+.pcard{border-radius:var(--r-lg); overflow:hidden; background:var(--surface); border:1px solid var(--line); text-align:left; padding:0; display:grid}
+.cover{position:relative; aspect-ratio:16/10; max-width:100%; color:#fff; padding:14px; display:flex; flex-direction:column; justify-content:flex-end; background:var(--t-mountain); overflow:hidden}
+.cover img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+.cover.has-img::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, transparent 35%, rgba(0,0,0,.7))}
+.cover > *{position:relative; z-index:1}
+.cover h3{font-size:1.45rem; line-height:1.05; color:#fff; text-shadow:0 1px 12px rgba(0,0,0,.25)}
+.cover .area{font-size:13px; font-weight:700; opacity:.9}
+.stamp{position:absolute; top:12px; right:12px; z-index:2; background:#fff; color:#0F231E; font:800 12px/1 var(--f-display); padding:7px 9px; border-radius:8px; transform:rotate(5deg); box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.sticker{position:absolute; top:12px; left:12px; z-index:2; background:var(--sun); color:#1D1500; font:800 11.5px/1 var(--f-body); padding:6px 9px; border-radius:999px; transform:rotate(-4deg); text-transform:uppercase; letter-spacing:.04em}
+.pbody{padding:12px 14px 14px; display:grid; gap:8px}
+.pbody p{margin:0; color:var(--muted); font-size:14px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden}
+.t-Mountains{background:var(--t-mountain)} .t-Trek{background:var(--t-trek)} .t-Beach{background:var(--t-beach)} .t-Temple{background:var(--t-temple)}
+.t-Safari{background:var(--t-safari)} .t-Houseboat{background:var(--t-house)} .t-Wildlife{background:var(--t-wild)} .t-Hidden-gem{background:var(--t-gem)}
+.facts{display:grid; gap:8px; grid-template-columns:repeat(auto-fit, minmax(min(100%, 150px), 1fr))}
+.fact{background:var(--surface-2); border-radius:var(--r-sm); padding:10px 12px}
+.fact small{display:block; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.08em; color:var(--muted)}
+.shots{list-style:none; padding:0; margin:0; display:grid; gap:8px}
+.shots li{display:grid; grid-template-columns:30px minmax(0,1fr); gap:10px; align-items:start; background:var(--surface-2); padding:10px; border-radius:var(--r-sm)}
+.shots svg{width:22px; height:22px; color:var(--hibiscus); margin-top:1px}
+.gallery{display:grid; gap:8px; grid-template-columns:repeat(auto-fill, minmax(96px, 1fr))}
+.gallery button{padding:0; border:0; border-radius:12px; overflow:hidden; aspect-ratio:1; max-width:100%; background:var(--surface-2)}
+.gallery img{width:100%; height:100%; object-fit:cover}
+
+/* stays */
+.night{display:grid; gap:12px}
+.night-head{display:grid; gap:6px}
+.night-head .when{font:700 13px/1.2 var(--f-mono); color:var(--accent)}
+.search-row{display:flex; gap:6px; overflow-x:auto; padding-bottom:4px; scrollbar-width:none}
+.search-row::-webkit-scrollbar{display:none}
+.plat{display:inline-flex; align-items:center; border-radius:8px; padding:4px 8px; font-size:12px; font-weight:800; color:#fff; background:#55625D; white-space:nowrap}
+.plat-airbnb{background:#E0314F} .plat-booking-com{background:#003580} .plat-agoda{background:#2B6BE0} .plat-trip-com{background:#1F6FE5} .plat-makemytrip{background:#C9302C} .plat-goibibo{background:#E8531C} .plat-direct-website{background:#0E6F52}
+.option{display:grid; gap:8px}
+.option-top{display:flex; justify-content:space-between; gap:10px; align-items:flex-start}
+.option h3{font-size:1.05rem}
+.price-line{font-weight:700}
+.price-line .num{font-size:1.05rem}
+.option.is-booked{border-color:var(--accent); box-shadow:0 0 0 2px color-mix(in srgb, var(--accent) 30%, transparent)}
+
+/* tickets */
+.ticket{display:grid; grid-template-columns:minmax(0,1fr) auto; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); overflow:hidden; text-align:left; padding:0}
+.ticket-main{padding:14px; display:grid; gap:6px; min-width:0}
+.ticket-stub{border-left:2px dashed var(--line); padding:14px 12px; display:grid; align-content:center; justify-items:center; gap:2px; min-width:104px; position:relative; background:color-mix(in srgb, var(--sun) 14%, var(--surface))}
+.ticket-stub::before,.ticket-stub::after{content:""; position:absolute; left:-9px; width:16px; height:16px; border-radius:50%; background:var(--bg)}
+.ticket-stub::before{top:-9px}.ticket-stub::after{bottom:-9px}
+.ticket-stub b{font:700 1.05rem/1.1 var(--f-mono)}
+.ticket-stub small{font-size:11px; color:var(--muted); font-weight:700; text-align:center}
+.bk{font-size:12px; font-weight:800}
+.bk-online{color:var(--lagoon)} .bk-offline{color:var(--warn)} .bk-none{color:var(--muted)}
+.day-label{font:800 13px/1 var(--f-body); text-transform:uppercase; letter-spacing:.1em; color:var(--muted); margin:6px 0 2px}
+
+/* budget */
+.total-card{background:var(--hero); color:var(--hero-ink); border-radius:var(--r-lg); padding:20px; display:grid; gap:14px}
+.total-card .big{font:800 clamp(2.2rem, 9vw, 3.2rem)/1 var(--f-display)}
+.total-card .sub{display:flex; flex-wrap:wrap; gap:8px}
+.total-card .chip{background:color-mix(in srgb, var(--hero-ink) 12%, transparent); color:var(--hero-ink)}
+.catbars{display:grid; gap:10px}
+.catbar{display:grid; grid-template-columns:110px minmax(0,1fr) auto; gap:10px; align-items:center; font-weight:700; font-size:14px}
+.catbar .bar{height:12px}
+.cat-Transport i{background:var(--lagoon)} .cat-Stay i{background:var(--accent)} .cat-Food i{background:var(--pop)} .cat-Activities i{background:var(--sun)} .cat-Shopping i{background:var(--hibiscus)} .cat-Other i{background:var(--muted)}
+.table-wrap{overflow-x:auto}
+.rows{display:grid}
+.row{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:4px 12px; padding:11px 2px; border-bottom:1px solid var(--line); text-align:left; background:none; border-left:0; border-right:0; border-top:0; width:100%}
+.row:last-child{border-bottom:0}
+.row .amt{font:700 14px var(--f-mono); text-align:right}
+.row small{color:var(--muted); grid-column:1 / -1; font-size:12.5px}
+
+/* must do */
+.check{display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:12px; align-items:center; padding:12px 14px; border-radius:var(--r-md); background:var(--surface); border:1px solid var(--line)}
+.check .txt{background:none; border:0; text-align:left; padding:0; font-weight:700; min-width:0}
+.check.done .txt{text-decoration:line-through; color:var(--muted)}
+.check.done .tick{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.check.done .tick svg{opacity:1}
+.ring{--p:0; width:64px; height:64px; border-radius:50%; background:conic-gradient(var(--accent) calc(var(--p)*1%), var(--surface-2) 0); display:grid; place-items:center; flex:none}
+.ring span{width:48px; height:48px; border-radius:50%; background:var(--bg); display:grid; place-items:center; font:700 13px var(--f-mono)}
+
+/* FAB + sheet + toast */
+.fab{position:fixed; right:calc(16px + env(safe-area-inset-right,0px)); bottom:calc(18px + env(safe-area-inset-bottom,0px)); z-index:25; height:56px; border-radius:18px; padding:0 20px 0 16px; background:var(--pop); color:#fff; border:0; font-weight:800; font-size:15px; display:flex; align-items:center; gap:8px; box-shadow:0 10px 26px color-mix(in srgb, var(--pop) 40%, transparent)}
+.fab svg{width:22px; height:22px}
+.sheet-wrap{position:fixed; inset:0; z-index:40; background:var(--scrim); display:flex; align-items:flex-end; justify-content:center}
+.sheet{background:var(--bg); width:100%; max-width:640px; max-height:92vh; overflow:auto; border-radius:26px 26px 0 0; padding:8px var(--gut-r) calc(20px + env(safe-area-inset-bottom,0px)) var(--gut-l); animation:up .22s ease-out}
+@media (min-width:700px){ .sheet-wrap{align-items:center} .sheet{border-radius:26px; padding:8px 22px 22px} }
+@keyframes up{from{transform:translateY(30px); opacity:.6} to{transform:none; opacity:1}}
+@media (prefers-reduced-motion:reduce){ .sheet{animation:none} }
+.grab{width:42px; height:5px; border-radius:9px; background:var(--line); margin:4px auto 10px}
+.sheet-head{display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:12px; position:sticky; top:-8px; background:var(--bg); padding-block:8px; z-index:2}
+.sheet-head h2{font-size:1.3rem}
+.form{display:grid; gap:12px}
+.field{display:grid; gap:5px}
+.field label{font-size:12.5px; font-weight:800; color:var(--muted); text-transform:uppercase; letter-spacing:.06em}
+.field input,.field select,.field textarea{width:100%; border:1px solid var(--line); background:var(--surface); border-radius:12px; padding:11px 12px; font-size:16px}
+.field textarea{min-height:84px; resize:vertical}
+.field .hint{font-size:12.5px; color:var(--muted)}
+.two{display:grid; gap:12px; grid-template-columns:repeat(auto-fit, minmax(min(100%, 150px), 1fr))}
+.multi{display:flex; flex-wrap:wrap; gap:6px}
+.actions{display:flex; flex-wrap:wrap; gap:8px; justify-content:space-between; margin-top:6px}
+.actions .r{display:flex; gap:8px; margin-left:auto}
+.toast{position:fixed; left:50%; bottom:calc(86px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%); z-index:60; background:var(--ink); color:var(--bg); padding:10px 16px; border-radius:12px; font-weight:700; font-size:14px; max-width:calc(100% - 32px); box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.banner{border-radius:var(--r-md); padding:14px 16px; background:color-mix(in srgb, var(--sun) 22%, var(--surface)); border:1px solid color-mix(in srgb, var(--sun) 50%, var(--line)); display:grid; gap:10px}
+.banner p{margin:0}
+.steps{margin:0; padding-left:20px; display:grid; gap:6px}
+.copybox{display:flex; gap:8px}
+.copybox input{flex:1; min-width:0; border:1px solid var(--line); border-radius:12px; padding:10px 12px; background:var(--surface); font:500 13px var(--f-mono)}
+.lightbox img{border-radius:16px; width:100%; max-height:70vh; object-fit:contain; background:var(--surface-2)}
+/* split */
+.xfer{display:grid; gap:12px}
+.xfer.mine{border-color:var(--pop); box-shadow:0 0 0 2px color-mix(in srgb, var(--pop) 25%, transparent)}
+.xfer-top{display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:12px; align-items:center}
+.xamt{font:800 1.35rem/1 var(--f-display); color:var(--pop)}
+.av{width:40px; height:40px; border-radius:14px; background:var(--surface-2); display:grid; place-items:center; font:800 14px/1 var(--f-display); flex:none; color:var(--accent)}
+.who-cell{display:flex; gap:12px; align-items:center; min-width:0}
+.who-cell > span:last-child{min-width:0}
+.ico{width:40px; height:40px; border-radius:14px; background:var(--surface-2); display:grid; place-items:center; font-size:20px; flex:none}
+.exp-row,.bal-row{align-items:center}
+.amt.pos{color:var(--ok)} .amt.neg{color:var(--bad)}
+.total-card select{background:var(--surface); color:var(--ink)}
+.typegrid{display:grid; gap:6px; grid-auto-flow:column; grid-template-rows:repeat(2, auto); grid-auto-columns:88px; overflow-x:auto; padding-bottom:4px; scrollbar-width:thin}
+.typebtn{border:1px solid var(--line); background:var(--surface); border-radius:14px; padding:8px 6px; display:grid; justify-items:center; gap:2px; font-size:12px; font-weight:700}
+.typebtn span{font-size:22px; line-height:1.1}
+.typebtn[aria-pressed="true"]{border-color:var(--accent); background:color-mix(in srgb, var(--accent) 16%, var(--surface)); box-shadow:0 0 0 2px color-mix(in srgb, var(--accent) 35%, transparent)}
+.seg{display:grid; grid-template-columns:repeat(4, 1fr); background:var(--surface-2); border-radius:14px; padding:4px; gap:4px}
+.seg button{border:0; background:none; border-radius:10px; padding:9px 4px; font-weight:800; font-size:13.5px}
+.seg button[aria-checked="true"]{background:var(--surface); color:var(--accent); box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.split-head{display:flex; justify-content:space-between; align-items:center}
+.split-rows{display:grid; gap:6px}
+.split-row{display:grid; grid-template-columns:minmax(0,1fr) 76px 40px 84px; gap:8px; align-items:center; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:6px 10px}
+.split-row.off{opacity:.55}
+.split-row .inc{display:flex; gap:8px; align-items:center; font-weight:700; min-width:0}
+.split-row .inc span{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.split-row .inc input{width:20px; height:20px; accent-color:var(--accent); flex:none}
+.split-row .sv{width:100%; border:1px solid var(--line); border-radius:9px; padding:7px 8px; background:var(--bg); font-size:15px}
+.split-row .unit{font-size:12px; color:var(--muted); font-weight:700}
+.split-row .out{text-align:right; font-weight:700; font-size:13.5px}
+#splitMsg.err{color:var(--bad); font-weight:700}
+.qr{background:#fff; border-radius:18px; padding:12px; width:min(100%, 280px); margin:0 auto; aspect-ratio:1; display:grid; place-items:center}
+.qr svg{width:100%; height:auto}
+@media (max-width:420px){ .split-row{grid-template-columns:minmax(0,1fr) 64px 72px} .split-row .unit{display:none} }
+/* attachments */
+.att-list{display:grid; gap:8px}
+.att{display:grid; grid-template-columns:52px minmax(0,1fr) auto; gap:10px; align-items:center; background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:6px}
+.att-thumb{width:52px; height:52px; border-radius:10px; border:0; padding:0; overflow:hidden; background:var(--surface-2); display:grid; place-items:center; font:800 12px var(--f-mono); color:var(--pop)}
+.att-thumb img{width:100%; height:100%; object-fit:cover}
+.att-meta{display:grid; min-width:0}
+.att-meta b{white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-size:14px}
+.att-btns{display:flex; gap:6px}
+.att-chip{padding:2px 7px; font-size:11.5px}
+.read-box{display:grid; gap:10px; border-radius:14px; padding:12px; background:color-mix(in srgb, var(--lagoon) 12%, var(--surface)); border:1px solid color-mix(in srgb, var(--lagoon) 40%, var(--line))}
+.read-box:not(.done){grid-template-columns:auto minmax(0,1fr); align-items:center}
+.spinner{width:20px; height:20px; border-radius:50%; border:3px solid var(--line); border-top-color:var(--lagoon); animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.sugg{display:grid; grid-template-columns:auto minmax(0,1fr); gap:4px 10px; align-items:center; font-size:13px; font-weight:700; color:var(--muted)}
+.sugg input[type=checkbox]{width:20px; height:20px; accent-color:var(--accent)}
+.sugg .sugg-v{grid-column:2; width:100%; border:1px solid var(--line); border-radius:10px; padding:8px 10px; background:var(--surface); font-size:15px; color:var(--ink); font-weight:500}
+.viewer{position:fixed; inset:0; z-index:55; background:var(--scrim); display:grid; place-items:center; padding:16px max(16px, env(safe-area-inset-right,0px)) 16px max(16px, env(safe-area-inset-left,0px))}
+.viewer-box{background:var(--bg); border-radius:22px; padding:14px; width:min(100%, 720px); max-height:92vh; overflow:auto; display:grid; gap:12px}
+.viewer-img{width:100%; max-height:66vh; object-fit:contain; border-radius:14px; background:var(--surface-2)}
+.pdf-box{display:grid; place-items:center; gap:8px; padding:30px; border-radius:14px; background:var(--surface-2)}
+.pdf-icon{font:800 1.6rem var(--f-display); color:var(--pop); border:3px solid var(--pop); border-radius:12px; padding:10px 14px}
+@media (prefers-reduced-motion:reduce){ .spinner{animation:none} }
+code{font-family:var(--f-mono); font-size:.9em; background:var(--surface-2); padding:1px 5px; border-radius:6px}
+pre.code{white-space:pre-wrap; word-break:break-word; font:500 12.5px/1.45 var(--f-mono); background:var(--surface-2); border-radius:12px; padding:12px; margin:0}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="top-row">
+      <div class="logo" aria-hidden="true">KL</div>
+      <div class="brand"><b id="tripName">Kerala Era ’27</b><span class="sync" id="sync"><i class="dot"></i><span>Loading…</span></span></div>
+      <button class="icon-btn" id="settingsBtn" aria-label="Settings and sharing"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
+    </div>
+    <nav class="tabs" id="tabs" role="tablist" aria-label="Sections"></nav>
+  </div>
+</header>
+<main class="wrap"><div id="view" class="view"></div></main>
+<button class="fab" id="fab" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span id="fabLabel">Add</span></button>
+<div id="sheetRoot"></div>
+<div id="viewerRoot"></div>
+<div id="toastRoot"></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const safeUrl = u => { u = String(u || '').trim(); if (!u) return ''; if (!/^https?:\/\//i.test(u)) u = 'https://' + u; try { const x = new URL(u); return /^https?:$/.test(x.protocol) ? x.href : ''; } catch (e) { return ''; } };
+const imgSrc = u => { u = String(u || '').trim(); if (/^data:image\/(png|jpe?g|webp|gif);base64,/i.test(u)) return u; return /^https?:\/\//i.test(u) ? safeUrl(u) : ''; };
+const inr = n => '₹' + Math.round(+n || 0).toLocaleString('en-IN');
+const slug = s => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+const ls = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; } },
+  del(k) { try { localStorage.removeItem(k); } catch (e) {} }
+};
+const KEYS = { cfg: 'ktrip.cfg', name: 'ktrip.name', tab: 'ktrip.tab', day: 'ktrip.day', local: 'ktrip.local.v1', welcomed: 'ktrip.welcomed' };
+const WD = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const MO = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const pd = s => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(s || ''); return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null; };
+const fmtD = s => { const d = pd(s); return d ? `${WD[d.getDay()]} ${d.getDate()} ${MO[d.getMonth()]}` : ''; };
+const nightsBetween = (a, b) => { const x = pd(a), y = pd(b); return x && y ? Math.max(0, Math.round((y - x) / 864e5)) : 0; };
+const b64e = s => btoa(unescape(encodeURIComponent(s))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+const b64d = s => decodeURIComponent(escape(atob(s.replace(/-/g, '+').replace(/_/g, '/'))));
+
+const IC = {
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+  out: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>',
+  cam: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>',
+  van: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16V7h12l4 4h2v5h-2"/><path d="M3 16h2m4 0h6"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>',
+  edit: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>',
+  copy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h9"/></svg>',
+  x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+  pin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>'
+};
+
+/* ---------- options & schemas ---------- */
+const OPT = {
+  tags: ['Mountains','Trek','Beach','Temple','Safari','Houseboat','Wildlife','Hidden gem','Must visit','Adventure'],
+  platform: ['Airbnb','Booking.com','Agoda','Trip.com','MakeMyTrip','Goibibo','Direct / Website','WhatsApp / Phone','Other'],
+  stayStatus: ['Idea','Shortlisted','Booked','Paid','Rejected'],
+  actStatus: ['Idea','To book','Booked','Paid','Skip'],
+  booking: ['Online','Offline (at counter)','No booking needed'],
+  priceType: ['per person','per group','per jeep / vehicle','free'],
+  budgetCat: ['Transport','Stay','Food','Activities','Shopping','Other'],
+  budgetStatus: ['Estimate','Quoted','Paid'],
+  phStatus: ['Shortlist','Contacted','Booked','Not now'],
+  mustCat: ['See','Do','Eat','Buy','Photo','Prep'],
+  who: ['Everyone','Adventure group','Relaxed group','Optional']
+};
+const SCHEMA = {
+  meta: { noun: 'trip settings', fields: [
+    ['tripName','Trip name','text'], ['start','Departure (date & time)','datetime-local'],
+    ['adults','Adults','number'], ['teens','Teenagers','number'], ['kids','Kids','number'], ['infants','Infants','number'],
+    ['paying','Split budget between (people)','number','Infants usually travel free'], ['buffer','Budget buffer %','number'] ] },
+  days: { noun: 'day', fields: [
+    ['dayNo','Day number','number'], ['date','Date','date'], ['title','Day title','text'], ['route','Route','text'],
+    ['km','Distance (km)','number'], ['night','Night stay','text'], ['vibe','Day summary','textarea'] ] },
+  timeline: { noun: 'plan item', fields: [
+    ['dayNo','Day','day'], ['time','Time','text','e.g. 7:30 am or Mon 9:30 pm'], ['title','What','text'],
+    ['note','Notes','textarea'], ['who','Who','select:who'] ] },
+  legs: { noun: 'travel leg', fields: [
+    ['dayNo','Day','day'], ['from','From','text'], ['fromCode','From code','text','3 letters, e.g. KDP'], ['to','To','text'], ['toCode','To code','text'],
+    ['via','Via','text'], ['km','Distance (km)','number'], ['hours','Drive time','text'], ['notes','Notes','textarea'] ] },
+  places: { noun: 'place', fields: [
+    ['name','Place name','text'], ['dayNo','Day','day'], ['area','Area / town','text'], ['tags','Type','multi:tags'],
+    ['timings','Timings','text'], ['entry','Entry fee','text'], ['about','Why go','textarea'], ['tips','Tips','textarea'],
+    ['ig','Instagram photo ideas','textarea','One idea per line'], ['hashtags','Hashtags','text','#munnar #kerala'],
+    ['images','Image links','textarea','Paste image URLs, one per line'], ['map','Google Maps search','text'] ] },
+  stays: { noun: 'stay option', fields: [
+    ['stop','Stop / town','text'], ['checkin','Check-in','date'], ['checkout','Check-out','date'], ['name','Property name','text'],
+    ['platform','Booked on','select:platform'], ['link','Booking link','url','Paste the Airbnb / Agoda / Trip.com / Booking.com link'],
+    ['price','Price per night (₹, whole group)','number'], ['rooms','Rooms','number'], ['sleeps','Sleeps','number'],
+    ['status','Status','select:stayStatus'], ['notes','Notes','textarea'] ] },
+  activities: { noun: 'activity', fields: [
+    ['name','Activity','text'], ['dayNo','Day','day'], ['place','Where','text'], ['price','Ticket price (₹)','number'],
+    ['priceType','Price is','select:priceType'], ['qty','How many (people / jeeps)','number'], ['booking','Booking','select:booking'],
+    ['link','Booking link','url','Needed for online booking'], ['status','Status','select:actStatus'], ['notes','Notes','textarea'] ] },
+  budget: { noun: 'budget line', fields: [
+    ['category','Category','select:budgetCat'], ['item','Item','text'], ['amount','Amount (₹)','number'],
+    ['status','Status','select:budgetStatus'], ['paidBy','Paid by','text'], ['notes','Notes','textarea'] ] },
+  photographers: { noun: 'photographer', fields: [
+    ['name','Name','text'], ['base','Based in / covers','text'], ['offer','What you get','textarea'], ['price','Price','text'],
+    ['platform','Found on','text'], ['link','Link','url'], ['contact','Contact','text','Phone, WhatsApp or email'],
+    ['status','Status','select:phStatus'], ['notes','Notes','textarea'] ] },
+  mustdo: { noun: 'must-do', fields: [
+    ['text','Must-do','text'], ['category','Type','select:mustCat'], ['dayNo','Day','day'] ] },
+  photos: { noun: 'photo', fields: [['caption','Caption','text']] }
+};
+SCHEMA.members = { noun: 'person / family', fields: [
+  ['name','Name','text','A person or a family, e.g. “Ravi’s family”'], ['heads','Head count','number','How many people this covers – used for head-count splits'],
+  ['upi','UPI ID (for PhonePe)','text','e.g. 98xxxxxx10@ybl – shown to whoever pays them'], ['phone','WhatsApp number','text','For payment reminders'] ] };
+SCHEMA.settlements = { noun: 'payment', fields: [
+  ['from','Who paid','member'], ['to','Paid to','member'], ['amount','Amount (₹)','number'], ['date','Date','date'],
+  ['method','How','select:payMethod'], ['note','Note','text'] ] };
+SCHEMA.expenses = { noun: 'expense', fields: [] };
+OPT.payMethod = ['PhonePe','Other UPI app','Cash','Bank transfer'];
+const EXP = [['Fuel','⛽'],['Tolls','🛣️'],['Vehicle','🚐'],['Stay','🏡'],['Houseboat','🛶'],['Food','🍛'],['Snacks & tea','☕'],['Tickets','🎟️'],['Activities','🧗'],['Temple','🛕'],['Shopping','🛍️'],['Photographer','📸'],['Tips','💸'],['Medical','💊'],['Other','🧾']];
+const expIcon = t => (EXP.find(e => e[0] === t) || EXP[EXP.length - 1])[1];
+const SPLIT_MODES = [['heads','Head count'],['ratio','Ratio'],['percent','%'],['exact','Exact ₹']];
+const COLLS = ['meta','days','timeline','legs','places','stays','activities','budget','photographers','mustdo','photos','members','expenses','settlements','files'];
+const ATTACH = new Set(['stays','activities','budget','photographers','expenses','settlements']);
+
+/* ---------- seed: the Kerala plan ---------- */
+function seed() {
+  const s = {}; COLLS.forEach(c => s[c] = []);
+  const add = (c, rows) => rows.forEach(r => s[c].push(Object.assign({ id: uid() }, r)));
+  s.meta.push({ id: 'trip', tripName: 'Kerala Era ’27', start: '2027-01-25T21:30', adults: 16, teens: 2, kids: 1, infants: 2, paying: 19, buffer: 10 });
+  add('days', [
+    { dayNo: 1, date: '2027-01-26', title: 'Night drive to the hills', route: 'Kadapa → Munnar', km: 706, night: 'Munnar', vibe: 'Leave Kadapa Mon 25 Jan around 9:30 pm. Sleep in the van, climb the Bodimettu ghat in morning light, lazy afternoon in the tea hills. 26 Jan is Republic Day, so skip the crowded spots today.' },
+    { dayNo: 2, date: '2027-01-27', title: 'Mountains + trek day', route: 'Munnar local', km: 80, night: 'Munnar', vibe: 'Eravikulam first thing, then split: trek squad goes up Lakshmi Hills, chill squad does the lakes and Top Station. Bonfire night.' },
+    { dayNo: 3, date: '2027-01-28', title: 'Sunrise jeep → jungle', route: 'Munnar → Thekkady', km: 100, night: 'Thekkady', vibe: 'Kolukkumalai sunrise for the adventure group, then down to Thekkady for the Periyar boat safari and a Kalaripayattu show.' },
+    { dayNo: 4, date: '2027-01-29', title: 'Safari & spice day', route: 'Thekkady local', km: 40, night: 'Thekkady', vibe: 'Bamboo rafting or a nature walk inside Periyar, spice farm, market shopping, optional sunset at Chellarkovil.' },
+    { dayNo: 5, date: '2027-01-30', title: 'Houseboat life', route: 'Thekkady → Alleppey', km: 150, night: 'Houseboat', vibe: 'Board by noon, cruise Vembanad Lake and the Kuttanad canals, sleep on the water.' },
+    { dayNo: 6, date: '2027-01-31', title: 'Temple, beach, temple', route: 'Alleppey → Guruvayur', km: 175, night: 'Guruvayur', vibe: 'Ambalapuzha palpayasam, toes in the sand at Marari, elephants at Punnathur Kotta, evening darshan at Guruvayur.' },
+    { dayNo: 7, date: '2027-02-01', title: 'Long road home', route: 'Guruvayur → Kadapa', km: 700, night: 'Home', vibe: 'Early darshan for those who want it, then the drive home via Coimbatore and Salem.' }
+  ]);
+  const T = (dayNo, rows) => add('timeline', rows.map(r => ({ dayNo, time: r[0], title: r[1], note: r[2] || '', who: r[3] || 'Everyone', done: false })));
+  T(1, [['Mon 8:00 pm','Early dinner at home, load the vans','Snack and infant bag inside, big bags in the boot'],['Mon 9:30 pm','Depart Kadapa','Via Rayachoti – Madanapalle – Palamaner – Krishnagiri. Two drivers per van'],['Tue 2:00 am','Tea & stretch stop near Krishnagiri','Driver swap, about 270 km done'],['Tue 4:30 am','Salem bypass → Namakkal → Karur',''],['7:30 am','Breakfast at Dindigul','Veg tiffin hotels; Thalappakatti biryani opens later'],['9:00 am','Fuel up at Bodinayakanur','Last big town before the ghat'],['10:00 am','Bodimettu ghat → Poopara → Devikulam','Hairpin bends in daylight; tea-garden photo stops'],['12:00 pm','Reach Munnar, lunch, check in','Saravana Bhavan (veg) or Rapsy (non-veg). Ask for early check-in'],['2:00 pm','Rest & nap','Everyone will be tired'],['5:00 pm','Tea-garden walk or Munnar town','Skip Mattupetty today: Republic Day crowds'],['7:30 pm','Dinner & early night','']]);
+  T(2, [['6:30 am','Breakfast',''],['7:30 am','Eravikulam National Park','Park bus from 5th Mile. Nilgiri tahr and shola grasslands, 2–3 h'],['11:00 am','Tea Museum (KDHP)','','Optional'],['12:30 pm','Lunch in Munnar town','Saravana Bhavan / Gurubhavan / Rapsy'],['2:00 pm','Trek: Lakshmi Hills or Chokramudi','3–4 h with a local guide booked through the host. Water + rain jacket','Adventure group'],['2:00 pm','Mattupetty Dam → Echo Point → Kundala Lake → Top Station','Boating for the kids; Top Station for sunset','Relaxed group'],['6:30 pm','Bonfire & BBQ at the villa','Tell the host a day ahead']]);
+  T(3, [['4:00 am','Kolukkumalai sunrise jeep','From Suryanelli. Very bumpy: no infants or elders','Adventure group'],['7:30 am','Slow breakfast & pack','','Relaxed group'],['10:30 am','Drive to Thekkady via Poopara – Nedumkandam','About 100 km. 20-min detour to Ramakkalmedu viewpoint'],['1:30 pm','Check in at Thekkady, lunch',''],['3:00 pm','Periyar Lake boat safari (3:30 pm slot)','Be at the boat landing by 3 pm'],['6:00 pm','Kalaripayattu show','Kadathanadan Kalari, Kumily, 1 hour'],['7:30 pm','Dinner in Kumily','']]);
+  T(4, [['7:00 am','Bamboo rafting (full day)','Trek + raft, max 10 people per day','Adventure group'],['7:00 am','Periyar nature walk','2.5–3 h with a tribal guide','Relaxed group'],['11:00 am','Spice plantation tour','Cardamom, pepper, vanilla, cocoa. Kid-friendly'],['1:00 pm','Lunch & rest',''],['3:30 pm','Kumily spice & tea market','Buy direct from the shops'],['5:00 pm','Chellarkovil viewpoint sunset','Hidden gem, about 15 km','Optional'],['7:00 pm','Kathakali show & dinner','','Optional']]);
+  T(5, [['7:00 am','Breakfast & check out',''],['7:30 am','Drive to Alleppey','About 150 km via Mundakayam – Kottayam'],['11:45 am','Reach the houseboat jetty','Punnamada / Finishing Point. Vans park at the jetty'],['12:00 pm','Board the houseboats','Lunch on board. Karimeen pollichathu for non-veg'],['5:30 pm','Houseboats anchor for the night','Tea, snacks, short village walk'],['8:00 pm','Dinner on board','AC usually runs only at night']]);
+  T(6, [['8:00 am','Breakfast on board, off by 9',''],['9:30 am','Ambalapuzha Sri Krishna Temple','Palpayasam handed out around 12:30 pm. Order at the counter'],['10:45 am','Marari Beach','Quiet fishing-village beach. Kids stay knee-deep'],['12:15 pm','Drive to Guruvayur','About 145 km via NH66 / Kochi bypass, lunch on the way'],['4:30 pm','Check in + Punnathur Kotta elephants','Open till about 6 pm'],['6:00 pm','Guruvayur evening darshan','Sunday crowds. Dress code; Hindus only'],['8:00 pm','Veg dinner near the temple','Nandini Cafe Moo / Gokulam Park']]);
+  T(7, [['3:00 am','Nirmalyam darshan','Seniors 60+: free queue 5–8 am with ID','Optional'],['7:00 am','Breakfast & leave for Kadapa','About 700 km via Thrissur – Palakkad – Coimbatore'],['12:30 pm','Lunch at Coimbatore','Shree Annapoorna (veg)'],['5:00 pm','Tea break at Salem',''],['8:00 pm','Dinner near Krishnagiri',''],['10:30 pm','Home, Kadapa','']]);
+  add('legs', [
+    { dayNo: 1, from: 'Kadapa', fromCode: 'KDP', to: 'Munnar', toCode: 'MNR', via: 'Madanapalle, Krishnagiri, Salem, Dindigul, Theni, Bodimettu ghat', km: 706, hours: '13–14 h + stops', notes: 'Overnight. Two drivers per van; ghat in daylight.' },
+    { dayNo: 2, from: 'Munnar', fromCode: 'MNR', to: 'Top Station', toCode: 'TOP', via: 'Eravikulam, Mattupetty, Echo Point, Kundala', km: 80, hours: '3 h total', notes: 'Local sightseeing loop.' },
+    { dayNo: 3, from: 'Munnar', fromCode: 'MNR', to: 'Thekkady', toCode: 'TKD', via: 'Poopara, Nedumkandam', km: 100, hours: '~3 h', notes: 'Optional Ramakkalmedu detour.' },
+    { dayNo: 4, from: 'Thekkady', fromCode: 'TKD', to: 'Periyar & Kumily', toCode: 'PTR', via: 'Spice farms, Chellarkovil', km: 40, hours: '1–2 h', notes: 'Gavi jeep safari is a full extra day trip if chosen.' },
+    { dayNo: 5, from: 'Thekkady', fromCode: 'TKD', to: 'Alleppey', toCode: 'ALP', via: 'Mundakayam, Kottayam', km: 150, hours: '~4 h', notes: 'Reach the jetty by 11:45 am.' },
+    { dayNo: 6, from: 'Alleppey', fromCode: 'ALP', to: 'Guruvayur', toCode: 'GVR', via: 'Ambalapuzha, Marari, Kochi bypass', km: 175, hours: '~4.5 h', notes: 'Temple + beach on the way.' },
+    { dayNo: 7, from: 'Guruvayur', fromCode: 'GVR', to: 'Kadapa', toCode: 'KDP', via: 'Thrissur, Palakkad, Coimbatore, Salem, Krishnagiri', km: 700, hours: '13–14 h + stops', notes: 'Leave by 7 am.' }
+  ]);
+  const P = (o) => add('places', [Object.assign({ images: '', map: '' }, o)]);
+  P({ name: 'Bodimettu ghat & Devikulam tea estates', dayNo: 1, area: 'Bodi → Munnar', tags: ['Mountains'], timings: 'Daylight only', entry: 'Free', about: 'Your welcome to the Western Ghats: hairpin bends climbing out of Tamil Nadu into rolling tea estates.', tips: 'Stop at a safe pull-out, never on a bend. Motion-sickness tablets before the climb.', ig: 'Drone-style shot from a hairpin looking down the switchbacks\nWalk single-file between the tea rows, shot from behind\nHands holding a fresh tea cup with the estate blurred behind', hashtags: '#munnar #teagardens #ghatroads #keralatourism', map: 'Devikulam tea estate' });
+  P({ name: 'Eravikulam National Park', dayNo: 2, area: 'Rajamala, Munnar', tags: ['Mountains','Wildlife','Must visit'], timings: '7:30 am – 4 pm', entry: '₹200 adult · ₹150 child · camera ₹50', about: 'Home of the Nilgiri tahr, a mountain goat found only here, on misty grasslands under Anamudi, the highest peak in South India.', tips: 'Closes from about 1 Feb for calving, so 27 Jan is safe. Reach the gate early; the park bus takes you up.', ig: 'Telephoto portrait of a Nilgiri tahr (keep your distance, no feeding)\nThe whole gang walking up the winding park road with mist behind\nLow-angle shot of the grassland with Anamudi peak in frame', hashtags: '#eravikulam #nilgiritahr #munnar #anamudi', map: 'Eravikulam National Park' });
+  P({ name: 'Lakshmi Hills / Chokramudi trek', dayNo: 2, area: 'Munnar', tags: ['Trek','Adventure','Mountains'], timings: 'Afternoon, 3–4 h', entry: 'Guide fee', about: 'Grassy ridge treks with 360° views of the tea valleys. The best "we did it" moment of the trip.', tips: 'Go with a local guide arranged by your host. Carry water, a rain jacket and leech socks.', ig: 'Summit silhouette with arms up against the sky\nPanorama of the squad sitting on the ridge edge (stay back from drops)\nBoots-on-the-trail flat lay at the start', hashtags: '#munnartrek #chokramudi #trekkinglife #westernghats', map: 'Chokramudi peak Munnar' });
+  P({ name: 'Mattupetty Dam & Echo Point', dayNo: 2, area: 'Munnar', tags: ['Mountains'], timings: 'Daytime', entry: 'Small fee; boating extra', about: 'Lake boating and a valley where kids can shout for echoes. Easy and fun for the relaxed group.', tips: 'Very busy on holidays. Keep infants away from the dam edges.', ig: 'Kids shouting at Echo Point, shot mid-yell\nPedal-boat top-down shot of the family\nReflection shot of the hills in the lake', hashtags: '#mattupetty #echopoint #munnardiaries', map: 'Mattupetty Dam' });
+  P({ name: 'Kundala Lake', dayNo: 2, area: 'Munnar', tags: ['Mountains'], timings: 'Daytime', entry: 'Boating extra', about: 'Calm lake with shikara rides and eucalyptus slopes.', tips: 'Pair it with Echo Point and Top Station on the same road.', ig: 'Shikara ride with the arched dam behind\nCandid of grandparents on the lakeside bench', hashtags: '#kundalalake #shikara #munnar', map: 'Kundala Lake Munnar' });
+  P({ name: 'Top Station', dayNo: 2, area: 'Munnar (32 km)', tags: ['Mountains','Hidden gem'], timings: '8:30 am – 5:30 pm', entry: '₹25–50', about: 'The edge of Kerala: look straight down into the Tamil Nadu plains. Best at sunset when clouds roll in.', tips: 'Windy and cold after 5 pm: bring jackets.', ig: 'Silhouette at the viewpoint railing with the clouds below\nGolden-hour group selfie with the valley behind', hashtags: '#topstation #munnar #abovetheclouds', map: 'Top Station Munnar' });
+  P({ name: 'Kolukkumalai sunrise', dayNo: 3, area: 'Suryanelli, near Munnar', tags: ['Trek','Adventure','Hidden gem'], timings: 'From ~4 am', entry: 'Jeep ~₹3,195 per jeep + small entry', about: 'One of the highest tea estates in the world. Sunrise over a sea of clouds is unreal.', tips: 'Adventure group only. Very bumpy 4×4 ride; book jeeps online in advance.', ig: 'Back-to-camera shot facing the sunrise over the clouds\nJeep bouncing on the dirt track, shot from the back seat\nSteam from chai cups at the orthodox tea factory', hashtags: '#kolukkumalai #sunrise #seaofclouds #highesttea', map: 'Kolukkumalai Tea Estate' });
+  P({ name: 'Ramakkalmedu', dayNo: 3, area: 'Near Nedumkandam', tags: ['Hidden gem','Mountains'], timings: 'Daytime', entry: 'Small fee', about: 'Windy hilltop with a giant Kuravan-Kurathi statue and views into Tamil Nadu. Quick detour on the way to Thekkady.', tips: 'Very windy: hold on to caps and phones.', ig: 'Hair-blowing wind shot at the edge (slow-mo video)\nTiny people next to the huge statue for scale', hashtags: '#ramakkalmedu #idukki #windyhills', map: 'Ramakkalmedu' });
+  P({ name: 'Periyar Lake boat safari', dayNo: 3, area: 'Thekkady', tags: ['Safari','Wildlife','Must visit'], timings: '7:30, 9:30, 11:15 am, 1:45, 3:30 pm', entry: 'KTDC ₹450 · Forest Dept ₹255 adult / ₹85 child', about: 'Cruise the reservoir inside Periyar Tiger Reserve and spot elephants, gaur and sambar along the banks.', tips: 'Book online. Upper deck for photos. Keep voices low for better sightings.', ig: 'Elephants at the water’s edge, shot with zoom from the deck\nDead tree stumps rising out of the lake at golden hour\nCandid of kids with binoculars', hashtags: '#periyar #thekkady #wildlifesafari #elephants', map: 'Thekkady boat landing' });
+  P({ name: 'Periyar bamboo rafting / nature walk', dayNo: 4, area: 'Periyar Tiger Reserve', tags: ['Safari','Trek','Adventure','Wildlife'], timings: 'Rafting 8 am–5 pm · walks 7 am, 10 am, 2 pm', entry: 'Rafting ~₹2,000+ pp · walk ~₹300 pp', about: 'Forest-department programmes run with tribal guides. The rafting is a full-day trek plus raft trip, max 10 people a day.', tips: 'Book weeks ahead through the Periyar eco-tourism centre. No plastic inside.', ig: 'Bamboo raft from water level, paddles mid-stroke\nGuide pointing at tracks; candid storytelling moment', hashtags: '#bamboorafting #periyartigerreserve #ecotourism', map: 'Periyar Tiger Reserve eco tourism centre' });
+  P({ name: 'Spice plantation', dayNo: 4, area: 'Kumily', tags: ['Wildlife'], timings: 'Morning', entry: '~₹150 pp', about: 'See cardamom, pepper, vanilla, cocoa and cinnamon growing. Kids love the taste-test.', tips: 'Buy spices at the market later; farm shops are pricier.', ig: 'Close-up of green cardamom pods in a palm\nPepper vine framing a face (cute portrait for the kids)', hashtags: '#spicegarden #thekkady #cardamom', map: 'spice plantation Kumily' });
+  P({ name: 'Chellarkovil viewpoint', dayNo: 4, area: '~15 km from Kumily', tags: ['Hidden gem','Mountains'], timings: 'Sunset', entry: 'Free', about: 'Quiet viewpoint over waterfalls and the Tamil Nadu plains. Far fewer tourists.', tips: 'Road is narrow; take one van.', ig: 'Sunset silhouette lineup of the whole group\nTime-lapse of the plains lighting up', hashtags: '#chellarkovil #hiddengem #idukki', map: 'Chellarkovil viewpoint' });
+  P({ name: 'Alleppey backwaters (houseboat)', dayNo: 5, area: 'Punnamada / Vembanad Lake', tags: ['Houseboat','Must visit'], timings: 'Board 12 pm, off 9 am', entry: 'Included in houseboat price', about: 'A night on a kettuvallam floating through paddy fields, coconut palms and village canals.', tips: 'Two boats that cruise together. Carry an infant life jacket. Cruising stops after dark.', ig: 'Matching-outfit squad on the upper deck\nDrone-style shot of the boat in a narrow canal\nSunset reflection with a palm silhouette\nChai on the deck, feet up, slow-mo', hashtags: '#alleppey #houseboat #keralabackwaters #godsowncountry', map: 'Punnamada houseboat terminal' });
+  P({ name: 'Ambalapuzha Sri Krishna Temple', dayNo: 6, area: '14 km south of Alleppey', tags: ['Temple'], timings: '3 am – 12 noon, 5 – 8 pm', entry: 'Free', about: 'Famous for its palpayasam, a slow-cooked rice and milk offering.', tips: 'Modest dress for the inner shrine. No photography inside.', ig: 'Temple gopuram from the pond side (outside only)\nPalpayasam cup close-up after the visit', hashtags: '#ambalapuzha #palpayasam #keralatemples', map: 'Ambalapuzha Sri Krishna Temple' });
+  P({ name: 'Marari Beach', dayNo: 6, area: 'Mararikulam', tags: ['Beach','Hidden gem'], timings: 'All day', entry: 'Free', about: 'Quiet fishing-village beach with palms right up to the sand. Nothing like the crowded city beaches.', tips: 'Shallow at the edge but strong currents. Kids stay knee-deep with an adult.', ig: 'Footprints and the gang running toward the waves\nHammock between palms\nFishing boats lined up on the sand', hashtags: '#mararibeach #keralabeaches #beachvibes', map: 'Marari Beach' });
+  P({ name: 'Guruvayur Sri Krishna Temple', dayNo: 6, area: 'Guruvayur', tags: ['Temple','Must visit'], timings: '3 am – 12:30 pm, 4:30 – 9:15 pm', entry: 'Free; special darshan ₹1,000 pp', about: 'One of the most important Krishna temples in India.', tips: 'Hindus only. Men: dhoti and angavastram, no shirt. Women: saree or churidar. No phones inside.', ig: 'Family in traditional wear in front of the east gate (outside only)\nFlower-seller stalls in the morning light', hashtags: '#guruvayur #guruvayurappan #keralatemples', map: 'Guruvayur Temple' });
+  P({ name: 'Punnathur Kotta', dayNo: 6, area: '3 km from Guruvayur', tags: ['Wildlife'], timings: '8 am – 6 pm', entry: 'Nominal + camera fee', about: 'The temple elephant camp, home to dozens of elephants.', tips: 'Don’t get close or feed them. Late afternoon is calmer.', ig: 'Elephant bath time, wide shot from a safe distance\nKids’ reaction shot watching the elephants', hashtags: '#punnathurkotta #elephants #guruvayur', map: 'Punnathur Kotta Elephant Camp' });
+  P({ name: 'Chavakkad Beach', dayNo: 6, area: '5 km from Guruvayur', tags: ['Beach','Hidden gem'], timings: 'Sunset', entry: 'Free', about: 'Where the river meets the sea. A good backup beach if you skip Marari.', tips: 'Go for sunset only; no swimming.', ig: 'Sunset with the river mouth in frame\nJump shot on the sandbar', hashtags: '#chavakkad #sunset #keralabeaches', map: 'Chavakkad Beach' });
+
+  add('stays', [
+    { stop: 'Munnar', checkin: '2027-01-26', checkout: '2027-01-28', name: 'Plantation Zone Bungalow (WhiteTrip)', platform: 'Other', link: '', price: 30000, rooms: 0, sleeps: 20, status: 'Idea', notes: 'Group bungalow, ideal for 8, takes up to 20 (₹500 per extra guest). Ask about geysers.' },
+    { stop: 'Munnar', checkin: '2027-01-26', checkout: '2027-01-28', name: 'StayVista villas – two side by side', platform: 'Direct / Website', link: 'https://www.stayvista.com', price: 30000, rooms: 0, sleeps: 20, status: 'Idea', notes: 'E.g. Cardamom Casa or Misty Village (Pooppara). BBQ, bonfire and meals.' },
+    { stop: 'Munnar', checkin: '2027-01-26', checkout: '2027-01-28', name: 'Munnar Village Homes, Anaviratty', platform: 'Other', link: '', price: 0, rooms: 0, sleeps: 0, status: 'Idea', notes: 'Quiet village holiday home, homely food, ~20 km from town.' },
+    { stop: 'Thekkady', checkin: '2027-01-28', checkout: '2027-01-30', name: 'Thekkady Homestay – 4BR townhouse', platform: 'Airbnb', link: '', price: 12000, rooms: 4, sleeps: 12, status: 'Idea', notes: 'Superhost Basil, 4.5 baths. Pair with a nearby homestay for the rest of the group.' },
+    { stop: 'Thekkady', checkin: '2027-01-28', checkout: '2027-01-30', name: 'Plantation homestays (Coffee & Pepper / Alencherry / Periyar Villa)', platform: 'Other', link: '', price: 13000, rooms: 4, sleeps: 10, status: 'Idea', notes: '~₹2.5–4k per room. Well-reviewed hosts and food.' },
+    { stop: 'Thekkady', checkin: '2027-01-28', checkout: '2027-01-30', name: 'KTDC Aranya Nivas (inside the reserve)', platform: 'Direct / Website', link: 'https://www.ktdc.com', price: 0, rooms: 0, sleeps: 0, status: 'Idea', notes: 'Heritage hotel next to the boat landing. The true in-the-forest stay.' },
+    { stop: 'Alleppey houseboat', checkin: '2027-01-30', checkout: '2027-01-31', name: 'Rainbow Cruises – 2 boats cruising together', platform: 'Direct / Website', link: 'https://www.rainbowcruises.in', price: 90000, rooms: 10, sleeps: 20, status: 'Idea', notes: 'Award-winning operator. 2 × 5-bedroom premium, all meals. Saturday night: book first!' },
+    { stop: 'Alleppey houseboat', checkin: '2027-01-30', checkout: '2027-01-31', name: 'Lakes & Lagoons', platform: 'Direct / Website', link: '', price: 0, rooms: 0, sleeps: 0, status: 'Idea', notes: 'One of the oldest operators, 25+ boats. Ask for a quote.' },
+    { stop: 'Alleppey houseboat', checkin: '2027-01-30', checkout: '2027-01-31', name: 'Spice Coast Cruises (CGH Earth)', platform: 'Direct / Website', link: 'https://www.cghearth.com', price: 0, rooms: 0, sleeps: 0, status: 'Idea', notes: 'Eco-luxury boats, excellent food, premium price.' },
+    { stop: 'Guruvayur', checkin: '2027-01-31', checkout: '2027-02-01', name: 'KTDC Tamarind Guruvayoor', platform: 'Direct / Website', link: 'https://www.ktdc.com/tamarind/guruvayoor', price: 18000, rooms: 0, sleeps: 0, status: 'Idea', notes: '2-, 3- and 5-bed rooms; takes group bookings. Near the temple and elephant camp.' },
+    { stop: 'Guruvayur', checkin: '2027-01-31', checkout: '2027-02-01', name: 'Guruvayur Homestay (with pool)', platform: 'Other', link: '', price: 0, rooms: 4, sleeps: 14, status: 'Idea', notes: 'Home food on pre-order. Kids will love the pool.' },
+    { stop: 'Guruvayur', checkin: '2027-01-31', checkout: '2027-02-01', name: 'Sree Nandhavanam Homestay', platform: 'Other', link: '', price: 0, rooms: 0, sleeps: 0, status: 'Idea', notes: 'Pure-veg, family rooms, AC.' }
+  ]);
+  add('activities', [
+    { name: 'Eravikulam National Park entry', dayNo: 2, place: 'Munnar', price: 200, priceType: 'per person', qty: 18, booking: 'Online', link: '', status: 'To book', notes: 'Child ₹150, camera ₹50. Kerala Forest Dept online / WhatsApp ticketing – check the latest link in early Jan.' },
+    { name: 'Lakshmi Hills / Chokramudi trek guide', dayNo: 2, place: 'Munnar', price: 1500, priceType: 'per group', qty: 1, booking: 'Offline (at counter)', link: '', status: 'Idea', notes: 'Arrange through the Munnar host.' },
+    { name: 'Mattupetty & Kundala boating', dayNo: 2, place: 'Munnar', price: 6000, priceType: 'per group', qty: 1, booking: 'Offline (at counter)', link: '', status: 'Idea', notes: 'Pedal, speed and shikara boats; pay at the jetty.' },
+    { name: 'Kolukkumalai sunrise jeep', dayNo: 3, place: 'Suryanelli', price: 3195, priceType: 'per jeep / vehicle', qty: 2, booking: 'Online', link: 'https://munnar.com/day-packages/kolukkumalai-sunrise-jeep-safari', status: 'To book', notes: '5–6 people per jeep. Adventure group only. Compare operators before paying.' },
+    { name: 'Periyar Lake boat (KTDC)', dayNo: 3, place: 'Thekkady', price: 450, priceType: 'per person', qty: 19, booking: 'Online', link: 'https://www.ktdcboating.com', status: 'To book', notes: '3:30 pm slot. Reserve entry ~₹45–50 pp extra.' },
+    { name: 'Kalaripayattu show', dayNo: 3, place: 'Kadathanadan Kalari, Kumily', price: 354, priceType: 'per person', qty: 19, booking: 'Offline (at counter)', link: '', status: 'Idea', notes: '₹300 + GST. 6 pm show, 1 hour.' },
+    { name: 'Bamboo rafting', dayNo: 4, place: 'Periyar Tiger Reserve', price: 2000, priceType: 'per person', qty: 6, booking: 'Online', link: 'https://www.periyartigerreserve.org', status: 'To book', notes: 'Max 10 people per day. Book weeks ahead; confirm the booking page with the eco-tourism centre (04869-224571).' },
+    { name: 'Periyar nature walk', dayNo: 4, place: 'Periyar Tiger Reserve', price: 300, priceType: 'per person', qty: 10, booking: 'Offline (at counter)', link: '', status: 'Idea', notes: 'Small groups; 7 am, 10 am, 2 pm.' },
+    { name: 'Spice plantation tour', dayNo: 4, place: 'Kumily', price: 150, priceType: 'per person', qty: 19, booking: 'Offline (at counter)', link: '', status: 'Idea', notes: 'Your homestay can arrange it.' },
+    { name: 'Kathakali show', dayNo: 4, place: 'Kumily', price: 354, priceType: 'per person', qty: 19, booking: 'Offline (at counter)', link: '', status: 'Idea', notes: 'Optional.' },
+    { name: 'Ambalapuzha palpayasam offering', dayNo: 6, place: 'Ambalapuzha', price: 0, priceType: 'free', qty: 0, booking: 'Offline (at counter)', link: '', status: 'Idea', notes: 'Order at the temple counter in the morning.' },
+    { name: 'Guruvayur special (ghee-lamp) darshan', dayNo: 6, place: 'Guruvayur', price: 1000, priceType: 'per person', qty: 16, booking: 'Online', link: 'https://guruvayurdevaswom.in', status: 'Idea', notes: 'Optional. Under-10 free. Worth it on a Sunday evening.' },
+    { name: 'Punnathur Kotta elephant camp', dayNo: 6, place: 'Guruvayur', price: 50, priceType: 'per person', qty: 19, booking: 'Offline (at counter)', link: '', status: 'Idea', notes: 'Nominal entry + camera fee.' }
+  ]);
+  const Bd = (category, rows) => add('budget', rows.map(r => ({ category, item: r[0], amount: r[1], status: 'Estimate', paidBy: '', notes: r[2] || '' })));
+  Bd('Transport', [['Force Urbania 17-seater (~2,100 km × ₹30)', 63000], ['Second vehicle (~2,100 km × ₹26)', 54600], ['Driver allowance (2 vans × 8 days × ₹800)', 12800], ['Extra driver per van for the night drive', 6000], ['Tolls, both vans, both ways', 20000], ['Interstate permit / state tax (TN + Kerala)', 25000, 'Least certain – get an all-in quote'], ['Parking & misc.', 4000]]);
+  Bd('Stay', [['Munnar – 2 nights', 60000], ['Thekkady – 2 nights', 50000], ['Alleppey houseboats – 1 night, all meals', 90000], ['Guruvayur – 1 night', 18000]]);
+  Bd('Food', [['Meals outside the houseboat (19 × ₹650 × 6 days)', 74100], ['Snacks, water, tea stops', 10000]]);
+  Bd('Activities', [['Eravikulam entry', 3850], ['Kolukkumalai jeeps', 7390], ['Munnar boating & viewpoints', 6000], ['Periyar entry + KTDC boat', 10170], ['Kalaripayattu show', 6726], ['Kathakali show (optional)', 6726], ['Nature walk + bamboo rafting', 15000], ['Spice plantation tour', 2850], ['Guruvayur special darshan (optional)', 16000], ['Temple offerings, elephant camp, misc.', 1200]]);
+  Bd('Other', [['Travel photographer (half day, group)', 15000, 'Pick one in the Photographers tab']]);
+  add('photographers', [
+    { name: 'Albin – The Pixel Theory', base: 'Thrissur (30 km from Guruvayur)', offer: 'Family / vacation shoot: 2 h, one location, guided posing, 30–40 edited photos in 3–4 days. Listing covers up to 5 guests.', price: '₹9,000 per group (up to 5) – ask for a full-group quote', platform: 'Airbnb Services', link: 'https://www.airbnb.co.in/services/6754127', contact: 'Message through Airbnb', status: 'Shortlist', notes: 'Rated 5.0 (10 reviews). Free cancellation up to 1 day before. Fits Day 6 (Guruvayur / Chavakkad sunset).' },
+    { name: 'ClickMyGo – Munnar photoshoot', base: 'Munnar', offer: 'Photo + video shoot at quieter Munnar spots, ~5 h, retouched high-res digital gallery.', price: 'On request', platform: 'Magpie', link: 'https://magpie.travel/things-to-do/book-a-photoshoot-in-munnar-clickmygo/89064e16-9989-4ebb-9e1b-ae9a4f43cd9f', contact: '', status: 'Shortlist', notes: 'Free cancellation 24 h before. Fits Day 2 (Munnar).' },
+    { name: 'Universal Adventures – Alleppey shoot', base: 'Alleppey Beach', offer: '60 min, 30 edited photos on Google Drive within 7 working days.', price: '₹3,499 per person (group deals on request)', platform: 'Website', link: 'https://www.universaladventures.in/products/photoshoot-packages-at-allepey', contact: 'WhatsApp 8533812266 · contact@universaladventures.in', status: 'Shortlist', notes: 'Bring ID (PAN not accepted). Ask for a houseboat + beach family package.' },
+    { name: 'Thrillophilia – Alleppey beach shoot', base: 'Alleppey Beach', offer: '1 h, guided posing, 20 edited photos.', price: '₹3,000 per person', platform: 'Thrillophilia', link: 'https://thrillophilia.com/tours/couple-photoshoot-in-alleppey', contact: '', status: 'Shortlist', notes: 'Sold as a couple shoot – ask whether families can book.' },
+    { name: 'Cliqora – Kochi photographer directory', base: 'Kochi', offer: 'Compare portfolios and send a quote request to one photographer at a time.', price: 'Varies', platform: 'Directory', link: 'https://www.cliqora.com/travel-photographers-in-kochi', contact: '', status: 'Shortlist', notes: 'Not a booking site – agree terms directly with the photographer.' }
+  ]);
+  const M = (category, rows) => add('mustdo', rows.map(r => ({ category, text: r[0], dayNo: r[1] || '', done: false })));
+  M('See', [['Nilgiri tahr at Eravikulam', 2], ['Elephants from the Periyar boat', 3], ['Kalaripayattu fire stunts', 3]]);
+  M('Do', [['Sunrise above the clouds at Kolukkumalai', 3], ['Bonfire night in Munnar', 2], ['Toes in the sand at Marari', 6], ['Guruvayur darshan in traditional wear', 6]]);
+  M('Eat', [['Karimeen pollichathu on the houseboat', 5], ['Ambalapuzha palpayasam', 6], ['Kerala sadya on a banana leaf', ''], ['Tea + pazham pori at a roadside stall', ''], ['Appam with stew for breakfast', '']]);
+  M('Buy', [['Cardamom, pepper and tea at Kumily market', 4], ['Banana chips & halwa for home', 6]]);
+  M('Photo', [['Matching-outfits squad shot on the houseboat deck', 5], ['Whole-group photo at Top Station', 2]]);
+  M('Prep', [['Aadhaar for everyone, kids included', ''], ['Book houseboats by mid-November', ''], ['Infant life jacket', ''], ['Motion-sickness tablets for the ghats', ''], ['Cash for forest counters and tea stalls', '']]);
+  return s;
+}
+
+/* ---------- state ---------- */
+const DB = {}; COLLS.forEach(c => DB[c] = []); DB.blobs = [];
+const S = {
+  tab: ls.get(KEYS.tab, 'home'), day: ls.get(KEYS.day, 1), placeFilter: 'All', mustFilter: 'All',
+  name: ls.get(KEYS.name, ''), me: ls.get('ktrip.me', ''), ready: false, mode: 'local', pending: false, err: '', online: navigator.onLine
+};
+const TABS = [['home','Home'],['days','Days'],['route','Travel plan'],['places','Places'],['stays','Stays'],['activities','Activities'],['budget','Budget'],['split','Split & settle'],['photo','Photographers'],['must','Must-do']];
+const FAB = { split: ['expenses','Add expense'], home: ['timeline','Add plan item'], days: ['timeline','Add to this day'], route: ['legs','Add leg'], places: ['places','Add place'], stays: ['stays','Add stay option'], activities: ['activities','Add activity'], budget: ['budget','Add budget line'], photo: ['photographers','Add photographer'], must: ['mustdo','Add must-do'] };
+const meta = () => Object.assign({ tripName: 'Our trip', start: '', adults: 0, teens: 0, kids: 0, infants: 0, paying: 1, buffer: 10 }, DB.meta.find(m => m.id === 'trip') || DB.meta[0] || {});
+
+/* ---------- backends ---------- */
+const Local = {
+  mode: 'local',
+  start() {
+    let d = ls.get(KEYS.local, null);
+    if (!d) { d = seed(); ls.set(KEYS.local, d); }
+    COLLS.forEach(c => DB[c] = d[c] || []); DB.blobs = d.blobs || [];
+    S.ready = true; render();
+  },
+  save() { const d = {}; COLLS.forEach(c => d[c] = DB[c]); d.blobs = DB.blobs; if (!ls.set(KEYS.local, d)) toast('This phone’s storage is full. Connect the shared database to keep photos.'); },
+  add(c, o, id) { (DB[c] = DB[c] || []).push(Object.assign({}, o, { id: id || uid(), _by: S.name, _at: Date.now() })); this.save(); render(); return Promise.resolve(); },
+  get(c, id) { return Promise.resolve((DB[c] || []).find(x => x.id === id) || null); },
+  update(c, id, p) { const i = DB[c].findIndex(x => x.id === id); if (i > -1) DB[c][i] = Object.assign({}, DB[c][i], p, { _by: S.name, _at: Date.now() }); else DB[c].push(Object.assign({ id }, p)); this.save(); render(); return Promise.resolve(); },
+  remove(c, id) { DB[c] = DB[c].filter(x => x.id !== id); this.save(); render(); return Promise.resolve(); },
+  reset() { ls.del(KEYS.local); this.start(); }
+};
+const FB = 'https://www.gstatic.com/firebasejs/10.12.2/';
+/* Built-in shared trip: everyone who opens this page joins it automatically. */
+const BUILTIN = { trip: 'kerala27-gang-q7m4x2', fb: {
+  apiKey: 'AIzaSyCwBWtdo_3Va8_usy1aD3kg7ts-gAwtql8', authDomain: 'kerala-trip-5b28b.firebaseapp.com', projectId: 'kerala-trip-5b28b',
+  storageBucket: 'kerala-trip-5b28b.firebasestorage.app', messagingSenderId: '721569305673', appId: '1:721569305673:web:68763a16bbffdb4bac5b98' } };
+const loadScript = src => new Promise((ok, no) => { const s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = () => no(new Error('Could not load ' + src)); document.head.appendChild(s); });
+const Cloud = {
+  mode: 'cloud', fs: null, base: null, loaded: new Set(),
+  async start(cfg) {
+    const srcs = [FB, 'https://cdn.jsdelivr.net/npm/firebase@10.12.2/', 'https://unpkg.com/firebase@10.12.2/'];
+    let lastErr;
+    for (const base of srcs) {
+      try {
+        if (!window.firebase) await loadScript(base + 'firebase-app-compat.js');
+        if (!(window.firebase && firebase.firestore)) await loadScript(base + 'firebase-firestore-compat.js');
+        lastErr = null; break;
+      } catch (e) { lastErr = e; }
+    }
+    if (lastErr || !(window.firebase && firebase.firestore)) throw new Error('Couldn’t download the sync code. Open the trip from your github.io link in Safari or Chrome (not a file preview), and check the internet connection.');
+    if (!firebase.apps.length) firebase.initializeApp(cfg.fb);
+    this.fs = firebase.firestore();
+    try { this.fs.settings({ experimentalForceLongPolling: true, merge: true }); } catch (e) {}
+    try { await this.fs.enablePersistence({ synchronizeTabs: true }); } catch (e) { /* another tab or unsupported: fine */ }
+    this.base = this.fs.collection('trips').doc(cfg.trip);
+    COLLS.forEach(c => {
+      this.base.collection(c).onSnapshot({ includeMetadataChanges: true }, snap => {
+        if (!snap.metadata.fromCache) this.serverOk = true;
+        DB[c] = snap.docs.map(d => Object.assign({ id: d.id }, d.data()));
+        this.loaded.add(c);
+        S.pending = snap.metadata.hasPendingWrites; S.fromCache = snap.metadata.fromCache; S.err = '';
+        if (this.loaded.size === COLLS.length) S.ready = true;
+        schedule();
+      }, err => { S.err = err.code || err.message; S.ready = true; schedule(); });
+    });
+  },
+  clean(o) { const x = {}; for (const k in o) { if (k === 'id' || o[k] === undefined) continue; x[k] = o[k]; } return x; },
+  add(c, o, id) { const d = Object.assign(this.clean(o), { _by: S.name, _at: Date.now() }); return id ? this.base.collection(c).doc(id).set(d) : this.base.collection(c).add(d); },
+  async get(c, id) { const x = await this.base.collection(c).doc(id).get(); return x.exists ? Object.assign({ id }, x.data()) : null; },
+  update(c, id, p) { return this.base.collection(c).doc(id).set(Object.assign(this.clean(p), { _by: S.name, _at: Date.now() }), { merge: true }); },
+  remove(c, id) { return this.base.collection(c).doc(id).delete(); },
+  async importAll(data) {
+    const ops = []; COLLS.forEach(c => (data[c] || []).forEach(o => ops.push([c, o])));
+    for (let i = 0; i < ops.length; i += 400) {
+      const b = this.fs.batch();
+      ops.slice(i, i + 400).forEach(([c, o]) => { const ref = c === 'meta' ? this.base.collection(c).doc('trip') : this.base.collection(c).doc(); b.set(ref, Object.assign(this.clean(o), { _by: S.name, _at: Date.now() })); });
+      await b.commit();
+    }
+  }
+};
+/* Backup sync over plain HTTPS (Firestore REST) for networks that block the live connection */
+function toFS(v) {
+  if (v === null || v === undefined) return { nullValue: null };
+  if (typeof v === 'boolean') return { booleanValue: v };
+  if (typeof v === 'number') return Number.isInteger(v) ? { integerValue: String(v) } : { doubleValue: v };
+  if (Array.isArray(v)) return { arrayValue: { values: v.map(toFS) } };
+  if (typeof v === 'object') return { mapValue: { fields: toFields(v) } };
+  return { stringValue: String(v) };
+}
+function toFields(o) { const f = {}; for (const k in o) if (o[k] !== undefined) f[k] = toFS(o[k]); return f; }
+function fromFS(x) {
+  if (!x) return null;
+  if ('stringValue' in x) return x.stringValue; if ('integerValue' in x) return Number(x.integerValue); if ('doubleValue' in x) return x.doubleValue;
+  if ('booleanValue' in x) return x.booleanValue; if ('nullValue' in x) return null; if ('timestampValue' in x) return x.timestampValue;
+  if ('arrayValue' in x) return (x.arrayValue.values || []).map(fromFS);
+  if ('mapValue' in x) return fromFields(x.mapValue.fields || {});
+  return null;
+}
+function fromFields(f) { const o = {}; for (const k in f) o[k] = fromFS(f[k]); return o; }
+const restBase = cfg => `https://firestore.googleapis.com/v1/projects/${encodeURIComponent(cfg.fb.projectId)}/databases/(default)/documents/trips/${encodeURIComponent(cfg.trip)}`;
+async function diagnose(cfg) {
+  try {
+    const r = await fetch(`${restBase(cfg)}/meta?pageSize=1&key=${encodeURIComponent(cfg.fb.apiKey)}`);
+    const j = await r.json().catch(() => ({})); const msg = (j.error && j.error.message) || '';
+    if (r.ok) return { ok: true };
+    if (r.status === 404 || /does not exist|NOT_FOUND/i.test(msg)) return { text: 'The Firestore database doesn’t exist yet, or it was created with a name other than “(default)”. In Firebase open Build → Firestore Database and create it with the database ID “(default)”.' };
+    if (/SERVICE_DISABLED|has not been used|is disabled/i.test(msg)) return { text: 'The Cloud Firestore API is switched off for this project. In Firebase open Build → Firestore Database and finish creating the database, then wait 2 minutes.' };
+    if (/API key|referer|API_KEY/i.test(msg)) return { text: 'The Firebase API key is refusing this website. In Google Cloud Console → Credentials, remove website restrictions from the browser key, or add your github.io address.' };
+    if (r.status === 403 || /PERMISSION_DENIED|permission/i.test(msg)) return { text: 'The database rules are blocking access. In Firebase open Firestore Database → Rules, paste the trip rules and tap Publish.' };
+    return { text: 'Firebase answered: ' + (msg || 'HTTP ' + r.status) };
+  } catch (e) {
+    return { blocked: true, text: inPreview ? 'This is a preview copy, which isn’t allowed to connect. Open your github.io link in Safari or Chrome.' : 'This browser or network blocked the connection to Google’s database. Turn off ad/content blockers or VPN for this site, or try mobile data instead of this Wi-Fi.' };
+  }
+}
+const Rest = {
+  mode: 'cloud', rest: true, pending: 0, busy: false,
+  init(cfg) { this.base = restBase(cfg); this.key = encodeURIComponent(cfg.fb.apiKey); },
+  async req(method, url, body) {
+    const r = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: body ? JSON.stringify(body) : undefined });
+    if (!r.ok) { const j = await r.json().catch(() => ({})); const e = new Error((j.error && j.error.message) || ('HTTP ' + r.status)); e.code = r.status === 403 ? 'permission-denied' : String(r.status); throw e; }
+    return r.status === 204 ? null : r.json().catch(() => null);
+  },
+  async listColl(c) {
+    const out = []; let tok = '';
+    do { const j = await this.req('GET', `${this.base}/${c}?pageSize=300&key=${this.key}${tok ? '&pageToken=' + encodeURIComponent(tok) : ''}`);
+      ((j && j.documents) || []).forEach(d => out.push(Object.assign(fromFields(d.fields || {}), { id: d.name.split('/').pop() })));
+      tok = (j && j.nextPageToken) || ''; } while (tok);
+    return out;
+  },
+  async pull(colls) {
+    if (this.busy || this.pending) return; this.busy = true;
+    try {
+      const res = await Promise.all(colls.map(c => this.listColl(c)));
+      if (!this.pending) colls.forEach((c, i) => DB[c] = res[i]);
+      S.err = ''; S.ready = true; S.online = true;
+      const cache = {}; COLLS.forEach(c => { if (c !== 'photos') cache[c] = DB[c]; }); ls.set('ktrip.cache', cache);
+    } catch (e) { S.err = e.code === 'permission-denied' ? 'permission-denied' : ''; S.online = false; S.ready = true; }
+    finally { this.busy = false; schedule(); }
+  },
+  start() {
+    const cache = ls.get('ktrip.cache', null);
+    if (cache) { COLLS.forEach(c => { if (cache[c]) DB[c] = cache[c]; }); S.ready = true; }
+    render();
+    this.pull(COLLS);
+    setInterval(() => { if (!document.hidden) this.pull(COLLS.filter(c => c !== 'photos' && c !== 'files')); }, 8000);
+    setInterval(() => { if (!document.hidden) this.pull(['photos', 'files']); }, 45000);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) this.pull(COLLS); });
+  },
+  done(c) { this.pending = Math.max(0, this.pending - 1); if (c !== 'blobs') setTimeout(() => this.pull([c]), 300); },
+  async get(c, id) { const d = await this.req('GET', `${this.base}/${c}/${encodeURIComponent(id)}?key=${this.key}`); return d ? Object.assign(fromFields(d.fields || {}), { id }) : null; },
+  add(c, o, id) {
+    const data = Object.assign(Cloud.clean(o), { _by: S.name, _at: Date.now() });
+    const tmp = Object.assign({ id: id || 'tmp_' + uid() }, data); if (c !== 'blobs') { DB[c].push(tmp); schedule(); } this.pending++;
+    const p = c === 'meta' ? this.req('PATCH', `${this.base}/meta/trip?key=${this.key}`, { fields: toFields(data) })
+      : id ? this.req('PATCH', `${this.base}/${c}/${encodeURIComponent(id)}?key=${this.key}`, { fields: toFields(data) })
+      : this.req('POST', `${this.base}/${c}?key=${this.key}`, { fields: toFields(data) });
+    return p.then(d => { if (d && d.name) tmp.id = d.name.split('/').pop(); }).finally(() => this.done(c));
+  },
+  update(c, id, p) {
+    const data = Object.assign(Cloud.clean(p), { _by: S.name, _at: Date.now() });
+    const i = DB[c].findIndex(x => x.id === id); if (i > -1) DB[c][i] = Object.assign({}, DB[c][i], data); schedule(); this.pending++;
+    const mask = Object.keys(data).map(k => 'updateMask.fieldPaths=' + encodeURIComponent(k)).join('&');
+    return this.req('PATCH', `${this.base}/${c}/${encodeURIComponent(id)}?${mask}&key=${this.key}`, { fields: toFields(data) }).finally(() => this.done(c));
+  },
+  remove(c, id) {
+    DB[c] = DB[c].filter(x => x.id !== id); schedule(); this.pending++;
+    return this.req('DELETE', `${this.base}/${c}/${encodeURIComponent(id)}?key=${this.key}`).finally(() => this.done(c));
+  },
+  async importAll(data) {
+    const ops = []; COLLS.forEach(c => (data[c] || []).forEach(o => ops.push([c, o])));
+    this.pending++;
+    try {
+      for (let i = 0; i < ops.length; i += 8) {
+        await Promise.all(ops.slice(i, i + 8).map(([c, o]) => { const f = { fields: toFields(Object.assign(Cloud.clean(o), { _by: S.name, _at: Date.now() })) };
+          return c === 'meta' ? this.req('PATCH', `${this.base}/meta/trip?key=${this.key}`, f) : this.req('POST', `${this.base}/${c}?key=${this.key}`, f); }));
+      }
+    } finally { this.pending = Math.max(0, this.pending - 1); }
+    await this.pull(COLLS);
+  }
+};
+async function fallbackToRest(cfg) {
+  if (B === Rest) return;
+  S.ready = true; S.err = ''; S.checking = true; render();
+  const d = await diagnose(cfg); S.checking = false;
+  if (d.ok) {
+    try { firebase.firestore().terminate(); } catch (e) {}
+    ls.set('ktrip.rest', true); Rest.init(cfg); B = Rest; COLLS.forEach(c => DB[c] = []); Rest.start();
+  } else { S.err = d.text; S.errBlocked = !!d.blocked; render(); }
+}
+let B = Local;
+const run = p => Promise.resolve(p).catch(e => { const c = e && (e.code || e.message) || 'unknown'; toast(c === 'permission-denied' ? 'Save blocked by the database rules. Check the Firebase rules (Settings → Sharing).' : 'Could not save: ' + c); });
+
+/* ---------- render ---------- */
+let rq = 0; const schedule = () => { if (!rq) rq = requestAnimationFrame(() => { rq = 0; render(); }); };
+function render() {
+  const m = meta();
+  $('#tripName').textContent = m.tripName || 'Our trip';
+  document.title = m.tripName || 'Trip planner';
+  renderSync(); renderTabs();
+  const f = FAB[S.tab]; $('#fabLabel').textContent = f ? f[1] : 'Add';
+  const v = $('#view');
+  if (!S.ready) { v.innerHTML = '<div class="empty">Loading the trip…</div>'; return; }
+  const fn = { home: vHome, days: vDays, route: vRoute, places: vPlaces, stays: vStays, activities: vActs, budget: vBudget, split: vSplit, photo: vPhoto, must: vMust }[S.tab] || vHome;
+  v.innerHTML = banner() + fn();
+  tickCountdown();
+  if ($('#attList')) renderAttList();
+}
+function renderSync() {
+  let cls = '', txt = 'Only on this phone';
+  if (B.mode === 'cloud') {
+    if (S.err) { cls = 'err'; txt = 'Sync problem – tap ⚙'; }
+    else if (!S.online) { cls = 'wait'; txt = 'Offline – saves when back online'; }
+    else if (S.checking) { cls = 'wait'; txt = 'Connecting…'; }
+    else if (B.rest) { cls = 'live'; txt = 'Shared · auto-sync'; }
+    else if (S.pending) { cls = 'wait'; txt = 'Saving…'; }
+    else if (!Cloud.serverOk) { cls = 'wait'; txt = 'Connecting…'; }
+    else { cls = 'live'; txt = 'Shared · live'; }
+  }
+  $('#sync').innerHTML = `<i class="dot ${cls}"></i><span>${esc(txt)}${S.name ? ' · ' + esc(S.name) : ''}</span>`;
+}
+function renderTabs() {
+  $('#tabs').innerHTML = TABS.map(([k, l]) => `<button class="tab" role="tab" aria-selected="${S.tab === k}" data-act="tab" data-k="${k}">${l}</button>`).join('');
+}
+const inPreview = (() => { try { return window.self !== window.top || location.protocol === 'file:'; } catch (e) { return true; } })();
+function banner() {
+  if (B.mode === 'cloud' && S.checking) return `<div class="banner"><p><b>Checking the connection to the shared trip…</b></p></div>`;
+  if (B.mode === 'cloud' && S.err) return `<div class="banner"><p><b>Can’t reach the shared trip.</b> ${esc(S.err === 'permission-denied' ? 'The database rules are blocking access. In Firebase open Firestore Database → Rules, paste the trip rules and tap Publish.' : S.err)}</p><p class="by">This page: ${esc(location.href.split('#')[0])}</p><div class="chips"><button class="btn sm dark" data-act="retry">Try again</button><button class="btn sm" data-act="settings">Sharing settings</button></div></div>`;
+  if (B.mode === 'cloud' && S.ready && !DB.days.length && !DB.places.length) return `<div class="banner"><p><b>This shared trip is empty.</b> Load the Kerala plan (or whatever is saved on this phone) so everyone starts from it.</p><div class="chips"><button class="btn sm primary" data-act="seedCloud">Load the Kerala plan</button><button class="btn sm" data-act="seedCloudLocal">Upload this phone’s copy</button></div></div>`;
+  if (B.mode === 'local' && S.tab === 'home') return `<div class="banner"><p><b>Right now this plan is only on this phone.</b> Connect a free shared database so the whole gang can add, edit and delete from their own phones – no Claude account needed.</p><div><button class="btn sm dark" data-act="settings">Set up sharing</button></div></div>`;
+  return '';
+}
+const dayOf = n => DB.days.find(d => +d.dayNo === +n);
+const daysSorted = () => DB.days.slice().sort((a, b) => (+a.dayNo || 0) - (+b.dayNo || 0));
+const dayChip = n => { const d = dayOf(n); return n ? `<span class="chip">Day ${esc(n)}${d && d.date ? ' · ' + esc(fmtD(d.date).replace(/^\w+ /, '')) : ''}</span>` : ''; };
+const byLine = o => o && o._by ? `<span class="by">edited by ${esc(o._by)}</span>` : '';
+function tMin(time, dateStr) {
+  const s = String(time || '').toLowerCase();
+  const m = /(\d{1,2})(?:[:.](\d{2}))?\s*(am|pm|noon)?/.exec(s);
+  if (!m) return 99999;
+  let h = +m[1] % 12, mi = +(m[2] || 0); let mer = m[3];
+  if (!mer) { const n = /(am|pm|noon)/.exec(s.slice(m.index + m[0].length)); mer = n && n[1]; }
+  if (mer === 'pm' || mer === 'noon') h += (mer === 'noon' && +m[1] === 12) ? 0 : 12;
+  if (mer === 'noon') h = 12;
+  let off = 0; const wd = /^(mon|tue|wed|thu|fri|sat|sun)/.exec(s); const d = pd(dateStr);
+  if (wd && d) { const idx = ['sun','mon','tue','wed','thu','fri','sat'].indexOf(wd[1]); if (idx !== d.getDay()) off = (idx === (d.getDay() + 6) % 7) ? -1440 : 1440; }
+  return off + h * 60 + mi;
+}
+const tlFor = n => { const d = dayOf(n); return DB.timeline.filter(t => +t.dayNo === +n).sort((a, b) => tMin(a.time, d && d.date) - tMin(b.time, d && d.date)); };
+function stayGroups() {
+  const g = {};
+  DB.stays.forEach(s => { const k = (s.checkin || '') + '|' + (s.stop || 'Unsorted'); (g[k] = g[k] || { stop: s.stop || 'Unsorted', checkin: s.checkin, checkout: s.checkout, items: [] }).items.push(s); });
+  return Object.values(g).sort((a, b) => String(a.checkin).localeCompare(String(b.checkin)));
+}
+const isBooked = s => s.status === 'Booked' || s.status === 'Paid';
+function actTotal(a) { if (a.priceType === 'free') return 0; return (+a.price || 0) * (a.priceType === 'per group' ? 1 : (+a.qty || 0)); }
+function budgetTotals() { const m = meta(); const sum = DB.budget.reduce((t, b) => t + (+b.amount || 0), 0); const buf = Math.round(sum * (+m.buffer || 0) / 100); return { sum, buf, total: sum + buf, per: (sum + buf) / Math.max(1, +m.paying || 1) }; }
+
+/* Home */
+function vHome() {
+  const m = meta(), days = daysSorted(), groups = stayGroups();
+  const booked = groups.filter(g => g.items.some(isBooked)).length;
+  const acts = DB.activities.filter(a => a.status !== 'Skip'); const actsDone = acts.filter(a => a.status === 'Booked' || a.status === 'Paid').length;
+  const must = DB.mustdo.length, mustDone = DB.mustdo.filter(x => x.done).length;
+  const bt = budgetTotals(); const km = DB.legs.reduce((t, l) => t + (+l.km || 0), 0);
+  const crew = [['adults','adults'],['teens','teens'],['kids','kid'],['infants','infants']].filter(([k]) => +m[k]).map(([k, l]) => `<span class="chip">${+m[k]} ${+m[k] === 1 ? l.replace(/s$/, '') : l}</span>`).join('');
+  const route = days.length ? [days[0].route.split('→')[0].trim()].concat(days.map(d => (d.route || '').split('→').pop().trim()).filter((x, i, a) => x && !/local/i.test(x) && x !== a[i - 1])).join(' → ') : '';
+  const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
+  return `
+  <section class="hero">
+    <div><span class="eyebrow">Group road trip · ${esc(m.start ? fmtD(m.start.slice(0, 10)) : '')}${days.length ? ' – ' + esc(fmtD(days[days.length - 1].date)) : ''}</span>
+    <h1>${esc(m.tripName)}</h1><p class="route-line">${esc(route)}</p></div>
+    <div class="count" id="countdown" aria-live="polite"></div>
+    <div class="chips">${crew}<span class="chip num">${km.toLocaleString('en-IN')} km</span></div>
+  </section>
+  <section class="stats">
+    ${stat('Stays booked', `${booked}/${groups.length}`, pct(booked, groups.length), 'stays')}
+    ${stat('Activities booked', `${actsDone}/${acts.length}`, pct(actsDone, acts.length), 'activities')}
+    ${stat('Must-dos done', `${mustDone}/${must}`, pct(mustDone, must), 'must')}
+    ${stat('Budget per head', inr(bt.per), null, 'budget', inr(bt.total) + ' total')}
+  </section>
+  <section class="view" style="gap:12px"><div class="sec-head"><h2>The days</h2><button class="btn sm" data-act="tab" data-k="days">Open Days</button></div>
+    <div class="strip">${days.map(d => `<button class="daycard" data-act="goDay" data-n="${+d.dayNo}"><span class="d">${String(d.dayNo).padStart(2, '0')}</span><b>${esc(d.title)}</b><span class="muted">${esc(fmtD(d.date))} · ${esc(d.route)}</span></button>`).join('')}</div>
+  </section>`;
+}
+const stat = (k, v, p, tab, sub) => `<button class="stat" data-act="tab" data-k="${tab}"><span class="k">${k}</span><span class="v num">${v}</span>${p == null ? `<span class="muted" style="font-size:13px">${esc(sub || '')}</span>` : `<span class="bar"><i style="width:${p}%"></i></span>`}</button>`;
+function tickCountdown() {
+  const el = $('#countdown'); if (!el) return;
+  const m = meta(); const t = m.start ? new Date(m.start).getTime() : NaN;
+  if (isNaN(t)) { el.innerHTML = ''; return; }
+  let ms = t - Date.now();
+  if (ms <= 0) { el.innerHTML = `<div><b>Live</b><span>we’re on the road</span></div>`; return; }
+  const d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, mi = Math.floor(ms / 6e4) % 60;
+  el.innerHTML = `<div><b>${d}</b><span>days</span></div><div><b>${h}</b><span>hours</span></div><div><b>${mi}</b><span>mins</span></div>`;
+}
+setInterval(tickCountdown, 30000);
+
+/* Days */
+function vDays() {
+  const days = daysSorted();
+  if (!days.length) return `<div class="empty">No days yet. <button class="btn sm" data-act="add" data-c="days">Add day 1</button></div>`;
+  if (!dayOf(S.day)) S.day = +days[0].dayNo;
+  const d = dayOf(S.day), tl = tlFor(S.day);
+  const stays = DB.stays.filter(s => s.checkin && s.checkout && s.checkin <= d.date && d.date < s.checkout);
+  const showStays = stays.filter(isBooked).length ? stays.filter(isBooked) : stays;
+  const places = DB.places.filter(p => +p.dayNo === +S.day);
+  const acts = DB.activities.filter(a => +a.dayNo === +S.day && a.status !== 'Skip');
+  const must = DB.mustdo.filter(x => +x.dayNo === +S.day);
+  return `
+  <div class="daypills" role="tablist">${days.map(x => `<button class="daypill" role="tab" aria-selected="${+x.dayNo === +S.day}" data-act="day" data-n="${+x.dayNo}"><b>Day ${esc(x.dayNo)}</b><small>${esc(fmtD(x.date))}</small></button>`).join('')}<button class="daypill" data-act="add" data-c="days"><b>+</b><small>New day</small></button></div>
+  <section class="dayhero">
+    <span class="eyebrow">Day ${esc(d.dayNo)} · ${esc(fmtD(d.date))}</span>
+    <h2>${esc(d.title)}</h2>
+    <p>${esc(d.vibe)}</p>
+    <div class="chips"><span class="chip">${esc(d.route)}</span>${+d.km ? `<span class="chip num">${esc(d.km)} km</span>` : ''}${d.night ? `<span class="chip">Night: ${esc(d.night)}</span>` : ''}<button class="chip" data-act="edit" data-c="days" data-id="${esc(d.id)}">${IC.edit} Edit day</button></div>
+  </section>
+  <div class="day-layout">
+    <section class="card"><div class="sec-head" style="margin-bottom:4px"><h3>Plan for the day</h3><span class="muted num">${tl.filter(t => t.done).length}/${tl.length} done</span></div>
+      ${tl.length ? `<ul class="tl">${tl.map(t => `<li class="tl-item ${t.done ? 'done' : ''}"><button class="tick" aria-label="Mark done" data-act="toggle" data-c="timeline" data-id="${esc(t.id)}">${IC.check}</button><div class="tl-time">${esc(t.time)}</div><button class="tl-body" data-act="edit" data-c="timeline" data-id="${esc(t.id)}"><b>${esc(t.title)}</b>${t.note ? `<p>${esc(t.note)}</p>` : ''}${t.who && t.who !== 'Everyone' ? `<span class="who">${esc(t.who)}</span>` : ''}</button></li>`).join('')}</ul>` : `<div class="empty">Nothing planned yet. Tap “Add to this day”.</div>`}
+    </section>
+    <aside class="side">
+      <section class="card mini"><h3>Tonight’s stay</h3>${showStays.length ? showStays.map(s => `<button class="mini-row" data-act="edit" data-c="stays" data-id="${esc(s.id)}"><span><b>${esc(s.name)}</b><br><span class="muted">${esc(s.stop)}</span></span><span class="pill st-${slug(s.status)}">${esc(s.status || 'Idea')}</span></button>`).join('') : `<p class="muted" style="margin:0">${esc(d.night === 'Home' ? 'Home sweet home.' : 'No stay matches this date yet.')}</p>`}</section>
+      <section class="card mini"><h3>Places today</h3>${places.length ? places.map(p => `<button class="mini-row" data-act="place" data-id="${esc(p.id)}"><span><b>${esc(p.name)}</b></span><span class="muted">${esc((p.tags || [])[0] || '')}</span></button>`).join('') : '<p class="muted" style="margin:0">None linked to this day.</p>'}</section>
+      <section class="card mini"><h3>Activities today</h3>${acts.length ? acts.map(a => `<button class="mini-row" data-act="edit" data-c="activities" data-id="${esc(a.id)}"><span><b>${esc(a.name)}</b><br><span class="muted num">${actTotal(a) ? inr(actTotal(a)) : 'Free'}</span></span><span class="pill st-${slug(a.status)}">${esc(a.status)}</span></button>`).join('') : '<p class="muted" style="margin:0">None.</p>'}</section>
+      ${must.length ? `<section class="card mini"><h3>Must-dos today</h3>${must.map(x => `<button class="mini-row" data-act="toggle" data-c="mustdo" data-id="${esc(x.id)}"><span>${x.done ? '✓ ' : ''}<b>${esc(x.text)}</b></span><span class="muted">${esc(x.category)}</span></button>`).join('')}</section>` : ''}
+    </aside>
+  </div>`;
+}
+
+/* Route */
+function vRoute() {
+  const legs = DB.legs.slice().sort((a, b) => (+a.dayNo || 0) - (+b.dayNo || 0));
+  const km = legs.reduce((t, l) => t + (+l.km || 0), 0);
+  return `<div class="sec-head"><div><h2>Travel plan</h2><p>${legs.length} legs · <span class="num">${km.toLocaleString('en-IN')}</span> km in the Force Urbania</p></div></div>
+  ${legs.length ? `<div class="grid">${legs.map(l => {
+    const fc = (l.fromCode || (l.from || '').slice(0, 3)).toUpperCase(), tc = (l.toCode || (l.to || '').slice(0, 3)).toUpperCase();
+    const maps = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(l.from || '')}&destination=${encodeURIComponent(l.to || '')}&travelmode=driving`;
+    return `<article class="pass"><div class="pass-main">
+      <div class="chips">${dayChip(l.dayNo)}</div>
+      <div class="codes"><span class="code">${esc(fc)}</span><span class="line">${IC.van}</span><span class="code">${esc(tc)}</span></div>
+      <div class="places-sub"><span>${esc(l.from)}</span><span style="text-align:right">${esc(l.to)}</span></div>
+      ${l.via ? `<p class="muted" style="margin:0;font-size:14px">Via ${esc(l.via)}</p>` : ''}
+      ${l.notes ? `<p style="margin:0;font-size:14px">${esc(l.notes)}</p>` : ''}
+      <div class="chips" style="justify-content:space-between;align-items:center"><a class="link-out" href="${esc(maps)}" target="_blank" rel="noopener">Google Maps ${IC.out}</a><button class="btn sm" data-act="edit" data-c="legs" data-id="${esc(l.id)}">${IC.edit} Edit</button></div>
+    </div><div class="pass-stub"><small>Distance</small><b class="num">${esc(l.km || '–')}</b><small>km</small><small style="margin-top:8px">Drive</small><b style="font-size:1rem">${esc(l.hours || '–')}</b></div></article>`; }).join('')}</div>` : '<div class="empty">No travel legs yet.</div>'}`;
+}
+
+/* Places */
+function placeCover(p, big) {
+  const tag = (p.tags || []).find(t => !/must visit|adventure/i.test(t)) || (p.tags || [])[0] || 'Mountains';
+  const photo = DB.photos.find(x => x.placeId === p.id);
+  const firstImg = photo ? imgSrc(photo.src) : imgSrc(String(p.images || '').split(/\s+/).find(Boolean));
+  const special = (p.tags || []).includes('Must visit') ? 'Must visit' : (p.tags || []).includes('Hidden gem') ? 'Hidden gem' : '';
+  return `<div class="cover t-${slug(tag).replace(/^./, c => c.toUpperCase())} ${firstImg ? 'has-img' : ''}" ${big ? 'style="aspect-ratio:16/9;border-radius:18px"' : ''}>
+    ${firstImg ? `<img src="${esc(firstImg)}" alt="" loading="lazy">` : ''}
+    ${special ? `<span class="sticker">${special}</span>` : ''}${p.dayNo ? `<span class="stamp">DAY ${esc(p.dayNo)}</span>` : ''}
+    <h3>${esc(p.name)}</h3><span class="area">${esc(p.area)}</span></div>`;
+}
+function vPlaces() {
+  const tags = ['All'].concat(OPT.tags.filter(t => DB.places.some(p => (p.tags || []).includes(t))));
+  const list = DB.places.filter(p => S.placeFilter === 'All' || (p.tags || []).includes(S.placeFilter)).sort((a, b) => (+a.dayNo || 99) - (+b.dayNo || 99));
+  return `<div class="sec-head"><div><h2>Places to visit</h2><p>Tap a place for timings, entry fees, photos and Instagram shot ideas.</p></div></div>
+  <div class="chips">${tags.map(t => `<button class="chip" aria-pressed="${S.placeFilter === t}" data-act="pf" data-k="${esc(t)}">${esc(t)}</button>`).join('')}</div>
+  ${list.length ? `<div class="grid">${list.map(p => `<button class="pcard" data-act="place" data-id="${esc(p.id)}">${placeCover(p)}<div class="pbody"><p>${esc(p.about)}</p><div class="chips">${(p.tags || []).filter(t => t !== 'Must visit' && t !== 'Hidden gem').map(t => `<span class="chip">${esc(t)}</span>`).join('')}${DB.photos.filter(x => x.placeId === p.id).length ? `<span class="chip">${IC.cam.replace('<svg', '<svg width="13" height="13"')} ${DB.photos.filter(x => x.placeId === p.id).length}</span>` : ''}</div></div></button>`).join('')}</div>` : '<div class="empty">No places in this filter.</div>'}`;
+}
+function openPlace(id) {
+  const p = DB.places.find(x => x.id === id); if (!p) return;
+  const q = encodeURIComponent((p.name || '') + ' ' + (p.area || '') + ' Kerala');
+  const tag1 = String(p.hashtags || '').match(/#([\w]+)/);
+  const ig = String(p.ig || '').split('\n').map(s => s.trim()).filter(Boolean);
+  const imgs = String(p.images || '').split(/\s+/).map(imgSrc).filter(Boolean);
+  const photos = DB.photos.filter(x => x.placeId === p.id);
+  openSheet(p.name, `
+    ${placeCover(p, true)}
+    <div class="chips">${dayChip(p.dayNo)}${(p.tags || []).map(t => `<span class="chip">${esc(t)}</span>`).join('')}</div>
+    <div class="facts"><div class="fact"><small>Timings</small>${esc(p.timings || '–')}</div><div class="fact"><small>Entry</small>${esc(p.entry || '–')}</div></div>
+    ${p.about ? `<p style="margin:0">${esc(p.about)}</p>` : ''}
+    ${p.tips ? `<div class="fact"><small>Tips</small>${esc(p.tips)}</div>` : ''}
+    <div class="chips"><a class="btn sm" href="https://www.google.com/search?tbm=isch&q=${q}" target="_blank" rel="noopener">See photos ${IC.out}</a>${tag1 ? `<a class="btn sm" href="https://www.instagram.com/explore/tags/${encodeURIComponent(tag1[1])}/" target="_blank" rel="noopener">#${esc(tag1[1])} on Instagram ${IC.out}</a>` : ''}<a class="btn sm" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.map || p.name)}" target="_blank" rel="noopener">${IC.pin} Map</a></div>
+    <h3>Instagram shot list</h3>
+    ${ig.length ? `<ul class="shots">${ig.map(s => `<li>${IC.cam}<span>${esc(s)}</span></li>`).join('')}</ul>` : '<p class="muted" style="margin:0">No ideas yet – add some with Edit.</p>'}
+    ${p.hashtags ? `<div class="copybox"><input id="tagsBox" readonly value="${esc(p.hashtags)}" aria-label="Hashtags"><button class="btn sm" data-act="copy" data-target="tagsBox">${IC.copy} Copy</button></div>` : ''}
+    <div class="sec-head"><h3>Our photos</h3><span class="muted">${photos.length + imgs.length}</span></div>
+    <div class="gallery">${photos.map(x => `<button data-act="photo" data-id="${esc(x.id)}"><img src="${esc(imgSrc(x.src))}" alt="${esc(x.caption || p.name)}" loading="lazy"></button>`).join('')}${imgs.map(u => `<button data-act="photoUrl" data-u="${esc(u)}"><img src="${esc(u)}" alt="" loading="lazy"></button>`).join('')}</div>
+    <div class="chips"><label class="btn sm primary" for="upl">${IC.cam} Add photo</label><input id="upl" type="file" accept="image/*" multiple hidden data-place="${esc(p.id)}"></div>
+    <div class="actions"><button class="btn" data-act="closeSheet">Close</button><div class="r"><button class="btn dark" data-act="edit" data-c="places" data-id="${esc(p.id)}">${IC.edit} Edit place</button></div></div>`);
+}
+
+/* Stays */
+function searchLinks(g) {
+  const m = meta(); const ad = (+m.adults || 2) + (+m.teens || 0); const ci = g.checkin || '', co = g.checkout || '';
+  const q = encodeURIComponent(g.stop.replace(/houseboat/i, '').trim() + ', Kerala');
+  const air = /houseboat/i.test(g.stop) ? encodeURIComponent('Alleppey houseboat') : encodeURIComponent(g.stop + ', Kerala');
+  return [
+    ['Airbnb', `https://www.airbnb.co.in/s/${air}/homes?checkin=${ci}&checkout=${co}&adults=${ad}&children=${+m.kids || 0}&infants=${+m.infants || 0}`],
+    ['Booking.com', `https://www.booking.com/searchresults.html?ss=${q}&checkin=${ci}&checkout=${co}&group_adults=${ad}&no_rooms=5`],
+    ['Agoda', `https://www.agoda.com/search?textToSearch=${q}&checkIn=${ci}&checkOut=${co}&adults=${ad}&rooms=5`],
+    ['Trip.com', `https://www.trip.com/hotels/`],
+    ['MakeMyTrip', `https://www.makemytrip.com/homestays/`]
+  ];
+}
+function vStays() {
+  const groups = stayGroups();
+  return `<div class="sec-head"><div><h2>Where we sleep</h2><p>Night-by-night options. Paste any Airbnb, Agoda, Trip.com or Booking.com link and mark one as Booked.</p></div><button class="btn sm primary" data-act="scan" data-c="stays">📄 Scan a booking</button></div>
+  ${groups.length ? groups.map(g => {
+    const n = nightsBetween(g.checkin, g.checkout); const bookedOne = g.items.find(isBooked);
+    const items = g.items.slice().sort((a, b) => (isBooked(b) - isBooked(a)) || ((a.status === 'Rejected') - (b.status === 'Rejected')));
+    return `<section class="night"><div class="night-head">
+      <span class="when">${esc(fmtD(g.checkin))} → ${esc(fmtD(g.checkout))} · ${n} night${n === 1 ? '' : 's'}</span>
+      <div class="sec-head"><h2>${esc(g.stop)}</h2><span class="pill ${bookedOne ? 'st-booked' : 'st-shortlisted'}">${bookedOne ? 'Booked: ' + esc(bookedOne.name) : 'Not booked yet'}</span></div>
+      <div class="search-row">${searchLinks(g).map(([pl, u]) => `<a class="chip" href="${esc(u)}" target="_blank" rel="noopener">Search ${esc(pl)} ${IC.out.replace('<svg', '<svg width="12" height="12"')}</a>`).join('')}</div></div>
+      <div class="grid">${items.map(s => {
+        const pl = s.platform || detectPlatform(s.link) || 'Other'; const link = safeUrl(s.link);
+        return `<article class="card option ${isBooked(s) ? 'is-booked' : ''}"><div class="option-top"><span class="plat plat-${slug(pl)}">${esc(pl)}</span><span class="chips">${attChip('stays', s.id)}<span class="pill st-${slug(s.status)}">${esc(s.status || 'Idea')}</span></span></div>
+        <h3>${esc(s.name)}</h3>
+        ${+s.price ? `<div class="price-line"><span class="num">${inr(s.price)}</span> <span class="muted">/ night</span>${n > 1 ? ` · <span class="num">${inr(s.price * n)}</span> <span class="muted">total</span>` : ''}</div>` : '<div class="muted">Price not added</div>'}
+        ${(+s.rooms || +s.sleeps) ? `<div class="chips">${+s.rooms ? `<span class="chip">${+s.rooms} rooms</span>` : ''}${+s.sleeps ? `<span class="chip">sleeps ${+s.sleeps}</span>` : ''}</div>` : ''}
+        ${s.notes ? `<p class="muted" style="margin:0;font-size:14px">${esc(s.notes)}</p>` : ''}
+        <div class="chips" style="justify-content:space-between;align-items:center">${link ? `<a class="link-out" href="${esc(link)}" target="_blank" rel="noopener">Open on ${esc(pl === 'Other' || pl === 'Direct / Website' ? 'website' : pl)} ${IC.out}</a>` : '<span class="by">No link yet</span>'}<button class="btn sm" data-act="edit" data-c="stays" data-id="${esc(s.id)}">${IC.edit} Edit</button></div>${byLine(s)}</article>`; }).join('')}
+      <button class="empty" style="cursor:pointer" data-act="addStay" data-stop="${esc(g.stop)}" data-ci="${esc(g.checkin)}" data-co="${esc(g.checkout)}">+ Add an option for ${esc(g.stop)}</button></div></section>`; }).join('') : '<div class="empty">No stays yet. Tap “Add stay option”.</div>'}`;
+}
+function detectPlatform(u) { u = String(u || '').toLowerCase(); return /airbnb\./.test(u) ? 'Airbnb' : /booking\.com/.test(u) ? 'Booking.com' : /agoda\./.test(u) ? 'Agoda' : /trip\.com/.test(u) ? 'Trip.com' : /makemytrip\./.test(u) ? 'MakeMyTrip' : /goibibo\./.test(u) ? 'Goibibo' : u ? 'Direct / Website' : ''; }
+
+/* Activities */
+function vActs() {
+  const list = DB.activities.slice().sort((a, b) => (+a.dayNo || 99) - (+b.dayNo || 99));
+  const live = list.filter(a => a.status !== 'Skip');
+  const total = live.reduce((t, a) => t + actTotal(a), 0);
+  const toBookOnline = live.filter(a => a.booking === 'Online' && !(a.status === 'Booked' || a.status === 'Paid')).length;
+  const groups = {}; list.forEach(a => (groups[a.dayNo || '–'] = groups[a.dayNo || '–'] || []).push(a));
+  return `<div class="sec-head"><div><h2>Activities</h2><p><span class="num">${inr(total)}</span> in tickets · ${toBookOnline} still to book online</p></div><button class="btn sm primary" data-act="scan" data-c="activities">📄 Scan a ticket</button></div>
+  ${Object.keys(groups).sort((a, b) => (+a || 99) - (+b || 99)).map(k => { const d = dayOf(k); return `<div class="view" style="gap:10px"><div class="day-label">${k === '–' ? 'Any day' : 'Day ' + esc(k) + (d ? ' · ' + esc(fmtD(d.date)) : '')}</div>
+    ${groups[k].map(a => { const link = safeUrl(a.link); const bk = a.booking === 'Online' ? 'online' : /offline/i.test(a.booking || '') ? 'offline' : 'none';
+      const per = a.priceType === 'free' ? 'Free' : `${inr(a.price)} ${esc(a.priceType || '')}`;
+      return `<article class="ticket"><div class="ticket-main"><div class="chips" style="justify-content:space-between"><span class="bk bk-${bk}">${esc(a.booking || 'Booking?')}</span><span class="chips">${attChip('activities', a.id)}<span class="pill st-${slug(a.status)}">${esc(a.status || 'Idea')}</span></span></div>
+      <h3>${esc(a.name)}</h3><span class="muted" style="font-size:14px">${esc(a.place)}</span>
+      ${a.notes ? `<p class="muted" style="margin:0;font-size:13.5px">${esc(a.notes)}</p>` : ''}
+      <div class="chips" style="align-items:center;gap:12px">${link ? `<a class="link-out" href="${esc(link)}" target="_blank" rel="noopener">${a.booking === 'Online' ? 'Book online' : 'Website'} ${IC.out}</a>` : (a.booking === 'Online' ? '<span class="by">Add the booking link</span>' : '')}<button class="btn sm" data-act="edit" data-c="activities" data-id="${esc(a.id)}">${IC.edit} Edit</button></div>${byLine(a)}</div>
+      <div class="ticket-stub"><small>${per}</small>${a.priceType !== 'free' && a.priceType !== 'per group' ? `<small>× ${+a.qty || 0}</small>` : ''}<b>${a.priceType === 'free' ? 'Free' : inr(actTotal(a))}</b></div></article>`; }).join('')}</div>`; }).join('') || '<div class="empty">No activities yet.</div>'}`;
+}
+
+/* Budget */
+function vBudget() {
+  const m = meta(), bt = budgetTotals();
+  const cats = {}; DB.budget.forEach(b => { const c = b.category || 'Other'; (cats[c] = cats[c] || []).push(b); });
+  const catSum = c => cats[c].reduce((t, b) => t + (+b.amount || 0), 0);
+  const order = OPT.budgetCat.filter(c => cats[c]).concat(Object.keys(cats).filter(c => !OPT.budgetCat.includes(c)));
+  const max = Math.max(1, ...order.map(catSum));
+  const paid = DB.budget.filter(b => b.status === 'Paid').reduce((t, b) => t + (+b.amount || 0), 0);
+  const staysBooked = stayGroups().reduce((t, g) => { const b = g.items.find(isBooked); return t + (b ? (+b.price || 0) * nightsBetween(g.checkin, g.checkout) : 0); }, 0);
+  const actsTotal = DB.activities.filter(a => a.status !== 'Skip').reduce((t, a) => t + actTotal(a), 0);
+  return `<div class="sec-head"><div><h2>Budget</h2><p>Plan vs paid. Attach bills to any line.</p></div><button class="btn sm primary" data-act="scan" data-c="budget">📄 Scan a bill</button></div>
+  <section class="total-card"><span class="eyebrow">Trip budget incl. ${+m.buffer || 0}% buffer</span><div class="big num">${inr(bt.total)}</div>
+    <div class="sub"><span class="chip num">${inr(bt.per)} per head (${+m.paying || 1})</span><span class="chip num">${inr(bt.sum)} + ${inr(bt.buf)} buffer</span><span class="chip num">${inr(paid)} paid so far</span><button class="chip" data-act="edit" data-c="meta" data-id="trip">${IC.edit} Headcount & buffer</button></div></section>
+  <section class="card catbars"><h3>By category</h3>${order.map(c => `<div class="catbar cat-${slug(c).replace(/^./, x => x.toUpperCase())}"><span>${esc(c)}</span><span class="bar"><i style="width:${Math.round(catSum(c) / max * 100)}%"></i></span><span class="num">${inr(catSum(c))}</span></div>`).join('')}
+    <p class="muted" style="margin:4px 0 0;font-size:13.5px">Cross-check: booked stays add up to <b class="num">${inr(staysBooked)}</b>, activity tickets to <b class="num">${inr(actsTotal)}</b>. Actually spent so far (Split & settle): <b class="num">${inr(DB.expenses.reduce((t, x) => t + expTotal(x), 0))}</b>.</p></section>
+  ${order.map(c => `<section class="card"><div class="sec-head"><h3>${esc(c)}</h3><span class="num">${inr(catSum(c))}</span></div><div class="rows">${cats[c].map(b => `<button class="row" data-act="edit" data-c="budget" data-id="${esc(b.id)}"><span><b>${esc(b.item)}</b></span><span class="amt">${inr(b.amount)}</span><small>${attChip('budget', b.id)} <span class="pill st-${slug(b.status)}">${esc(b.status || 'Estimate')}</span>${b.paidBy ? ' · paid by ' + esc(b.paidBy) : ''}${b.notes ? ' · ' + esc(b.notes) : ''}</small></button>`).join('')}</div></section>`).join('')}`;
+}
+
+/* Split & settle */
+const membersSorted = () => DB.members.slice().sort((a, b) => String(a.name).localeCompare(String(b.name)));
+const mOf = id => DB.members.find(m => m.id === id);
+const mName = id => (mOf(id) || {}).name || 'Someone';
+const initials = n => String(n || '?').replace(/’s family|'s family|family/ig, '').trim().split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase() || '?';
+const expTotal = x => (+x.amount || 0) + (+x.tip || 0);
+const today = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
+function expShares(x) {
+  const tot = expTotal(x), out = {};
+  const rows = (x.shares || []).filter(r => r && mOf(r.m) && +r.v > 0);
+  if (!rows.length || !tot) return out;
+  if (x.mode === 'exact') rows.forEach(r => out[r.m] = +r.v);
+  else if (x.mode === 'percent') rows.forEach(r => out[r.m] = tot * (+r.v) / 100);
+  else { const sum = rows.reduce((t, r) => t + (+r.v), 0); rows.forEach(r => out[r.m] = tot * (+r.v) / sum); }
+  return out;
+}
+function balances() {
+  const b = {}; DB.members.forEach(m => b[m.id] = 0);
+  DB.expenses.forEach(x => { if (x.paidBy in b) b[x.paidBy] += expTotal(x); const s = expShares(x); for (const k in s) if (k in b) b[k] -= s[k]; });
+  DB.settlements.forEach(p => { if (p.from in b) b[p.from] += (+p.amount || 0); if (p.to in b) b[p.to] -= (+p.amount || 0); });
+  return b;
+}
+function settleUp(b) {
+  const cr = [], dr = [];
+  for (const k in b) { const v = Math.round(b[k] * 100) / 100; if (v > 0.5) cr.push([k, v]); else if (v < -0.5) dr.push([k, -v]); }
+  cr.sort((x, y) => y[1] - x[1]); dr.sort((x, y) => y[1] - x[1]);
+  const out = []; let i = 0, j = 0;
+  while (i < dr.length && j < cr.length) {
+    const amt = Math.min(dr[i][1], cr[j][1]);
+    if (Math.round(amt) > 0) out.push({ from: dr[i][0], to: cr[j][0], amount: Math.round(amt) });
+    dr[i][1] -= amt; cr[j][1] -= amt; if (dr[i][1] < 0.5) i++; if (cr[j][1] < 0.5) j++;
+  }
+  return out;
+}
+const upiQuery = (to, amt, note) => { const m = mOf(to) || {}; return `pa=${encodeURIComponent(m.upi || '')}&pn=${encodeURIComponent(m.name || '')}&am=${(+amt).toFixed(2)}&cu=INR&tn=${encodeURIComponent(note || 'Kerala trip')}`; };
+const waNum = p => { let d = String(p || '').replace(/\D/g, ''); if (d.length === 10) d = '91' + d; return d; };
+function vSplit() {
+  const mem = membersSorted();
+  if (!mem.length) return `<div class="sec-head"><div><h2>Split & settle</h2><p>Track who paid for what and who owes whom – like Splitwise, for the whole gang.</p></div></div>
+    <section class="card" style="display:grid;gap:12px"><h3>Start in three steps</h3>
+    <ol class="steps"><li><b>Add the people sharing costs.</b> One row per person or per family. Set the head count (a family of 4 = 4) and their UPI ID so others can pay them on PhonePe.</li>
+    <li><b>Log every expense</b> – fuel, tolls, food, tickets – with who paid and how to split it: by head count, ratio, % or exact amounts.</li>
+    <li><b>Settle up.</b> The app works out the fewest payments and opens PhonePe with the amount filled in.</li></ol>
+    <div><button class="btn primary" data-act="add" data-c="members">+ Add first person / family</button></div></section>`;
+  const b = balances(), xfers = settleUp(b);
+  const spent = DB.expenses.reduce((t, x) => t + expTotal(x), 0);
+  const me = mOf(S.me) ? S.me : '';
+  const myShare = me ? DB.expenses.reduce((t, x) => t + (expShares(x)[me] || 0), 0) : 0;
+  const myBal = me ? b[me] : 0;
+  const exps = DB.expenses.slice().sort((x, y) => String(y.date || '').localeCompare(String(x.date || '')) || ((y._at || 0) - (x._at || 0)));
+  const pays = DB.settlements.slice().sort((x, y) => String(y.date || '').localeCompare(String(x.date || '')));
+  const heads = mem.reduce((t, m) => t + (+m.heads || 1), 0);
+  return `<div class="sec-head"><div><h2>Split & settle</h2><p>${DB.expenses.length} expenses · ${mem.length} people/families · ${heads} heads</p></div><div class="chips"><button class="btn sm primary" data-act="scan" data-c="expenses">📄 Scan a bill</button><button class="btn sm" data-act="scan" data-c="settlements">Scan a payment</button><button class="btn sm" data-act="add" data-c="settlements">Record a payment</button></div></div>
+  <section class="total-card"><span class="eyebrow">Spent together so far</span><div class="big num">${inr(spent)}</div>
+    <div class="field" style="max-width:320px"><label for="meSel" style="color:var(--hero-muted)">I am</label><select id="meSel"><option value="">Choose yourself…</option>${mem.map(m => `<option value="${esc(m.id)}" ${m.id === me ? 'selected' : ''}>${esc(m.name)}</option>`).join('')}</select></div>
+    ${me ? `<div class="sub"><span class="chip num">My share ${inr(myShare)}</span><span class="chip num">${myBal > 0.5 ? 'I get back ' + inr(myBal) : myBal < -0.5 ? 'I owe ' + inr(-myBal) : 'All settled'}</span></div>` : ''}</section>
+  <section class="view" style="gap:10px"><div class="sec-head"><h2>Settle up</h2><span class="muted">${xfers.length ? xfers.length + ' payment' + (xfers.length > 1 ? 's' : '') + ' clears everything' : ''}</span></div>
+    ${xfers.length ? xfers.map(t => { const to = mOf(t.to) || {}; const mine = me && (t.from === me || t.to === me);
+      return `<article class="card xfer ${mine ? 'mine' : ''}"><div class="xfer-top"><span class="av">${esc(initials(mName(t.from)))}</span><div style="min-width:0"><b>${esc(mName(t.from))}</b> pays <b>${esc(mName(t.to))}</b><div class="by">${to.upi ? 'UPI: ' + esc(to.upi) : 'No UPI ID saved for ' + esc(mName(t.to))}</div></div><span class="xamt num">${inr(t.amount)}</span></div>
+      <div class="chips">${to.upi ? `<a class="btn sm primary" href="phonepe://pay?${esc(upiQuery(t.to, t.amount, 'Kerala trip settle-up'))}">Pay on PhonePe</a><a class="btn sm" href="upi://pay?${esc(upiQuery(t.to, t.amount, 'Kerala trip settle-up'))}">Other UPI app</a><button class="btn sm" data-act="qr" data-from="${esc(t.from)}" data-to="${esc(t.to)}" data-amt="${t.amount}">QR code</button>` : `<button class="btn sm" data-act="edit" data-c="members" data-id="${esc(t.to)}">Add ${esc(mName(t.to))}’s UPI ID</button>`}
+      <button class="btn sm" data-act="wa" data-from="${esc(t.from)}" data-to="${esc(t.to)}" data-amt="${t.amount}">WhatsApp reminder</button><button class="btn sm dark" data-act="markPaid" data-from="${esc(t.from)}" data-to="${esc(t.to)}" data-amt="${t.amount}">${IC.check.replace('<svg', '<svg width="15" height="15"')} Mark paid</button></div></article>`; }).join('')
+    : `<div class="empty">${DB.expenses.length ? 'Everyone is settled up.' : 'Add an expense and the payments will show here.'}</div>`}</section>
+  <section class="card"><div class="sec-head"><h3>Balances</h3><button class="btn sm" data-act="add" data-c="members">+ Person / family</button></div><div class="rows">
+    ${mem.map(m => { const v = Math.round(b[m.id] || 0); return `<button class="row bal-row" data-act="edit" data-c="members" data-id="${esc(m.id)}"><span class="who-cell"><span class="av">${esc(initials(m.name))}</span><span><b>${esc(m.name)}</b><br><span class="by">${+m.heads || 1} head${(+m.heads || 1) > 1 ? 's' : ''}${m.upi ? ' · ' + esc(m.upi) : ' · no UPI yet'}</span></span></span><span class="amt ${v > 0 ? 'pos' : v < 0 ? 'neg' : ''}">${v > 0 ? 'gets ' + inr(v) : v < 0 ? 'owes ' + inr(-v) : 'settled'}</span></button>`; }).join('')}</div></section>
+  <section class="view" style="gap:10px"><div class="sec-head"><h2>Expenses</h2><button class="btn sm primary" data-act="add" data-c="expenses">+ Add expense</button></div>
+    ${exps.length ? `<div class="card rows">${exps.map(x => { const s = expShares(x); const modeL = (SPLIT_MODES.find(m => m[0] === x.mode) || SPLIT_MODES[0])[1];
+      return `<button class="row exp-row" data-act="edit" data-c="expenses" data-id="${esc(x.id)}"><span class="who-cell"><span class="ico" aria-hidden="true">${expIcon(x.type)}</span><span><b>${esc(x.title || x.type)}</b> ${attChip('expenses', x.id)}<br><span class="by">${esc(mName(x.paidBy))} paid · ${esc(fmtD(x.date))} · ${esc(x.type || 'Other')} · split by ${esc(modeL)} (${Object.keys(s).length})${+x.tip ? ' · incl. ' + inr(x.tip) + ' tip' : ''}</span></span></span><span class="amt">${inr(expTotal(x))}${me && s[me] ? `<br><span class="by">my share ${inr(s[me])}</span>` : ''}</span></button>`; }).join('')}</div>` : '<div class="empty">No expenses yet. Tap “Add expense” after the first fuel stop.</div>'}</section>
+  ${pays.length ? `<section class="card"><h3>Payments made</h3><div class="rows">${pays.map(p => `<button class="row" data-act="edit" data-c="settlements" data-id="${esc(p.id)}"><span><b>${esc(mName(p.from))}</b> → <b>${esc(mName(p.to))}</b> ${attChip('settlements', p.id)}<br><span class="by">${esc(fmtD(p.date))} · ${esc(p.method || '')}${p.note ? ' · ' + esc(p.note) : ''}</span></span><span class="amt">${inr(p.amount)}</span></button>`).join('')}</div></section>` : ''}`;
+}
+function defaultShareVal(mode, m, n, total) {
+  if (mode === 'heads') return +m.heads || 1;
+  if (mode === 'ratio') return 1;
+  if (mode === 'percent') return Math.round(10000 / n) / 100;
+  return Math.round(total / n * 100) / 100;
+}
+function openExpense(id) {
+  const x = id ? DB.expenses.find(e => e.id === id) : null; const mem = membersSorted();
+  if (!mem.length) { toast('Add the people or families first.'); openForm('members'); return; }
+  editing = { c: 'expenses', id: x ? x.id : null, pending: [] };
+  const v = x || { title: '', type: 'Food', date: today(), paidBy: mOf(S.me) ? S.me : '', amount: '', tip: '', mode: 'heads', shares: mem.map(m => ({ m: m.id, v: +m.heads || 1 })), notes: '' };
+  const sv = {}; (v.shares || []).forEach(r => sv[r.m] = r.v);
+  openSheet(x ? 'Edit expense' : 'Add expense', `<form id="expForm" class="form">
+    <div class="field"><label>Type</label><div class="typegrid">${EXP.map(([t, i]) => `<button type="button" class="typebtn" aria-pressed="${t === v.type}" data-act="etype" data-v="${esc(t)}"><span>${i}</span>${esc(t)}</button>`).join('')}</div></div>
+    <div class="field"><label for="e_title">What was it?</label><input id="e_title" value="${esc(v.title)}" placeholder="e.g. Diesel at Salem"></div>
+    <div class="two"><div class="field"><label for="e_date">Date</label><input id="e_date" type="date" value="${esc(v.date)}"></div>
+      <div class="field"><label for="e_paid">Paid by</label><select id="e_paid"><option value="">Choose…</option>${mem.map(m => `<option value="${esc(m.id)}" ${m.id === v.paidBy ? 'selected' : ''}>${esc(m.name)}</option>`).join('')}</select></div></div>
+    <div class="two"><div class="field"><label for="e_amt">Amount paid (₹)</label><input id="e_amt" type="number" inputmode="decimal" step="any" value="${esc(v.amount)}"></div>
+      <div class="field"><label for="e_tip">Tip (₹)</label><input id="e_tip" type="number" inputmode="decimal" step="any" value="${esc(v.tip)}"><span class="hint">Added to the total and split the same way</span></div></div>
+    <div class="field"><label>Split by</label><div class="seg" role="radiogroup">${SPLIT_MODES.map(([k, l]) => `<button type="button" role="radio" aria-checked="${k === (v.mode || 'heads')}" data-act="emode" data-v="${k}">${l}</button>`).join('')}</div></div>
+    <div class="field"><div class="split-head"><label>Who shares it</label><span><button type="button" class="link-out" style="border:0;background:none" data-act="eall">All</button> · <button type="button" class="link-out" style="border:0;background:none" data-act="enone">None</button></span></div>
+      <div class="split-rows" id="splitRows">${mem.map(m => `<div class="split-row" data-m="${esc(m.id)}" data-heads="${+m.heads || 1}"><label class="inc"><input type="checkbox" ${m.id in sv ? 'checked' : ''}><span>${esc(m.name)}</span></label><input class="sv" type="number" inputmode="decimal" step="any" value="${esc(m.id in sv ? sv[m.id] : '')}" aria-label="Share for ${esc(m.name)}"><span class="unit"></span><span class="out num">–</span></div>`).join('')}</div>
+      <span class="hint" id="splitMsg"></span></div>
+    <div class="field"><label for="e_notes">Notes</label><input id="e_notes" value="${esc(v.notes)}"></div>
+    ${attSection()}
+    <div class="actions">${x ? '<button type="button" class="btn danger" data-act="del">Delete</button>' : ''}<div class="r"><button type="button" class="btn" data-act="closeSheet">Cancel</button><button class="btn primary" type="submit">Save</button></div></div>${x && x._by ? `<span class="by">Last edited by ${esc(x._by)}</span>` : ''}</form>`);
+  recalcSplit(); renderAttList();
+}
+const curMode = () => { const b = document.querySelector('#expForm .seg [aria-checked="true"]'); return b ? b.dataset.v : 'heads'; };
+function recalcSplit() {
+  const f = $('#expForm'); if (!f) return;
+  const mode = curMode(), total = (+$('#e_amt').value || 0) + (+$('#e_tip').value || 0);
+  const rows = [...f.querySelectorAll('.split-row')];
+  const unit = { heads: 'heads', ratio: 'parts', percent: '%', exact: '₹' }[mode];
+  const inc = rows.filter(r => r.querySelector('.inc input').checked);
+  const vals = inc.map(r => +r.querySelector('.sv').value || 0); const sum = vals.reduce((a, b) => a + b, 0);
+  rows.forEach(r => { const on = r.querySelector('.inc input').checked; r.classList.toggle('off', !on); r.querySelector('.sv').disabled = !on; r.querySelector('.unit').textContent = unit; });
+  inc.forEach((r, i) => { const v = vals[i]; let s = 0;
+    if (mode === 'exact') s = v; else if (mode === 'percent') s = total * v / 100; else s = sum ? total * v / sum : 0;
+    r.querySelector('.out').textContent = inr(s); });
+  rows.filter(r => !r.querySelector('.inc input').checked).forEach(r => r.querySelector('.out').textContent = '–');
+  let msg = '', bad = false;
+  if (!inc.length) { msg = 'Pick at least one person.'; bad = true; }
+  else if (mode === 'percent' && Math.abs(sum - 100) > 0.5) { msg = `Percentages add up to ${Math.round(sum * 100) / 100}% – they need to make 100%.`; bad = true; }
+  else if (mode === 'exact' && Math.abs(sum - total) > 1) { msg = `Amounts add up to ${inr(sum)} but the total is ${inr(total)}.`; bad = true; }
+  else if (mode === 'heads') msg = `${sum} heads · ${inr(sum ? total / sum : 0)} per head`;
+  else if (mode === 'ratio') msg = `${sum} parts · ${inr(sum ? total / sum : 0)} per part`;
+  else msg = `Total ${inr(total)}`;
+  const el = $('#splitMsg'); el.textContent = msg; el.classList.toggle('err', bad);
+  return !bad;
+}
+function resetSplitVals() {
+  const mode = curMode(), total = (+$('#e_amt').value || 0) + (+$('#e_tip').value || 0);
+  const inc = [...document.querySelectorAll('#expForm .split-row')].filter(r => r.querySelector('.inc input').checked);
+  inc.forEach(r => r.querySelector('.sv').value = defaultShareVal(mode, { heads: +r.dataset.heads }, inc.length, total));
+}
+function saveExpense() {
+  const title = $('#e_title').value.trim(), paidBy = $('#e_paid').value, amount = +$('#e_amt').value || 0, tip = +$('#e_tip').value || 0;
+  const typeB = document.querySelector('#expForm .typebtn[aria-pressed="true"]'); const type = typeB ? typeB.dataset.v : 'Other';
+  if (!paidBy) { toast('Choose who paid.'); return; }
+  if (!(amount > 0)) { toast('Enter the amount paid.'); return; }
+  if (!recalcSplit()) { toast($('#splitMsg').textContent); return; }
+  const shares = [...document.querySelectorAll('#expForm .split-row')].filter(r => r.querySelector('.inc input').checked).map(r => ({ m: r.dataset.m, v: +r.querySelector('.sv').value || 0 })).filter(r => r.v > 0);
+  const data = { title: title || type, type, date: $('#e_date').value || today(), paidBy, amount, tip, mode: curMode(), shares, notes: $('#e_notes').value.trim() };
+  const id = editing.id || uid();
+  if (editing.id) run(B.update('expenses', id, data)); else run(B.add('expenses', data, id));
+  const ed = editing; closeSheet(); toast('Expense saved'); editing = ed; uploadPending('expenses', id).finally(() => { if (editing === ed) editing = null; });
+}
+let qrLib = null;
+async function showQR(from, to, amt) {
+  const m = mOf(to) || {}; const link = 'upi://pay?' + upiQuery(to, amt, 'Kerala trip settle-up');
+  openSheet('Scan to pay', `<div class="qr" id="qrBox"><span class="muted">Making QR…</span></div>
+    <p style="margin:0;text-align:center"><b>${esc(mName(from))}</b> pays <b>${esc(m.name)}</b> <span class="num">${inr(amt)}</span></p>
+    <p class="muted" style="margin:0;text-align:center;font-size:13.5px">Scan with PhonePe, GPay or Paytm. Amount and UPI ID fill in automatically.</p>
+    <div class="copybox"><input id="upiBox" readonly value="${esc(m.upi || '')}" aria-label="UPI ID"><button class="btn sm" data-act="copy" data-target="upiBox">${IC.copy} Copy UPI ID</button></div>`);
+  try {
+    if (!qrLib) { await loadScript('https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js'); qrLib = window.qrcode; }
+    const q = qrLib(0, 'M'); q.addData(link); q.make();
+    const box = $('#qrBox'); if (box) box.innerHTML = q.createSvgTag({ cellSize: 6, margin: 3, scalable: true });
+  } catch (e) { const box = $('#qrBox'); if (box) box.innerHTML = '<span class="muted">Couldn’t load the QR maker (no internet?). Copy the UPI ID instead.</span>'; }
+}
+
+/* Photographers */
+function vPhoto() {
+  return `<div class="sec-head"><div><h2>Travel photographers</h2><p>Book someone for a half day so nobody is stuck behind the camera.</p></div></div>
+  <div class="banner"><p><b>Tip for a group of 21:</b> most listings price per person or cap at 4–5 guests. Message 2–3 of these for a <b>half-day family package</b> – e.g. houseboat boarding at 12 pm (Day 5) or Marari + Chavakkad sunset (Day 6) – and compare the quotes.</p></div>
+  <div class="grid">${DB.photographers.map(p => { const link = safeUrl(p.link); return `<article class="card option"><div class="option-top"><span class="chip">${esc(p.platform || 'Photographer')}</span><span class="chips">${attChip('photographers', p.id)}<span class="pill st-${slug(p.status)}">${esc(p.status || 'Shortlist')}</span></span></div>
+    <h3>${esc(p.name)}</h3><span class="muted" style="font-size:14px">${IC.pin.replace('<svg', '<svg width="13" height="13" style="vertical-align:-2px"')} ${esc(p.base)}</span>
+    ${p.offer ? `<p style="margin:0;font-size:14px">${esc(p.offer)}</p>` : ''}
+    <div class="price-line">${esc(p.price || 'Price on request')}</div>
+    ${p.contact ? `<div class="copybox"><input readonly id="c-${esc(p.id)}" value="${esc(p.contact)}" aria-label="Contact"><button class="btn sm" data-act="copy" data-target="c-${esc(p.id)}">${IC.copy}</button></div>` : ''}
+    ${p.notes ? `<p class="muted" style="margin:0;font-size:13.5px">${esc(p.notes)}</p>` : ''}
+    <div class="chips" style="justify-content:space-between;align-items:center">${link ? `<a class="link-out" href="${esc(link)}" target="_blank" rel="noopener">View & book ${IC.out}</a>` : '<span></span>'}<button class="btn sm" data-act="edit" data-c="photographers" data-id="${esc(p.id)}">${IC.edit} Edit</button></div>${byLine(p)}</article>`; }).join('') || '<div class="empty">No photographers yet.</div>'}</div>`;
+}
+
+/* Must-do */
+function vMust() {
+  const cats = ['All'].concat(OPT.mustCat.filter(c => DB.mustdo.some(x => x.category === c)));
+  const list = DB.mustdo.filter(x => S.mustFilter === 'All' || x.category === S.mustFilter).sort((a, b) => (a.done - b.done) || ((+a.dayNo || 99) - (+b.dayNo || 99)));
+  const done = DB.mustdo.filter(x => x.done).length, all = DB.mustdo.length, p = all ? Math.round(done / all * 100) : 0;
+  return `<div class="sec-head"><div><h2>Must-do list</h2><p>Tick things off as you go – everyone sees it live.</p></div><div class="ring" style="--p:${p}"><span>${done}/${all}</span></div></div>
+  <div class="chips">${cats.map(c => `<button class="chip" aria-pressed="${S.mustFilter === c}" data-act="mf" data-k="${esc(c)}">${esc(c)}</button>`).join('')}</div>
+  <div class="view" style="gap:8px">${list.map(x => `<div class="check ${x.done ? 'done' : ''}"><button class="tick" aria-label="Done" data-act="toggle" data-c="mustdo" data-id="${esc(x.id)}">${IC.check}</button><button class="txt" data-act="edit" data-c="mustdo" data-id="${esc(x.id)}">${esc(x.text)}</button><span class="chips"><span class="chip">${esc(x.category)}</span>${x.dayNo ? `<span class="chip">D${esc(x.dayNo)}</span>` : ''}</span></div>`).join('') || '<div class="empty">Nothing here yet.</div>'}</div>`;
+}
+
+/* ---------- sheet & forms ---------- */
+function openSheet(title, html) {
+  $('#sheetRoot').innerHTML = `<div class="sheet-wrap" data-act="scrim"><div class="sheet" role="dialog" aria-modal="true" aria-label="${esc(title)}"><div class="grab"></div><div class="sheet-head"><h2>${esc(title)}</h2><button class="icon-btn" data-act="closeSheet" aria-label="Close">${IC.x}</button></div><div class="form">${html}</div></div></div>`;
+  document.body.style.overflow = 'hidden';
+  const f = $('#sheetRoot input:not([readonly]):not([type=file]), #sheetRoot select, #sheetRoot textarea'); if (f && window.innerWidth > 700) f.focus();
+}
+function closeSheet() { $('#sheetRoot').innerHTML = ''; document.body.style.overflow = ''; }
+function fieldHtml(f, val) {
+  const [k, label, type, hint] = f; const id = 'f_' + k; let input;
+  if (type === 'textarea') input = `<textarea id="${id}" name="${k}">${esc(val)}</textarea>`;
+  else if (type === 'day') input = `<select id="${id}" name="${k}"><option value="">Any day</option>${daysSorted().map(d => `<option value="${+d.dayNo}" ${+val === +d.dayNo ? 'selected' : ''}>Day ${esc(d.dayNo)} · ${esc(fmtD(d.date))}</option>`).join('')}</select>`;
+  else if (type === 'member') input = `<select id="${id}" name="${k}"><option value="">Choose…</option>${membersSorted().map(m => `<option value="${esc(m.id)}" ${m.id === val ? 'selected' : ''}>${esc(m.name)}</option>`).join('')}</select>`;
+  else if (type.startsWith('select:')) { const o = OPT[type.slice(7)]; input = `<select id="${id}" name="${k}">${o.map(x => `<option ${x === val ? 'selected' : ''}>${esc(x)}</option>`).join('')}</select>`; }
+  else if (type.startsWith('multi:')) { const o = OPT[type.slice(6)], v = Array.isArray(val) ? val : []; input = `<div class="multi" id="${id}" data-multi="${k}">${o.map(x => `<button type="button" class="chip" aria-pressed="${v.includes(x)}" data-act="multi" data-v="${esc(x)}">${esc(x)}</button>`).join('')}</div>`; }
+  else input = `<input id="${id}" name="${k}" type="${type === 'url' ? 'url' : type}" ${type === 'number' ? 'inputmode="decimal" step="any"' : ''} value="${esc(val)}" ${type === 'url' ? 'placeholder="https://"' : ''}>`;
+  return `<div class="field"><label for="${id}">${esc(label)}</label>${input}${hint ? `<span class="hint">${esc(hint)}</span>` : ''}</div>`;
+}
+let editing = null;
+function openForm(c, id, defaults) {
+  if (c === 'expenses') return openExpense(id);
+  if (c === 'settlements' && !id) defaults = Object.assign({ date: today(), method: 'PhonePe', from: mOf(S.me) ? S.me : '' }, defaults || {});
+  if (c === 'members' && !id) defaults = Object.assign({ heads: 1 }, defaults || {});
+  const sc = SCHEMA[c]; const item = id ? DB[c].find(x => x.id === id) : null;
+  if (c === 'meta') { editing = { c, id: 'trip' }; } else editing = { c, id: item ? item.id : null, pending: [] };
+  const val = Object.assign({}, defaults || {}, c === 'meta' ? meta() : (item || {}));
+  const fields = sc.fields.map(f => fieldHtml(f, val[f[0]] ?? (f[2].startsWith('select:') ? OPT[f[2].slice(7)][0] : ''))).join('');
+  openSheet((item || c === 'meta' ? 'Edit ' : 'Add ') + sc.noun, `<form id="theForm" class="form">${fields}${ATTACH.has(c) ? attSection() : ''}
+    <div class="actions">${item && c !== 'meta' ? `<button type="button" class="btn danger" data-act="del">Delete</button>` : ''}<div class="r"><button type="button" class="btn" data-act="closeSheet">Cancel</button><button class="btn primary" type="submit">Save</button></div></div>${item ? `<span class="by">${item._by ? 'Last edited by ' + esc(item._by) : ''}</span>` : ''}</form>`);
+  renderAttList();
+}
+function readForm() {
+  const { c } = editing; const out = {};
+  SCHEMA[c].fields.forEach(([k, , type]) => {
+    if (type.startsWith('multi:')) { out[k] = [...document.querySelectorAll(`[data-multi="${k}"] [aria-pressed="true"]`)].map(b => b.dataset.v); return; }
+    const el = document.getElementById('f_' + k); if (!el) return; let v = el.value.trim();
+    if (type === 'number' || type === 'day') v = v === '' ? (type === 'day' ? '' : 0) : +v;
+    out[k] = v;
+  });
+  if (c === 'stays' && out.link && (!out.platform || out.platform === 'Airbnb' && !/airbnb/i.test(out.link))) { const d = detectPlatform(out.link); if (d) out.platform = d; }
+  return out;
+}
+
+/* ---------- photos ---------- */
+function compress(file, max = 1280, limit = 700000) {
+  return new Promise((ok, no) => {
+    const r = new FileReader(); r.onerror = no;
+    r.onload = () => { const im = new Image(); im.onerror = no; im.onload = () => {
+      let { width: w, height: h } = im; const s = Math.min(1, max / Math.max(w, h)); w = Math.round(w * s); h = Math.round(h * s);
+      const cv = document.createElement('canvas'); cv.width = w; cv.height = h; cv.getContext('2d').drawImage(im, 0, 0, w, h);
+      let q = .8, out = cv.toDataURL('image/jpeg', q); while (out.length > limit && q > .35) { q -= .1; out = cv.toDataURL('image/jpeg', q); }
+      ok(out); }; im.src = r.result; };
+    r.readAsDataURL(file);
+  });
+}
+async function uploadPhotos(input) {
+  const pid = input.dataset.place; const files = [...input.files]; if (!files.length) return;
+  toast(`Adding ${files.length} photo${files.length > 1 ? 's' : ''}…`);
+  for (const f of files) { try { const src = await compress(f); await run(B.add('photos', { placeId: pid, src, caption: '' })); } catch (e) { toast('That file is not a readable image.'); } }
+  setTimeout(() => openPlace(pid), 300);
+}
+
+/* ---------- attachments: receipts, bookings, bills ---------- */
+const CHUNK = 900000;
+const filesFor = (c, id) => id ? DB.files.filter(f => f.parentC === c && f.parentId === id).sort((a, b) => (a._at || 0) - (b._at || 0)) : [];
+const attChip = (c, id) => { const n = filesFor(c, id).length; return n ? `<span class="chip att-chip" title="${n} file${n > 1 ? 's' : ''}">📎 ${n}</span>` : ''; };
+const fmtSize = b => b > 1e6 ? (b / 1e6).toFixed(1) + ' MB' : Math.max(1, Math.round(b / 1e3)) + ' KB';
+const readDataURL = f => new Promise((ok, no) => { const r = new FileReader(); r.onload = () => ok(r.result); r.onerror = no; r.readAsDataURL(f); });
+const dataURLtoBlob = u => { const [h, b] = u.split(','); const mime = (/data:([^;]+)/.exec(h) || [])[1] || 'application/octet-stream'; const bin = atob(b); const arr = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i); return new Blob([arr], { type: mime }); };
+const isPdf = t => /pdf/i.test(t || '');
+const blobCache = {};
+async function saveAttachment(parentC, parentId, file, text) {
+  let data, type = file.type || '', thumb = '';
+  if (/^image\//.test(type) || /\.(heic|heif|jpe?g|png|webp)$/i.test(file.name)) { data = await compress(file, 1600, CHUNK); thumb = await compress(file, 180, 12000); type = 'image/jpeg'; }
+  else if (isPdf(type) || /\.pdf$/i.test(file.name)) { if (file.size > 8e6) throw new Error(file.name + ' is over 8 MB'); data = await readDataURL(file); type = 'application/pdf'; }
+  else throw new Error(file.name + ' isn’t an image or PDF');
+  const fid = uid(); const parts = [];
+  for (let i = 0; i < data.length; i += CHUNK) parts.push(data.slice(i, i + CHUNK));
+  for (let i = 0; i < parts.length; i++) await B.add('blobs', { fileId: fid, i, d: parts[i] }, fid + '_' + i);
+  blobCache[fid] = data;
+  await B.add('files', { parentC, parentId, name: file.name, type, size: file.size, n: parts.length, thumb, text: (text || '').slice(0, 4000) }, fid);
+}
+async function loadAttachment(f) {
+  if (blobCache[f.id]) return blobCache[f.id];
+  const parts = [];
+  for (let i = 0; i < (+f.n || 1); i++) { const b = await B.get('blobs', f.id + '_' + i); if (!b) throw new Error('File data is missing'); parts.push(b.d); }
+  return (blobCache[f.id] = parts.join(''));
+}
+function deleteAttachment(f) { for (let i = 0; i < (+f.n || 1); i++) run(B.remove('blobs', f.id + '_' + i)); run(B.remove('files', f.id)); delete blobCache[f.id]; }
+
+/* attachment list inside a form */
+function attSection() {
+  return `<div class="field att-field"><label>Receipts, bookings & bills</label>
+    <div id="attList" class="att-list"></div>
+    <div class="chips"><label class="btn sm" for="attInput">📎 Add files</label><input id="attInput" type="file" multiple accept="image/*,application/pdf,.pdf" hidden><span class="hint">Photos, screenshots or PDFs. Tap “Read” to fill this form from a receipt.</span></div>
+    <div id="readPanel"></div></div>`;
+}
+function renderAttList() {
+  const el = $('#attList'); if (!el || !editing) return;
+  const saved = filesFor(editing.c, editing.id), pend = editing.pending || [];
+  if (!saved.length && !pend.length) { el.innerHTML = '<p class="hint" style="margin:0">No files yet.</p>'; return; }
+  const row = (key, name, type, size, thumb, note) => `<div class="att">
+    <button type="button" class="att-thumb" data-act="attView" data-k="${esc(key)}" aria-label="Open ${esc(name)}">${thumb ? `<img src="${esc(thumb)}" alt="">` : `<span>${isPdf(type) ? 'PDF' : 'IMG'}</span>`}</button>
+    <div class="att-meta"><b>${esc(name)}</b><span class="by">${esc(fmtSize(size || 0))}${note ? ' · ' + esc(note) : ''}</span></div>
+    <div class="att-btns"><button type="button" class="btn sm" data-act="attRead" data-k="${esc(key)}">Read</button><button type="button" class="btn sm danger" data-act="attDel" data-k="${esc(key)}" aria-label="Remove ${esc(name)}">✕</button></div></div>`;
+  el.innerHTML = saved.map(f => row('s:' + f.id, f.name, f.type, f.size, imgSrc(f.thumb), f._by ? 'by ' + f._by : '')).join('')
+    + pend.map((p, i) => row('p:' + i, p.file.name, p.file.type, p.file.size, p.preview, 'saves with the form')).join('');
+}
+async function attSource(key) {
+  if (key.startsWith('p:')) { const p = editing.pending[+key.slice(2)]; return p && { blob: p.file, type: p.file.type || (/\.pdf$/i.test(p.file.name) ? 'application/pdf' : 'image/jpeg'), name: p.file.name, pend: p }; }
+  const f = DB.files.find(x => x.id === key.slice(2)); if (!f) return null;
+  const data = await loadAttachment(f); return { blob: dataURLtoBlob(data), type: f.type, name: f.name, url: data, file: f };
+}
+async function viewAttachment(key) {
+  const v = $('#viewerRoot');
+  v.innerHTML = `<div class="viewer" data-act="closeViewer"><div class="viewer-box"><div class="sheet-head"><h2>Loading…</h2><button class="icon-btn" data-act="closeViewer" aria-label="Close">${IC.x}</button></div></div></div>`;
+  try {
+    const s = await attSource(key); if (!s) throw new Error('File not found');
+    const url = URL.createObjectURL(s.blob);
+    v.querySelector('.viewer-box').innerHTML = `<div class="sheet-head"><h2>${esc(s.name)}</h2><button class="icon-btn" data-act="closeViewer" aria-label="Close">${IC.x}</button></div>
+      ${isPdf(s.type) ? `<div class="pdf-box"><span class="pdf-icon">PDF</span><p class="muted" style="margin:0">${esc(s.name)}</p></div>` : `<img src="${esc(url)}" alt="${esc(s.name)}" class="viewer-img">`}
+      <div class="chips" style="justify-content:center"><a class="btn sm primary" href="${esc(url)}" target="_blank" rel="noopener">Open ${isPdf(s.type) ? 'PDF' : 'full size'} ${IC.out}</a><a class="btn sm" href="${esc(url)}" download="${esc(s.name)}">Download</a></div>
+      ${s.file && s.file.text ? `<details><summary class="by">Text read from this file</summary><pre class="code">${esc(s.file.text)}</pre></details>` : ''}`;
+  } catch (e) { v.querySelector('.viewer-box h2').textContent = 'Couldn’t open: ' + e.message; }
+}
+
+/* text extraction: PDF text layer first, OCR for images and scanned PDFs */
+let pdfLib = null, ocrLib = null;
+async function getPdfLib() {
+  if (pdfLib) return pdfLib;
+  await loadScript('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js');
+  window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  return (pdfLib = window.pdfjsLib);
+}
+async function ocr(src, prog) {
+  if (!ocrLib) { await loadScript('https://cdn.jsdelivr.net/npm/tesseract.js@5.1.0/dist/tesseract.min.js'); ocrLib = window.Tesseract; }
+  const w = await ocrLib.createWorker('eng', 1, { logger: m => { if (m.status === 'recognizing text') prog('Reading text… ' + Math.round(m.progress * 100) + '%'); else if (/load/i.test(m.status)) prog('Getting the text reader ready (first time takes a moment)…'); } });
+  try { const r = await w.recognize(src); return r.data.text || ''; } finally { w.terminate(); }
+}
+async function extractText(blob, type, prog) {
+  if (isPdf(type)) {
+    prog('Opening PDF…');
+    const lib = await getPdfLib(); const pdf = await lib.getDocument({ data: new Uint8Array(await blob.arrayBuffer()) }).promise;
+    const lines = [];
+    for (let p = 1; p <= Math.min(pdf.numPages, 4); p++) {
+      const tc = await (await pdf.getPage(p)).getTextContent(); let last = null, line = [];
+      tc.items.forEach(it => { const y = Math.round(it.transform[5]); if (last !== null && Math.abs(y - last) > 3) { lines.push(line.join(' ')); line = []; } if (it.str.trim()) line.push(it.str.trim()); last = y; });
+      lines.push(line.join(' '));
+    }
+    const text = lines.filter(Boolean).join('\n');
+    if (text.replace(/\s/g, '').length > 40) return text;
+    prog('This PDF is a scan – reading it as an image…');
+    const page = await pdf.getPage(1); const vp = page.getViewport({ scale: 2.2 });
+    const cv = document.createElement('canvas'); cv.width = vp.width; cv.height = vp.height;
+    await page.render({ canvasContext: cv.getContext('2d'), viewport: vp }).promise;
+    return ocr(cv, prog);
+  }
+  const url = URL.createObjectURL(blob);
+  try { return await ocr(url, prog); } finally { setTimeout(() => URL.revokeObjectURL(url), 5000); }
+}
+
+/* receipt parser: best-effort guesses that the person reviews before filling */
+const MONS = { jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6, jul: 7, aug: 8, sep: 9, oct: 10, nov: 11, dec: 12 };
+const pad2 = n => String(n).padStart(2, '0');
+function findDates(t) {
+  const out = []; const tripYear = (meta().start || '2027').slice(0, 4);
+  const push = (y, m, d, idx, len) => { y = +String(y).replace(/\D/g, ''); if (y < 100) y += 2000; m = +m; d = +d; if (m >= 1 && m <= 12 && d >= 1 && d <= 31 && y >= 2020 && y <= 2035) out.push({ iso: `${y}-${pad2(m)}-${pad2(d)}`, idx, len }); };
+  for (const m of t.matchAll(/\b(20\d\d)[-\/.](\d{1,2})[-\/.](\d{1,2})\b/g)) push(m[1], m[2], m[3], m.index, m[0].length);
+  for (const m of t.matchAll(/\b(\d{1,2})[\/.\-](\d{1,2})[\/.\-](20\d\d|\d\d)\b/g)) push(m[3], m[2], m[1], m.index, m[0].length);
+  for (const m of t.matchAll(/\b(\d{1,2})(?:st|nd|rd|th)?[\s\-]+([A-Za-z]{3,9})\.?,?[\s\-]+('?\d{2,4})\b/g)) { const mo = MONS[m[2].slice(0, 3).toLowerCase()]; if (mo) push(m[3], mo, m[1], m.index, m[0].length); }
+  for (const m of t.matchAll(/\b([A-Za-z]{3,9})\.?\s+(\d{1,2})(?:st|nd|rd|th)?,?\s+(20\d\d)\b/g)) { const mo = MONS[m[1].slice(0, 3).toLowerCase()]; if (mo) push(m[3], mo, m[2], m.index, m[0].length); }
+  for (const m of t.matchAll(/\b(\d{1,2})(?:st|nd|rd|th)?\s+(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\b/gi)) {
+    if (out.some(o => m.index >= o.idx && m.index < o.idx + o.len)) continue;
+    const mo = MONS[m[2].toLowerCase()]; push(mo <= 3 ? tripYear : new Date().getFullYear(), mo, m[1], m.index, m[0].length);
+  }
+  const seen = new Set(); return out.sort((a, b) => a.idx - b.idx).filter(o => { const k = o.idx; if (seen.has(k)) return false; seen.add(k); return true; });
+}
+function dateAfter(t, dates, res) { for (const re of [].concat(res)) { const m = re.exec(t); if (!m) continue; const d = dates.find(x => x.idx >= m.index && x.idx - m.index < 120); if (d) return d.iso; } return ''; }
+const num = s => +String(s).replace(/[,\s]/g, '');
+const CUR_RE = /(?:₹|\brs\.?\s?|\binr\s?)\s*:?\s*([0-9]{1,3}(?:,[0-9]{2,3})+(?:\.[0-9]{1,2})?|[0-9]+(?:\.[0-9]{1,2})?)/gi;
+function findAmount(t) {
+  const lines = t.split(/\n/); let best = null;
+  const KW = [[/grand\s*total|total\s*(?:amount\s*)?paid|amount\s*paid|you\s*paid|net\s*(?:amount|payable)|total\s*payable|paid\s*amount/i, 5], [/total\s*(?:amount|price|fare|charges|cost)?/i, 4], [/\b(?:paid|debited|amount|price|fare)\b/i, 2]];
+  lines.forEach((ln, i) => {
+    let w = 0; for (const [re, s] of KW) if (re.test(ln)) { w = s; break; } if (!w) return;
+    if (/sub\s*total|discount|tax|gst|cgst|sgst|saved|savings|per night|\/night/i.test(ln) && w < 5) w -= 1;
+    const scan = ln + ' ' + (lines[i + 1] || '');
+    const ok = v => v >= 10 && v < 5e6 && !(v >= 2020 && v <= 2035 && Number.isInteger(v));
+    let nums = [...scan.matchAll(CUR_RE)].map(m => num(m[1])).filter(ok);
+    if (!nums.length) nums = [...scan.matchAll(/(?<![A-Za-z0-9.,:\/])([0-9]{1,3}(?:,[0-9]{2,3})+(?:\.[0-9]{1,2})?|[0-9]{2,7}(?:\.[0-9]{1,2})?)(?![0-9\/\-:%])/g)].map(m => num(m[1])).filter(ok);
+    if (!nums.length) return; const v = Math.max(...nums);
+    if (!best || w > best.w || (w === best.w && i > best.i)) best = { v, w, i };
+  });
+  if (best) return best.v;
+  const cur = [...t.matchAll(CUR_RE)].map(m => num(m[1])).filter(v => v >= 1);
+  return cur.length ? Math.max(...cur) : 0;
+}
+const PLATFORMS = [['Airbnb', /airbnb/i], ['Booking.com', /booking\.com/i], ['Agoda', /agoda/i], ['Trip.com', /trip\.com/i], ['MakeMyTrip', /makemytrip|\bmmt\b/i], ['Goibibo', /goibibo/i]];
+const PAYAPPS = [['PhonePe', /phone\s?pe/i], ['Other UPI app', /google\s?pay|\bgpay\b|paytm|bhim|\bupi\b/i]];
+const TYPE_KW = [['Fuel', /petrol|diesel|fuel|hpcl|iocl|indian\s*oil|bharat\s*petroleum|bpcl|nayara|filling\s*station/i], ['Tolls', /toll|fastag|nhai|plaza/i], ['Houseboat', /houseboat|kettuvallam|cruise/i], ['Stay', /resort|homestay|villa|airbnb|booking\.com|agoda|check-?\s?in|room\s*type|\bnights?\b/i], ['Food', /restaurant|cafe|café|meals|biryani|swiggy|zomato|bakery|food|kitchen|dhaba|tiffin|bhavan|\bhotel\b/i], ['Snacks & tea', /tea|coffee|chai|juice|snack/i], ['Tickets', /ticket|entry|admission|boating|safari|park/i], ['Activities', /rafting|trek|kalari|kathakali|jeep|tour/i], ['Temple', /temple|devaswom|darshan|offering|pooja/i], ['Medical', /pharma|medical|chemist|hospital|clinic/i], ['Shopping', /mart|store|shop|spices|emporium|textiles/i], ['Vehicle', /urbania|tempo|traveller|cab|taxi|travels|rental/i], ['Photographer', /photo|studio/i]];
+const firstMatch = (t, res) => { for (const re of res) { const m = re.exec(t); if (m && m[1] && m[1].trim().length > 1) return m[1].trim(); } return ''; };
+const cleanName = s => String(s || '').replace(/\s{2,}/g, ' ').replace(/[|*_]+/g, '').replace(/^[^A-Za-z0-9]+|[^A-Za-z0-9)\].]+$/g, '').slice(0, 70);
+function parseReceipt(t) {
+  t = String(t || '').replace(/\r/g, '');
+  const dates = findDates(t);
+  const r = { text: t };
+  r.amount = findAmount(t);
+  r.checkin = dateAfter(t, dates, [/check[\s-]?in|arriv(?:al|e)/i, /\bfrom\b/i]);
+  r.checkout = dateAfter(t, dates, [/check[\s-]?out|depart(?:ure)?/i, /\buntil\b/i]);
+  if (!r.checkin && dates.length >= 2) { const s = [...new Set(dates.map(d => d.iso))].sort(); r.checkin = s[0]; r.checkout = s[1]; }
+  if (r.checkin && r.checkout && r.checkout <= r.checkin) { const [a, b] = [r.checkin, r.checkout].sort(); r.checkin = a; r.checkout = b === a ? '' : b; }
+  r.date = dateAfter(t, dates, [/(?:transaction|bill|invoice|payment|booking)\s*date|paid\s*on|date\s*[:\-]/i, /\bdate\b/i, /\bon\b/i]) || (dates[0] && dates[0].iso) || '';
+  r.platform = (PLATFORMS.find(([, re]) => re.test(t)) || [])[0] || '';
+  r.payApp = (PAYAPPS.find(([, re]) => re.test(t)) || [])[0] || '';
+  r.ref = firstMatch(t, [/(?:booking|confirmation|reservation|itinerary|order|pnr|invoice|bill)\s*(?:id|no\.?|number|code|#|ref)\s*[:#\-]?\s*([A-Z0-9][A-Z0-9\-]{4,})/i, /\b(?:pnr|ref(?:erence)?)\s*[:#\-]?\s*([A-Z0-9][A-Z0-9\-]{4,})/i]);
+  r.txn = firstMatch(t, [/(?:transaction\s*id|txn\s*id|utr(?:\s*no)?|upi\s*ref(?:erence)?(?:\s*no)?|upi\s*transaction\s*id)\.?\s*[:#\-]?\s*([A-Z0-9]{8,})/i]);
+  const paidLine = /(?:paid\s*to|sent\s*to|payee|merchant(?:\s*name)?|to\s*:)\s*[:\-]?\s*([^\n]*)\n?([^\n]*)/i.exec(t);
+  r.paidTo = paidLine ? cleanName(paidLine[1].trim().length > 2 ? paidLine[1] : paidLine[2]) : '';
+  r.name = cleanName(firstMatch(t, [/(?:your\s*(?:stay|booking|reservation|trip)\s*(?:at|in)|booking\s*(?:confirmed|confirmation)\s*(?:at|for)|reservation\s*at|hotel\s*name|property\s*name|property|hotel)\s*[:\-]?\s*([^\n]{3,70})/i]));
+  if (!r.name) { const ln = t.split('\n').map(s => s.trim()).find(s => s.length > 4 && s.length < 60 && /[A-Za-z]{3}/.test(s) && !/receipt|invoice|tax|booking|confirm|thank|payment|paid|successful|total|date|page|www\.|http|@|gst|bill\b|^\d|:\d\d/i.test(s) && !PLATFORMS.some(([, re]) => re.test(s)) && !/^(?:agoda|airbnb|phonepe|gpay|paytm)$/i.test(s)); r.name = cleanName(ln || ''); }
+  r.paid = /payment\s*(?:successful|received|completed|done)|paid\s*successfully|transaction\s*successful|amount\s*paid|you\s*paid|\bpaid\b/i.test(t);
+  r.type = (TYPE_KW.find(([, re]) => re.test(t)) || ['Other'])[0];
+  return r;
+}
+
+/* turn parsed values into editable suggestions for the open form */
+function suggestionsFor(c, r) {
+  const S_ = []; const add = (label, target, value, kind) => { if (value !== '' && value != null && value !== 0) S_.push({ label, target, value: String(value), kind: kind || 'input' }); };
+  const refNote = [r.ref && 'Ref: ' + r.ref, r.txn && 'Txn: ' + r.txn].filter(Boolean).join(' · ');
+  if (c === 'stays') {
+    const n = nightsBetween(r.checkin, r.checkout) || nightsBetween($('#f_checkin') && $('#f_checkin').value, $('#f_checkout') && $('#f_checkout').value) || 1;
+    add('Property name', 'f_name', r.name); add('Booked on', 'f_platform', r.platform, 'select');
+    add('Check-in', 'f_checkin', r.checkin); add('Check-out', 'f_checkout', r.checkout);
+    if (r.amount) add(`Price per night (total ${inr(r.amount)} ÷ ${n})`, 'f_price', Math.round(r.amount / n));
+    add('Status', 'f_status', r.paid ? 'Paid' : 'Booked', 'select'); add('Add to notes', 'f_notes', refNote, 'append');
+  } else if (c === 'activities') {
+    add('Activity', 'f_name', r.name); if (r.amount) { add('Ticket price (whole booking)', 'f_price', r.amount); add('Price is', 'f_priceType', 'per group', 'select'); add('How many', 'f_qty', 1); }
+    add('Status', 'f_status', r.paid ? 'Paid' : 'Booked', 'select'); add('Add to notes', 'f_notes', [refNote, r.date && 'Date: ' + fmtD(r.date)].filter(Boolean).join(' · '), 'append');
+  } else if (c === 'budget') {
+    add('Item', 'f_item', r.name || r.paidTo); add('Amount (₹)', 'f_amount', r.amount); add('Category', 'f_category', ({ Fuel: 'Transport', Tolls: 'Transport', Vehicle: 'Transport', Stay: 'Stay', Houseboat: 'Stay', Food: 'Food', 'Snacks & tea': 'Food', Tickets: 'Activities', Activities: 'Activities', Shopping: 'Shopping' })[r.type] || '', 'select');
+    add('Status', 'f_status', r.paid ? 'Paid' : 'Quoted', 'select'); add('Add to notes', 'f_notes', refNote, 'append');
+  } else if (c === 'photographers') {
+    add('Price', 'f_price', r.amount ? inr(r.amount) : ''); add('Add to notes', 'f_notes', [refNote, r.date && 'Date: ' + fmtD(r.date)].filter(Boolean).join(' · '), 'append');
+  } else if (c === 'settlements') {
+    add('Amount (₹)', 'f_amount', r.amount); add('Date', 'f_date', r.date); add('How', 'f_method', r.payApp || '', 'select');
+    add('Note', 'f_note', [r.paidTo && 'To ' + r.paidTo, r.txn && 'Txn ' + r.txn].filter(Boolean).join(' · '));
+  } else if (c === 'expenses') {
+    add('What was it?', 'e_title', r.paidTo || r.name); add('Amount paid (₹)', 'e_amt', r.amount); add('Date', 'e_date', r.date);
+    add('Type', 'etype', r.type, 'etype'); add('Notes', 'e_notes', refNote, 'append');
+  }
+  return S_;
+}
+async function readAttachment(key) {
+  const panel = $('#readPanel'); if (!panel) return;
+  const say = msg => { panel.innerHTML = `<div class="read-box"><div class="spinner" aria-hidden="true"></div><span>${esc(msg)}</span></div>`; };
+  say('Getting the file…'); try { panel.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch (e) {}
+  try {
+    const s = await attSource(key); if (!s) throw new Error('File not found');
+    const text = await extractText(s.blob, s.type, say);
+    if (s.pend) s.pend.text = text; else if (s.file && !s.file.text) run(B.update('files', s.file.id, { text: text.slice(0, 4000) }));
+    const r = parseReceipt(text); const sug = suggestionsFor(editing.c, r);
+    editing.sugg = sug;
+    panel.innerHTML = `<div class="read-box done"><div style="display:grid;gap:4px"><b>Found in ${esc(s.name)}</b><span class="hint">${sug.length ? 'Untick or correct anything wrong, then tap Fill form. You can still edit every field afterwards.' : 'Couldn’t spot any details. Check the text below and type them in.'}</span></div>
+      ${sug.map((g, i) => `<label class="sugg"><input type="checkbox" checked data-si="${i}"><span>${esc(g.label)}</span><input type="text" class="sugg-v" data-si="${i}" value="${esc(g.value)}" aria-label="${esc(g.label)}"></label>`).join('')}
+      <div class="chips">${sug.length ? '<button type="button" class="btn sm primary" data-act="applySugg">Fill form</button>' : ''}<button type="button" class="btn sm" data-act="closeRead">Close</button></div>
+      <details><summary class="by">Text read from the file</summary><pre class="code">${esc(text.slice(0, 3000) || '(no text found)')}</pre></details></div>`;
+    try { panel.scrollIntoView({ block: 'start', behavior: 'smooth' }); } catch (e) {}
+  } catch (e) { panel.innerHTML = `<div class="read-box"><span>Couldn’t read that file: ${esc(e.message || e)}. Fill the details in by hand.</span></div>`; }
+}
+function applySuggestions() {
+  const sug = editing.sugg || []; let n = 0;
+  sug.forEach((g, i) => {
+    const on = document.querySelector(`.sugg input[type=checkbox][data-si="${i}"]`); if (!on || !on.checked) return;
+    const v = document.querySelector(`.sugg-v[data-si="${i}"]`).value.trim(); if (!v) return;
+    if (g.kind === 'etype') { const b = document.querySelector(`#expForm .typebtn[data-v="${CSS.escape(v)}"]`); if (b) { document.querySelectorAll('#expForm .typebtn').forEach(x => x.setAttribute('aria-pressed', x === b)); n++; } return; }
+    const el = document.getElementById(g.target); if (!el) return;
+    if (g.kind === 'select') { const opt = [...el.options].find(o => o.value.toLowerCase() === v.toLowerCase() || o.text.toLowerCase() === v.toLowerCase()); if (opt) { el.value = opt.value; n++; } return; }
+    if (g.kind === 'append') { el.value = el.value ? (el.value.includes(v) ? el.value : el.value + ' · ' + v) : v; n++; return; }
+    el.value = v; n++;
+  });
+  if ($('#expForm')) { if (curMode() === 'exact') resetSplitVals(); recalcSplit(); }
+  $('#readPanel').innerHTML = ''; toast(n ? `Filled ${n} field${n > 1 ? 's' : ''} – check and Save` : 'Nothing was filled');
+  const sh = document.querySelector('#sheetRoot .sheet'); if (sh) sh.scrollTo({ top: 0, behavior: 'smooth' });
+}
+async function uploadPending(c, id) {
+  const pend = (editing && editing.pending) || []; if (!pend.length) return;
+  toast(`Uploading ${pend.length} file${pend.length > 1 ? 's' : ''}…`);
+  let ok = 0;
+  for (const p of pend) { try { await saveAttachment(c, id, p.file, p.text); ok++; } catch (e) { toast('Couldn’t upload: ' + (e.message || e)); } }
+  if (ok) toast(`${ok} file${ok > 1 ? 's' : ''} saved`);
+}
+async function addPendingFiles(input) {
+  const files = [...input.files]; input.value = ''; if (!files.length || !editing) return;
+  editing.pending = editing.pending || [];
+  for (const f of files) {
+    if (!(/^image\//.test(f.type) || isPdf(f.type) || /\.(pdf|jpe?g|png|heic|webp)$/i.test(f.name))) { toast(f.name + ' isn’t an image or PDF'); continue; }
+    if ((isPdf(f.type) || /\.pdf$/i.test(f.name)) && f.size > 8e6) { toast(f.name + ' is over 8 MB'); continue; }
+    editing.pending.push({ file: f, preview: /^image\//.test(f.type) ? URL.createObjectURL(f) : '' });
+  }
+  renderAttList();
+  if (editing.autoRead && editing.pending.length) { editing.autoRead = false; readAttachment('p:' + (editing.pending.length - files.length < 0 ? 0 : editing.pending.length - files.length)); }
+}
+
+/* ---------- settings / sharing ---------- */
+const RULES = `rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /trips/{tripId}/{document=**} {
+      allow read, write: if request.time < timestamp.date(2027, 3, 31);
+    }
+  }
+}`;
+function parseConfig(txt) {
+  const o = {}; const re = /["']?(apiKey|authDomain|projectId|storageBucket|messagingSenderId|appId|measurementId|databaseURL)["']?\s*:\s*["'`]([^"'`]+)["'`]/g; let m;
+  while ((m = re.exec(txt || ''))) o[m[1]] = m[2].trim();
+  if (!o.apiKey || !o.projectId) throw new Error('couldn’t find apiKey and projectId – paste the whole firebaseConfig block');
+  return o;
+}
+function shareLink(cfg) { return location.origin + location.pathname + '#join=' + b64e(JSON.stringify(cfg)); }
+function openSettings() {
+  const cfg = ls.get(KEYS.cfg, null);
+  const sharing = B.mode === 'cloud' && cfg ? `
+    <div class="banner"><p><b>Shared trip connected.</b> Trip code <code>${esc(cfg.trip)}</code>. Send this link to the group – anyone who opens it can view, add, edit and delete.</p>
+    <div class="copybox"><input id="shareLink" readonly value="${esc(shareLink(cfg))}" aria-label="Share link"><button class="btn sm dark" data-act="copy" data-target="shareLink">${IC.copy} Copy</button></div>
+    <div class="chips"><a class="btn sm primary" href="https://wa.me/?text=${encodeURIComponent((meta().tripName || 'Our trip') + ' – open, add and edit the plan: ' + shareLink(cfg))}" target="_blank" rel="noopener">Share on WhatsApp</a><button class="btn sm danger" data-act="disconnect">Disconnect this phone</button></div></div>`
+  : `<p style="margin:0">To let the whole group edit from their own phones, connect a free Google Firebase database (about 10 minutes, all doable on your phone):</p>
+    <ol class="steps"><li>Open <a class="link-out" href="https://console.firebase.google.com" target="_blank" rel="noopener">console.firebase.google.com ${IC.out}</a> and sign in with Google. Tap <b>Create a project</b> (Analytics can be off).</li>
+    <li>Go to <b>Build → Firestore Database → Create database</b>. Pick location <b>asia-south1 (Mumbai)</b>, start in <b>production mode</b>.</li>
+    <li>Open the <b>Rules</b> tab, replace everything with the rules below and tap <b>Publish</b>.</li>
+    <li>Go to <b>Project settings (gear) → Your apps → Web (&lt;/&gt;)</b>, register an app (no hosting), and copy the <code>firebaseConfig</code> block.</li>
+    <li>Paste it below and tap <b>Connect</b>. Then load the Kerala plan and share the link.</li></ol>
+    <pre class="code" id="rulesText">${esc(RULES)}</pre><div><button class="btn sm" data-act="copyText" data-text="rules">${IC.copy} Copy rules</button></div>
+    <div class="field"><label for="cfgBox">Firebase config</label><textarea id="cfgBox" placeholder="const firebaseConfig = { apiKey: &quot;…&quot;, projectId: &quot;…&quot;, … };"></textarea><span class="hint">The rules let anyone with your link edit until 31 Mar 2027 – keep the link inside the group.</span></div>
+    <div class="field"><label for="tripCode">Trip code</label><input id="tripCode" value="kerala27-${Math.random().toString(36).slice(2, 8)}"><span class="hint">Acts like a private room name. Keep it random.</span></div>
+    <div><button class="btn primary" data-act="connect">Connect & go live</button></div>`;
+  openSheet('Settings & sharing', `
+    <div class="field"><label for="myName">Your name</label><input id="myName" value="${esc(S.name)}" placeholder="So others see who edited what"></div>
+    <div><button class="btn sm" data-act="saveName">Save name</button> <button class="btn sm" data-act="edit" data-c="meta" data-id="trip">${IC.edit} Trip name, dates & headcount</button></div>
+    <h3>Sharing</h3>${sharing}
+    <h3>Backup</h3>
+    <p class="muted" style="margin:0">Download everything as a file, or restore from one. Photos are included.</p>
+    <div class="chips"><button class="btn sm" data-act="export">Download backup</button><label class="btn sm" for="importFile">Restore from file</label><input id="importFile" type="file" accept="application/json,.json" hidden>${B.mode === 'local' ? '<button class="btn sm danger" data-act="reset">Reset to the Kerala plan</button>' : ''}</div>
+    <h3>Look</h3><div class="chips"><button class="chip" data-act="theme" data-k="">Follow phone</button><button class="chip" data-act="theme" data-k="light">Light</button><button class="chip" data-act="theme" data-k="dark">Dark</button></div>`);
+}
+function exportAll() {
+  const d = {}; COLLS.forEach(c => d[c] = DB[c].map(x => Object.assign({}, x)));
+  const blob = new Blob([JSON.stringify({ app: 'kerala-trip', v: 1, at: new Date().toISOString(), data: d })], { type: 'application/json' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'kerala-trip-backup.json'; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+}
+async function importFile(file) {
+  try {
+    const j = JSON.parse(await file.text()); const d = j.data || j; if (!d.days) throw new Error('not a trip backup');
+    if (B.mode === 'local') { COLLS.forEach(c => DB[c] = d[c] || []); Local.save(); render(); toast('Restored on this phone.'); }
+    else { if (DB.days.length) { toast('Shared trip already has data. Restore into an empty trip (new trip code).'); return; } await B.importAll(d); toast('Restored into the shared trip.'); }
+    closeSheet();
+  } catch (e) { toast('Could not read that backup: ' + e.message); }
+}
+
+/* ---------- toast ---------- */
+let tt; function toast(msg) { $('#toastRoot').innerHTML = `<div class="toast" role="status">${esc(msg)}</div>`; clearTimeout(tt); tt = setTimeout(() => $('#toastRoot').innerHTML = '', 3200); }
+function copyFrom(el) {
+  const v = el.value != null ? el.value : el.textContent;
+  const fallback = () => { try { el.select && el.select(); document.execCommand('copy'); toast('Copied'); } catch (e) { toast('Select and copy manually'); } };
+  if (navigator.clipboard) navigator.clipboard.writeText(v).then(() => toast('Copied'), fallback); else fallback();
+}
+
+/* ---------- events ---------- */
+let armed = null;
+document.addEventListener('click', async e => {
+  const t = e.target.closest('[data-act]'); if (!t) return;
+  const a = t.dataset.act;
+  if (a === 'scrim') { if (e.target === t) closeSheet(); return; }
+  if (a === 'closeViewer') { if (e.target === t || t.classList.contains('icon-btn')) $('#viewerRoot').innerHTML = ''; return; }
+  if (a !== 'multi' && t.tagName !== 'A' && t.tagName !== 'LABEL') e.preventDefault();
+  switch (a) {
+    case 'tab': S.tab = t.dataset.k; ls.set(KEYS.tab, S.tab); closeSheet(); render(); window.scrollTo({ top: 0 }); break;
+    case 'goDay': S.day = +t.dataset.n; ls.set(KEYS.day, S.day); S.tab = 'days'; ls.set(KEYS.tab, 'days'); render(); window.scrollTo({ top: 0 }); break;
+    case 'day': S.day = +t.dataset.n; ls.set(KEYS.day, S.day); render(); break;
+    case 'pf': S.placeFilter = t.dataset.k; render(); break;
+    case 'mf': S.mustFilter = t.dataset.k; render(); break;
+    case 'place': openPlace(t.dataset.id); break;
+    case 'add': openForm(t.dataset.c, null, t.dataset.c === 'days' ? { dayNo: (Math.max(0, ...DB.days.map(d => +d.dayNo || 0)) + 1) } : {}); break;
+    case 'addStay': openForm('stays', null, { stop: t.dataset.stop, checkin: t.dataset.ci, checkout: t.dataset.co, status: 'Idea' }); break;
+    case 'edit': openForm(t.dataset.c, t.dataset.id); break;
+    case 'toggle': { const c = t.dataset.c, it = DB[c].find(x => x.id === t.dataset.id); if (it) run(B.update(c, it.id, { done: !it.done })); break; }
+    case 'multi': t.setAttribute('aria-pressed', t.getAttribute('aria-pressed') !== 'true'); break;
+    case 'closeSheet': closeSheet(); break;
+    case 'del': {
+      if (armed !== t) { armed = t; t.classList.add('armed'); t.textContent = 'Tap again to delete'; setTimeout(() => { if (armed === t) { armed = null; t.classList.remove('armed'); t.textContent = 'Delete'; } }, 3000); break; }
+      const { c, id } = editing;
+      if (c === 'members' && (DB.expenses.some(x => x.paidBy === id || (x.shares || []).some(r => r.m === id)) || DB.settlements.some(p => p.from === id || p.to === id))) { toast('This person is in some expenses or payments. Edit or delete those first.'); armed = null; t.classList.remove('armed'); t.textContent = 'Delete'; break; }
+      filesFor(c, id).forEach(deleteAttachment);
+      closeSheet(); run(B.remove(c, id)); if (c === 'places') DB.photos.filter(p => p.placeId === id).forEach(p => run(B.remove('photos', p.id))); toast('Deleted'); break; }
+    case 'photo': { const p = DB.photos.find(x => x.id === t.dataset.id); if (!p) break;
+      openSheet(p.caption || 'Photo', `<div class="lightbox"><img src="${esc(imgSrc(p.src))}" alt=""></div><span class="by">${p._by ? 'Added by ' + esc(p._by) : ''}</span><div class="actions"><button class="btn danger" data-act="delPhoto" data-id="${esc(p.id)}" data-place="${esc(p.placeId)}">Delete photo</button><div class="r"><button class="btn" data-act="place" data-id="${esc(p.placeId)}">Back</button></div></div>`); break; }
+    case 'photoUrl': openSheet('Photo', `<div class="lightbox"><img src="${esc(t.dataset.u)}" alt=""></div><p class="muted" style="margin:0">From an image link. Remove it in Edit place → Image links.</p>`); break;
+    case 'delPhoto': if (armed !== t) { armed = t; t.classList.add('armed'); t.textContent = 'Tap again to delete'; break; } run(B.remove('photos', t.dataset.id)); toast('Photo deleted'); setTimeout(() => openPlace(t.dataset.place), 200); break;
+    case 'copy': copyFrom(document.getElementById(t.dataset.target)); break;
+    case 'copyText': copyFrom({ value: RULES }); break;
+    case 'settings': openSettings(); break;
+    case 'retry': ls.del('ktrip.rest'); location.reload(); break;
+    case 'saveName': S.name = $('#myName').value.trim(); ls.set(KEYS.name, S.name); toast('Saved'); render(); break;
+    case 'connect': {
+      try { const fb = parseConfig($('#cfgBox').value); const trip = ($('#tripCode').value || '').trim().replace(/[^\w-]/g, '') || 'kerala27'; ls.set(KEYS.cfg, { fb, trip }); ls.del('ktrip.localOnly'); toast('Connecting…'); setTimeout(() => location.reload(), 400); }
+      catch (err) { toast('That config doesn’t look right: ' + err.message); } break; }
+    case 'disconnect': if (armed !== t) { armed = t; t.classList.add('armed'); t.textContent = 'Tap again – this phone goes back to its own copy'; break; } ls.del(KEYS.cfg); ls.set('ktrip.localOnly', true); location.reload(); break;
+    case 'seedCloud': t.disabled = true; run(B.importAll(seed()).then(() => toast('Kerala plan loaded for everyone'))); break;
+    case 'seedCloudLocal': { t.disabled = true; const d = ls.get(KEYS.local, null) || seed(); run(B.importAll(d).then(() => toast('Uploaded'))); break; }
+    case 'export': exportAll(); break;
+    case 'reset': if (armed !== t) { armed = t; t.classList.add('armed'); t.textContent = 'Tap again to reset this phone'; break; } closeSheet(); Local.reset(); toast('Reset to the Kerala plan'); break;
+    case 'etype': document.querySelectorAll('#expForm .typebtn').forEach(x => x.setAttribute('aria-pressed', x === t)); if (!$('#e_title').value) $('#e_title').placeholder = t.dataset.v; break;
+    case 'emode': document.querySelectorAll('#expForm .seg button').forEach(x => x.setAttribute('aria-checked', x === t)); resetSplitVals(); recalcSplit(); break;
+    case 'eall': case 'enone': document.querySelectorAll('#expForm .split-row .inc input').forEach(cb => cb.checked = a === 'eall'); resetSplitVals(); recalcSplit(); break;
+    case 'qr': showQR(t.dataset.from, t.dataset.to, +t.dataset.amt); break;
+    case 'wa': {
+      const from = mOf(t.dataset.from) || {}, to = mOf(t.dataset.to) || {}, amt = +t.dataset.amt;
+      const msg = `Hi ${from.name || ''}! Kerala trip settle-up: please pay ${to.name || ''} ${inr(amt)}.` + (to.upi ? `\nUPI ID: ${to.upi}\nPhonePe / any UPI app → Pay to UPI ID → ${to.upi} → ${inr(amt)}` : '') + `\nDetails in the trip app: ${location.origin + location.pathname}`;
+      const n = waNum(from.phone); window.open(`https://wa.me/${n}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener'); break; }
+    case 'markPaid': {
+      if (armed !== t) { armed = t; t.classList.add('armed'); t.textContent = 'Tap again to confirm'; setTimeout(() => { if (armed === t) { armed = null; render(); } }, 3000); break; }
+      armed = null; run(B.add('settlements', { from: t.dataset.from, to: t.dataset.to, amount: +t.dataset.amt, date: today(), method: 'PhonePe', note: 'Settle-up' })); toast('Payment recorded'); break; }
+    case 'attView': viewAttachment(t.dataset.k); break;
+    case 'attRead': readAttachment(t.dataset.k); break;
+    case 'attDel': {
+      if (armed !== t) { armed = t; t.classList.add('armed'); t.textContent = 'Remove?'; setTimeout(() => { if (armed === t) { armed = null; t.classList.remove('armed'); t.textContent = '✕'; } }, 3000); break; }
+      armed = null; const k = t.dataset.k;
+      if (k.startsWith('p:')) editing.pending.splice(+k.slice(2), 1); else { const f = DB.files.find(x => x.id === k.slice(2)); if (f) deleteAttachment(f); }
+      renderAttList(); toast('File removed'); break; }
+    case 'applySugg': applySuggestions(); break;
+    case 'closeRead': $('#readPanel').innerHTML = ''; break;
+    case 'scan': openForm(t.dataset.c, null, t.dataset.c === 'stays' ? { status: 'Booked' } : t.dataset.c === 'activities' ? { status: 'Booked' } : {}); if (editing) { editing.autoRead = true; const inp = $('#attInput'); if (inp) inp.click(); } break;
+    case 'theme': { const k = t.dataset.k; if (k) document.documentElement.setAttribute('data-theme', k); else document.documentElement.removeAttribute('data-theme'); ls.set('ktrip.theme', k); break; }
+  }
+});
+document.addEventListener('input', e => { if (e.target.closest('#expForm')) { if (e.target.id === 'e_amt' || e.target.id === 'e_tip') { if (curMode() === 'exact') resetSplitVals(); } recalcSplit(); } });
+document.addEventListener('submit', e => {
+  if (e.target.id === 'expForm') { e.preventDefault(); saveExpense(); return; }
+  if (e.target.id !== 'theForm') return; e.preventDefault();
+  const { c } = editing; const id = editing.id; const data = readForm(); const newId = id || (c === 'meta' ? 'trip' : uid());
+  if (c === 'meta') { run(B.update('meta', 'trip', data)); }
+  else if (id) run(B.update(c, id, data));
+  else { if (c === 'timeline' || c === 'mustdo') data.done = false; run(B.add(c, data, newId)); }
+  const ed = editing; closeSheet(); toast('Saved');
+  if (ATTACH.has(c) && ed.pending && ed.pending.length) { editing = ed; uploadPending(c, newId).finally(() => { if (editing === ed) editing = null; }); }
+});
+document.addEventListener('change', e => {
+  if (e.target.id === 'upl') uploadPhotos(e.target);
+  if (e.target.id === 'attInput') addPendingFiles(e.target);
+  if (e.target.id === 'meSel') { S.me = e.target.value; ls.set('ktrip.me', S.me); render(); }
+  if (e.target.closest && e.target.closest('#expForm .inc')) { resetSplitVals(); recalcSplit(); }
+  if (e.target.id === 'importFile' && e.target.files[0]) importFile(e.target.files[0]);
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { if ($('#viewerRoot').innerHTML) $('#viewerRoot').innerHTML = ''; else closeSheet(); } });
+$('#settingsBtn').addEventListener('click', openSettings);
+$('#fab').addEventListener('click', () => {
+  const f = FAB[S.tab] || FAB.home; const def = {};
+  if (f[0] === 'timeline') def.dayNo = S.tab === 'days' ? S.day : '';
+  if (f[0] === 'mustdo') def.category = S.mustFilter !== 'All' ? S.mustFilter : 'Do';
+  if (f[0] === 'places' && S.placeFilter !== 'All') def.tags = [S.placeFilter];
+  openForm(f[0], null, def);
+});
+addEventListener('online', () => { S.online = true; renderSync(); });
+addEventListener('offline', () => { S.online = false; renderSync(); });
+
+/* ---------- boot ---------- */
+(function boot() {
+  const th = ls.get('ktrip.theme', ''); if (th) document.documentElement.setAttribute('data-theme', th);
+  if (location.hash.startsWith('#join=')) {
+    try { const cfg = JSON.parse(b64d(location.hash.slice(6))); if (cfg && cfg.fb && cfg.trip) ls.set(KEYS.cfg, cfg); } catch (e) { toast('That invite link is broken – ask for a fresh one.'); }
+    history.replaceState(null, '', location.pathname + location.search);
+  }
+  const cfg = ls.get(KEYS.cfg, null) || (ls.get('ktrip.localOnly', false) ? null : BUILTIN);
+  if (cfg && cfg.fb && cfg.trip) {
+    if (!ls.get(KEYS.cfg, null)) ls.set(KEYS.cfg, cfg);
+    if (ls.get('ktrip.rest', false)) { Rest.init(cfg); B = Rest; Rest.start(); }
+    else {
+      B = Cloud; render();
+      const timer = setTimeout(() => { if (!Cloud.serverOk) fallbackToRest(cfg); }, 7000);
+      Cloud.start(cfg).catch(() => { clearTimeout(timer); fallbackToRest(cfg); });
+    }
+  } else { B = Local; Local.start(); }
+  if (!S.name && !ls.get(KEYS.welcomed, false)) {
+    setTimeout(() => { ls.set(KEYS.welcomed, true); openSheet('Hey, who’s planning?', `<p style="margin:0">Add your name so the group can see who added or changed what. You can skip this.</p><div class="field"><label for="myName">Your name</label><input id="myName" placeholder="e.g. Ayen"></div><div class="actions"><button class="btn" data-act="closeSheet">Skip</button><div class="r"><button class="btn primary" data-act="saveName">Let’s go</button></div></div>`); }, 500);
+  }
+})();
+document.addEventListener('click', e => { if (e.target.closest('[data-act="saveName"]') && $('#sheetRoot .sheet[aria-label^="Hey"]')) closeSheet(); });
+})();
+</script>
+</body>
+</html>
