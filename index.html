@@ -3485,10 +3485,22 @@ async function aiAsk() {
   const q = ($('#aiQ').value || '').trim(); if (!q) { toast('Type a question'); return; } if (q.length > 600) { toast('Please keep it under 600 characters'); return; }
   const out = $('#aiOut'); out.insertAdjacentHTML('afterbegin', `<div class="ai-q">${esc(q)}</div><div class="ai-a ai-wait">Thinking…</div>`); $('#aiQ').value = '';
   const el = out.querySelector('.ai-wait');
+  let url = String(meta().aiUrl || '').trim().replace(/\s+/g, '');
+  if (!/^https?:\/\//i.test(url)) url = 'https://' + url.replace(/^\/+/, '');
+  url = url.replace(/^http:\/\//i, 'https://');
   try {
-    const r = await fetch(meta().aiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + await idToken() }, body: JSON.stringify({ question: q, context: aiContext() }) });
+    let r;
+    try { r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + await idToken() }, body: JSON.stringify({ question: q, context: aiContext() }) }); }
+    catch (netErr) {
+      // the request never got a readable reply – find out why
+      let probe = '';
+      try { const g = await fetch(url, { method: 'GET' }); const gj = await g.json().catch(() => null); probe = gj && gj.ok ? 'reachable' : 'odd'; } catch (e2) { probe = 'unreachable'; }
+      throw new Error(probe === 'unreachable'
+        ? `the app can’t reach ${url}. Check the AI assistant address in ⚙ → Trip name, dates & headcount (copy it exactly from Cloudflare, e.g. https://kerala-ai.yourname.workers.dev).`
+        : `${url} is running, but it crashed while answering. In Cloudflare open the worker → Logs → Begin log stream, press Ask again, and look at the error shown there.`);
+    }
     const j = await r.json().catch(() => ({}));
-    if (!r.ok) throw new Error(j.error || ('HTTP ' + r.status));
+    if (!r.ok) throw new Error(j.error || ('HTTP ' + r.status + ' from ' + url));
     el.classList.remove('ai-wait'); el.innerHTML = mdLite(j.answer || 'No answer.'); S.aiLog.push({ q, a: j.answer || '' });
   } catch (e) { el.classList.remove('ai-wait'); el.innerHTML = `<span class="neg">Couldn’t get an answer: ${esc(e.message)}</span>`; }
 }
