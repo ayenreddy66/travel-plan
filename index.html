@@ -763,6 +763,143 @@ h2{font-size:1.45rem} h3{font-size:1.08rem}
 .roles-tbl td:not(:first-child),.roles-tbl th:not(:first-child){text-align:center}
 @media print{ .ai-fab{display:none !important} }
 @media print{ .top,.bnav,.fab,.no-print,#toastRoot{display:none !important} body{padding:0; background:#fff} .card{box-shadow:none; border:1px solid #ddd} }
+
+/* ===== v9 Trip Passport ===== */
+:root{ --pp-navy:#0F2A4A; --pp-navy2:#123668; --pp-gold:#C9A961; --pp-gold2:#F1DFA4; --pp-paper:#F8F5EC; --pp-paper2:#EFE7D4; --pp-ink:#1D2A3A }
+.pp-wrap{display:flex; justify-content:center; padding:10px 0 28px; perspective:2200px}
+.pp-book{width:100%; max-width:360px; height:500px; position:relative; transform-style:preserve-3d}
+.pp-front,.pp-inside{position:absolute; inset:0; border-radius:22px 28px 28px 22px; overflow:hidden; backface-visibility:hidden}
+.pp-front{background:radial-gradient(120% 80% at 30% 10%,#1B4A86,transparent 60%),linear-gradient(150deg,var(--pp-navy2),#0A1E37); color:#F4EEDC; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:28px; transform-origin:left center; transition:transform 1.25s cubic-bezier(.22,1,.36,1); box-shadow:inset 10px 0 18px rgba(0,0,0,.35), 0 30px 60px rgba(5,15,30,.45); border:1px solid rgba(241,223,164,.25)}
+.pp-front::before{content:""; position:absolute; inset:12px; border:1px solid rgba(241,223,164,.35); border-radius:16px 20px 20px 16px; pointer-events:none}
+.pp-book.open .pp-front{transform:rotateY(-170deg)}
+.pp-inside{background:linear-gradient(180deg,var(--pp-paper),var(--pp-paper2)); display:grid; place-items:center; color:var(--pp-ink); box-shadow:0 10px 40px rgba(0,0,0,.18)}
+.pp-inside-hint{font:600 14px var(--f-body); opacity:.6}
+.pp-seal{width:86px; height:86px; border-radius:50%; display:grid; place-items:center; font:900 32px/1 var(--f-display); color:#3B2C0B; background:conic-gradient(from 20deg,#B8913F,#F6E3A6,#C9A256,#FFF1C2,#B8913F); box-shadow:0 0 0 4px rgba(241,223,164,.2), inset 0 2px 6px rgba(255,255,255,.6); margin-bottom:18px}
+.pp-rep{font:600 10px/1 var(--f-body); letter-spacing:.32em; text-transform:uppercase; opacity:.7; margin:0 0 10px}
+.pp-front h1{font:700 27px/1.15 var(--f-display); letter-spacing:.08em; color:#F7EFD8}
+.pp-front h2{font:600 13px/1 var(--f-body); letter-spacing:.42em; text-transform:uppercase; margin-top:12px; background:linear-gradient(90deg,#C9A961,#FFF0C0,#C9A961); -webkit-background-clip:text; background-clip:text; color:transparent}
+.pp-holder{margin:26px 0 4px; font-size:14px; opacity:.9}
+.pp-meta{margin:0; font-size:12px; opacity:.65}
+.pp-open{margin-top:26px; padding:13px 26px; border:0; border-radius:999px; font:700 14px var(--f-body); color:#2A1E05; cursor:pointer; background:linear-gradient(120deg,#B8913F,#F6E3A6 45%,#C9A256); box-shadow:0 8px 20px rgba(0,0,0,.3)}
+.pp-sheen,.pp-foil{position:absolute; inset:0; pointer-events:none; background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.16) 48%,transparent 60%); background-size:250% 100%; animation:ppSheen 6s ease-in-out infinite}
+@keyframes ppSheen{0%{background-position:130% 0}60%,100%{background-position:-60% 0}}
+
+.pp-progress .pp-pct{font:700 20px var(--f-display); color:var(--gold-ink, #5E4A20)}
+.pp-bar{height:12px; border-radius:99px; background:var(--surface-2); overflow:hidden; margin:4px 0 10px}
+.pp-bar i{display:block; height:100%; border-radius:99px; background:linear-gradient(90deg,#B8913F,#F1DFA4,#C9A961); transition:width .8s ease}
+
+.pp-page{background:linear-gradient(180deg,var(--pp-paper),var(--pp-paper2)); color:var(--pp-ink); border-radius:var(--r-lg); padding:18px 14px 20px; box-shadow:var(--shadow); position:relative; overflow:hidden; margin-top:14px;
+  background-image:repeating-linear-gradient(0deg,transparent 0 22px,rgba(15,42,74,.035) 22px 23px),linear-gradient(180deg,var(--pp-paper),var(--pp-paper2))}
+.pp-page-h{font:600 11px var(--f-body); letter-spacing:.3em; text-transform:uppercase; text-align:center; opacity:.55; margin-bottom:14px}
+.pp-stamps{display:grid; grid-template-columns:repeat(2,1fr); gap:14px 10px}
+@media (min-width:600px){ .pp-stamps{grid-template-columns:repeat(4,1fr)} }
+.pp-stamp{aspect-ratio:1.25; border-radius:50%; border:2.5px dashed rgba(15,42,74,.22); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:2px; padding:8px; color:rgba(29,42,58,.45); transform:rotate(var(--rot))}
+.pp-stamp b{font:700 13px/1.15 var(--f-display); text-transform:uppercase; letter-spacing:.04em}
+.pp-stamp span{font-size:10.5px; line-height:1.2}
+.pp-st-e{font-size:20px!important; filter:grayscale(1); opacity:.6}
+.pp-stamp.on{border:3px double #A23B3B; color:#8E2F2F; background:radial-gradient(circle,rgba(162,59,59,.06),transparent 70%); box-shadow:inset 0 0 0 4px rgba(162,59,59,.12)}
+.pp-stamp.on:nth-child(3n+2){border-color:#1F5A8A; color:#1F4E78; box-shadow:inset 0 0 0 4px rgba(31,90,138,.12)}
+.pp-stamp.on:nth-child(3n){border-color:#2D6B48; color:#245A3C; box-shadow:inset 0 0 0 4px rgba(45,107,72,.12)}
+.pp-stamp.on .pp-st-e{filter:none; opacity:1}
+.pp-stamp.drop{opacity:0; animation:ppDrop .75s cubic-bezier(.2,.9,.3,1.3) forwards; animation-delay:calc(.25s + var(--dl))}
+@keyframes ppDrop{0%{opacity:0; transform:translateY(-120px) scale(2.2) rotate(-40deg)}55%{opacity:1; transform:translateY(4px) scale(.92) rotate(calc(var(--rot) + 6deg))}100%{opacity:1; transform:rotate(var(--rot))}}
+
+.pp-deck{display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; padding:6px 2px 14px; margin:0 -2px; scrollbar-width:none; -webkit-overflow-scrolling:touch}
+.pp-deck::-webkit-scrollbar{display:none}
+.pp-slide{flex:0 0 min(84%,340px); scroll-snap-align:center; perspective:1400px; height:390px}
+.pp-card{position:relative; height:100%; transform-style:preserve-3d; transition:transform .8s cubic-bezier(.3,.8,.3,1); cursor:pointer; outline:none}
+.pp-card.flipped{transform:rotateY(180deg)}
+.pp-card:focus-visible{box-shadow:0 0 0 3px var(--gold); border-radius:24px}
+.pp-face{position:absolute; inset:0; border-radius:24px; overflow:hidden; backface-visibility:hidden; -webkit-backface-visibility:hidden; padding:20px; display:flex; flex-direction:column; justify-content:space-between; color:#F7F2E4; box-shadow:0 18px 40px rgba(8,25,20,.28)}
+.pp-fr{background-size:cover; background-position:center; border:1.5px solid transparent; background-clip:padding-box}
+.pp-fr::after{content:""; position:absolute; inset:0; border-radius:24px; padding:1.5px; background:linear-gradient(135deg,#F6E3A6,#9C7A35 30%,#FFF1C2 50%,#9C7A35 70%,#F6E3A6); -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; pointer-events:none}
+.pp-top{display:flex; justify-content:space-between; align-items:center; position:relative}
+.pp-day{font:700 11px var(--f-body); letter-spacing:.28em; opacity:.85}
+.pp-rar{font-size:13px; color:#F1DFA4; letter-spacing:1px} .pp-rar i{font-style:normal; opacity:.3}
+.pp-big{font-size:64px; text-align:center; filter:drop-shadow(0 6px 14px rgba(0,0,0,.35)); position:relative}
+.pp-title{font:700 28px/1.05 var(--f-display); text-shadow:0 2px 12px rgba(0,0,0,.4)}
+.pp-route{font-size:14px; opacity:.88; margin-top:6px}
+.pp-foot{display:flex; justify-content:space-between; align-items:center; gap:8px; margin-top:14px; font-size:12px}
+.pp-tap{opacity:.7} .pp-date{opacity:.75}
+.pp-got{display:inline-flex; align-items:center; gap:6px; padding:6px 12px; border-radius:99px; font:700 12px var(--f-body); color:#2A1E05; background:linear-gradient(120deg,#B8913F,#F6E3A6 45%,#C9A256)}
+.pp-bk{transform:rotateY(180deg); background:radial-gradient(120% 70% at 80% 0%,#1E4C80,transparent 60%),linear-gradient(160deg,var(--pp-navy),#0B1F38); justify-content:flex-start; gap:12px}
+.pp-facts{margin:0; padding:0 0 0 18px; font-size:13.5px; line-height:1.5; display:grid; gap:6px}
+.pp-ch{background:rgba(241,223,164,.12); border:1px solid rgba(241,223,164,.3); border-radius:14px; padding:10px 12px}
+.pp-ch span{font:700 11px var(--f-body); letter-spacing:.14em; text-transform:uppercase; color:#F1DFA4}
+.pp-ch p{margin:4px 0 0; font-size:14px}
+.pp-acts{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:auto}
+.pp-bk .btn:not(.primary){background:rgba(255,255,255,.1); color:#fff; border-color:rgba(255,255,255,.25)}
+.pp-lock{font-size:12px; opacity:.7}
+.pp-dots{display:flex; justify-content:center; gap:7px; margin:2px 0 18px}
+.pp-dots button{width:8px; height:8px; padding:0; border:0; border-radius:99px; background:var(--line); cursor:pointer; transition:width .25s, background .25s}
+.pp-dots button.on{width:22px; background:var(--gold, #B79A60)}
+
+.pp-badges{display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:10px}
+.pp-badge{display:flex; flex-direction:column; align-items:center; text-align:center; gap:4px; padding:12px 8px; border-radius:var(--r-md); background:var(--surface-2); color:var(--muted); min-width:0}
+.pp-badge b{font-size:13px}
+.pp-badge .by{font-size:11px}
+.pp-medal{width:52px; height:52px; border-radius:50%; display:grid; place-items:center; font-size:24px; background:var(--line); filter:grayscale(1); opacity:.6}
+.pp-badge.on{color:var(--ink); background:linear-gradient(160deg,var(--surface),var(--surface-2)); box-shadow:inset 0 0 0 1px var(--gold, #B79A60)}
+.pp-badge.on .pp-medal{filter:none; opacity:1; background:conic-gradient(from 30deg,#B8913F,#F6E3A6,#C9A256,#FFF1C2,#B8913F); box-shadow:0 4px 12px rgba(150,115,40,.35)}
+.pp-board{margin:0; padding-left:22px; display:grid; gap:6px} .pp-board li{display:flex; justify-content:space-between}
+.pp-tl{list-style:none; margin:10px 0; padding:0; display:grid; gap:10px}
+.pp-tl li{display:grid; grid-template-columns:76px 1fr; gap:10px; border-left:2px solid var(--gold, #B79A60); padding-left:10px}
+.pp-tl li > span{font:600 12px var(--f-body); color:var(--muted)} .pp-tl em{font-size:11px; color:var(--muted)} .pp-tl p{margin:2px 0 0; font-size:13px; color:var(--muted)}
+.pp-confetti{position:fixed; inset:0; pointer-events:none; z-index:999; overflow:hidden}
+.pp-confetti i{position:absolute; top:-12px; width:8px; height:12px; animation:ppFall 2s ease-in forwards}
+@keyframes ppFall{to{transform:translate(var(--dx),105vh) rotate(var(--r)); opacity:.9}}
+@media (prefers-reduced-motion:reduce){ .pp-front,.pp-card{transition:none} .pp-sheen,.pp-foil{animation:none} .pp-stamp.drop{animation:none; opacity:1} }
+.mini-add{margin-top:10px; justify-self:start; align-self:flex-start}
+/* ===== v10 Kerala Quest ===== */
+.q-tabs{margin:-4px 0 14px; flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none} .q-tabs::-webkit-scrollbar{display:none}
+.q-tabs .chip{white-space:nowrap} .q-tabs .chip.on{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+.q-hero{display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:center; padding:20px; border-radius:var(--r-lg); color:var(--hero-ink); background:radial-gradient(120% 90% at 0% 0%,#24604D,transparent 60%),linear-gradient(150deg,var(--hero),#0B1F19); box-shadow:var(--shadow); margin-bottom:14px}
+.q-hero h3{color:var(--hero-ink); margin:2px 0 10px; font-size:22px} .q-hero .eyebrow{color:var(--gold, #B79A60)}
+.q-ring{--p:0; width:112px; height:112px; border-radius:50%; display:grid; place-items:center; align-content:center; background:radial-gradient(closest-side,var(--hero) 78%,transparent 79%),conic-gradient(#E9CF8A calc(var(--p)*1%),rgba(255,255,255,.12) 0)}
+.q-ring b{font:700 26px/1 var(--f-display)} .q-ring span{font-size:11px; opacity:.75}
+.q-parts{list-style:none; margin:0; padding:0; display:grid; gap:7px; font-size:13px}
+.q-parts li{display:grid; grid-template-columns:1fr auto; gap:2px 10px} .q-parts i{grid-column:1/-1; height:5px; border-radius:9px; background:linear-gradient(90deg,#E9CF8A var(--w),rgba(255,255,255,.14) var(--w))}
+@media (max-width:420px){ .q-hero{grid-template-columns:1fr; justify-items:start} }
+.q-ev-text{font:600 17px/1.4 var(--f-display); margin:4px 0 10px}
+.q-event{background:linear-gradient(135deg,var(--surface),color-mix(in srgb,var(--gold, #B79A60) 14%,var(--surface)))}
+.q-me{display:grid; grid-template-columns:auto 1fr auto; gap:12px; align-items:center}
+.q-me .by{display:block}
+.q-avatar{width:48px; height:48px; border-radius:50%; display:grid; place-items:center; font-size:24px; background:conic-gradient(from 30deg,#B8913F,#F6E3A6,#C9A256,#FFF1C2,#B8913F)}
+.q-big{font:700 24px/1 var(--f-display)}
+.q-teams{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px}
+.q-team{display:grid; gap:4px; padding:12px; border-radius:var(--r-md); background:var(--surface-2); min-width:0}
+.q-team > span:first-child{font-size:26px} .q-team.lead{box-shadow:inset 0 0 0 2px var(--gold, #B79A60)}
+.q-board{list-style:none; margin:0 0 12px; padding:0; display:grid; gap:4px}
+.q-board li{display:grid; grid-template-columns:44px 1fr auto; align-items:center; gap:8px; padding:8px 6px; border-bottom:1px solid var(--line)}
+.q-board li.top{background:color-mix(in srgb,var(--gold, #B79A60) 10%,transparent); border-radius:12px}
+.q-rank{font-weight:700; text-align:center} .q-name{display:grid; min-width:0} .q-name .by{white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.q-cats{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:8px}
+.q-cat{display:flex; gap:10px; align-items:center; text-align:left; padding:10px 12px; border-radius:var(--r-md); border:1px solid var(--line); background:var(--surface); color:var(--ink); font:inherit; font-size:13px; cursor:pointer}
+.q-cat b{font:700 18px var(--f-display); color:var(--ok); min-width:28px} .q-cat.neg b{color:var(--bad)}
+.q-feed{list-style:none; margin:0; padding:0; display:grid; gap:8px}
+.q-feed li{display:grid; grid-template-columns:40px 1fr auto; gap:10px; align-items:start; padding-bottom:8px; border-bottom:1px solid var(--line)}
+.q-feed .pos{color:var(--ok)} .q-feed .neg{color:var(--bad)} .q-feed li > b{font:700 17px var(--f-display)}
+.q-secret{background:linear-gradient(160deg,#14202E,#0B1622); color:#EDE6D3} .q-secret .by{color:#B9B2A0} .q-secret .eyebrow{color:#E9CF8A}
+.q-mission{margin:12px 0; padding:18px; border-radius:16px; border:1px dashed rgba(233,207,138,.5); cursor:pointer; text-align:center}
+.q-mission p{margin:0 0 8px; font:600 18px/1.4 var(--f-display); filter:blur(9px); user-select:none; transition:filter .3s}
+.q-mission.show p{filter:none} .q-mission span{font-size:12px; opacity:.75}
+.q-film{display:grid; gap:12px}
+.q-scene{display:grid; grid-template-columns:120px 1fr; gap:12px; align-items:center}
+.q-scene .by{display:block; margin:2px 0 6px}
+.q-frame{position:relative; aspect-ratio:4/3; border-radius:10px; overflow:hidden; background:#111; display:grid; place-items:center; font-size:34px; border:3px solid #111; box-shadow:0 0 0 1px var(--line)}
+.q-frame::before,.q-frame::after{content:""; position:absolute; left:0; right:0; height:7px; background:repeating-linear-gradient(90deg,#111 0 6px,#EEE 6px 10px,#111 10px 16px); z-index:1}
+.q-frame::before{top:0} .q-frame::after{bottom:0}
+.q-frame img{width:100%; height:100%; object-fit:cover} .q-frame em{position:absolute; bottom:9px; left:6px; font:700 10px var(--f-body); color:#fff; font-style:normal; text-shadow:0 1px 3px #000; z-index:2}
+.q-bingo{display:grid; grid-template-columns:repeat(5,1fr); gap:6px}
+.q-sq{aspect-ratio:1; min-width:0; padding:4px; border-radius:10px; border:1px solid var(--line); background:var(--surface); color:var(--ink); font:600 10.5px/1.15 var(--f-body); display:grid; place-items:center; align-content:center; gap:2px; cursor:pointer; text-align:center; overflow:hidden; word-break:break-word}
+.q-sq.on{background:linear-gradient(150deg,var(--accent),#0E2A22); color:#fff; border-color:transparent} .q-sq em{font-size:9px; font-style:normal; opacity:.75}
+@media (min-width:700px){ .q-sq{font-size:12.5px} }
+.q-fun-banner{display:grid; grid-template-columns:auto 1fr auto; gap:14px; align-items:center; width:100%; text-align:left; padding:14px 16px; border-radius:var(--r-lg); border:0; cursor:pointer; color:var(--hero-ink); font:inherit; background:linear-gradient(120deg,var(--hero),#24604D); box-shadow:var(--shadow); margin-bottom:14px}
+.q-fun-banner .q-ring{width:64px; height:64px} .q-fun-banner .q-ring b{font-size:16px} .q-fun-banner span.by{color:var(--hero-muted); display:block}
+.pp-firsts .pp-stamp{aspect-ratio:auto; border-radius:18px; padding:10px 6px; gap:4px}
+.pp-firsts .btn{margin-top:4px}
+.q-name-grid{display:grid; grid-template-columns:72px 1fr; gap:0 10px} .q-emoji-in{text-align:center; font-size:20px}
+.q-rm{float:right; border:0; background:none; color:var(--bad); font:600 12px var(--f-body); cursor:pointer; padding:0}
 </style>
 </head>
 <body>
@@ -903,6 +1040,7 @@ SCHEMA.contacts = { noun: 'contact', fields: [
 SCHEMA.polls = { noun: 'poll', fields: [
   ['q','Question','text','e.g. Which Munnar stay should we book?'], ['options','Options','textarea','One option per line'] ] };
 SCHEMA.meta.fields.push(['aiUrl','AI assistant address','url','Your Cloudflare Worker URL from the ai-worker setup (optional)']);
+SCHEMA.meta.fields.push(['driveUrl','Google Drive photo uploader','url','Web app URL from the drive-uploader Apps Script (optional) – new trip photos are copied to your Drive folder']);
 SCHEMA.meta.fields.push(['albumUrl','Shared photo album link','url','Optional: a Google Photos shared album for full-resolution originals']);
 const COLLS = ['meta','days','timeline','legs','places','stays','activities','budget','photographers','mustdo','photos','members','expenses','settlements','files','contacts','votes','polls','activity','payers','fun','kit'];
 const ATTACH = new Set(['stays','activities','budget','photographers','expenses','settlements']);
@@ -1043,7 +1181,7 @@ const S = {
   tab: ls.get(KEYS.tab, 'home'), day: ls.get(KEYS.day, 1), placeFilter: 'All', mustFilter: 'All',
   name: ls.get(KEYS.name, ''), me: ls.get('ktrip.me', ''), ready: false, mode: 'local', pending: false, err: '', online: navigator.onLine
 };
-const TABS = ['home','places','food','activities','photo','days','route','stays','transport','kit','must','people','updates','tasks','gallery','memories','budget','split','reports','hub','events','docs','safety','fun'].map(k => [k, k]);
+const TABS = ['home','places','food','activities','photo','days','route','stays','transport','kit','must','people','updates','tasks','gallery','memories','budget','split','reports','hub','events','docs','safety','fun','passport','quest'].map(k => [k, k]);
 const FAB = { transport: ['kit:vehicle','Add vehicle'], tasks: ['kit:task','Add task'], docs: ['kit:doc','Add document'], updates: ['kit:announce','Post announcement'], food: ['kit:food','Add a dish'], memories: ['kit:journal','Add a memory'], gallery: ['gallery','Add photos'], people: ['contacts','Add contact'], updates: ['polls','Ask the group'], split: ['expenses','Add expense'], home: ['timeline','Add plan item'], days: ['timeline','Add to this day'], route: ['legs','Add leg'], places: ['places','Add place'], stays: ['stays','Add stay option'], activities: ['activities','Add activity'], budget: ['budget','Add budget line'], photo: ['photographers','Add photographer'], must: ['mustdo','Add must-do'] };
 const meta = () => Object.assign({ tripName: 'Our trip', start: '', adults: 0, teens: 0, kids: 0, infants: 0, paying: 1, buffer: 10 }, DB.meta.find(m => m.id === 'trip') || DB.meta[0] || {});
 
@@ -1238,14 +1376,15 @@ function render() {
   const f = FAB[S.tab]; $('#fabLabel').textContent = f ? f[1] : 'Add';
   const v = $('#view');
   if (!S.ready) { v.innerHTML = '<div class="empty">Loading the trip…</div>'; return; }
-  const fn = { home: vHome2, transport: vTransport, tasks: vTasks, reports: vReports, events: vEvents, docs: vDocs, hub: vHub, days: vDays, route: vRoute, places: vPlaces, stays: vStays, activities: vActs, budget: vBudget, split: vSplit, photo: vPhoto, must: vMust, gallery: vGallery, people: vPeople, updates: vUpdates, fun: vFun, kit: vKit, safety: vSafety, food: vFood, memories: vMemories }[S.tab] || vHome;
+  const fn = { home: vHome2, transport: vTransport, tasks: vTasks, reports: vReports, events: vEvents, docs: vDocs, hub: vHub, days: vDays, route: vRoute, places: vPlaces, stays: vStays, activities: vActs, budget: vBudget, split: vSplit, photo: vPhoto, must: vMust, gallery: vGallery, people: vPeople, updates: vUpdates, fun: vFun, kit: vKit, safety: vSafety, food: vFood, memories: vMemories, passport: vPassport, quest: vQuest }[S.tab] || vHome;
   if (S.tab === 'updates') markSeen();
   v.innerHTML = banner() + (S.err === 'permission-denied' ? '' : fn());
   renderNav(); checkNewActivity();
   tickCountdown(); charTick();
-  $('#fab').hidden = S.role === 'guest' || ['fun', 'kit', 'safety', 'hub', 'reports', 'events', 'home'].includes(S.tab);
+  $('#fab').hidden = S.role === 'guest' || ['fun', 'kit', 'safety', 'hub', 'reports', 'events', 'home', 'passport', 'quest'].includes(S.tab);
   ensurePayers(); ensureCleanup();
   if ($('#attList')) renderAttList();
+  if (S.tab === 'passport') ppAfter();
 }
 function renderSync() {
   let cls = '', txt = 'Only on this phone';
@@ -1373,9 +1512,9 @@ function vDays() {
       ${tl.length ? `<ul class="tl">${tl.map(t => `<li class="tl-item ${t.done ? 'done' : ''}"><button class="tick" aria-label="Mark done" data-act="toggle" data-c="timeline" data-id="${esc(t.id)}">${IC.check}</button><div class="tl-time">${esc(t.time)}</div><button class="tl-body" data-act="edit" data-c="timeline" data-id="${esc(t.id)}"><b>${esc(t.title)}</b>${t.note ? `<p>${esc(t.note)}</p>` : ''}${t.who && t.who !== 'Everyone' ? `<span class="who">${esc(t.who)}</span>` : ''}</button></li>`).join('')}</ul>` : `<div class="empty">Nothing planned yet. Tap “Add to this day”.</div>`}
     </section>
     <aside class="side">
-      <section class="card mini"><h3>Tonight’s stay</h3>${showStays.length ? showStays.map(s => `<button class="mini-row" data-act="edit" data-c="stays" data-id="${esc(s.id)}"><span><b>${esc(s.name)}</b><br><span class="muted">${esc(s.stop)}</span></span><span class="pill st-${slug(s.status)}">${esc(s.status || 'Idea')}</span></button>`).join('') : `<p class="muted" style="margin:0">${esc(d.night === 'Home' ? 'Home sweet home.' : 'No stay matches this date yet.')}</p>`}</section>
-      <section class="card mini"><h3>Places today</h3>${places.length ? places.map(p => `<button class="mini-row" data-act="place" data-id="${esc(p.id)}"><span><b>${esc(p.name)}</b></span><span class="muted">${esc((p.tags || [])[0] || '')}</span></button>`).join('') : '<p class="muted" style="margin:0">None linked to this day.</p>'}</section>
-      <section class="card mini"><h3>Activities today</h3>${acts.length ? acts.map(a => `<button class="mini-row" data-act="edit" data-c="activities" data-id="${esc(a.id)}"><span><b>${esc(a.name)}</b><br><span class="muted num">${actTotal(a) ? inr(actTotal(a)) : 'Free'}</span></span><span class="pill st-${slug(a.status)}">${esc(a.status)}</span></button>`).join('') : '<p class="muted" style="margin:0">None.</p>'}</section>
+      <section class="card mini"><h3>Tonight’s stay</h3>${showStays.length ? showStays.map(s => `<button class="mini-row" data-act="edit" data-c="stays" data-id="${esc(s.id)}"><span><b>${esc(s.name)}</b><br><span class="muted">${esc(s.stop)}</span></span><span class="pill st-${slug(s.status)}">${esc(s.status || 'Idea')}</span></button>`).join('') : `<p class="muted" style="margin:0">${esc(d.night === 'Home' ? 'Home sweet home.' : 'No stay matches this date yet.')}</p>`}${d.night && !/home/i.test(d.night) && d.date ? `<button class="btn sm mini-add" data-act="addStay" data-stop="${esc(d.night)}" data-ci="${esc(d.date)}" data-co="${(() => { const x = new Date(d.date + 'T12:00:00'); x.setDate(x.getDate() + 1); return x.toISOString().slice(0, 10); })()}">+ Add a stay${showStays.length ? ' option' : ' for ' + esc(d.night)}</button>` : ''}</section>
+      <section class="card mini"><h3>Places today</h3>${places.length ? places.map(p => `<button class="mini-row" data-act="place" data-id="${esc(p.id)}"><span><b>${esc(p.name)}</b></span><span class="muted">${esc((p.tags || [])[0] || '')}</span></button>`).join('') : '<p class="muted" style="margin:0">None linked to this day.</p>'}<button class="btn sm mini-add" data-act="add" data-c="places" data-day="${esc(d.dayNo)}">+ Add a place</button></section>
+      <section class="card mini"><h3>Activities today</h3>${acts.length ? acts.map(a => `<button class="mini-row" data-act="edit" data-c="activities" data-id="${esc(a.id)}"><span><b>${esc(a.name)}</b><br><span class="muted num">${actTotal(a) ? inr(actTotal(a)) : 'Free'}</span></span><span class="pill st-${slug(a.status)}">${esc(a.status)}</span></button>`).join('') : '<p class="muted" style="margin:0">None.</p>'}<button class="btn sm mini-add" data-act="add" data-c="activities" data-day="${esc(d.dayNo)}">+ Add an activity</button></section>
       ${must.length ? `<section class="card mini"><h3>Must-dos today</h3>${must.map(x => `<button class="mini-row" data-act="toggle" data-c="mustdo" data-id="${esc(x.id)}"><span>${x.done ? '✓ ' : ''}<b>${esc(x.text)}</b></span><span class="muted">${esc(x.category)}</span></button>`).join('')}</section>` : ''}
     </aside>
   </div>`;
@@ -1456,16 +1595,24 @@ function searchLinks(g) {
     ['MakeMyTrip', `https://www.makemytrip.com/homestays/`]
   ];
 }
+function itinNights() {
+  const out = []; const nx = ds => { const d = new Date(ds + 'T12:00:00'); d.setDate(d.getDate() + 1); return d.toISOString().slice(0, 10); };
+  daysSorted().forEach(d => { const n = String(d.night || '').trim(); if (!d.date || !n || /home/i.test(n)) return; const last = out[out.length - 1];
+    if (last && last.stop.toLowerCase() === n.toLowerCase() && last.checkout === d.date) last.checkout = nx(d.date); else out.push({ stop: n, checkin: d.date, checkout: nx(d.date), items: [] }); });
+  return out;
+}
 function vStays() {
   const groups = stayGroups();
+  itinNights().forEach(n => { if (!groups.some(g => g.checkin === n.checkin || (String(g.stop).toLowerCase() === n.stop.toLowerCase() && g.checkin <= n.checkin && n.checkin < g.checkout))) groups.push(n); });
+  groups.sort((a, b) => String(a.checkin).localeCompare(String(b.checkin)));
   return `<div class="sec-head"><div><h2>Where we sleep</h2><p>Night-by-night options. Paste any Airbnb, Agoda, Trip.com or Booking.com link and mark one as Booked.</p></div><button class="btn sm primary" data-act="scan" data-c="stays">📄 Scan a booking</button></div>
   ${groups.length ? groups.map(g => {
     const n = nightsBetween(g.checkin, g.checkout); const bookedOne = g.items.find(isBooked);
     const items = g.items.slice().sort((a, b) => (isBooked(b) - isBooked(a)) || ((a.status === 'Rejected') - (b.status === 'Rejected')));
     return `<section class="night"><div class="night-head">
       <span class="when">${esc(fmtD(g.checkin))} → ${esc(fmtD(g.checkout))} · ${n} night${n === 1 ? '' : 's'}</span>
-      <div class="sec-head"><h2>${esc(g.stop)}</h2><span class="pill ${bookedOne ? 'st-booked' : 'st-shortlisted'}">${bookedOne ? 'Booked: ' + esc(bookedOne.name) : 'Not booked yet'}</span></div>
-      ${bookedOne ? '' : `<div><a class="chip wa-chip" href="${esc(shareWA(`🗳 Which stay for ${g.stop} (${fmtD(g.checkin)})? Tap ❤️ on your favourite:\n` + g.items.filter(x => x.status !== 'Rejected').map(x => '• ' + x.name + (+x.price ? ' – ' + inr(x.price) + '/night' : '')).join('\n') + `\n${appLink('stays')}` + sign()))}" target="_blank" rel="noopener">${IC.wa} Ask the group to vote</a></div>`}
+      <div class="sec-head"><h2>${esc(g.stop)}</h2><span class="pill ${bookedOne ? 'st-booked' : 'st-shortlisted'}">${bookedOne ? 'Booked: ' + esc(bookedOne.name) : g.items.length ? 'Not booked yet' : 'No options yet'}</span></div>
+      ${bookedOne || !g.items.length ? '' : `<div><a class="chip wa-chip" href="${esc(shareWA(`🗳 Which stay for ${g.stop} (${fmtD(g.checkin)})? Tap ❤️ on your favourite:\n` + g.items.filter(x => x.status !== 'Rejected').map(x => '• ' + x.name + (+x.price ? ' – ' + inr(x.price) + '/night' : '')).join('\n') + `\n${appLink('stays')}` + sign()))}" target="_blank" rel="noopener">${IC.wa} Ask the group to vote</a></div>`}
       <div class="search-row">${searchLinks(g).map(([pl, u]) => `<a class="chip" href="${esc(u)}" target="_blank" rel="noopener">Search ${esc(pl)} ${IC.out.replace('<svg', '<svg width="12" height="12"')}</a>`).join('')}</div></div>
       <div class="grid">${items.map(s => {
         const pl = s.platform || detectPlatform(s.link) || 'Other'; const link = safeUrl(s.link);
@@ -1783,6 +1930,7 @@ async function saveAttachment(parentC, parentId, file, text, o) {
   for (let i = 0; i < parts.length; i++) await B.add('blobs', { fileId: fid, i, d: parts[i] }, fid + '_' + i);
   blobCache[fid] = data;
   await B.add('files', { parentC, parentId, name: file.name, type, size: file.size, stored: Math.round(data.length * .75), n: parts.length, thumb, text: (text || '').slice(0, 4000) }, fid);
+  return { fid, data };
 }
 async function loadAttachment(f) {
   if (blobCache[f.id]) return blobCache[f.id];
@@ -2227,7 +2375,7 @@ function vGallery() {
   const f = S.galDay === undefined || S.galDay === 'all' ? all : all.filter(x => String(x.parentId) === String(S.galDay));
   const used = DB.files.reduce((t, x) => t + (+x.stored || +x.size || 0), 0);
   const todayDay = (days.find(d => d.date === today()) || {}).dayNo;
-  return `<div class="sec-head"><div><h2>Trip photos</h2><p>Everyone’s photos in one place, saved in HD. ${all.length} photo${all.length === 1 ? '' : 's'}.</p></div>
+  return `<div class="sec-head"><div><h2>Trip photos</h2><p>Everyone’s photos in one place, saved in HD. ${all.length} photo${all.length === 1 ? '' : 's'}.${m.driveUrl ? (() => { const left = all.filter(x => !x.drive).length; return ` ☁️ New photos are also copied to the trip’s Google Drive folder${left && canEdit() ? `. <button class="link-out" style="border:0;background:none;padding:0" data-act="driveBackfill">Copy ${left} earlier photo${left > 1 ? 's' : ''}</button>` : '.'}`; })() : ''}</p></div>
     <div class="chips"><label class="btn sm primary" for="galInput">📸 Add photos</label><a class="btn sm wa-btn" href="${esc(shareWA(`📸 Add your ${m.tripName} photos here (HD): ${appLink('gallery')}${sign()}`))}" target="_blank" rel="noopener">${IC.wa} Invite to add</a></div></div>
   <div class="field" style="max-width:340px"><label for="galDay">New photos go to</label><select id="galDay"><option value="trip">Whole trip</option>${days.map(d => `<option value="${+d.dayNo}" ${+(S.galUpDay || todayDay || 0) === +d.dayNo ? 'selected' : ''}>Day ${esc(d.dayNo)} · ${esc(fmtD(d.date))}</option>`).join('')}</select></div>
   <div class="chips"><button class="chip" aria-pressed="${!S.galDay || S.galDay === 'all'}" data-act="galf" data-k="all">All</button>${days.map(d => `<button class="chip" aria-pressed="${String(S.galDay) === String(d.dayNo)}" data-act="galf" data-k="${+d.dayNo}">Day ${esc(d.dayNo)}</button>`).join('')}<button class="chip" aria-pressed="${S.galDay === 'trip'}" data-act="galf" data-k="trip">Whole trip</button></div>
@@ -2236,14 +2384,34 @@ function vGallery() {
   <div class="card" style="display:grid;gap:8px"><div class="sec-head"><h3>Space used</h3><span class="num">${(used / 1048576).toFixed(1)} MB of ~1,000 MB free</span></div><div class="bar"><i style="width:${Math.max(used ? 1 : 0, Math.min(100, used / 10737418))}%"></i></div>
     <p class="muted" style="margin:0;font-size:13.5px">${m.albumUrl ? `Full-resolution originals: <a class="link-out" href="${esc(safeUrl(m.albumUrl))}" target="_blank" rel="noopener">open the shared album ${IC.out}</a>` : 'Want untouched originals or videos? Make a Google Photos shared album and add its link in ⚙ → Trip name, dates & headcount.'}</p></div>`;
 }
+/* ---------- v10: copy trip photos to the organiser's Google Drive (Apps Script web app) ---------- */
+const driveQ = []; let driveBusy = false;
+const driveDayLabel = day => { const d = dayOf(day); return d ? `Day ${d.dayNo} · ${dayPlace(d) || d.title || ''}`.trim() : 'Whole trip'; };
+async function driveSend(fid, dataUrl, name, day) {
+  const url = String(meta().driveUrl || '').trim(); if (!url) throw new Error('No Drive uploader set');
+  const m = /^data:([^;]+);base64,(.*)$/.exec(dataUrl || ''); if (!m) throw new Error('Unreadable photo');
+  const r = await fetch(url, { method: 'POST', body: JSON.stringify({ token: await idToken(), name: name || fid + '.jpg', mime: m[1], data: m[2], folder: driveDayLabel(day), by: S.name || '', fid }) });
+  const j = await r.json().catch(() => ({})); if (!r.ok || !j.ok) throw new Error(j.error || 'HTTP ' + r.status);
+  await B.update('files', fid, { drive: j.id || 'ok' }).catch(() => {});
+}
+const readOrig = f => new Promise((res, rej) => { const fr = new FileReader(); fr.onload = () => res(fr.result); fr.onerror = rej; fr.readAsDataURL(f); });
+async function driveRun() {
+  if (driveBusy) return; driveBusy = true; let ok = 0, bad = '';
+  while (driveQ.length) { const j = driveQ.shift();
+    try { const data = j.file && j.file.size < 25e6 ? await readOrig(j.file) : await loadAttachment(j.f || DB.files.find(x => x.id === j.fid)); await driveSend(j.fid, data, j.file ? j.file.name : (j.f && j.f.name), j.day); ok++; }
+    catch (e) { bad = e.message || String(e); } }
+  driveBusy = false; if (ok) toast(`☁️ ${ok} photo${ok > 1 ? 's' : ''} copied to Google Drive`); if (bad) toast('Drive copy failed: ' + bad);
+  if (S.tab === 'gallery') render();
+}
 async function uploadGallery(input) {
   const files = [...input.files].filter(f => /^image\//.test(f.type) || /\.(jpe?g|png|heic|webp)$/i.test(f.name)); input.value = ''; if (!files.length) return;
   const sel = $('#galDay'); const day = sel ? sel.value : 'trip'; S.galUpDay = day;
   let ok = 0;
   for (let i = 0; i < files.length; i++) {
     toast(`Uploading photo ${i + 1} of ${files.length}…`);
-    try { await saveAttachment('gallery', String(day), files[i], '', { max: 2560, limit: 2600000, q: .9, thumb: 360, thumbLimit: 22000 }); ok++; } catch (e) { toast('Couldn’t upload ' + files[i].name + ': ' + (e.message || e)); }
+    try { const r = await saveAttachment('gallery', String(day), files[i], '', { max: 2560, limit: 2600000, q: .9, thumb: 360, thumbLimit: 22000 }); ok++; if (meta().driveUrl) driveQ.push({ fid: r.fid, file: files[i], day }); } catch (e) { toast('Couldn’t upload ' + files[i].name + ': ' + (e.message || e)); }
   }
+  if (driveQ.length) driveRun();
   if (ok) announce('photos', `added ${ok} photo${ok > 1 ? 's' : ''}${day !== 'trip' ? ' to Day ' + day : ''}`, 'gallery');
 }
 async function viewGallery(id) {
@@ -2488,7 +2656,7 @@ const CARD_RULES = [
 function vFun() {
   const g = S.fun;
   if (!g) return `<div class="sec-head"><div><h2>Fun Zone</h2><p>Games for the long drives and lazy evenings. Scores sync to everyone’s phone.</p></div></div>
-    <section class="fun-hero"><span class="eyebrow">Van-ride tip</span><b>Hold the phone up, play one game per hour, rotate the reader.</b><span>Quiz and Tambola are shared – everyone joins from their own phone.</span></section>
+    ${(() => { const c = qCompletion(); return `<button class="q-fun-banner" data-act="tab" data-k="quest"><div class="q-ring" style="--p:${c.pct}"><b>${c.pct}%</b></div><div><b>Kerala Quest</b><span class="by">Family championship · ${qPlayers().length ? qPlayers().length + ' players in ' + (qCfg().teams || []).length + ' teams' : 'set up teams to start'} · stamps, bingo, secret missions</span></div><span aria-hidden="true">›</span></button>`; })()}<section class="fun-hero"><span class="eyebrow">Van-ride tip</span><b>Hold the phone up, play one game per hour, rotate the reader.</b><span>Quiz and Tambola are shared – everyone joins from their own phone.</span></section>
     <div class="fun-grid">${FUN_GAMES.map(([k, ic, t, d]) => `<button class="fun-tile fun-${k}" data-act="fun" data-k="${k}"><span class="fun-ic" aria-hidden="true">${ic}</span><b>${esc(t)}</b><span>${esc(d)}</span></button>`).join('')}</div>`;
   const head = FUN_GAMES.find(x => x[0] === g) || ['', '', ''];
   const body = { quiz: funQuiz, tambola: funTambola, charades: funCharades, antakshari: funAntak, ludo: funLudo, snakes: funSnakes, cards: funCards, memory: funMemory, wyr: funWyr, karaoke: funKaraoke }[g];
@@ -3108,6 +3276,7 @@ function ensureCleanup() {
 
 /* ================= v7 redesign: 5 sections, Travel Hub, events, documents, transport, reports ================= */
 const LI = {
+  globe: '<rect x="4.5" y="2.5" width="15" height="19" rx="2.5"/><circle cx="12" cy="10.5" r="3.6"/><path d="M8.4 10.5h7.2M12 6.9c1.3 1.2 1.3 6 0 7.2M12 6.9c-1.3 1.2-1.3 6 0 7.2M8.5 17.5h7"/>',
   home: '<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h5v-6h4v6h5V9.5"/>',
   explore: '<circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/>',
   plan: '<path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/>',
@@ -3122,8 +3291,8 @@ const LI = {
   bell: '<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/>', cake: '<path d="M4 21h16M5 21v-7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v7"/><path d="M5 16c1.5 1 3 1 4.5 0s3-1 4.5 0 3 1 5 0M12 12V8M12 5.5c.8-.8.8-1.7 0-2.5-.8.8-.8 1.7 0 2.5z"/>'
 };
 const ico = (k, s) => `<svg class="li" width="${s || 20}" height="${s || 20}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${LI[k] || ''}</svg>`;
-const LABEL = { home: 'Home', places: 'Places', food: 'Food & restaurants', activities: 'Activities', photo: 'Photographers', days: 'Itinerary', route: 'Route & map', stays: 'Stays', transport: 'Transport', kit: 'Checklists & rooms', must: 'Must-do', people: 'People & chat', updates: 'Announcements', tasks: 'Tasks', gallery: 'Photos', memories: 'Memories', budget: 'Overview', split: 'Split & settle', reports: 'Reports', hub: 'Travel Hub', events: 'Events', docs: 'Documents', safety: 'Kids & SOS', fun: 'Fun Zone' };
-const SECTIONS = [['home', 'Home', ['home']], ['explore', 'Explore', ['places', 'food', 'activities', 'photo']], ['plan', 'Plan', ['days', 'route', 'stays', 'transport', 'kit', 'must']], ['group', 'Group', ['people', 'updates', 'tasks', 'gallery', 'memories']], ['budget', 'Budget', ['budget', 'split', 'reports']], ['hub', 'Travel Hub', ['hub', 'events', 'docs', 'safety', 'fun']]];
+const LABEL = { home: 'Home', places: 'Places', food: 'Food & restaurants', activities: 'Activities', photo: 'Photographers', days: 'Itinerary', route: 'Route & map', stays: 'Stays', transport: 'Transport', kit: 'Checklists & rooms', must: 'Must-do', people: 'People & chat', updates: 'Announcements', tasks: 'Tasks', gallery: 'Photos', memories: 'Memories', budget: 'Overview', split: 'Split & settle', reports: 'Reports', hub: 'Travel Hub', events: 'Events', docs: 'Documents', safety: 'Kids & SOS', fun: 'Fun Zone', passport: 'Trip passport', quest: 'Kerala Quest' };
+const SECTIONS = [['home', 'Home', ['home']], ['explore', 'Explore', ['places', 'food', 'activities', 'photo']], ['plan', 'Plan', ['days', 'route', 'stays', 'transport', 'kit', 'must']], ['group', 'Group', ['people', 'updates', 'tasks', 'gallery', 'memories']], ['budget', 'Budget', ['budget', 'split', 'reports']], ['hub', 'Travel Hub', ['hub', 'events', 'docs', 'safety', 'fun', 'quest', 'passport']]];
 const sectionOf = k => (SECTIONS.find(s => s[2].includes(k)) || SECTIONS[0])[0];
 S.secLast = ls.get('ktrip.secLast', {});
 
@@ -3219,7 +3388,7 @@ function vHome2() {
 }
 function hubGrid(compact) {
   const ev = kitOf('event').length, docs = vaultFiles().length, tasks = kitOf('task').filter(x => !x.done).length;
-  const items = [['events', 'cake', 'Events & celebrations', ev ? `${ev} event${ev > 1 ? 's' : ''}` : 'Birthdays, dinners, ceremonies'], ['docs', 'doc', 'Document vault', `${docs} file${docs === 1 ? '' : 's'}`], ['safety', 'shield', 'Kids & SOS', 'Emergency, babies, live location'], ['kit', 'check', 'Checklists & rooms', `Readiness ${readiness()}%`], ['tasks', 'check', 'Tasks', tasks ? `${tasks} open` : 'Who does what'], ['fun', 'game', 'Fun Zone', 'Quiz, Tambola, Ludo, karaoke']];
+  const items = [['events', 'cake', 'Events & celebrations', ev ? `${ev} event${ev > 1 ? 's' : ''}` : 'Birthdays, dinners, ceremonies'], ['docs', 'doc', 'Document vault', `${docs} file${docs === 1 ? '' : 's'}`], ['quest', 'game', 'Kerala Quest', 'Family championship, teams, bingo'], ['passport', 'globe', 'Trip passport', 'Stamps, day cards & badges'], ['safety', 'shield', 'Kids & SOS', 'Emergency, babies, live location'], ['kit', 'check', 'Checklists & rooms', `Readiness ${readiness()}%`], ['tasks', 'check', 'Tasks', tasks ? `${tasks} open` : 'Who does what'], ['fun', 'game', 'Fun Zone', 'Quiz, Tambola, Ludo, karaoke']];
   return `<div class="hub-grid ${compact ? 'compact' : ''}">${items.map(([k, i, t, s]) => `<button class="hub-card" data-act="tab" data-k="${k}"><span class="hub-ic">${ico(i, 22)}</span><b>${esc(t)}</b><span class="by">${esc(s)}</span></button>`).join('')}${compact ? '' : `<button class="hub-card" data-act="settings"><span class="hub-ic">${ico('gear', 22)}</span><b>Settings & sharing</b><span class="by">Name, link, backup, alerts</span></button>`}</div>`;
 }
 function vHub() {
@@ -3391,7 +3560,7 @@ async function ensureAuth(cfg) {
     }
     if (!(window.firebase && firebase.auth)) return null;
     if (!firebase.apps.length) firebase.initializeApp(cfg.fb);
-    try { await firebase.auth().getRedirectResult(); } catch (e) { if (e && e.code) S.authErr = authMsg(e); }
+    try { const rr = await firebase.auth().getRedirectResult(); const t0 = +ls.get('ktrip.redir', 0); ls.del('ktrip.redir'); if (t0 && Date.now() - t0 < 600000 && !(rr && rr.user) && !firebase.auth().currentUser) S.authErr = 'Google sign-in didn’t finish on this device. Use email + password instead (see “Set a password” in ⚙ → Sign-in & roles on a normal browser).'; } catch (e) { if (e && e.code) S.authErr = authMsg(e); }
     return new Promise(res => { const un = firebase.auth().onAuthStateChanged(u => { un(); S.user = u ? { uid: u.uid, email: (u.email || '').toLowerCase(), name: u.displayName || '', verified: !!u.emailVerified } : null; if (S.user && !S.name && S.user.name) { S.name = S.user.name.split(' ')[0]; ls.set(KEYS.name, S.name); } res(S.user); }); setTimeout(() => res(S.user), 6000); });
   })();
   return authReady;
@@ -3399,7 +3568,7 @@ async function ensureAuth(cfg) {
 const idToken = async () => { try { const u = window.firebase && firebase.auth && firebase.auth().currentUser; return u ? await u.getIdToken() : ''; } catch (e) { return ''; } };
 function authMsg(e) {
   const c = (e && e.code) || '';
-  return ({ 'auth/unauthorized-domain': 'This website isn’t on the Firebase list of authorised domains yet. In Firebase → Authentication → Settings → Authorised domains, add ayenreddy66.github.io.', 'auth/operation-not-allowed': 'This sign-in method is switched off. In Firebase → Authentication → Sign-in method, enable it.', 'auth/wrong-password': 'Wrong email or password.', 'auth/invalid-credential': 'Wrong email or password.', 'auth/user-not-found': 'No account with that email – tap Create account.', 'auth/email-already-in-use': 'That email already has an account – tap Sign in.', 'auth/weak-password': 'Use at least 6 characters.', 'auth/popup-closed-by-user': 'Sign-in window closed.', 'auth/network-request-failed': 'No internet connection.' })[c] || (e && e.message) || 'Sign-in failed';
+  return ({ 'ktrip/standalone': 'Google sign-in can’t open inside the home-screen app. Sign in with email + password instead – Google users can set a password from ⚙ → Sign-in & roles in Safari/Chrome first.', 'auth/requires-recent-login': 'For safety, sign out and sign in again, then set the password straight away.', 'auth/weak-password': 'Use at least 6 characters.', 'auth/unauthorized-domain': 'This website isn’t on the Firebase list of authorised domains yet. In Firebase → Authentication → Settings → Authorised domains, add ayenreddy66.github.io.', 'auth/operation-not-allowed': 'This sign-in method is switched off. In Firebase → Authentication → Sign-in method, enable it.', 'auth/wrong-password': 'Wrong email or password.', 'auth/invalid-credential': 'Wrong email or password.', 'auth/user-not-found': 'No account with that email – tap Create account.', 'auth/email-already-in-use': 'That email already has an account – tap Sign in.', 'auth/weak-password': 'Use at least 6 characters.', 'auth/popup-closed-by-user': 'Sign-in window closed.', 'auth/network-request-failed': 'No internet connection.' })[c] || (e && e.message) || 'Sign-in failed';
 }
 /* membership: trips/{trip}/access/{uid} */
 async function loadAccess() {
@@ -3417,7 +3586,8 @@ async function loadAccess() {
 }
 const canEdit = () => !S.role || S.role === 'admin' || S.role === 'coorg';
 function signInSheet(msg) {
-  openSheet('Sign in to Kerala Era', `${msg ? `<div class="banner"><p>${esc(msg)}</p></div>` : ''}
+  const standalone = navigator.standalone || matchMedia('(display-mode: standalone)').matches;
+  openSheet('Sign in to Kerala Era', `${msg ? `<div class="banner"><p>${esc(msg)}</p></div>` : ''}${standalone ? `<div class="banner"><p><b>Using the home-screen app?</b> If Google sign-in keeps coming back here, sign in with <b>email + password</b> below. Google users: first open the trip link in Safari/Chrome, sign in with Google, then ⚙ → Sign-in & roles → <b>Set a password for the app</b>. Then use your Gmail address and that password here.</p></div>` : ''}
     <button class="btn google-btn" data-act="gSignIn"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg> Continue with Google</button>
     <div class="or"><span>or with email</span></div>
     <div class="field"><label for="authEmail">Email</label><input id="authEmail" type="email" autocomplete="email" inputmode="email"></div>
@@ -3429,7 +3599,7 @@ function signInSheet(msg) {
 async function doSignIn(kind) {
   const a = firebase.auth(); const email = ($('#authEmail') || {}).value, pass = ($('#authPass') || {}).value;
   try {
-    if (kind === 'google') { const p = new firebase.auth.GoogleAuthProvider(); const standalone = navigator.standalone || matchMedia('(display-mode: standalone)').matches; if (standalone) { await a.signInWithRedirect(p); return; } try { await a.signInWithPopup(p); } catch (e) { if (/popup-blocked|operation-not-supported/.test(e.code || '')) { await a.signInWithRedirect(p); return; } throw e; } }
+    if (kind === 'google') { const p = new firebase.auth.GoogleAuthProvider(); const standalone = navigator.standalone || matchMedia('(display-mode: standalone)').matches; try { await a.signInWithPopup(p); } catch (e) { if (/popup-blocked|operation-not-supported/.test(e.code || '')) { if (standalone) throw { code: 'ktrip/standalone' }; ls.set('ktrip.redir', Date.now()); await a.signInWithRedirect(p); return; } throw e; } }
     else if (kind === 'up') { if (!email || !pass) { toast('Enter email and password'); return; } const r = await a.createUserWithEmailAndPassword(email.trim(), pass); try { await r.user.sendEmailVerification(); } catch (e) {} toast('Account created – check your inbox to verify your email'); }
     else if (kind === 'in') { if (!email || !pass) { toast('Enter email and password'); return; } await a.signInWithEmailAndPassword(email.trim(), pass); }
     else if (kind === 'reset') { if (!email) { toast('Type your email first'); return; } await a.sendPasswordResetEmail(email.trim()); toast('Password reset email sent'); return; }
@@ -3441,7 +3611,7 @@ function securitySection() {
   if (!(window.firebase && firebase.auth)) return '<p class="muted" style="margin:0">Sign-in isn’t available on this connection.</p>';
   if (!S.user) return `<p class="muted" style="margin:0">Sign in to get your role, use the AI assistant and keep the trip private.</p><div><button class="btn sm primary" data-act="signIn">Sign in</button></div>`;
   return `<div class="row" style="border:0"><span><b>${esc(S.user.name || S.user.email)}</b><br><span class="by">${esc(S.user.email)}${S.user.verified ? '' : ' · email not verified'}</span></span>${statusTag(S.role ? 'ok' : 'warn', roleName(S.role))}</div>
-    <div class="chips">${S.role === 'admin' ? '<button class="btn sm primary" data-act="manageRoles">Manage people & roles</button>' : ''}${!S.role ? '<button class="btn sm" data-act="claimAdmin">Make me the admin</button>' : ''}<button class="btn sm" data-act="copyUid">Copy my user ID</button><button class="btn sm danger" data-act="signOut">Sign out</button></div>
+    <div class="chips">${S.role === 'admin' ? '<button class="btn sm primary" data-act="manageRoles">Manage people & roles</button>' : ''}${!S.role ? '<button class="btn sm" data-act="claimAdmin">Make me the admin</button>' : ''}${(() => { try { const u = firebase.auth().currentUser; return u && !u.providerData.some(x => x.providerId === 'password') ? '<button class="btn sm" data-act="setPw">Set a password for the app</button>' : ''; } catch (e) { return ''; } })()}<button class="btn sm" data-act="copyUid">Copy my user ID</button><button class="btn sm danger" data-act="signOut">Sign out</button></div>
     ${!S.role ? '<p class="by" style="margin:0">“Make me the admin” only works before the secure rules are published. After that, only an admin can add people.</p>' : ''}`;
 }
 async function openRoles() {
@@ -3596,6 +3766,9 @@ function v8Click(a, t) {
   switch (a) {
     case 'signIn': signInSheet(); return true;
     case 'gSignIn': doSignIn('google'); return true;
+    case 'setPw': openSheet('Set a password for the app', `<p class="muted">Lets you sign in on the home-screen app with <b>${esc((S.user || {}).email || '')}</b> and this password. Your Google sign-in keeps working too.</p><div class="field"><label for="newPw">New password (6+ characters)</label><input id="newPw" type="password" autocomplete="new-password"></div><div class="actions"><span></span><div class="r"><button class="btn primary" data-act="savePw">Save password</button></div></div>`); return true;
+    case 'driveBackfill': galFiles().filter(x => !x.drive).forEach(f => driveQ.push({ fid: f.id, f, day: f.parentId })); toast('Copying photos to Drive…'); driveRun(); return true;
+    case 'savePw': { const v = ($('#newPw') || {}).value || ''; if (v.length < 6) { toast('Use at least 6 characters'); return true; } firebase.auth().currentUser.updatePassword(v).then(() => { closeSheet(); toast('Password set – use it with your Gmail address in the home-screen app'); }).catch(e => toast(authMsg(e))); return true; }
     case 'emailIn': doSignIn('in'); return true;
     case 'emailUp': doSignIn('up'); return true;
     case 'resetPw': doSignIn('reset'); return true;
@@ -3626,12 +3799,313 @@ function copyFrom(el) {
 
 /* ---------- events ---------- */
 let armed = null;
+
+/* ================= v9: Trip Passport (stamps, flip cards, badges) ================= */
+SCHEMA.days.fields.push(['cover', 'Passport card photo', 'url', 'Optional image link for this day’s passport card']);
+const PP = {
+  dindigul: { t: 'Road Runner', r: 3, e: '🚐', art: 'temple', facts: ['Dindigul’s Rock Fort sits on a single granite hill above the town.', 'The town is famous for Thalappakatti biryani and its lock-making heritage.'], ch: 'Take the first official full-gang trip selfie.', b: ['road', 'Road Runner', '🚐'] },
+  munnar: { t: 'The Tea Kingdom', r: 5, e: '🍵', img: 'Mountains', facts: ['Munnar means “three rivers” – the Mudhirapuzha, Nallathanni and Kundala meet here.', 'The Tea Museum shows how a leaf becomes your chai – all flat, pram-friendly walking.', 'Must buy: homemade chocolate and fresh estate tea.'], ch: 'Spot clouds sitting below the road level.', b: ['tea', 'Tea Master', '🍵'] },
+  munnar2: { t: 'Master of Echoes', r: 4, e: '📢', img: 'Mountains', facts: ['Echo Point bounces your voice back across Kundala Lake.', 'Top Station at sunset often shows a sea of clouds over Tamil Nadu.', 'Eravikulam is home to the Nilgiri tahr, a rare mountain goat.'], ch: 'Shout the trip name at Echo Point and hear it come back.', b: ['echo', 'Echo Master', '📢'] },
+  thekkady: { t: 'Tiger Gate', r: 4, e: '🐅', art: 'wild', facts: ['Periyar is one of India’s best-known tiger reserves, built around a 19th-century lake.', 'From the boat, elephants, gaur (Indian bison) and otters are the usual sightings.', 'Kalaripayattu is among the oldest martial arts in the world.'], ch: 'Be the first to spot an animal from the boat.', b: ['wild', 'Wildlife Spotter', '🐘'] },
+  kumarakom: { t: 'Spice Lord', r: 4, e: '🌶️', img: 'backwater', facts: ['Kumily’s plantations grow cardamom, pepper, cinnamon and clove side by side.', 'Kumarakom sits on Vembanad, Kerala’s largest lake.', 'Must try: karimeen pollichathu (pearl spot fish in banana leaf) – or appam with veg stew.'], ch: 'Name 5 spices by smell at the plantation.', b: ['spice', 'Spice Lord', '🌶️'] },
+  athira: { t: 'Waterfall Titan', r: 5, e: '💦', art: 'house', facts: ['Athirappilly is Kerala’s largest waterfall – the “Niagara of India”.', 'It has starred in many films, including Baahubali.', 'The top viewpoints are the easy, infant-friendly way to see it.'], ch: 'Capture the cinematic waterfall shot.', b: ['falls', 'Waterfall Hunter', '💦'] },
+  guru: { t: 'Elephant Keeper', r: 4, e: '🛕', art: 'temple', facts: ['Punnathur Kotta is home to the Guruvayur temple’s elephants.', 'Guruvayur is one of Kerala’s most visited Krishna temples – dress code applies.', 'Chavakkad beach is a short drive away for sunset.'], ch: 'Count the elephants at Punnathur Kotta.', b: ['ele', 'Elephant Keeper', '🛕'] },
+  home: { t: 'Return of Legends', r: 5, e: '🏆', art: 'gem', facts: ['Expedition complete – every kilometre, every chai, every memory.', 'Total distance: {km} km across three states.'], ch: 'Vote for the Trip MVP in Updates.', b: ['legend', 'Legend Returns', '🏆'] }
+};
+const PP_BONUS = [['foodie', 'Kerala Foodie', '🍛', 'Tried a proper Kerala sadya or karimeen'], ['sunrise', 'Early Bird', '🌅', 'Up for a sunrise at Top Station or the lake'], ['shutter', 'Shutterbug', '📸', 'Added 5+ photos to Trip photos (automatic)'], ['quiz', 'Quiz Whiz', '🧠', 'Scored 7+ in the trip quiz (automatic)'], ['full', 'Full Passport', '🛂', 'Collected every day badge (automatic)']];
+function ppKey(d) {
+  const tx = ((d.route || '') + ' ' + (d.night || '')).toLowerCase(), n = String(d.night || '').toLowerCase();
+  if (/home/.test(n) || /→\s*kadapa\s*$/.test(String(d.route || '').toLowerCase())) return 'home';
+  if (/munnar/.test(n)) return /local/.test(tx) ? 'munnar2' : 'munnar';
+  const R = [[/dindigul/, 'dindigul'], [/thekkady|kumily/, 'thekkady'], [/kumarakom|alapp?u?zha|allepp?ey/, 'kumarakom'], [/athirap/, 'athira'], [/guruvayur/, 'guru']];
+  for (const [re, k] of R) if (re.test(n)) return k;
+  for (const [re, k] of R) if (re.test(tx)) return k;
+  return '';
+}
+function ppDays() {
+  const seen = {};
+  return daysSorted().map(d => { let k = ppKey(d); if (k && seen[k]) k = k === 'munnar' ? 'munnar2' : ''; if (k) seen[k] = 1;
+    const p = PP[k] || { t: d.title || 'Day ' + d.dayNo, r: 3, e: '📍', art: 'mountain', facts: [d.vibe || ''].filter(Boolean), ch: 'Take a group photo at today’s best spot.', b: ['day' + d.dayNo, 'Day ' + d.dayNo + ' Explorer', '📍'] };
+    return Object.assign({ d, k }, p); });
+}
+const ppDoc = () => S.name ? funDoc('pass__' + slug(S.name)) : null;
+function ppBadges() {
+  const own = Object.assign({}, (ppDoc() || {}).badges || {});
+  const mine = galFiles().filter(f => f._by === S.name).length; if (mine >= 5) own.shutter = own.shutter || 1;
+  const q = S.name ? funDoc('quiz__' + slug(S.name)) : null; if (q && +q.best >= 7) own.quiz = own.quiz || 1;
+  if (ppDays().every(x => own[x.b[0]])) own.full = own.full || 1;
+  return own;
+}
+const ppReached = d => !!d.date && d.date <= today();
+function ppStamped(x, own) { return S.ppPreview || ppReached(x.d) || !!own[x.b[0]]; }
+function ppBg(x) {
+  const g = galFiles().find(f => String(f.parentId) === String(x.d.dayNo) && f.thumb);
+  const src = imgSrc(x.d.cover) || (g && imgSrc(g.thumb)) || (x.img && STOCK[x.img] ? UNS(STOCK[x.img][0], 700) : '');
+  return src ? `background-image:linear-gradient(180deg,rgba(6,22,18,.15),rgba(6,22,18,.88)),url('${esc(src)}')` : `background:var(--t-${x.art || 'mountain'})`;
+}
+function vPassport() {
+  const list = ppDays(), own = ppBadges(), m = meta();
+  if (!list.length) return `<div class="empty">Add the itinerary first – the passport is built from your days.</div>`;
+  const stamped = list.filter(x => ppStamped(x, own)), totalKm = list.reduce((t, x) => t + (+x.d.km || 0), 0);
+  const kmDone = list.filter(x => ppReached(x.d)).reduce((t, x) => t + (+x.d.km || 0), 0);
+  const pct = Math.round(stamped.length / list.length * 100);
+  const holder = S.name || 'Traveller';
+  if (!S.passOpen) return `<div class="pp-wrap"><div class="pp-book" id="ppBook">
+      <div class="pp-inside"><div class="pp-inside-hint">Stamping your pages…</div></div>
+      <div class="pp-front"><div class="pp-sheen"></div><div class="pp-seal">KE</div><p class="pp-rep">Republic of Family Holidays</p><h1>${esc((m.tripName || 'Kerala Era ’27').toUpperCase())}</h1><h2>Travel Passport</h2><p class="pp-holder">Holder · <b>${esc(holder)}</b></p><p class="pp-meta">${list.length} days · ${totalKm.toLocaleString('en-IN')} km · ${stamped.length}/${list.length} stamps</p><button class="pp-open" data-act="ppOpen">Open passport</button></div>
+    </div></div>`;
+  const seen = new Set(ls.get('ktrip.ppSeen', [])); const fresh = [];
+  const stamps = list.map((x, i) => { const on = ppStamped(x, own); const neu = on && (S.ppPreview ? S.ppAnimAll : !seen.has(x.b[0])); if (neu && !S.ppPreview) fresh.push(x.b[0]);
+    return `<div class="pp-stamp ${on ? 'on' : ''} ${neu ? 'drop' : ''}" style="--rot:${[-8, 6, -4, 9, -10, 5, -6, 8][i % 8]}deg;--dl:${(fresh.length + (S.ppPreview ? i : 0)) * .12}s"><span class="pp-st-e">${on ? x.e : '🔒'}</span><b>${esc(dayPlace(x.d) || x.d.route || 'Day ' + x.d.dayNo)}</b><span>Day ${esc(x.d.dayNo)} · ${esc(fmtD(x.d.date))}</span></div>`; }).join('');
+  S.ppFresh = fresh;
+  const flipped = S.ppFlip || (S.ppFlip = {});
+  const todayIdx = Math.max(0, list.findIndex(x => x.d.date === today()));
+  const cards = list.map((x, i) => { const has = !!own[x.b[0]]; const can = ppReached(x.d); const places = DB.places.filter(p => +p.dayNo === +x.d.dayNo).map(p => p.name).slice(0, 4);
+    return `<div class="pp-slide" data-i="${i}"><div class="pp-card ${flipped[i] ? 'flipped' : ''}" data-act="ppFlip" data-i="${i}" role="button" tabindex="0" aria-label="Day ${esc(x.d.dayNo)} card – tap to flip">
+      <div class="pp-face pp-fr" style="${ppBg(x)}"><div class="pp-foil"></div>
+        <div class="pp-top"><span class="pp-day">DAY ${String(x.d.dayNo).padStart(2, '0')}</span><span class="pp-rar" aria-label="${x.r} of 5 stars">${'★'.repeat(x.r)}<i>${'★'.repeat(5 - x.r)}</i></span></div>
+        <div class="pp-big">${x.e}</div>
+        <div><div class="pp-title">${esc(x.t)}</div><div class="pp-route">${esc(x.d.route || '')}${x.d.km ? ' · ' + esc(x.d.km) + ' km' : ''}</div>
+        <div class="pp-foot">${has ? `<span class="pp-got">${x.b[2]} ${esc(x.b[1])}</span>` : `<span class="pp-tap">Tap for destination intel</span>`}<span class="pp-date">${esc(fmtD(x.d.date))}</span></div></div></div>
+      <div class="pp-face pp-bk"><div class="pp-day">DESTINATION INTEL · DAY ${esc(x.d.dayNo)}</div>
+        <ul class="pp-facts">${x.facts.map(f => `<li>${esc(f.replace('{km}', totalKm.toLocaleString('en-IN')))}</li>`).join('')}${places.length ? `<li><b>Stops:</b> ${esc(places.join(', '))}</li>` : ''}</ul>
+        <div class="pp-ch"><span>🎯 Challenge</span><p>${esc(x.ch)}</p></div>
+        <div class="pp-acts">${has ? `<span class="pp-got">${x.b[2]} ${esc(x.b[1])} earned</span>` : can || S.ppPreview ? `<button class="btn sm primary" data-act="ppClaim" data-b="${esc(x.b[0])}" ${S.ppPreview && !can ? 'disabled' : ''}>We did it · claim ${x.b[2]}</button>` : `<span class="pp-lock">Badge unlocks ${esc(fmtD(x.d.date))}</span>`}<button class="btn sm" data-act="ppPlan" data-n="${esc(x.d.dayNo)}">Day plan</button></div></div>
+    </div></div>`; }).join('');
+  const allB = list.map(x => x.b).concat(PP_BONUS);
+  const badges = allB.map(([id, name, e, how]) => { const on = !!own[id]; const bonus = PP_BONUS.find(b => b[0] === id);
+    return `<div class="pp-badge ${on ? 'on' : ''}"><span class="pp-medal">${on ? e : '🔒'}</span><b>${esc(name)}</b>${bonus ? (on || /automatic/.test(how) ? `<span class="by">${esc(how)}</span>` : `<button class="btn sm" data-act="ppClaim" data-b="${id}">Claim</button>`) : ''}</div>`; }).join('');
+  const board = DB.fun.filter(x => x.kind === 'passport' && x.by).map(x => ({ by: x.by, n: Object.keys(x.badges || {}).length })).filter(x => x.n).sort((a, b) => b.n - a.n).slice(0, 8);
+  const got = allB.filter(b => own[b[0]]);
+  const shareTxt = `🛂 ${holder}’s ${m.tripName || 'Kerala Era ’27'} passport\n📍 Stamps: ${stamped.length}/${list.length}${stamped.length ? ' – ' + stamped.map(x => dayPlace(x.d)).filter(Boolean).join(', ') : ''}\n🏅 Badges: ${got.length ? got.map(b => b[2] + ' ' + b[1]).join(', ') : 'none yet'}\n🚐 ${kmDone.toLocaleString('en-IN')} of ${totalKm.toLocaleString('en-IN')} km\nCollect yours: ${appLink('passport')}`;
+  return `<div class="sec-head"><div><h2>Trip passport</h2><p>${esc(holder)}’s stamps, destination cards and badges.</p></div><div class="chips"><a class="btn sm wa-btn" href="${esc(shareWA(shareTxt))}" target="_blank" rel="noopener">${IC.wa} Share</a><button class="btn sm" data-act="ppPreview">${S.ppPreview ? 'Exit preview' : 'Preview all stamps'}</button><button class="btn sm" data-act="ppClose">Close passport</button></div></div>
+    ${S.ppPreview ? `<div class="banner"><p><b>Preview mode.</b> Showing every stamp as it will look. Real stamps unlock on each trip day, or when you claim that day’s challenge.</p></div>` : ''}
+    ${!S.name ? `<div class="banner"><p><b>Add your name in ⚙</b> to save badges to your own passport.</p></div>` : ''}
+    <section class="card pp-progress"><div class="sec-head"><h3>Journey progress</h3><span class="pp-pct">${pct}%</span></div><div class="pp-bar"><i style="width:${pct}%"></i></div><p class="by">${stamped.length} of ${list.length} stamps · ${kmDone.toLocaleString('en-IN')} of ${totalKm.toLocaleString('en-IN')} km travelled · ${got.length} badge${got.length === 1 ? '' : 's'}</p></section>
+    <section class="pp-page"><div class="pp-page-h">Visas & entries</div><div class="pp-stamps">${stamps}</div></section>
+    ${(() => { const started = list.some(x => ppReached(x.d)); return `<section class="pp-page pp-firsts"><div class="pp-page-h">Kerala firsts · +3 each in Kerala Quest</div><div class="pp-stamps">${Q_FIRSTS.map(([k, l, e], i) => { const on = !!own[k] || S.ppPreview; return `<div class="pp-stamp ${on ? 'on' : ''}" style="--rot:${[-5, 4, -3, 6][i % 4]}deg"><span class="pp-st-e">${on ? e : '🔒'}</span><b>${esc(l.replace('First ', ''))}</b>${own[k] ? '<span>Stamped</span>' : started ? `<button class="btn sm" data-act="ppClaim" data-b="${k}">I did it</button>` : '<span>From 25 Jan</span>'}</div>`; }).join('')}</div></section>`; })()}
+    <div class="sec-head" style="margin-top:22px"><div><h3>Destination collection</h3><p class="by">Swipe through the days · tap a card to flip it.</p></div></div>
+    <div class="pp-deck" id="ppDeck" data-start="${todayIdx}">${cards}</div>
+    <div class="pp-dots" id="ppDots">${list.map((x, i) => `<button data-act="ppGo" data-i="${i}" aria-label="Go to day ${esc(x.d.dayNo)}"></button>`).join('')}</div>
+    <section class="card"><div class="sec-head"><h3>Achievement badges</h3><span class="by">${got.length}/${allB.length}</span></div><div class="pp-badges">${badges}</div></section>
+    ${board.length ? `<section class="card"><div class="sec-head"><h3>Badge leaders</h3></div><ol class="pp-board">${board.map(x => `<li><b>${esc(x.by)}</b><span>${x.n} 🏅</span></li>`).join('')}</ol></section>` : ''}`;
+}
+function ppConfetti(n) {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const box = document.createElement('div'); box.className = 'pp-confetti'; box.setAttribute('aria-hidden', 'true');
+  const cols = ['#B79A60', '#E9D49A', '#183D32', '#1599A8', '#D8326B', '#FFBF2E'];
+  for (let i = 0; i < (n || 90); i++) { const s = document.createElement('i'); s.style.cssText = `left:${Math.random() * 100}%;background:${cols[i % cols.length]};--dx:${(Math.random() - .5) * 160}px;--r:${Math.random() * 720 - 360}deg;animation-delay:${Math.random() * .35}s;animation-duration:${1.6 + Math.random() * 1.2}s;${i % 3 ? '' : 'border-radius:50%;'}`; box.appendChild(s); }
+  document.body.appendChild(box); setTimeout(() => box.remove(), 3400);
+}
+function ppAfter() {
+  const deck = $('#ppDeck'); if (!deck) return;
+  const dots = [...document.querySelectorAll('#ppDots button')];
+  const mark = () => { const c = deck.scrollLeft + deck.clientWidth / 2; let i = 0, best = 1e9; [...deck.children].forEach((el, j) => { const m = el.offsetLeft - deck.offsetLeft + el.offsetWidth / 2; if (Math.abs(m - c) < best) { best = Math.abs(m - c); i = j; } }); S.ppIdx = i; dots.forEach((b, j) => b.classList.toggle('on', j === i)); };
+  const start = S.ppIdx !== undefined ? S.ppIdx : +deck.dataset.start || 0;
+  const sl = deck.children[start]; if (sl) deck.scrollLeft = sl.offsetLeft - deck.offsetLeft - (deck.clientWidth - sl.offsetWidth) / 2;
+  mark(); deck.addEventListener('scroll', () => { clearTimeout(deck._t); deck._t = setTimeout(mark, 60); }, { passive: true });
+  if (S.ppFresh && S.ppFresh.length) { const f = S.ppFresh; S.ppFresh = []; const seen = new Set(ls.get('ktrip.ppSeen', [])); f.forEach(k => seen.add(k)); ls.set('ktrip.ppSeen', [...seen]); setTimeout(() => ppConfetti(), 500 + f.length * 120); }
+  if (S.ppAnimAll) { S.ppAnimAll = false; setTimeout(() => ppConfetti(), 900); }
+}
+function ppClick(a, t) {
+  switch (a) {
+    case 'ppOpen': { const b = $('#ppBook'); if (!b) return true; b.classList.add('open'); setTimeout(() => { S.passOpen = true; render(); }, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 1250); return true; }
+    case 'ppClose': S.passOpen = false; S.ppIdx = undefined; render(); return true;
+    case 'ppPreview': S.ppPreview = !S.ppPreview; S.ppAnimAll = S.ppPreview; render(); return true;
+    case 'ppFlip': { const i = +t.dataset.i; S.ppFlip = S.ppFlip || {}; S.ppFlip[i] = !S.ppFlip[i]; t.classList.toggle('flipped', !!S.ppFlip[i]); return true; }
+    case 'ppGo': { const deck = $('#ppDeck'); const sl = deck && deck.children[+t.dataset.i]; if (sl) deck.scrollTo({ left: sl.offsetLeft - deck.offsetLeft - (deck.clientWidth - sl.offsetWidth) / 2, behavior: 'smooth' }); return true; }
+    case 'ppPlan': { const n = +t.dataset.n; const d = dayOf(n); const tl = tlFor(n); const st = DB.stays.filter(s => s.checkin && s.checkout && d && s.checkin <= d.date && d.date < s.checkout);
+      openSheet(`Day ${n} · ${d ? d.title : ''}`, `<p class="muted">${esc(d ? (d.route || '') + (d.km ? ' · ' + d.km + ' km' : '') + ' · ' + fmtD(d.date) : '')}</p>
+        ${tl.length ? `<ol class="pp-tl">${tl.map(x => `<li><span>${esc(x.time || '')}</span><div><b>${esc(x.title || '')}</b>${x.who && x.who !== 'Everyone' ? ` <em>${esc(x.who)}</em>` : ''}${x.note ? `<p>${esc(x.note)}</p>` : ''}</div></li>`).join('')}</ol>` : '<p class="muted">No plan items for this day yet.</p>'}
+        ${st.length ? `<p><b>Tonight:</b> ${esc(st.map(s => s.name || s.stop).join(' / '))}</p>` : ''}
+        <div class="actions"><span></span><div class="r"><button class="btn primary" data-act="goDay" data-n="${n}">Open full day</button></div></div>`); return true; }
+    case 'ppClaim': {
+      if (!S.name) { toast('Add your name in ⚙ first'); return true; }
+      const k = t.dataset.b; const id = 'pass__' + slug(S.name); const cur = funDoc(id) || {};
+      const badges = Object.assign({}, cur.badges || {}); if (badges[k]) return true; badges[k] = Date.now();
+      run(B.add('fun', { kind: 'passport', by: S.name, badges }, id));
+      const meta_ = ppDays().map(x => x.b).concat(PP_BONUS, Q_FIRSTS).find(b => b[0] === k) || ['', 'a badge', '🏅'];
+      logActivity('note', `earned the ${meta_[2]} ${meta_[1]} passport badge`, 'passport'); toast(`${meta_[2]} ${meta_[1]} unlocked!`); ppConfetti(120); return true; }
+  }
+  return false;
+}
+
+/* ================= v10: Kerala Quest – one family championship ================= */
+const Q_TEAMS = [['Coconut', '🥥'], ['Elephant', '🐘'], ['Spice', '🌶️']];
+// [key, label, points, class]
+const Q_CATS = [['game', 'Won a mini-game', 5, 'Entertainer'], ['photo', 'Award-winning photo', 5, 'Photographer'], ['food', 'Tried a local dish', 4, 'Foodie'], ['mal', 'Spoke a Malayalam phrase', 3, 'Explorer'], ['hidden', 'Found a hidden challenge', 3, 'Explorer'], ['wild', 'Spotted wildlife first', 2, 'Wildlife Hunter'], ['help', 'Helped someone (luggage, kids, elders)', 2, 'Helper'], ['event', 'Completed an event card', 3, 'Entertainer'], ['late', 'Late for the van', -2, ''], ['water', 'Forgot the water bottle', -1, '']];
+const Q_CLASS = { Explorer: ['🧭', 'Master Explorer'], Foodie: ['🍛', 'Spice Baron'], Photographer: ['📸', 'Frame Maharaja'], Entertainer: ['🎤', 'Van DJ'], 'Wildlife Hunter': ['🐘', 'Elephant Whisperer'], Helper: ['🥥', 'Coconut King'] };
+const Q_FIRSTS = [['f_tea', 'First tea estate', '☕'], ['f_boat', 'First boat ride', '🚤'], ['f_ele', 'First elephant', '🐘'], ['f_falls', 'First waterfall', '🌊'], ['f_mal', 'First Malayalam sentence', '🗣️'], ['f_sun', 'First sunrise photo', '🌅'], ['f_spice', 'First spice garden', '🌿'], ['f_coco', 'First tender coconut', '🥥']];
+const Q_SECRETS = ['Get someone to say “chai” 5 times in one conversation.', 'Convince 3 people to take a group selfie with you.', 'Make everyone in your van look up at the sky.', 'Get an elder to tell a story from their childhood.', 'Get someone to sing a line of a Malayalam song.', 'Make the whole van clap together for something.', 'Get 3 different people to try a snack you offer.', 'Get someone to teach you a Malayalam word – then use it at dinner.', 'Get a kid to show you their best dance move.', 'Get someone to say “Kerala Era” without asking them to.', 'Start a toast with tender coconut water at a meal.', 'Get two people to swap seats in the van.', 'Get someone to take a photo of you without asking directly.', 'Make someone laugh so hard they snort.', 'Get the drivers a thank-you cheer from everyone.', 'Get someone to rate the chai out of 10.', 'Get 4 people to pose like the same animal in a photo.', 'Get someone to predict the next day’s weather – out loud.', 'Collect a compliment for every family in your van.', 'Get someone to hum the same tune as you without noticing.'];
+const Q_EVENTS = ['📸 Double points for every photo-challenge win in the next hour.', '🗣️ Everybody says one Malayalam word before the next stop.', '{E0} Bonus challenge for {T0}: a team photo with coconut trees in 30 minutes.', '{E1} Bonus challenge for {T1}: everyone does an elephant trumpet together.', '{E2} Bonus challenge for {T2}: name 6 spices in 60 seconds.', '🤳 Selfie mission: one photo with every person in your van.', '🎵 Van DJ hour – whoever picks the best song by the next stop earns +3.', '🤫 Silent minute – first person to talk loses 1 point (babies exempt!).', '☕ Chai judge: rate the next chai stop out of 10. Closest to the family average +2.', '🔎 Hidden challenge: find something purple outside in 10 minutes.', '🙏 Thank-you round: everyone thanks one person for something today.', '🧠 Pop quiz: next person to open the Fun Zone quiz and score 7+ earns +3.', '👀 Wildlife watch: first to spot a cow, goat or monkey earns +2.', '🎭 Charades round at the next stop – winning team +5.', '🌄 Look-up moment: everyone finds a cloud shape and names it.', '🍌 Banana chips duel: who can name 5 Kerala snacks fastest?'];
+const Q_SCENES = { dindigul: 'The Departure', munnar: 'The Great Tea Estate Discovery', munnar2: 'The Lake of Echoes', thekkady: 'Jungle Expedition', kumarakom: 'The Spice Road & the Shikara', athira: 'Chasing the Titan Falls', guru: 'The Kingdom of Elephants', home: 'Return of the Heroes' };
+const Q_BINGO = ['Elephant sighting', 'Rain during travel', 'Banana chips bought', 'Tea estate photo', 'Someone asleep, mouth open', 'Full-gang selfie', 'Tender coconut water', 'Shikara ride', 'Kathakali face spotted', 'Monkey on the road', 'Hairpin bend count > 10', 'Fog on the road', 'Someone says “are we there yet?”', 'Spice shop haggling', 'Sunset photo', 'Waterfall mist on faces', 'Appam & stew', 'Lost item found', 'Van singalong', 'Baby giggle on video', 'Temple bell heard', 'Toddy shop sign', 'Boat on the backwaters', 'Kerala saree / mundu photo', 'Chai at 2 stops in a row'];
+const qCfg = () => funDoc('quest_cfg') || { players: [], teams: Q_TEAMS.map(t => t[0]) };
+const qPlayers = () => (qCfg().players || []).filter(p => p && p.n);
+const qTeamOf = n => (qPlayers().find(p => p.n === n) || {}).team || '';
+const qEmoji = t => ((qCfg().teamInfo || {})[t] || {}).e || (Q_TEAMS.find(x => x[0] === t) || ['', '🏳️'])[1];
+const qTN = t => ((qCfg().teamInfo || {})[t] || {}).n || 'Team ' + t;
+const qTro = () => Object.assign({ n: 'Coconut', e: '🥥' }, qCfg().trophy || {});
+const qHash = s => [...String(s)].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
+const qSecretFor = n => Q_SECRETS[qHash(n + '|' + (qCfg().salt || '')) % Q_SECRETS.length];
+const qPts = () => DB.fun.filter(x => x.kind === 'qpt');
+const qOrg = () => canEdit();
+const qTripOver = () => { const d = daysSorted(); const last = d[d.length - 1]; return !!(qCfg().reveal || (last && last.date && today() > last.date)); };
+function qScores() {
+  const pl = qPlayers(), P = {}, T = {}; (qCfg().teams || Q_TEAMS.map(t => t[0])).forEach(t => T[t] = 0);
+  pl.forEach(p => P[p.n] = { n: p.n, team: p.team, pts: 0, xp: {}, firsts: 0, badges: 0, secret: false });
+  qPts().forEach(e => { const pts = +e.pts || 0; if (e.who && e.who.startsWith('team:')) { const t = e.who.slice(5); if (t in T) T[t] += pts; return; } const r = P[e.who]; if (!r) return; r.pts += pts; const c = (Q_CATS.find(x => x[0] === e.cat) || [])[3]; if (c && pts > 0) r.xp[c] = (r.xp[c] || 0) + pts; });
+  DB.fun.filter(x => x.kind === 'passport').forEach(d => { const r = P[d.by]; if (!r) return; const ks = Object.keys(d.badges || {}); r.firsts = ks.filter(k => k.startsWith('f_')).length; r.badges = ks.length - r.firsts; r.pts += r.firsts * 3 + r.badges * 3; r.xp.Explorer = (r.xp.Explorer || 0) + (r.firsts + r.badges) * 3; });
+  DB.fun.filter(x => x.kind === 'qsecret' && x.done).forEach(d => { const r = P[d.who]; if (r) { r.secret = true; r.pts += 5; } });
+  Object.values(P).forEach(r => { if (r.team in T) T[r.team] += r.pts; const top = Object.entries(r.xp).sort((a, b) => b[1] - a[1])[0]; r.cls = top ? top[0] : ''; r.lvl = 1 + Math.floor(Object.values(r.xp).reduce((t, v) => t + v, 0) / 10); });
+  return { P: Object.values(P).sort((a, b) => b.pts - a.pts), T: Object.entries(T).sort((a, b) => b[1] - a[1]) };
+}
+function qEventNow() {
+  const days = daysSorted(); const d0 = days[0], dl = days[days.length - 1]; const t = today(), h = new Date().getHours();
+  const live = d0 && dl && t >= d0.date && t <= dl.date; const slot = h < 14 ? 'am' : 'pm';
+  if (!live && !S.qDraw) return { live: false, next: d0 ? d0.date : '' };
+  const key = live ? t + slot : 'preview' + S.qDraw;
+  const tm = qCfg().teams || Q_TEAMS.map(t => t[0]); return { live, slot, text: Q_EVENTS[qHash(key + (qCfg().salt || '')) % Q_EVENTS.length].replace(/\{([ET])(\d)\}/g, (m, k, i) => tm[+i] ? (k === 'E' ? qEmoji(tm[+i]) : qTN(tm[+i])) : '') };
+}
+function qCompletion() {
+  const days = ppDays(); const fam = qPlayers().length || 1;
+  const stampsAll = DB.fun.filter(x => x.kind === 'passport').reduce((t, d) => t + Object.keys(d.badges || {}).length, 0);
+  const stampMax = (days.length + Q_FIRSTS.length) * fam;
+  const scenes = days.filter(x => funDoc('qscene__' + x.d.dayNo)).length;
+  const bingo = DB.fun.filter(x => x.kind === 'qb').length;
+  const secrets = DB.fun.filter(x => x.kind === 'qsecret' && x.done).length;
+  const parts = [['Passport stamps', stampsAll, stampMax], ['Story scenes', scenes, days.length], ['Bingo squares', bingo, Q_BINGO.length], ['Secret missions', secrets, qPlayers().length]];
+  const pct = Math.round(parts.reduce((t, p) => t + Math.min(1, p[1] / Math.max(1, p[2])), 0) / parts.length * 100);
+  return { parts, pct };
+}
+function vQuest() {
+  const sec = S.qSec || 'home', pl = qPlayers();
+  const tabs = [['home', 'Overview'], ['score', 'Points'], ['secret', 'Secret mission'], ['movie', 'Movie'], ['bingo', 'Bingo'], ['teams', 'Players & teams']];
+  const head = `<div class="sec-head"><div><h2>Kerala Quest</h2><p>One family championship: every game, stamp, photo and good deed feeds the same leaderboard.</p></div>${pl.length ? `<button class="btn sm primary" data-act="qLog">+ Log points</button>` : ''}</div>
+    <div class="chips q-tabs" role="tablist">${tabs.map(([k, l]) => `<button class="chip ${sec === k ? 'on' : ''}" role="tab" aria-selected="${sec === k}" data-act="qSec" data-k="${k}">${esc(l)}</button>`).join('')}</div>`;
+  if (!pl.length && sec !== 'teams') return head + `<section class="card q-setup"><h3>Start the quest</h3><p class="muted">Add the players and split them into teams – 2 to 6, and you can rename them and the trophies. ${qOrg() ? '' : 'Ask an organiser to do this, or join yourself.'}</p><div class="chips">${qOrg() ? '<button class="btn primary" data-act="qSec" data-k="teams">Set up players & teams</button>' : ''}${S.name ? `<button class="btn" data-act="qJoin">Join as ${esc(S.name)}</button>` : ''}</div></section>`;
+  return head + ({ home: qHome, score: qScoreView, secret: qSecretView, movie: qMovie, bingo: qBingo, teams: qTeamsView }[sec] || qHome)();
+}
+function qHome() {
+  const { P, T } = qScores(), c = qCompletion(), ev = qEventNow(), me = P.find(r => r.n === S.name);
+  const fam = P.reduce((t, r) => t + r.pts, 0) + qPts().filter(e => String(e.who).startsWith('team:')).reduce((t, e) => t + (+e.pts || 0), 0);
+  const tro = ['🥇 Gold', '🥈 Silver', '🥉 Bronze'];
+  return `<section class="q-hero"><div class="q-ring" style="--p:${c.pct}"><b>${c.pct}%</b><span>complete</span></div><div><span class="eyebrow">Kerala Era completion</span><h3>Family score ${fam}</h3>
+      <ul class="q-parts">${c.parts.map(([l, n, m]) => `<li><span>${esc(l)}</span><b>${n}/${m}</b><i style="--w:${Math.min(100, Math.round(n / Math.max(1, m) * 100))}%"></i></li>`).join('')}</ul></div></section>
+    <section class="card q-event"><div class="sec-head"><h3>🎲 Event card</h3>${ev.live ? statusTag('ok', ev.slot === 'am' ? 'Morning card' : 'Afternoon card') : ''}</div>${ev.text ? `<p class="q-ev-text">${esc(ev.text)}</p>${ev.live ? '' : '<p class="by">Preview card – real cards switch on during the trip (a new one every morning and afternoon, the same for everyone).</p>'}<div class="chips"><button class="btn sm" data-act="qLog" data-cat="event">Log a win (+3)</button>${ev.live ? '' : '<button class="btn sm" data-act="qDraw">Draw another</button>'}</div>` : `<p class="muted" style="margin:0">Two event cards a day start on ${esc(fmtD(ev.next))}.</p><div><button class="btn sm" data-act="qDraw">Preview a card</button></div>`}</section>
+    ${me ? `<section class="card q-me"><div class="q-avatar">${me.cls ? Q_CLASS[me.cls][0] : '⭐'}</div><div><b>${esc(me.n)} · Level ${me.lvl}</b><span class="by">${me.cls ? esc(me.cls) + ' – on track for “' + esc(Q_CLASS[me.cls][1]) + '”' : 'Earn points to unlock your character class'} · ${qEmoji(me.team)} ${esc(me.team ? qTN(me.team) : 'No team')}</span></div><b class="q-big">${me.pts}</b></section>` : ''}
+    <section class="card"><div class="sec-head"><h3>Team race</h3></div><div class="q-teams">${T.map(([t, s], i) => `<div class="q-team ${i === 0 && s > 0 ? 'lead' : ''}"><span>${qEmoji(t)}</span><b>${esc(qTN(t))}</b><span class="q-big">${s}</span></div>`).join('')}</div></section>
+    <section class="card"><div class="sec-head"><h3>${esc(qTro().n)} trophies ${qTro().e}</h3><span class="by">${qTripOver() ? 'Final' : 'Live standings'}</span></div>
+      <ol class="q-board">${P.slice(0, 10).map((r, i) => `<li class="${i < 3 && r.pts > 0 ? 'top' : ''}"><span class="q-rank">${i < 3 && r.pts > 0 ? tro[i].split(' ')[0] + qTro().e : i + 1}</span><span class="q-name"><b>${esc(r.n)}</b><span class="by">${qEmoji(r.team)} ${r.cls ? Q_CLASS[r.cls][0] + ' ' + esc(qTripOver() ? Q_CLASS[r.cls][1] : r.cls) : ''} · Lv ${r.lvl}</span></span><b class="num">${r.pts}</b></li>`).join('')}</ol>
+      <button class="btn sm" data-act="tab" data-k="passport">Open your passport – each stamp is worth +3</button></section>`;
+}
+function qScoreView() {
+  const feed = qPts().slice().sort((a, b) => (b._at || 0) - (a._at || 0)).slice(0, 40);
+  return `<section class="card"><div class="sec-head"><h3>How points work</h3></div><div class="q-cats">${Q_CATS.map(([k, l, p]) => `<button class="q-cat ${p < 0 ? 'neg' : ''}" data-act="qLog" data-cat="${k}"><b>${p > 0 ? '+' : ''}${p}</b><span>${esc(l)}</span></button>`).join('')}</div>
+      <p class="by" style="margin:10px 0 0">Automatic: +3 for every passport stamp or “first”, +5 for a completed secret mission. Keep penalties light-hearted – babies and grandparents are always exempt.</p></section>
+    <section class="card"><div class="sec-head"><h3>Latest points</h3></div>${feed.length ? `<ul class="q-feed">${feed.map(e => { const c = Q_CATS.find(x => x[0] === e.cat); const who = String(e.who).startsWith('team:') ? qEmoji(e.who.slice(5)) + ' ' + qTN(e.who.slice(5)) : e.who;
+      return `<li><b class="${+e.pts < 0 ? 'neg' : 'pos'}">${+e.pts > 0 ? '+' : ''}${+e.pts}</b><span><b>${esc(who)}</b> · ${esc(e.note || (c ? c[1] : 'Points'))}<br><span class="by">by ${esc(e._by || '?')}${e._at ? ' · ' + esc(ago(e._at)) : ''}</span></span>${qOrg() || e._by === S.name ? `<button class="icon-btn" data-act="qDel" data-id="${esc(e.id)}" aria-label="Remove">✕</button>` : ''}</li>`; }).join('')}</ul>` : '<p class="muted" style="margin:0">No points yet. Tap a rule above to log the first ones.</p>'}</section>`;
+}
+function qSecretView() {
+  if (!S.name) return `<div class="banner"><p>Add your name in ⚙ to get your secret mission.</p></div>`;
+  const inGame = qPlayers().some(p => p.n === S.name); const done = funDoc('qsec__' + slug(S.name));
+  const over = qTripOver();
+  return `<section class="card q-secret"><span class="eyebrow">🕵️ Secret Traveller · for ${esc(S.name)} only</span>
+      ${inGame ? `<div class="q-mission ${S.qReveal ? 'show' : ''}" data-act="qReveal" role="button" tabindex="0"><p>${esc(qSecretFor(S.name))}</p><span>${S.qReveal ? 'Tap to hide' : 'Tap to reveal – make sure nobody is looking 👀'}</span></div>
+      <p class="by">Complete it without anyone guessing it. Worth <b>+5</b>. Everyone else’s missions stay hidden until the final night.</p>
+      ${done && done.done ? statusTag('ok', 'Mission complete') : `<button class="btn primary" data-act="qSecretDone">Mission complete – nobody guessed!</button>`}` : `<p class="muted">Join the quest first to get a mission.</p>${S.name ? `<button class="btn" data-act="qJoin">Join as ${esc(S.name)}</button>` : ''}`}</section>
+    <section class="card"><div class="sec-head"><h3>Final-night reveal</h3>${statusTag(over ? 'ok' : 'warn', over ? 'Revealed' : 'Locked')}</div>
+      ${over ? `<ul class="q-feed">${qPlayers().map(p => { const d = funDoc('qsec__' + slug(p.n)); return `<li><b class="${d && d.done ? 'pos' : ''}">${d && d.done ? '✓' : '–'}</b><span><b>${esc(p.n)}</b><br><span class="by">${esc(qSecretFor(p.n))}</span></span></li>`; }).join('')}</ul>` : `<p class="muted" style="margin:0">All missions are shown here after the last day${qOrg() ? ' – or reveal them now at the final dinner' : ''}. ${DB.fun.filter(x => x.kind === 'qsecret' && x.done).length} completed so far.</p>${qOrg() ? '<div><button class="btn sm" data-act="qRevealAll">Reveal everyone’s missions</button></div>' : ''}`}</section>`;
+}
+function qMovie() {
+  const days = ppDays();
+  return `<section class="card"><div class="sec-head"><div><h3>🎬 Kerala Movie Quest</h3><p class="by">One scene per day. Add photos in Trip photos for that day, then pick the shot that tells the story.</p></div></div>
+    <div class="q-film">${days.map(x => { const sc = funDoc('qscene__' + x.d.dayNo); const f = sc && DB.files.find(y => y.id === sc.fileId); const title = Q_SCENES[x.k] || x.d.title;
+      const pics = galFiles().filter(y => String(y.parentId) === String(x.d.dayNo) && y.thumb);
+      return `<div class="q-scene"><div class="q-frame">${f ? `<img src="${esc(imgSrc(f.thumb))}" alt="${esc(title)}">` : `<span>${x.e}</span>`}<em>Scene ${x.d.dayNo}</em></div><div><b>${esc(title)}</b><span class="by">${esc(fmtD(x.d.date))} · ${f ? 'by ' + esc(f._by || '') : pics.length ? pics.length + ' photo' + (pics.length > 1 ? 's' : '') + ' to choose from' : 'No photos yet'}</span>
+        <div class="chips">${pics.length ? `<button class="btn sm" data-act="qPick" data-n="${esc(x.d.dayNo)}">${f ? 'Change shot' : 'Pick the scene'}</button>` : `<button class="btn sm" data-act="tab" data-k="gallery">Add photos</button>`}</div></div></div>`; }).join('')}</div></section>`;
+}
+function qBingo() {
+  const marks = {}; DB.fun.filter(x => x.kind === 'qb').forEach(x => marks[x.i] = x);
+  const n = Object.keys(marks).length; const rows = [0, 1, 2, 3, 4].map(r => [0, 1, 2, 3, 4].map(c => r * 5 + c));
+  const lines = rows.concat([0, 1, 2, 3, 4].map(c => rows.map(r => r[c]))).concat([[0, 6, 12, 18, 24], [4, 8, 12, 16, 20]]).filter(l => l.every(i => marks[i])).length;
+  return `<section class="card"><div class="sec-head"><div><h3>📓 Kerala Bingo Book</h3><p class="by">The whole family fills one card together. Tap a square when it happens.</p></div><span class="q-big">${n}/25</span></div>
+    <div class="q-bingo">${Q_BINGO.map((t, i) => `<button class="q-sq ${marks[i] ? 'on' : ''}" data-act="qBingo" data-i="${i}" aria-pressed="${!!marks[i]}"><span>${esc(t)}</span>${marks[i] ? `<em>${esc(marks[i]._by || '')}</em>` : ''}</button>`).join('')}</div>
+    <p class="by" style="margin:10px 0 0">${lines ? `🎉 ${lines} full line${lines > 1 ? 's' : ''}!` : 'Complete a row, column or diagonal for a family cheer.'} ${n === 25 ? 'FULL HOUSE! 🥥' : ''}</p></section>`;
+}
+function qTeamsView() {
+  const pl = qPlayers(); const cfg = qCfg();
+  if (!qOrg()) return `<section class="card"><h3>Players & teams</h3>${pl.length ? `<div class="q-teams">${(cfg.teams || []).map(t => `<div class="q-team"><span>${qEmoji(t)}</span><b>${esc(qTN(t))}</b><span class="by">${esc(pl.filter(p => p.team === t).map(p => p.n).join(', ') || '–')}</span></div>`).join('')}</div>` : '<p class="muted">No players yet.</p>'}${S.name && !pl.some(p => p.n === S.name) ? `<div><button class="btn" data-act="qJoin">Join as ${esc(S.name)}</button></div>` : ''}</section>`;
+  const names = pl.length ? pl.map(p => p.n) : [...new Set([S.name].concat(DB.members.map(m => String(m.name || '').replace(/[’']s family| family/i, '').trim())).filter(Boolean))];
+  const ti = cfg.teamInfo || {}, tr = qTro();
+  const editor = `<section class="card"><h3>Team & trophy names</h3><p class="by">Rename any time – points and players stay with their team.</p>
+      <div class="q-name-grid">${(cfg.teams || Q_TEAMS.map(t => t[0])).map((t, i) => `<div class="field"><label for="qTe${i}">Icon</label><input id="qTe${i}" class="q-emoji-in" maxlength="4" value="${esc(qEmoji(t))}"></div><div class="field"><label for="qTn${i}">Team ${i + 1} name ${(cfg.teams || []).length > 2 ? `<button class="q-rm" data-act="qTeamDel" data-t="${esc(t)}" aria-label="Remove ${esc(qTN(t))}">Remove</button>` : ''}</label><input id="qTn${i}" maxlength="30" value="${esc(qTN(t))}"></div>`).join('')}
+      <div class="field"><label for="qRe">Icon</label><input id="qRe" class="q-emoji-in" maxlength="4" value="${esc(tr.e)}"></div><div class="field"><label for="qRn">Trophy name</label><input id="qRn" maxlength="30" value="${esc(tr.n)}"></div></div>
+      <p class="by" style="margin:0 0 10px">Shows as “🥇 Gold / 🥈 Silver / 🥉 Bronze ${esc(tr.n)}”. Tip: on a phone, use the emoji keyboard for icons.</p>
+      <div class="actions">${(cfg.teams || []).length < 6 ? '<button class="btn" data-act="qTeamAdd">+ Add a team</button>' : '<span class="by">6 teams is the maximum.</span>'}<div class="r"><button class="btn primary" data-act="qNames">Save names</button></div></div></section>`;
+  return editor + `<section class="card"><h3>Players</h3><p class="by">One person per line – include the kids. Babies can be honorary members of a team.</p>
+      <div class="field"><label for="qNames">Players</label><textarea id="qNames" style="min-height:180px">${esc(names.join('\n'))}</textarea></div>
+      <div class="actions"><span class="by">Saving keeps existing teams and puts new people in the smallest team.</span><div class="r"><button class="btn" data-act="qShuffle">Shuffle into teams</button><button class="btn primary" data-act="qSave">Save players</button></div></div></section>
+    ${pl.length ? `<section class="card"><h3>Teams</h3><p class="by">Tap a person to move them to the next team. Change the number of teams above.</p><div class="q-teams">${(cfg.teams || []).map(t => `<div class="q-team"><span>${qEmoji(t)}</span><b>${esc(qTN(t))} (${pl.filter(p => p.team === t).length})</b><div class="chips">${pl.filter(p => p.team === t).map(p => `<button class="chip" data-act="qMove" data-n="${esc(p.n)}">${esc(p.n)}</button>`).join('')}</div></div>`).join('')}</div></section>` : ''}`;
+}
+function qSaveCfg(players, extra) { const cur = qCfg(); run(B.add('fun', Object.assign({ kind: 'questcfg', teams: cur.teams || Q_TEAMS.map(t => t[0]), salt: cur.salt || Math.random().toString(36).slice(2, 8), reveal: !!cur.reveal, teamInfo: cur.teamInfo || {}, trophy: cur.trophy || { n: 'Coconut', e: '🥥' }, players }, extra || {}), 'quest_cfg')); }
+function qSmallest(pl) { const teams = qCfg().teams || Q_TEAMS.map(t => t[0]); return teams.slice().sort((a, b) => pl.filter(p => p.team === a).length - pl.filter(p => p.team === b).length)[0]; }
+function qLogSheet(cat) {
+  const pl = qPlayers(); const c = Q_CATS.find(x => x[0] === cat) || Q_CATS[0];
+  openSheet('Log points', `<div class="field"><label for="qWho">Who</label><select id="qWho">${pl.map(p => `<option ${p.n === S.name ? 'selected' : ''}>${esc(p.n)}</option>`).join('')}${(qCfg().teams || []).map(t => `<option value="team:${esc(t)}">${qEmoji(t)} Whole team: ${esc(qTN(t))}</option>`).join('')}</select></div>
+    <div class="field"><label for="qCat">For</label><select id="qCat">${Q_CATS.map(([k, l, p]) => `<option value="${k}" ${k === c[0] ? 'selected' : ''}>${esc(l)} (${p > 0 ? '+' : ''}${p})</option>`).join('')}<option value="custom">Something else…</option></select></div>
+    <div class="field"><label for="qPtsIn">Points</label><input id="qPtsIn" type="number" inputmode="numeric" value="${c[2]}"></div>
+    <div class="field"><label for="qNote">Note (optional)</label><input id="qNote" type="text" placeholder="e.g. Spotted the first elephant at Periyar"></div>
+    <div class="actions"><span class="by">Everyone sees who logged it.</span><div class="r"><button class="btn primary" data-act="qSavePts">Save</button></div></div>`);
+  const sel = $('#qCat'); sel.addEventListener('change', () => { const x = Q_CATS.find(y => y[0] === sel.value); if (x) $('#qPtsIn').value = x[2]; });
+}
+function qClick(a, t) {
+  switch (a) {
+    case 'qSec': S.qSec = t.dataset.k; render(); return true;
+    case 'qLog': if (!qPlayers().length) { toast('Add players first'); return true; } qLogSheet(t.dataset.cat); return true;
+    case 'qSavePts': { const who = $('#qWho').value, cat = $('#qCat').value, pts = Math.max(-20, Math.min(20, Math.round(+$('#qPtsIn').value || 0))), note = ($('#qNote').value || '').trim().slice(0, 140); if (!pts) { toast('Enter points'); return true; }
+      run(B.add('fun', { kind: 'qpt', who, team: who.startsWith('team:') ? who.slice(5) : qTeamOf(who), pts, cat, note, day: (daysSorted().find(d => d.date === today()) || {}).dayNo || '' }));
+      closeSheet(); toast(`${pts > 0 ? '+' : ''}${pts} for ${who.startsWith('team:') ? qTN(who.slice(5)) : who}`); if (pts >= 5) ppConfetti(60); return true; }
+    case 'qDel': run(B.remove('fun', t.dataset.id)); return true;
+    case 'qDraw': S.qDraw = (S.qDraw || 0) + 1; render(); return true;
+    case 'qJoin': { if (!S.name) { toast('Add your name in ⚙ first'); return true; } const pl = qPlayers().slice(); if (pl.some(p => p.n === S.name)) return true; pl.push({ n: S.name, team: qSmallest(pl) }); qSaveCfg(pl); toast('Welcome to the quest!'); return true; }
+    case 'qSave': case 'qShuffle': {
+      const names = [...new Set(($('#qNames').value || '').split('\n').map(s => s.trim()).filter(Boolean))].slice(0, 60); if (!names.length) { toast('Add at least one name'); return true; }
+      const teams = qCfg().teams || Q_TEAMS.map(t => t[0]); let pl;
+      if (a === 'qShuffle') pl = shuffle(names).map((n, i) => ({ n, team: teams[i % teams.length] }));
+      else { const old = qPlayers(); pl = []; names.forEach(n => { const o = old.find(p => p.n === n); pl.push({ n, team: o ? o.team : qSmallest(pl.concat(old.filter(p => names.includes(p.n) && !pl.some(q => q.n === p.n)))) }); }); }
+      qSaveCfg(pl); toast(a === 'qShuffle' ? 'Teams shuffled' : 'Players saved'); return true; }
+    case 'qMove': { const teams = qCfg().teams || Q_TEAMS.map(t => t[0]); const pl = qPlayers().map(p => p.n === t.dataset.n ? Object.assign({}, p, { team: teams[(teams.indexOf(p.team) + 1) % teams.length] }) : p); qSaveCfg(pl); return true; }
+    case 'qReveal': S.qReveal = !S.qReveal; render(); return true;
+    case 'qSecretDone': run(B.add('fun', { kind: 'qsecret', who: S.name, done: true }, 'qsec__' + slug(S.name))); logActivity('note', 'completed their secret mission 🕵️ (+5)', 'quest'); toast('+5 – secret mission complete!'); ppConfetti(100); return true;
+    case 'qTeamAdd': { const cur = qCfg(); const teams = (cur.teams || Q_TEAMS.map(t => t[0])).slice(); if (teams.length >= 6) return true;
+      const pool = [['Tea', '🍵'], ['Lotus', '🪷'], ['Tiger', '🐅'], ['Monsoon', '🌧️'], ['Banana', '🍌'], ['Kathakali', '🎭']].filter(x => !teams.includes(x[0]));
+      const nt = pool[0] || ['T' + Date.now().toString(36), '⭐']; teams.push(nt[0]); const info = Object.assign({}, cur.teamInfo || {}); info[nt[0]] = { n: 'Team ' + nt[0], e: nt[1] };
+      run(B.add('fun', Object.assign({}, cur, { kind: 'questcfg', teams, teamInfo: info, players: qPlayers() }), 'quest_cfg')); toast(`Added Team ${nt[0]} – tap Shuffle or move people into it`); return true; }
+    case 'qTeamDel': { const cur = qCfg(); const t0 = t.dataset.t; const teams = (cur.teams || []).filter(x => x !== t0); if (teams.length < 2) return true;
+      if (S.qDelArm !== t0) { S.qDelArm = t0; toast(`Tap Remove again to delete ${qTN(t0)} – its players move to other teams and its team-only points are dropped`); return true; } S.qDelArm = '';
+      const pl = []; qPlayers().forEach(p => pl.push(p.team === t0 || !teams.includes(p.team) ? Object.assign({}, p, { team: teams.slice().sort((a, b) => pl.filter(x => x.team === a).length - pl.filter(x => x.team === b).length)[0] }) : p));
+      run(B.add('fun', Object.assign({}, cur, { kind: 'questcfg', teams, players: pl }), 'quest_cfg')); toast(`${qTN(t0)} removed`); return true; }
+    case 'qNames': { const teams = qCfg().teams || Q_TEAMS.map(t => t[0]); const info = {}; teams.forEach((t, i) => { info[t] = { n: (($('#qTn' + i) || {}).value || '').trim().slice(0, 30) || 'Team ' + t, e: (($('#qTe' + i) || {}).value || '').trim().slice(0, 4) || qEmoji(t) }; });
+      qSaveCfg(qPlayers(), { teamInfo: info, trophy: { n: (($('#qRn') || {}).value || '').trim().slice(0, 30) || 'Coconut', e: (($('#qRe') || {}).value || '').trim().slice(0, 4) || '🥥' } }); toast('Names saved'); return true; }
+    case 'qRevealAll': qSaveCfg(qPlayers(), { reveal: true }); return true;
+    case 'qBingo': { const i = +t.dataset.i; const ex = funDoc('qb__' + i); if (ex) { if (qOrg() || ex._by === S.name) run(B.remove('fun', 'qb__' + i)); else toast(`Ticked by ${ex._by} – only they or an organiser can untick`); } else { run(B.add('fun', { kind: 'qb', i }, 'qb__' + i)); toast('Bingo square ticked!'); } return true; }
+    case 'qPick': { const n = t.dataset.n; const pics = galFiles().filter(y => String(y.parentId) === String(n) && y.thumb);
+      openSheet('Pick the scene', `<div class="gal">${pics.map(p => `<button class="gal-item" data-act="qPicked" data-n="${esc(n)}" data-id="${esc(p.id)}"><img src="${esc(imgSrc(p.thumb))}" alt="${esc(p.caption || p.name || '')}" loading="lazy"><span class="gal-by">${esc(p._by || '')}</span></button>`).join('')}</div>`); return true; }
+    case 'qPicked': run(B.add('fun', { kind: 'qscene', day: +t.dataset.n, fileId: t.dataset.id }, 'qscene__' + t.dataset.n)); closeSheet(); toast('Scene saved 🎬'); return true;
+  }
+  return false;
+}
+
+document.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('.pp-card, .q-mission')) { e.preventDefault(); e.target.click(); } });
 document.addEventListener('click', async e => {
   const t = e.target.closest('[data-act]'); if (!t) return;
   const a = t.dataset.act;
   if (a === 'scrim') { if (e.target === t) closeSheet(); return; }
   if (a === 'closeViewer') { if (e.target === t || t.classList.contains('icon-btn')) $('#viewerRoot').innerHTML = ''; return; }
   if (a !== 'multi' && t.tagName !== 'A' && t.tagName !== 'LABEL') e.preventDefault();
+  if (ppClick(a, t)) return;
+  if (qClick(a, t)) return;
   if (funClick(a, t)) return;
   if (v7Click(a, t)) return;
   if (v8Click(a, t)) return;
@@ -3647,7 +4121,7 @@ document.addEventListener('click', async e => {
     case 'pf': S.placeFilter = t.dataset.k; render(); break;
     case 'mf': S.mustFilter = t.dataset.k; render(); break;
     case 'place': openPlace(t.dataset.id); break;
-    case 'add': openForm(t.dataset.c, null, t.dataset.c === 'days' ? { dayNo: (Math.max(0, ...DB.days.map(d => +d.dayNo || 0)) + 1) } : Object.assign({}, t.dataset.night ? { night: t.dataset.night } : {}, t.dataset.fam ? { fam: t.dataset.fam } : {}, t.dataset.singer ? { singer: t.dataset.singer } : {}, t.dataset.ev ? { ev: t.dataset.ev } : {})); break;
+    case 'add': openForm(t.dataset.c, null, t.dataset.c === 'days' ? { dayNo: (Math.max(0, ...DB.days.map(d => +d.dayNo || 0)) + 1) } : Object.assign({}, t.dataset.night ? { night: t.dataset.night } : {}, t.dataset.fam ? { fam: t.dataset.fam } : {}, t.dataset.singer ? { singer: t.dataset.singer } : {}, t.dataset.ev ? { ev: t.dataset.ev } : {}, t.dataset.day ? { dayNo: +t.dataset.day } : {})); break;
     case 'addStay': openForm('stays', null, { stop: t.dataset.stop, checkin: t.dataset.ci, checkout: t.dataset.co, status: 'Idea' }); break;
     case 'edit': openForm(t.dataset.c, t.dataset.id); break;
     case 'toggle': { const c = t.dataset.c, it = DB[c].find(x => x.id === t.dataset.id); if (it) { run(B.update(c, it.id, { done: !it.done })); if (c === 'mustdo' && !it.done) logActivity('done', `ticked off: ${it.text}`, 'must'); } break; }
